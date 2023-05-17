@@ -16,6 +16,15 @@ body {
   text-align: center;
 }
 
+code {
+  font-family: monospace;
+  background-color: black;
+  color: #efde6e;
+  padding: 1.5rem;
+  border-radius: 15px;
+  display: block;
+}
+
 .book-image {
   max-width: 80vw;
   width: 200px;
@@ -174,6 +183,7 @@ h3 {
 .post .content {
   padding: 1rem;
   margin: 0 auto;
+  text-align: left;
 }
 
 .post .featured-img-container {
