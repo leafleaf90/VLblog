@@ -379,7 +379,7 @@ footer p {
 }
 
 .nav-bar {
-  background-color: black;
+  background-color: transparent;
   height: 70px;
   display: flex;
   align-items: center;
