@@ -4,10 +4,10 @@ layout: default
 
 <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:1.5rem">
 <div class="container" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:start">
-<h1>Book Recommendations<span class="milka red">.</span></h1>
-<p style="margin-bottom:0">Find all my reviews on <a href="https://www.goodreads.com/viktorlovgren" target="_blank">Goodreads</a></p> <span style="font-style: italic;">Goodreads is a great tool for tracking your reading. I also find that it inspires to more reading.</span>
-<p style="margin-bottom:0">Find all my visual summaries on <a href="https://www.15pages.com/book-summaries" target="_blank">15 Pages</a></p>
-<span style="font-style: italic;">15 Pages is a tracking tool for reading that I'm building (in progress), and also has my visual book summaries.</span>
+<h1 style="text-align:center">Book Recommendations<span class="milka red">.</span></h1>
+<p style="margin-bottom:0; width:100%">Find all my reviews on <a href="https://www.goodreads.com/viktorlovgren" target="_blank">Goodreads</a></p> <span style="font-style: italic;">Goodreads is a great tool for tracking your reading. I also find that it inspires to more reading.</span>
+<p style="margin-bottom:0; width:100%">Find my visual summaries on <a href="https://www.15pages.com/book-summaries" target="_blank">15 Pages</a></p>
+<span style="font-style: italic;">15 Pages is a tracking tool for reading that I'm building (in progress).</span>
 
 <h2>PRODUCTIVITY</h2>
 <div class="book-category">
