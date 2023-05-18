@@ -23,6 +23,7 @@ code {
   padding: 1.5rem;
   border-radius: 15px;
   display: block;
+  overflow: auto;
 }
 
 .book-image {
@@ -202,8 +203,13 @@ h3 {
   margin-bottom: 1rem;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.6);
   padding: 5px 25px 5px 25px;
+}
+
+.post-title {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .post .featured-img-container .post-title h1 {
@@ -216,7 +222,7 @@ h3 {
   color: white;
 }
 
-.post .featured-img-container h1:after {
+/* .post .featured-img-container h1:after {
   height: 3px;
   width: 100%;
   content: "";
@@ -224,7 +230,7 @@ h3 {
   position: absolute;
   bottom: 0;
   right: 0;
-}
+} */
 
 .post .content img {
   border: 1px solid black;
@@ -441,6 +447,15 @@ img + em {
   display: block;
 }
 
+.post-title-meta {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: between;
+  align-items: start;
+  border-left: 1px solid white;
+}
+
 @media (min-width: 768px) {
   .projects,
   .book-category {
@@ -454,7 +469,7 @@ img + em {
 
   .post-title-meta {
     transform: skewX(25deg);
-    padding-left: 3rem;
+    margin-left: 3rem;
   }
 
   .post .featured-img-container .post-title {

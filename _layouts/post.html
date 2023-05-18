@@ -15,12 +15,38 @@ comments: true
       <div class="post-title-meta">
         <h3>{{page.description}}</h3>
         <p>{{ page.date | date: "%b %-d, %Y" }}</p>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+          "
+        >
+          <img
+            style="height: 50px; margin-right: 20px"
+            src="/assets/images/viktor.png"
+            alt=""
+          />
+          <span style="color: white">Viktor Lövgren</span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="content">{{ content }}</div>
 </article>
+
+<!-- Series links
+{% if page.is_series == true %}
+<h3 class="text-success p-3 pb-0">{{ page.series_title | upcase }} series</h3>
+{% assign posts = site.posts | where: "is_series", true | where: "series_title",
+page.series_title | sort: 'date' %} {% for post in posts %} {% if post.title ==
+page.title %}
+<p class="nav-link bullet-pointer mb-0">{{ post.title }}</p>
+{% else %}
+<a class="nav-link bullet-hash" href="{{ post.url }}">{{ post.title }}</a>
+{% endif %} {% endfor %} {% endif %} -->
 
 <!-- <div id="disqus_thread"></div>
 <script>
