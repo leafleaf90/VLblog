@@ -1,5 +1,5 @@
 ---
-title: "Sets"
+title: "Sets And Duplicates"
 layout: post
 is_series: true
 series_title: "Dev Tricks"
