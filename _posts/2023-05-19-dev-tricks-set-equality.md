@@ -6,7 +6,7 @@ series_title: "Dev Tricks"
 featured-image: /assets/post-media/2023-05-17/junior-dev-trick-1-sets-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-17/junior-dev-trick-1-sets-sm.jpg
 description: Equality of sets might not behave the way you expect it to
-categories: programming dart
+categories: coding dart
 ---
 
 ## The Problem
