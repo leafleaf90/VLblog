@@ -1,0 +1,19 @@
+<div
+  class="{%if include.latest %} large-blog-post {% endif %} blog-post"
+  style="background-image:url({{include.post.featured-thumbnail}})"
+>
+  <a class="blog-title" href="{{ include.post.url }}"
+    >{{ include.post.title}}</a
+  >
+  {% if post.categories %} {% include components/post_logos.html
+  categories=include.post.categories %} {% endif %}
+  <p class="post-date">{{ include.post.date | date: "%b %-d, %Y" }}</p>
+  <div class="post-info">
+    <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+      {{include.post.description}}
+    </p>
+    <a href="{{include.post.url}}" class="blog-link white-link-button"
+      >Read More</a
+    >
+  </div>
+</div>

@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-04-28/server.jpg
 featured-thumbnail: /assets/post-media/2020-04-28/server-sm.jpg
 description: Do the changes, push to GitHub. Auto-build and served by Netlify, easy as that!
-categories: infrastructure
+categories: infrastructure jekyll
 ---
 
 ## Smooth hosting

@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-06-07/mac.jpg
 featured-thumbnail: /assets/post-media/2020-06-07/mac-sm.jpg
 description: Tools I use to keep my motivation up
-categories: motivation
+categories: motivation coding
 ---
 
 ## When the going gets tough...

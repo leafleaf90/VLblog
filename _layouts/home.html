@@ -102,37 +102,13 @@ layout: default
 </div>
 
 <h2 style="text-align: center">Latest Post<span class="milka red">.</span></h2>
-{% for post in site.posts limit:1 %}
-<div
-  class="latest-blog-post"
-  style="background-image:url({{post.featured-image}})"
-  ;
->
-  <a class="blog-title" href="{{ post.url }}">{{ post.title}}</a>
-  <p class="post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
-  <div class="post-info">
-    <p>{{post.description}}</p>
-    <a href="{{post.url}}" class="blog-link white-link-button">Read More</a>
-    {% endfor %}
-  </div>
-</div>
+{% for post in site.posts limit:1 %} {% include components/blog_post_card.html
+post=post latest=true %} {% endfor %}
 
 <div class="older-posts gradient-bg">
   <h2>Older Posts<span class="milka red">.</span></h2>
   <div class="posts-container">
-    {% for post in site.posts offset:1 %}
-    <div
-      class="blog-post"
-      style="background-image:url({{post.featured-thumbnail}})"
-    >
-      <a class="blog-title" href="{{ post.url }}">{{ post.title}}</a>
-
-      <p class="post-date">{{ post.date | date: "%b %-d, %Y" }}</p>
-      <div class="post-info">
-        <p>{{post.description}}</p>
-        <a href="{{post.url}}" class="blog-link white-link-button">Read More</a>
-      </div>
-    </div>
-    {% endfor %}
+    {% for post in site.posts offset:1 %} {% include
+    components/blog_post_card.html post=post %} {% endfor %}
   </div>
 </div>

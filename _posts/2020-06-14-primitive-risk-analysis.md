@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-06-14/risk.jpg
 featured-thumbnail: /assets/post-media/2020-06-14/risk-sm.jpg
 description: An entrepreneurial scientist’s robust approach
-categories: business
+categories: productivity
 ---
 
 ## The Drive podcast
