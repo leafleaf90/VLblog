@@ -12,8 +12,13 @@ layout: default
     I like to use technology to supercharge solutions for environmental
     sustainability and mental well-being.
   </h3>
+  <p style="margin-bottom: 0px">Jump Straight To a Topic:</p>
+  <div class="post-logos" style="display: flex">
+    {% for category in site.categories %} {% include
+    components/single_post_logo.html category=category.first %} {% endfor %}
+  </div>
   <a
-    class=""
+    class="floating"
     style="
       display: flex;
       align-items: center;
@@ -21,11 +26,12 @@ layout: default
       color: white;
       border: white 1px solid;
       padding: 10px;
+      margin-top: 50px;
       border-radius: 10px;
     "
     href="#blog"
   >
-    To Blog Posts
+    Browse Blog Posts
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"

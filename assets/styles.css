@@ -152,7 +152,7 @@ h3 {
     transform: translatey(0px);
   }
   50% {
-    transform: translatey(-15px);
+    transform: translatey(-10px);
   }
   100% {
     transform: translatey(0px);
@@ -160,7 +160,7 @@ h3 {
 }
 
 .floating {
-  animation: float 6s ease-in-out infinite;
+  animation: float 1s ease-in-out infinite;
 }
 
 .wrapper {
@@ -333,14 +333,19 @@ p.post-date:after {
 }
 
 .post-logos {
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 0.5rem;
-  border-radius: 10px;
   min-width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.post-logos .post-logos-single {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 10px;
 }
 
 .blog-post p,
