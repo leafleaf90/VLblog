@@ -314,15 +314,13 @@ p.post-date:after {
 }
 
 .large-blog-post {
-  min-height: 400px !important;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.latest-blog-post,
 .blog-post {
   border-radius: 10px;
-  min-height: 250px;
+  min-height: 270px;
   box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
@@ -465,6 +463,10 @@ img + em {
   .projects,
   .book-category {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .large-blog-post {
+    min-height: 400px !important;
   }
 
   .heroText {

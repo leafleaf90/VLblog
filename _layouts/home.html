@@ -12,6 +12,35 @@ layout: default
     I like to use technology to supercharge solutions for environmental
     sustainability and mental well-being.
   </h3>
+  <a
+    class=""
+    style="
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      border: white 1px solid;
+      padding: 10px;
+      border-radius: 10px;
+    "
+    href="#blog"
+  >
+    To Blog Posts
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-arrow-down-circle"
+      style="margin-left: 10px"
+      viewBox="0 0 16 16"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+      />
+    </svg>
+  </a>
 </header>
 
 <div id="myProjects" style="padding-right: 1rem; padding-left: 1rem">
@@ -100,15 +129,19 @@ layout: default
     </div>
   </div>
 </div>
-
-<h2 style="text-align: center">Latest Post<span class="milka red">.</span></h2>
-{% for post in site.posts limit:1 %} {% include components/blog_post_card.html
-post=post latest=true %} {% endfor %}
-
-<div class="older-posts gradient-bg">
-  <h2>Older Posts<span class="milka red">.</span></h2>
-  <div class="posts-container">
-    {% for post in site.posts offset:1 %} {% include
-    components/blog_post_card.html post=post %} {% endfor %}
+<div id="blog">
+  <div style="margin-left: 1rem; margin-right: 1rem">
+    <h2 style="text-align: center">
+      Latest Post<span class="milka red">.</span>
+    </h2>
+    {% for post in site.posts limit:1 %} {% include
+    components/blog_post_card.html post=post latest=true %} {% endfor %}
+  </div>
+  <div class="older-posts gradient-bg">
+    <h2>Older Posts<span class="milka red">.</span></h2>
+    <div class="posts-container">
+      {% for post in site.posts offset:1 %} {% include
+      components/blog_post_card.html post=post %} {% endfor %}
+    </div>
   </div>
 </div>
