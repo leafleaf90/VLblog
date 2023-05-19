@@ -14,15 +14,19 @@ comments: true
       {% if page.categories %} {% include components/post_logos.html
       categories=page.categories %} {% endif %}
       <h1>{{page.title}}</h1>
-      <div class="post-title-meta">
-        <h3>{{page.description}}</h3>
-        <p>{{ page.date | date: "%b %-d, %Y" }}</p>
+      <div class="post-title-meta" style="margin-bottom: 10px">
+        <h3 style="text-align: start; margin-top: 0px; margin-bottom: 10px">
+          {{page.description}}
+        </h3>
+        <p style="margin-top: 0px; margin-bottom: 10px">
+          {{ page.date | date: "%b %-d, %Y" }}
+        </p>
         <div
           style="
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 0px;
           "
         >
           <img
