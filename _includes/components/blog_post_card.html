@@ -3,7 +3,18 @@
   style="background-image:url({{include.post.featured-thumbnail}})"
 >
   <a class="blog-title" href="{{ include.post.url }}"
-    >{{ include.post.title}}</a
+    >{{ include.post.title}}{% if post.is_series %}
+    <p
+      style="
+        color: white;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      "
+    >
+      Series: {{include.post.series_title}}
+    </p>
+    {% endif %}</a
   >
   {% if post.categories %} {% include components/post_logos.html
   categories=include.post.categories %} {% endif %}

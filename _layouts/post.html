@@ -39,16 +39,22 @@ comments: true
   <div class="content">{{ content }}</div>
 </article>
 
-<!-- Series links
+<!-- Series links -->
 {% if page.is_series == true %}
-<h3 class="text-success p-3 pb-0">{{ page.series_title | upcase }} series</h3>
-{% assign posts = site.posts | where: "is_series", true | where: "series_title",
-page.series_title | sort: 'date' %} {% for post in posts %} {% if post.title ==
-page.title %}
-<p class="nav-link bullet-pointer mb-0">{{ post.title }}</p>
-{% else %}
-<a class="nav-link bullet-hash" href="{{ post.url }}">{{ post.title }}</a>
-{% endif %} {% endfor %} {% endif %} -->
+<div class="older-posts gradient-bg">
+  <h3 class="text-success p-3 pb-0">
+    <span style="font-style: italic">More From The</span>
+    <span style="font-size: 2rem">{{ page.series_title }}</span>
+    <span style="font-style: italic">Series</span>
+  </h3>
+  <div class="posts-container">
+    {% assign posts = site.posts | where: "is_series", true | where:
+    "series_title", page.series_title %} {% for post in posts %} {% if
+    post.title != page.title %} {% include components/blog_post_card.html
+    post=post %} {% endif %} {% endfor %}
+  </div>
+</div>
+{% endif %}
 
 <!-- <div id="disqus_thread"></div>
 <script>

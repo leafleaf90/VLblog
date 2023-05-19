@@ -1,5 +1,5 @@
 ---
-title: "Dev Tricks 2 - Equality of Sets"
+title: "Equality of Sets"
 layout: post
 is_series: true
 series_title: "Dev Tricks"
