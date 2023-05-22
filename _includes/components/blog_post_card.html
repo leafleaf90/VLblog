@@ -1,8 +1,16 @@
 <div
   class="{%if include.latest %} large-blog-post {% endif %} blog-post"
-  style="background-image:url({{include.post.featured-thumbnail}})"
+  style="background-image:url({{include.post.featured-thumbnail}});"
 >
-  <a class="blog-title" href="{{ include.post.url }}"
+  <div
+    style="
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    "
+  ></div>
+  <a class="blog-title" href="{{ include.post.url }}" style="z-index: 1"
     >{{ include.post.title}}{% if post.is_series %}
     <p
       style="
@@ -16,8 +24,10 @@
     </p>
     {% endif %}</a
   >
-  {% if post.categories %} {% include components/post_logos.html
-  categories=include.post.categories %} {% endif %}
+  <div style="z-index: 1">
+    {% if post.categories %} {% include components/post_logos.html
+    categories=include.post.categories %} {% endif %}
+  </div>
   <p class="post-date">{{ include.post.date | date: "%b %-d, %Y" }}</p>
   <div class="post-info">
     <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
