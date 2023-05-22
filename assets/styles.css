@@ -315,6 +315,7 @@ p.post-date:after {
 
 .large-blog-post {
   max-width: 800px;
+  min-height: 400px !important;
   margin: 0 auto;
 }
 
@@ -470,10 +471,6 @@ img + em {
   .projects,
   .book-category {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .large-blog-post {
-    min-height: 400px !important;
   }
 
   .heroText {
