@@ -161,7 +161,18 @@ exports.createCSV = functions
       //   "image.url",
       // ],
     };
+
+    const parser = new AsyncParser(opts);
+    const csv = await parser.parse(arrayToExport).promise();
+
+    await fs.outputFile(tempFilePath, csv);
+
+    await bucket.upload(tempFilePath, { destination: "exports/" + fileName });
+
+    exportRef.update({ status: "complete" });
 ```
+
+Note: you can also make this an on call function an hit it. The benefit with triggering it from the collection is that you have a record for each export, and thus a history of requested exports where you can also save the download URL for each export if the user wants to download it again, for example.
 
 The getDownloadUrl function called from the front-end takes it from here:
 
