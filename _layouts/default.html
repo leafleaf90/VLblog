@@ -61,9 +61,7 @@
     {% endif %}
   </head>
   <body>
-    <div
-      style="min-height: 100vh; max-width: 100vw; overflow: hiddenjekyll doctor"
-    >
+    <div style="min-height: 100vh; max-width: 100vw; overflow: hidden">
       <div class="nav-bar gradient-bg">
         <a href="/">
           <img
@@ -72,9 +70,9 @@
             alt=""
           />
         </a>
-        <a href="/">Home</a>
-        <a href="/books/">Books</a>
-        <a href="/categories/">Blog</a>
+        <a href="/" style="font-weight: bold">Home</a>
+        <a href="/books/" style="font-weight: bold">Books</a>
+        <a href="/categories/" style="font-weight: bold">Blog</a>
       </div>
       <div>{{ content }}</div>
     </div>
