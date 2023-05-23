@@ -9,15 +9,17 @@ description: I took my sad excuse of a blog and fed it to Jekyll. It spat this o
 categories: jekyll coding
 ---
 
-## Static Site Generator-generated!
-
-We are now up and running with static site generator Jekyll!
+## Jekyll - Static Site Generator
 
 ![Jekyll logo](\assets\post-media\2020-04-27\jekyll.svg "Jekyll logo")
 
-Jekyll is a static site generator that has been around for long and the documentation is solid. Steps:
+Jekyll is a static site generator that has been around for long and the documentation is solid.
 
-1. Install Ruby (Jekyll is written in Ruby). I'm on Windows so I used the installer package: [Ruby](https://www.ruby-lang.org/en/)</div>
+Setting up a blog with a JavaScript framework such as Vue or React can seem a bit overkill, and most likely you will end up having to use it together with a static site generator anyways (Gatsby for React, for example). Jekyll allows you to re-use components without any hassle if all you need is re-usable components and an easy way to publish blog posts.
+
+Steps to get going:
+
+1. Install Ruby (Jekyll is written in Ruby). I'm on Windows so I used the installer package: [Ruby](https://www.ruby-lang.org/en/)
 
 2. With Ruby installed, proceeded to install Jekyll:
 
@@ -31,6 +33,4 @@ Jekyll is a static site generator that has been around for long and the document
    > jekyll new C:/my-path
    ```
 
-4. Followed the [official Jekyll guide on converting a site to Jekyll](https://jekyllrb.com/tutorials/convert-site-to-jekyll/)
-
-And it seems smooth! Setting up a blog with a JavaScript framework such as Vue seemed a bit overkill for this simple blog just to be able to utilize components. Jekyll still allows the re-use of footer, html head etc on all pages without any hassle, by using layouts.
+4. Follow the [official Jekyll guide on converting a site to Jekyll](https://jekyllrb.com/tutorials/convert-site-to-jekyll/)
