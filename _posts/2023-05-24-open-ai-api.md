@@ -159,4 +159,6 @@ This will update the reactive variable aiCaption for the user to see in their In
 
 ## Dish Generator
 
-To give you some more ideas for what you can offer platform users with this Open AI integration: We use another cloud function for another AI service that we call it Dish Generator. The input is all the ingredients the restaurant uses in all their dishes, combined. The output is ideas for other dishes that they might want to consider adding to their menu, without the need to source new ingredients.
+We use another cloud function for an AI service that we call Dish Generator. The input is all the ingredients the restaurant uses in all their dishes, combined. The output is ideas for other dishes that they might want to consider adding to their menu, without the need to source new ingredients.
+
+I hope this gives you some more ideas for what you can offer your users with a simple Open AI integration.
