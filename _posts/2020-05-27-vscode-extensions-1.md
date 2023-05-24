@@ -20,6 +20,8 @@ This can help you understand what is enclosed by what. It simplifies debugging a
 ![Colorizer extension](\assets\post-media\2020-05-23\colorizer.png "Bracket Pair Colorizer 2 in action")
 _Bracket Pair Colorizer 2 in action_
 
+_Update: Since Bracket Pair Colorizer was so popular, Microsoft has now included it in Visual Studio out of the box, you don't need to install it as an extension._
+
 **Color Highlight**
 
 See what color you're setting at a glance.
