@@ -156,3 +156,7 @@ const getCaption = async () => {
 _(Here you'd use the data that is relevant for the caption/response you want in return from Open AI to call the cloud function)_
 
 This will update the reactive variable aiCaption for the user to see in their Insta Feed. You can go back top to see the functionality in action again.
+
+## Dish Generator
+
+To give you some more ideas for what you can offer platform users with this Open AI integration: We use another cloud function for another AI service that we call it Dish Generator. The input is all the ingredients the restaurant uses in all their dishes, combined. The output is ideas for other dishes that they might want to consider adding to their menu, without the need to source new ingredients.
