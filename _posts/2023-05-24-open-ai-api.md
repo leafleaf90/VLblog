@@ -23,7 +23,7 @@ Follow the below steps to implement a similar service in your webapp. This proje
 
 First, you’ll need to sign up for a developer account at https://openai.com/. Generate an API key and save it in your project’s .env file.
 
-You can’t call the Open AI endpoints from the front-end for security reasons (to not expose your API key), so you’ll have to do this from server-side. In this case, we use a cloud function that we can call from our front-end with the relevant product information to create our caption.
+You can’t call the Open AI endpoints from the front-end for security reasons (to not expose your API key), so you’ll have to do this from server-side. In this case, we use a Google cloud function that we can call from our front-end with the relevant product information to create our caption.
 
 ## Server-side
 
@@ -31,7 +31,6 @@ The cloud function looks like this:
 
 ```
 exports.getDishCaption = functions
-  .region("asia-southeast2")
   .https.onCall(async (data, context) => {
     // set openai API key (from .env file)
     const configuration = new Configuration({
@@ -120,7 +119,7 @@ Note that the error handling here is quite generic, you might want to implement 
   class="btn btn-secondary"
   @click="getCaption()"
 >
-  Try First
+  New AI Caption
 </button>
 ```
 
@@ -128,12 +127,6 @@ The button triggers a getCaption function:
 
 ```
 const getCaption = async () => {
-let productTypeName = await getProductTypeName(
-          props.product.productType
-        );
-        let productSubTypeName = await getProductSubTypeName(
-          props.product.ProductSubType[0]
-        );
         try {
           const response = await getCaption({
             title: props.product.title,
@@ -160,4 +153,6 @@ let productTypeName = await getProductTypeName(
 }
 ```
 
-This will update the reactive variable aiCaption for the user to see.
+_(Here you'd use the data that is relevant for the caption/response you want in return from Open AI to call the cloud function)_
+
+This will update the reactive variable aiCaption for the user to see in their Insta Feed. You can go back top to see the functionality in action again.

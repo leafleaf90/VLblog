@@ -21,6 +21,11 @@ comments: true
         <p style="margin-top: 0px; margin-bottom: 10px">
           {{ page.date | date: "%b %-d, %Y" }}
         </p>
+        {% if page.updated_date %}
+        <p style="margin-top: 0px; margin-bottom: 10px">
+          Updated: {{ page.updated_date | date: "%b %-d, %Y" }}
+        </p>
+        {% endif %}
         <div
           style="
             display: flex;

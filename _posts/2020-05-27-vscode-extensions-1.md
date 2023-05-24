@@ -3,6 +3,7 @@ title: "VSCode Extensions: Visuals"
 layout: post
 featured-image: /assets/post-media/2020-05-23/vscode.jpg
 featured-thumbnail: /assets/post-media/2020-05-23/vscode-sm.jpg
+updated_date: 2023-05-24
 is_series: true
 series_title: "Dev Tricks"
 description: Extensions that enhances VSCode
