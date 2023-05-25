@@ -19,7 +19,7 @@ I’ve [previously written]({% post_url 2020-07-05-50-days-of-meditation %}) abo
 
 ## Which one?
 
-For the kind of breathwork to do, there’s no shortage of guided variants out there. Choose one you like, and stick to it. Most are similar in that they consist of cycles of breathing and holding your breath and give an oxygen boost which produces a pleasant altered state. There’s a compound effect at play here, similar to with meditation, where the more you do it, the better you will feel.
+For the kind of breathwork to do, there’s no shortage of guided variants out there. Choose one you like, and stick to it. Most are similar in that they consist of cycles of breathing and holding your breath. It gives you an oxygen boost which many times produces a pleasant altered state. I've noticed there’s a compound effect at play here, similar to meditation, where the more you do it the better you will feel.
 
 We like to follow the instructions in this video:
 [Breathe and Flow - Powerful Ancient Tummo Breathwork](https://www.youtube.com/watch?v=1LWi8oTZ8ew&ab_channel=BreatheandFlow){:target="\_blank"}
