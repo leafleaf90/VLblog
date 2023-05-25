@@ -1,8 +1,6 @@
 ---
 title: "Breathwork"
 layout: post
-is_series: true
-series_title: "Dev Tricks"
 featured-image: /assets/post-media/2023-05-25/breathwork-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-25/breathwork-sm.jpg
 description: A powerful habit
