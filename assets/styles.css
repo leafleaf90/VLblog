@@ -319,6 +319,23 @@ p.post-date:after {
   margin: 0 auto;
 }
 
+.certificate-badge-container {
+  transform: rotate(-90deg);
+  position: absolute;
+  bottom: 30px;
+  right: -75px;
+  z-index: 99;
+  width: 200px;
+}
+
+.certificate-badge {
+  width: 120px;
+}
+
+.certificate-badge-text {
+  display: none;
+}
+
 .blog-post {
   border-radius: 10px;
   min-height: 300px;
@@ -468,6 +485,21 @@ img + em {
 }
 
 @media (min-width: 768px) {
+  .certificate-badge-container {
+    transform: rotate(0deg);
+    bottom: 0;
+    right: 0;
+    width: 220px;
+  }
+
+  .certificate-badge {
+    width: 200px;
+  }
+
+  .certificate-badge-text {
+    display: block;
+  }
+
   .projects,
   .book-category {
     grid-template-columns: 1fr 1fr;

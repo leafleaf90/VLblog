@@ -2,7 +2,32 @@
 layout: default
 ---
 
-<header class="gradient-bg">
+<header class="gradient-bg" style="position: relative">
+  <div
+    class="certificate-badge-container"
+    style="
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8rem;
+      padding: 1rem;
+    "
+  >
+    <a
+      href="https://nutritionstudies.org/courses/plant-based-nutrition/"
+      title="Plant-based Nutrition Certificate Badge"
+      target="_blank"
+      style="position: relative"
+      ><img src="/assets/images/grad-badge-lg.png" class="certificate-badge" />
+    </a>
+    <div class="certificate-badge-text">
+      <p style="margin: 0">
+        Plant-Based Nutrition Certificate Professional (Sep, 2021)
+      </p>
+      <p style="margin: 0">
+        T. Colin Campbell Center for Nutrition Studies and eCornell
+      </p>
+    </div>
+  </div>
   <!-- <img class="" src="/assets/images/viktor.png" style="width: 200px" alt="" /> -->
   <h1 class="heroText" style="color: white">
     Hi. I'm
@@ -28,6 +53,7 @@ layout: default
       padding: 10px;
       margin-top: 50px;
       border-radius: 10px;
+      z-index: 100;
     "
     href="#blog"
   >
