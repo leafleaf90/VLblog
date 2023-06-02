@@ -9,7 +9,7 @@ categories: javascript vue
 
 ## The Challenge
 
-Sometimes your user makes a choice in your webapp that you want to persist, so that they do not need to make it again even if they refresh the browser or step away for a while. If you're working with authenticated users, you might want to save some of these settings on the user object in your database so that it carries over to all devices that user might log in from. But for guest users or for some simple layout or user experience settings, it can be enough to just save the setting to the browser's [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage){:target="\_blank"}.
+Sometimes your user makes a choice in your webapp that you want to persist even if they refresh the browser or step away for a while. If you're working with authenticated users, you can save some of these settings on the user object in your database so that it carries over to all devices that user might log in from. But for guest users or for some simple layout or user experience settings, it can be enough to just save the setting to the browser's [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage){:target="\_blank"}.
 
 _Note: If you have a larger webapp you will most likely utilize more advanced state management for this. For vue, you can choose for example [VueX](https://vuex.vuejs.org/){:target="\_blank"} or or [Pinia](https://pinia.vuejs.org/){:target="\_blank"} (Pinia is the recommended option even by the official Vue docs at this point)._
 
@@ -124,13 +124,13 @@ But how do we react to language changes in the navbar and localStorage in other 
 // intiate activeLanguage
 const activeLanguage = ref(null);
 
-// function to set activeLanguage from localstorage when event fires
+// function to set activeLanguage from localStorage when event fires
 const setActiveLanguageFromLocalStorage = () => {
   activeLanguage.value = JSON.parse(event.detail.storage);
 };
 
 onMounted(() => {
-  //listen for changes of language in localstorage and change activeLanguage as needed
+  //listen for changes of language in localStorage and change activeLanguage as needed
   window.addEventListener(
     "localstorage-language-changed",
     setActiveLanguageFromLocalStorage
