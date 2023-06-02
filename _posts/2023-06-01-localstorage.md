@@ -66,15 +66,14 @@ Here is the template elements that make up the dropdown for language selection (
 ```
 
 Here's how it looks to the user:
-
-<img class="" src="/assets/post-media/2023-06-01/navbar-translation.png"/>
+<img class="" src="/assets/post-media/2023-06-01/navbar_translation.png"/>
 _Language selector_
 
 As you can see in the code, when the user clicks a language in the dropdown, we set the clicked language to activeLanguage. But this will only set activeLanguage in the component, we also need to explicitly save it to localStorage. We set a watcher on activeLanguage so that we can _do something_ whenever it changes:
 
 ```
 watch(activeLanguage, () => {
-      //when user changes language, save it to localstorage
+      //when user changes language, save it to localStorage
       localStorage.setItem(
         "activeLanguage",
         JSON.stringify(activeLanguage.value)
@@ -84,17 +83,20 @@ watch(activeLanguage, () => {
 
 _Note that we have to convert the language object to JSON to save it to localStorage_
 
+You can see how this is saved in your browsers local storage if you inspect and go to "Application":
+<img class="" src="/assets/post-media/2023-06-01/inspect_application.png"/>
+
 This will save the activeLanguage object to localStorage. But how about other components and views that also need to adapt to this change? Here's where the benefit of proper state management becomes clear, when the state of activeLanguage could be easily accessed from anywhere in the app. However, for this use case we can also dispatch this change as a custom event that other components can listen for. We add these lines in the same watch as above:
 
 ```
 //we need to dispatch the change for any components that listen to it
-      window.dispatchEvent(
-        new CustomEvent("localstorage-language-changed", {
-          detail: {
-            storage: localStorage.getItem("activeLanguage"),
-          },
-        })
-      );
+window.dispatchEvent(
+  new CustomEvent("localstorage-language-changed", {
+    detail: {
+      storage: localStorage.getItem("activeLanguage"),
+    },
+  })
+);
 ```
 
 Here we dispatch this event together with the activeLanguage item in localStorage.
