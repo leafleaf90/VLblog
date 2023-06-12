@@ -13,7 +13,7 @@ If you need a simple solution to create QR codes on demand in your webapp, read 
 
 ## The Solution
 
-Install the package [node-qrcode](https://github.com/soldair/node-qrcode){:target="\_blank"}. It will take care of the QR code generation itself. Since we use the Vue.js framework, we decided to use [vue-qrcode](<[(veganmonkey.co)](https://veganmonkey.co){:target="_blank"}>){:target="\_blank"} which is based on node-qrcode:
+Install the package [node-qrcode](https://github.com/soldair/node-qrcode){:target="\_blank"}. It will take care of the QR code generation itself. Since we use the Vue.js framework, we decided to use [vue-qrcode](https://www.npmjs.com/package/@chenfengyuan/vue-qrcode){:target="\_blank"} which is based on node-qrcode:
 
 ```
 npm i @chenfengyuan/vue-qrcode
