@@ -75,6 +75,23 @@ layout: default
   </a>
 </header>
 
+<div id="blog">
+  <div style="margin-left: 1rem; margin-right: 1rem">
+    <h2 style="text-align: center">
+      Latest Post<span class="milka red">.</span>
+    </h2>
+    {% for post in site.posts limit:1 %} {% include
+    components/blog_post_card.html post=post latest=true %} {% endfor %}
+  </div>
+  <div class="older-posts gradient-bg">
+    <h2>Older Posts<span class="milka red">.</span></h2>
+    <div class="posts-container">
+      {% for post in site.posts offset:1 %} {% include
+      components/blog_post_card.html post=post %} {% endfor %}
+    </div>
+  </div>
+</div>
+
 <div id="myProjects" style="padding-right: 1rem; padding-left: 1rem">
   <h2>Current Projects <span class="milka red">.</span></h2>
   <div class="projects">
@@ -158,22 +175,6 @@ layout: default
           >To Website</a
         >
       </div>
-    </div>
-  </div>
-</div>
-<div id="blog">
-  <div style="margin-left: 1rem; margin-right: 1rem">
-    <h2 style="text-align: center">
-      Latest Post<span class="milka red">.</span>
-    </h2>
-    {% for post in site.posts limit:1 %} {% include
-    components/blog_post_card.html post=post latest=true %} {% endfor %}
-  </div>
-  <div class="older-posts gradient-bg">
-    <h2>Older Posts<span class="milka red">.</span></h2>
-    <div class="posts-container">
-      {% for post in site.posts offset:1 %} {% include
-      components/blog_post_card.html post=post %} {% endfor %}
     </div>
   </div>
 </div>
