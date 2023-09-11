@@ -11,13 +11,13 @@ _Note that this is just based on my recent experience and you should do your own
 
 I recently found myself in the peculiar situation where my European driver's license had expired and I couldn't renew it, since I'm no longer living in my home country. The only option if I wanted to drive legally was to take the license in Thailand – from scratch. If you're in the same situation, here are some things that might help:
 
-You _can_ contact an agent that will help you with the process. But if you, like me, want to introduce some extra stress and confusion (or shall we call _excitement?_) into your life, you can also choose do it on your own.
+You _can_ contact an agent that will help you with the process. But if you, like me, want to introduce some extra stress and confusion (or shall we call it _excitement?_) into your life, you can also choose do it on your own.
 
 Go to the DLT early (I went to [this office](https://goo.gl/maps/t1eJgcHvhkXjPEjr7){:target="\_blank"} but you go to whichever is closer to you), around 7:30am, on a Wednesday morning. There'll be a line of people waiting. Once the DLT office opens, you go inside and will see the dedicated line for foreigners. It's usually short if you arrive early enough. You need to bring:
 
 -Passport.
 
--Medical certificate specifically for driver's license (you can get it at most clinics for a couple hundred baht, I got mine at [MedConsult Clinic](https://goo.gl/maps/N2LZ3EDPase8zmA38){:target="\_blank"}.
+-Medical certificate specifically for driver's license (you can get it at most clinics for a couple hundred baht, I got mine at [MedConsult Clinic](https://goo.gl/maps/N2LZ3EDPase8zmA38){:target="\_blank"}).
 
 -Address registration papers. I got mine from my embassy, but I've heard you can also get copies from immigration.
 
