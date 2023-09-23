@@ -17,7 +17,7 @@ Go to the DLT early (I went to [this office](https://goo.gl/maps/t1eJgcHvhkXjPEj
 
 -Passport.
 
--Medical certificate specifically for driver's license (you can get it at most clinics for a couple hundred baht, I got mine at [MedConsult Clinic](https://goo.gl/maps/N2LZ3EDPase8zmA38){:target="\_blank"}).
+-Medical certificate specifically for driver's license (you can get it at most clinics for a couple hundred baht, I got mine at [MedConsult Clinic](https://goo.gl/maps/N2LZ3EDPase8zmA38){:target="\_blank"}). Note that the medical certificate can not be older than 30 days when you register.
 
 -Address registration papers. I got mine from my embassy, but I've heard you can also get copies from immigration.
 
