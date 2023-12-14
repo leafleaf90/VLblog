@@ -60,3 +60,20 @@ apiKey: config.public.FIREBASE_API_KEY,
 _(note that it’s safe to expose the Firebase API key to the client. In fact, it is necessary for users to be able to interact with the database. You set database security rules in Firebase.)_
 
 **8.** When you push to Github, Vercel will build and deploy the application as preview. You can then promote to production if all works well. For more advanced use cases, you can utilize GitHub Actions to create custom CI/CD workflows that works with the Vercel deployments. Read more [here](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel). If you have a headless CMS or similar content solution, you can also use deployment hooks to automate deployment when content changes. Read more [here](https://vercel.com/docs/deployments/deploy-hooks).
+
+NOTE: if you use Prisma in your project, you will most likely run into an issue fetching data. You will have to run the `prisma generate` script on build time. You can add it locally in your package.json or in Vercel deployment settings. See more [here](https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/vercel-caching-issue).
+
+UPDATE: when I published a Nuxt Content website to Vercel recently, I got this build error:
+
+```
+[error] Cannot find module @rollup/rollup-linux-x64-gnu. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+```
+
+To solve it I had to add this to the optionalDependencies in package.json:
+
+```
+//package.json
+"optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  },
+```
