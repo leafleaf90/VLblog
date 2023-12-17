@@ -9,9 +9,9 @@ categories: travel
 
 **The resort**
 
-In the heart of Rawai, about one hour’s drive from Phuket Airport, you find Stay Wellbeing & Lifestyle Resort. We traveled down to see whether the high expectations set by the immaculate, polished surface could be met.
+In the heart of Rawai, about one hour’s drive from Phuket Airport, you find Stay Wellbeing & Lifestyle Resort. My girlfriend and I traveled down to see whether the high expectations set by the immaculate, polished surface could be met.
 
-In the middle of the resort, surrounded by a spa, gym and the rooms, sits a large swimming pool area. The Stay Green Café just next to it offers coffee and lighter lunches to guests lounging by the pool and to the hoards of digital nomads that type away on their laptops while sipping green juices.
+In the middle of the resort, surrounded by a spa, a gym and the rooms, sits a large swimming pool area. The Stay Green Café, just next to the pool, offers coffee and lighter lunches to the guests lounging by the pool and to the hoards of digital nomads that type away on their laptops while sipping green juices.
 
 <img src="/assets/post-media/2023-12-14/poolside.jpg"/>
 
