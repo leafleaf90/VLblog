@@ -45,7 +45,7 @@ That’s it in terms of getting Nuxt up and running. Now for Tailwind.
 
 Install the Tailwind module for Nuxt:
 
-[Docs here](https://nuxt.com/modules/tailwindcss)
+[Docs here](https://nuxt.com/modules/tailwindcss){:target="\_blank"}
 
 ```
 pnpm add --save-dev @nuxtjs/tailwindcss
@@ -63,7 +63,7 @@ export default defineNuxtConfig({
 })
 ```
 
-To get Intellisense (help with all the classes etc.) for Tailwind, install the Tailwind Intellisense extension in VS Code, info [here](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss).
+To get Intellisense (help with all the classes etc.) for Tailwind, install the Tailwind Intellisense extension in VS Code, info [here](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss){:target="\_blank"}.
 
 Initialize Tailwind with:
 
@@ -91,6 +91,6 @@ You should see a div with a black background and white text, looking something l
 <img class="half-image" src="/assets/post-media/2024-01-10/test_tailwind.png"/>
 
 Find all Tailwind utility classes here:
-[Tailwind docs](https://tailwindcss.com/docs/preflight)
+[Tailwind docs](https://tailwindcss.com/docs/preflight){:target="\_blank"}
 
 Now you’re ready to start developing!

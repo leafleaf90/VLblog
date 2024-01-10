@@ -98,4 +98,4 @@ Fitness package: 24,100 baht
 
 Cost if we would have done the same activities, booking only the room with breakfast: 25,588 baht + 1,000 baht airport transfer = 26,588 baht
 
-_All pictures from Stay Phuket Resort's website: [https://www.stayphuketresort.com/](https://www.stayphuketresort.com/)_
+_All pictures from Stay Phuket Resort's website: [https://www.stayphuketresort.com/](https://www.stayphuketresort.com/){:target="\_blank"}_
