@@ -94,3 +94,5 @@ Find all Tailwind utility classes here:
 [Tailwind docs](https://tailwindcss.com/docs/preflight){:target="\_blank"}
 
 Now you’re ready to start developing!
+
+If you want to learn how to add a component library to further speed up the process, check my post on that [here]({% post_url 2024-01-10-daisyui %}).
