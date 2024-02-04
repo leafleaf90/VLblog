@@ -3,13 +3,13 @@ title: "Test Cloud Functions for Firebase locally"
 layout: post
 featured-image: /assets/post-media/2024-02-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-03/cover_sm.jpg
-description: Set up in 5 steps
+description: Set up Firebase Emulator Suite in 5 steps
 categories: coding firebase
 ---
 
 If you’ve been writing and deploying Firebase cloud functions for your project, you know it takes a good minute (at least) to deploy changes. When in the development phase, it’s beneficial to be able to test them locally rather than deploying to Firebase with each change to run a test.
 
-On the services I run on Firebase I have very few, simple cloud functions, and I have not required extensive testing so far. But recently I updated Firebase from version 8 to version 10, going from the namespaced API to the modular API while also migrating coud functions from gen1 to gen2 _and_ upgrading all OpenAI functions from v3 to v4 (read more about working with the OpenAI API [here]({% post_url 2023-05-24-open-ai-api %})), so local testing was a must. Here’s how the emulator was set up to be able to test the cloud function that calls the OpenAI endpoint locally before deployment:
+On the services I run on Firebase I have very few, simple cloud functions, and I have not required extensive testing so far. But recently I updated Firebase from version 8 to version 10, going from the namespaced API to the modular API while also migrating coud functions from gen1 to gen2 _and_ upgrading all OpenAI functions from v3 to v4 (read more about working with the OpenAI API [here]({% post_url 2023-05-24-open-ai-api %})), so local testing was a must. Here’s how the Firebase Emulator Suite was set up to be able to test the cloud function that calls the OpenAI endpoint locally before deployment:
 
 1\. When inside of your Firebase project, add emulators by running in the terminal:
 
