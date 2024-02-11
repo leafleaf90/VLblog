@@ -1,9 +1,11 @@
 ---
-title: "Test Cloud Functions for Firebase locally"
+title: "Firebase Emulator Suit - Part 1"
 layout: post
+is_series: true
+series_title: "Firebase Emulator Suit"
 featured-image: /assets/post-media/2024-02-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-03/cover_sm.jpg
-description: Set up Firebase Emulator Suite in 5 steps
+description: Test Cloud Functions Locally
 categories: coding firebase
 ---
 
