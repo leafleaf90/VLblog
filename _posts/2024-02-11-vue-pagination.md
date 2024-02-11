@@ -115,8 +115,9 @@ const endBookRange = ref(10);
 ```
 
 Ideas for further improvement:
--Let the user select elements per page (simple ref which value can be changed by the user with a dropdown)
--Implement your own data-fetching logic to only fetch when the user changes page (current implementation assumes all data is already in the array)
+
+- Let the user select elements per page (simple ref which value can be changed by the user with a dropdown)
+- Implement your own data-fetching logic to only fetch when the user changes page (current implementation assumes all data is already in the array)
 
 We can now use this pagination component anywhere in our app where we need pagination. Here's the full code for the pagination component if you want to use a similar solution:
 
