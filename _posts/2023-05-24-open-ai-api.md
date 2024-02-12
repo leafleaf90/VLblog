@@ -2,7 +2,7 @@
 title: "OpenAI - Integrate to Vue front-end"
 layout: post
 is_series: true
-series_title: "Dev Tricks"
+series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2023-05-24/cover-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-24/cover-sm.jpg
 description: Utilize a cloud function to call the OpenAI endpoints

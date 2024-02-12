@@ -9,7 +9,8 @@ categories: vue firebase
 
 You can trigger a password reset for your users from the client side using the sendPasswordResetEmail method from the Firebase Auth SDK. In our app we have a HTML div just below the sign in form to trigger this method:
 
-```
+{% highlight vue%}
+
 <div>
         <p>Forgot password?</p>
         <button
@@ -40,7 +41,7 @@ You can trigger a password reset for your users from the client side using the s
           <button class="btn btn-secondary">Reset</button>
         </form>
       </div>
-```
+{% endhighlight %}
 
 <img class="" src="/assets/post-media/2023-06-13/currentLoginPage.jpg"/>
 
@@ -48,21 +49,20 @@ You can trigger a password reset for your users from the client side using the s
 
 In your script (this example is in Vue, using \<script setup\>, composition API), import the Firebase Auth package (preferably you’d do this globally for your app in a Firebase config file). Note that this example still uses version 8 of the Firebase SDK, we have yet to switch over to the modular version 9 (preferred due to the ability to tree-shake and thus a lighter bundle).
 
-```
+{% highlight js%}
 //import
 import firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
-  //your config here
+//your config here
 };
 
 firebase.initializeApp(firebaseConfig);
 
 //create auth instance
 const projectAuth = firebase.auth();
-
-```
+{% endhighlight %}
 
 You can now import the auth instance into your component that will handle the password reset (same component where the HTML for showing the reset password input resides).
 

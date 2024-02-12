@@ -17,13 +17,14 @@ body {
 }
 
 code {
-  font-family: monospace;
-  background-color: black;
-  color: #efde6e;
   padding: 1.5rem;
-  border-radius: 15px;
   display: block;
   overflow: auto;
+}
+
+.highlight {
+  border-radius: 25px;
+  margin: 0px;
 }
 
 .book-image {

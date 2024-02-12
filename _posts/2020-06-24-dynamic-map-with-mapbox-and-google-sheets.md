@@ -1,8 +1,6 @@
 ---
 title: "Dynamic map with Mapbox and Google Sheets"
 layout: post
-is_series: true
-series_title: "Dev Tricks"
 featured-image: /assets/post-media/2020-06-24/map.jpg
 featured-thumbnail: /assets/post-media/2020-06-24/map-sm.jpg
 description: Easy way to use Google Sheets data to render a map, utilizing a Lambda function to cache data

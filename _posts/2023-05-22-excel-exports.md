@@ -2,7 +2,7 @@
 title: "Excel Exports - Vue + Firebase solution"
 layout: post
 is_series: true
-series_title: "Dev Tricks"
+series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2023-05-22/excel.jpg
 featured-thumbnail: /assets/post-media/2023-05-22/excel.jpg
 description: Utilize a cloud function to generate CSV files on-demand

@@ -1,6 +1,8 @@
 ---
 title: "Vue pagination component"
 layout: post
+is_series: true
+series_title: "Building 15 Pages"
 featured-image: /assets/post-media/2024-02-11/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-11/cover_sm.jpg
 description: Reusable pagination
@@ -17,7 +19,7 @@ We want to handle all the logic in the pagination component, and only share the 
 
 First, let’s take a look at the logic in the script setup part of the pagination component:
 
-```
+{% highlight vue %}
 //Pagination.vue
 
 <script setup>
@@ -51,12 +53,15 @@ const numPages = computed(() => {
   return Math.ceil(props.totalElements / props.elementsPerPage);
 });
 </script>
-```
+
+{% endhighlight %}
 
 Here is the template of the pagination component:
 
-```
+{% highlight vue %}
+//Pagination.vue
 <template>
+
   <div class="w-full flex justify-center mt-5">
     <div class="join">
       <button
@@ -77,42 +82,42 @@ Here is the template of the pagination component:
     </div>
   </div>
 </template>
-```
+{% endhighlight %}
 
 We disable the “previous page” button when we know there is no previous page (when current page is 1) and the “next page” button when we know there’s no next page (deducted using the numPages computed property), by using the :disabled attribute.
 
 From the parent, in this case the book table, we use the Pagination component in the template part:
 
-```
-//template of parent
-    <Pagination
+{% highlight vue %}
+// parent template
+<Pagination
       :totalElements="allUserBooks.length"
       v-model:startRange="startBookRange"
       v-model:endRange="endBookRange"
     />
-```
+{% endhighlight %}
 
 We use a v-for to loop over and display all books, and it’s in this v-for we need to use the start and end ranges to cut off the list according to the startRange and endRange from the pagination component. For this, we use JavaScript’s slice method on the array of books (the book element itself is also a component):
 
-```
+{% highlight vue %}
 //template of parent
 <Book
-            :book="book"
-            v-for="book in allUserBooks.slice(
-              startBookRange,
-              endBookRange
-            )"
-            :key="book.id"
-          />
-```
+  :book="book"
+  v-for="book in allUserBooks.slice(
+    startBookRange,
+    endBookRange
+  )"
+  :key="book.id"
+/>
+{% endhighlight %}
 
 We also need to initialize startBookRange and endBookRange in the script setup for this to work:
 
-```
+{% highlight vue %}
 //script setup of parent
 const startBookRange = ref(0);
 const endBookRange = ref(10);
-```
+{% endhighlight %}
 
 Ideas for further improvement:
 
@@ -121,8 +126,9 @@ Ideas for further improvement:
 
 We can now use this pagination component anywhere in our app where we need pagination. Here's the full code for the pagination component if you want to use a similar solution:
 
-```
+{% highlight vue %}
 <template>
+
   <div class="w-full flex justify-center mt-5">
     <div class="join">
       <button
@@ -175,4 +181,5 @@ const numPages = computed(() => {
   return Math.ceil(props.totalElements / props.elementsPerPage);
 });
 </script>
-```
+
+{% endhighlight %}

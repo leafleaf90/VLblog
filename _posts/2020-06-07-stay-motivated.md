@@ -1,8 +1,6 @@
 ---
 title: "Staying motivated while learning to code"
 layout: post
-is_series: true
-series_title: "Dev Tricks"
 featured-image: /assets/post-media/2020-06-07/mac.jpg
 featured-thumbnail: /assets/post-media/2020-06-07/mac-sm.jpg
 description: Tools I use to keep my motivation up

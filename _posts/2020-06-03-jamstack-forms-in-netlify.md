@@ -2,7 +2,7 @@
 title: "JAMstack forms with Netlify"
 layout: post
 is_series: true
-series_title: "Dev Tricks"
+series_title: "Building this blog"
 featured-image: /assets/post-media/2020-06-03/coffee-computer.jpg
 featured-thumbnail: /assets/post-media/2020-06-03/coffee-computer-sm.jpg
 description: 1 minute setup for small-scale form handling with Netlify

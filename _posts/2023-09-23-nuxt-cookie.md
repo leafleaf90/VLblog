@@ -15,14 +15,18 @@ This step will differ depending on how you handle authentication. In my case, I 
 
 Initiate the cookie with (I do this in a composable that handle the Firebase logic):
 
-`const userCookie = useCookie("userCookie");`
+{% highlight js%}
+const userCookie = useCookie("userCookie");
+{% endhighlight %}
 
 Note that I choose to call it “userCookie”, but you can name it whatever you want.
 
 When user auth status changes, you save the new user info to the cookie. Again, I’m using the onAuthStateChanged from Firebase which provides the user data on this change.
 
-`//the new user info comes in the user variable from onAuthStateChanged
-userCookie.value = user;`
+{% highlight js%}
+//the new user info comes in the user variable from onAuthStateChanged
+userCookie.value = user;
+{% endhighlight %}
 
 Nuxt will automatically serialize the user data before writing it to the cookie. You can inspect this in your browser:
 
@@ -43,18 +47,22 @@ _Create the middleware folder in the server folder_
 
 In this case, I call the file "user-middleware". You can call it whatever you want. The only thing we need to get the cookie user info and pass it on is:
 
-`export default defineEventHandler((event) => {
+{% highlight js%}
+export default defineEventHandler((event) => {
 const userCookie = getCookie(event, "userCookie");
 event.context.user = userCookie;
-});`
+});
+{% endhighlight %}
 
 **3. Use the data provided by the middleware**
 
 You can now use this data in your API routes. For example, if you want to return the user info if there’s a logged in user, and an error message if not, you can do this in your API route:
 
-`export default defineEventHandler((event) => {
+{% highlight js%}
+export default defineEventHandler((event) => {
 const user = event.context.user;
 return user || "log in to access this page";
-});`
+});
+{% endhighlight %}
 
 Here you can also redirect users that are not authorized or use abortNavigation() to stop the navigation altogether.

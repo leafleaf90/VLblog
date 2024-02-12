@@ -2,7 +2,7 @@
 title: Generating the blog with Jekyll
 layout: post
 is_series: true
-series_title: "Dev Tricks"
+series_title: "Building this blog"
 featured-image: /assets/post-media/2020-04-27/kickin-back.jpg
 featured-thumbnail: /assets/post-media/2020-04-27/kickin-back-sm.jpg
 description: I took my sad excuse of a blog and fed it to Jekyll. It spat this out!
