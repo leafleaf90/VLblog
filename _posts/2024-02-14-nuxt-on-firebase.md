@@ -235,7 +235,7 @@ Now comes the workaround that will make this whole thing work: you need to run n
 }
 {% endhighlight %}
 
-This is all standard except the postbuild script. You can do this step manually by cd into the .output directory after building and running _npm install_, but this script makes it a bit easier.
+This is all standard except the postbuild script. You can do this step manually by cd into the .output directory after building and running _npm install_, but this script makes it a bit easier. The idea for the solution above comes from [this](https://github.com/nuxt/nuxt/issues/15185){:target="\_blank"} GitHub Nuxt issue.
 
 When you want to deploy, you do these steps in order in the terminal:
 
