@@ -6,7 +6,7 @@ series_title: "Building this blog"
 featured-image: /assets/post-media/2020-04-28/server.jpg
 featured-thumbnail: /assets/post-media/2020-04-28/server-sm.jpg
 description: Automated build with GitHub and Netlify
-categories: infrastructure jekyll
+categories: jekyll hosting
 ---
 
 This blog is built with the static site generator Jekyll (see [last post]({% post_url 2020-05-20-getting-started-with-jekyll %})). Static sites are easy, and usually free, to host.

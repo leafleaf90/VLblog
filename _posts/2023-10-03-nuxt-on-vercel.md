@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2023-10-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-10-03/cover_sm.jpg
 description: Great option for SSR apps
-categories: coding nuxt infrastructure
+categories: nuxt hosting
 ---
 
 I recently moved my SSR Nuxt3 applications from Firebase hosting over to Vercel, as the Firebase hosting requires some gymnastics to work with server-side rendering (you need to use Google Cloud function to reroute to the hosting). The deployment process to Vercel is more straightforward:
