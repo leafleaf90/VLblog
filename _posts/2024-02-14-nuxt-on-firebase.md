@@ -1,6 +1,8 @@
 ---
 title: "Firestore + Firebase Hosting with Nuxt 3"
 layout: post
+is_series: true
+series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2024-02-14/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-14/cover_sm.jpg
 description: Step-by-step to make it work
