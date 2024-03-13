@@ -26,7 +26,7 @@ YOUR CODE
 For example
 
 {% raw %}
-{% highlight js %}
+{% highlight javascript %}
 
 YOUR JAVASCRIPT CODE
 
@@ -41,7 +41,7 @@ If you do this and inspect your code, you will see that it has been tagged and i
 
 Now we only need to apply a CSS theme that will style these tags. You can see a list of available themes [here](https://github.com/mzlogin/rouge-themes){:target="\_blank"}. You can also create your own styles if you wish to do so. Next, use the Rouge-command "rougify" to create a CSS-file with the theme you choose:
 
-{% highlight js %}
+{% highlight javascript %}
 
 > rougify style base16.dark > base16_dark.css{% endhighlight %}
 
@@ -58,7 +58,7 @@ This will create the file in your project root. I prefer to place it in the asse
 {% endhighlight %}
 
 The code snippet we looked at in the beginning of this post now looks like this:
-{% highlight js%}
+{% highlight javascript %}
 //import
 import firebase from "firebase/app";
 import "firebase/auth";

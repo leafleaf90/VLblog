@@ -15,7 +15,7 @@ This step will differ depending on how you handle authentication. In my case, I 
 
 Initiate the cookie with (I do this in a composable that handle the Firebase logic):
 
-{% highlight js%}
+{% highlight javascript %}
 const userCookie = useCookie("userCookie");
 {% endhighlight %}
 
@@ -23,7 +23,7 @@ Note that I choose to call it “userCookie”, but you can name it whatever you
 
 When user auth status changes, you save the new user info to the cookie. Again, I’m using the onAuthStateChanged from Firebase which provides the user data on this change.
 
-{% highlight js%}
+{% highlight javascript %}
 //the new user info comes in the user variable from onAuthStateChanged
 userCookie.value = user;
 {% endhighlight %}
@@ -47,7 +47,7 @@ _Create the middleware folder in the server folder_
 
 In this case, I call the file "user-middleware". You can call it whatever you want. The only thing we need to get the cookie user info and pass it on is:
 
-{% highlight js%}
+{% highlight javascript %}
 export default defineEventHandler((event) => {
 const userCookie = getCookie(event, "userCookie");
 event.context.user = userCookie;
@@ -58,7 +58,7 @@ event.context.user = userCookie;
 
 You can now use this data in your API routes. For example, if you want to return the user info if there’s a logged in user, and an error message if not, you can do this in your API route:
 
-{% highlight js%}
+{% highlight javascript %}
 export default defineEventHandler((event) => {
 const user = event.context.user;
 return user || "log in to access this page";

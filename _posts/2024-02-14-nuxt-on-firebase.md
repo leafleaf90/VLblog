@@ -38,7 +38,7 @@ The Firebase UI will give you the client initialization code at this step, but i
 
 Put the downloaded file in your project root. We named it “service-account.json”. In the firebase.js we created earlier, import the Firebase admin modules needed:
 
-{% highlight js %}
+{% highlight javascript %}
 // server/lib/firebase.js
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
@@ -48,7 +48,7 @@ import serviceAccount from "@/service-account.json";
 
 We can now initialize Firebase in the same file:
 
-{% highlight js %}
+{% highlight javascript %}
 // server/lib/firebase.js
 …
 // Initialize Firebase
@@ -70,7 +70,7 @@ To use firestoreDb as explained above, let’s first create an API route that wi
 
 In this file, we import firestoreDb, and then handle any incoming events (simplified logic here that only fetched based on the category, ignoring country and city for now):
 
-{% highlight js %}
+{% highlight javascript %}
 // server/api/products/[country]/[city]/[category].get.js
 
 import { firestoreDb } from "@/server/lib/firebase";
@@ -119,7 +119,7 @@ We can now call this endpoint from our front-end. Create a page in the pages fol
 
 In this file, you can call the endpoint:
 
-{% highlight js %}
+{% highlight javascript %}
 
 <script setup>
 //initiate route

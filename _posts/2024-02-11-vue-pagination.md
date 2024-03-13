@@ -11,7 +11,7 @@ categories: coding vue
 
 If you are developing an application doing any kind of data presentation in the front-end, you will almost always need pagination to break the data up into smaller chunks for the user to browse. It might be both for improved UX but also for data loading reasons, to load the data on-demand when user goes between the pages. On [**15 Pages**](https://www.15pages.com){:target="\_blank"}, we have it in the list of the user’s saved books, for example. To be able to reuse the functionality in other places, we placed it in a component that can be dropped in wherever we need it. It looks like this:
 
-<img  src="/assets/post-media/2024-02-11/pagination.gif"/>
+<img src="/assets/post-media/2024-02-11/pagination.gif"/>
 
 We use Vue’s meta-framework Nuxt for **15 Pages**, and for styling, we use Tailwind together with DaisyUI. Read more about using Tailwind with Nuxt [here]({% post_url 2024-01-10-nuxt-tailwind-quick-start %}) and about DaisyUI [here]({% post_url 2024-01-10-daisyui %}).
 

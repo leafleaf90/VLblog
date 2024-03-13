@@ -7,6 +7,8 @@ description: A walkthrough
 categories: javascript vue
 ---
 
+NOTE: a better solution using Pinia for store management in Vue can be found in [this post]({% post_url 2024-03-13-pinia-store %}). if you are still interested in how to set something like this up without state management, keep reading.
+
 ## The Challenge
 
 Sometimes your user makes a choice in your webapp that you want to persist even if they refresh the browser or step away for a while. If you're working with authenticated users, you can save some of these settings on the user object in your database so that it carries over to all devices that user might log in from. But for guest users or for some simple layout or user experience settings, it can be enough to just save the setting to the browser's [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage){:target="\_blank"}.
