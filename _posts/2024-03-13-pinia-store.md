@@ -1,5 +1,5 @@
 ---
-title: "🍍 Pinia Store - Manage Vue State With Ease"
+title: "🍍 Pinia Stores - Manage Vue State With Ease"
 layout: post
 is_series: true
 series_title: "Building Vegan Monkey"
