@@ -1,11 +1,11 @@
 ---
-title: "🍍 Pinia Stores - Manage Vue State With Ease"
+title: "🚀 Vue Teleport"
 layout: post
 is_series: true
 series_title: "Building Vegan Monkey"
-featured-image: /assets/post-media/2024-03-13/cover_lg.jpg
-featured-thumbnail: /assets/post-media/2024-03-13/cover_sm.jpg
-description: Example of managing location and language settings in Vue3 using Pinia
+featured-image: /assets/post-media/2024-03-1/cover_lg.jpg
+featured-thumbnail: /assets/post-media/2024-03-14/cover_sm.jpg
+description: Put the content where it needs to go
 categories: vue
 ---
 
@@ -138,8 +138,6 @@ toggleCountrySelector,
 };
 });
 {% endhighlight %}
-
-Note that it might be a better idea to save everything to localstore to avoid re-fetch on next session. As long as you have a way to bust the localstorage when you know you have new data you want the user to get on next visit (see BONUS section at the bottom for a way to do this).
 
 The city and language stores are dependent on the country store. If country changes, city and language needs to adapt. For this, we use the country store in the city and language stores, and react to the changes that happen. For an example of this, let's look at how the city changes when country changes.
 
@@ -337,37 +335,3 @@ See it working in the web app:
 <img src="/assets/post-media/2024-03-13/stateExample.gif"/>
 
 You can check this live at [_**veganmonkey.co**_](https://app.veganmonkey.co){:target="\_blank"} as well
-
-### Bonus - clear localstorage when needed
-
-It's a good idea to have a reliable way to be able to clear localstorage for users on next visit when you have made code changes that might break with old data stored in localstorage. With this small snippet in your App.vue or other entrypoint you can achieve that:
-
-{% highlight javascript %}
-
-const localStorageVersion = "1.0.0";
-
-//get the saved version from localstorage
-let savedLocalStorageVersion = localStorage.getItem("localStorageVersion");
-
-//check if a saved version exists
-if (
-savedLocalStorageVersion &&
-typeof savedLocalStorageVersion !== typeof undefined &&
-savedLocalStorageVersion !== "undefined"
-) {
-//if the saved version is different from the current version, clear localstorage and reload the page
-if (savedLocalStorageVersion !== localStorageVersion) {
-localStorage.clear();
-sessionStorage.clear();
-//set the current version as the saved version
-localStorage.setItem("localStorageVersion", localStorageVersion);
-window.location.reload();
-}
-} else {
-//if there's no saved version, set the current version
-localStorage.setItem("localStorageVersion", localStorageVersion);
-}
-
-{% endhighlight %}
-
-When you make breaking changes, update the versioning and on next visit, the user's browser will clear localstorage.

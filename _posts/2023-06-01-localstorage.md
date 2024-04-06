@@ -101,6 +101,8 @@ window.dispatchEvent(
 );
 ```
 
+_Note that a better option here is to set up a reactive ref in a composable that can be imported to each component that needs the language info. Keep reading if you still want to know how it can be done using event dispatches._
+
 Here we dispatch this event together with the activeLanguage item in localStorage.
 
 So now we make sure to overwrite the activeLanguage in localStorage whenever the user changes it, and we also fire an event that can be listened to from other components.
@@ -167,7 +169,7 @@ props: {
 }
 ```
 
-To make this a ref that is reactive to changes, we use toRef (remember to import toRef from ):
+To make this a ref that is reactive to changes, we use toRef (remember to import toRef from 'vue'):
 
 ```
 setup(props) {
