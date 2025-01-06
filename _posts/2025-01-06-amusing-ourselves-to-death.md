@@ -1,9 +1,9 @@
 ---
-title: "Is this the year we find our way back to books?"
+title: "Are we amusing ourselves to death?"
 layout: post
 featured-image: /assets/post-media/2025-01-06/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2025-01-06/cover_sm.jpg
-description: A look at what’s lost—and the importance of winning it back
+description: McLuhan, Postman and the benefits of a typographic mind
 categories: books
 ---
 
