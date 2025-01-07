@@ -27,7 +27,7 @@ With modern technology, especially smartphones, we are no longer required to do 
 
 ## The way forward
 
-So what is the way out of this downward spiral of our minds? You guessed it: let’s get back to the typographic mind! Let’s read to build our attention span, grow our abilities to think critically and express ourselves coherently.
+So what is the way out of this downward spiral of our minds? Is there a way we claw our way back to a typographic mind? What seems clear is that by reading more quality books in 2025, we can build our attention span back up again, grow our abilities to think critically, and in the process also feel better. It feels good to focus, to be in the zone!
 
 Some tools and websites that might help you get into the reading mode this year:
 
