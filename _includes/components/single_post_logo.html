@@ -1,23 +1,11 @@
 <a
-  style="
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    width: fit-content;
-  "
-  class="post-logos-single"
+  class="post-logos-single post-logos-single-link"
   href="{{site.baseurl}}/categories/#{{include.category|slugize}}"
 >
   <img
     src="/assets/images/categories/{{include.category}}.svg"
-    style="padding-left: 5px; padding-right: 5px"
-    alt=""
+    alt="{{include.category}} category icon"
     class="post-logos-single-icon"
   />
-  <span
-    class="post-logos-single-text"
-    style="color: black; text-transform: capitalize"
-    >{{include.category}}</span
-  >
+  <span class="post-logos-single-text">{{include.category}}</span>
 </a>

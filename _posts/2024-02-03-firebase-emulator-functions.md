@@ -1,5 +1,5 @@
 ---
-title: "Firebase Emulator Suit - Part 1"
+title: "Firebase Emulator Suit"
 layout: post
 is_series: true
 series_title: "Firebase Emulator Suit"
