@@ -10,14 +10,14 @@
     flex-direction: column !important;
     gap: 1rem !important;
   }
-  
+
   .content-grid,
   .projects-grid {
     display: flex !important;
     flex-direction: column !important;
     gap: 1rem !important;
   }
-  
+
   .page-container {
     padding: 0 0.5rem !important;
   }
@@ -29,7 +29,7 @@
     display: flex !important;
     flex-direction: column !important;
   }
-  
+
   .content-grid,
   .projects-grid {
     display: flex !important;
@@ -214,7 +214,7 @@ body {
     grid-template-columns: 1fr !important;
     gap: var(--spacing-lg) !important;
   }
-  
+
   .sidebar {
     order: -1 !important;
   }
@@ -225,21 +225,21 @@ body {
   .page-container {
     padding: 0 var(--spacing-xs) !important;
   }
-  
+
   .main-layout {
     display: flex !important;
     flex-direction: column !important;
     gap: var(--spacing-md) !important;
     margin-top: var(--spacing-md) !important;
   }
-  
+
   .content-grid,
   .projects-grid {
     display: flex !important;
     flex-direction: column !important;
     gap: var(--spacing-xs) !important;
   }
-  
+
   .section-title {
     font-size: var(--font-size-lg) !important;
     text-align: center !important;
@@ -2176,9 +2176,9 @@ img + em {
     grid-template-columns: 1fr !important;
     gap: var(--spacing-sm) !important;
   }
-  
+
   /* Ensure cards take full width */
-  .post-card, 
+  .post-card,
   .project-card {
     width: 100% !important;
     max-width: 100% !important;
