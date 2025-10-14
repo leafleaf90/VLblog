@@ -64,7 +64,7 @@ layout: default
                     truncatewords: 15 }}
                   </p>
                   <div class="slider-card-meta">
-                    <span class="slider-card-category">
+                    <span class="post-card-category">
                       {{ post.categories.first | capitalize }}
                     </span>
                     <span class="slider-card-date">
@@ -119,22 +119,7 @@ layout: default
 
         <!-- Category Filter Selector -->
         <div class="category-filter">
-          <button class="filter-btn active" data-filter="all">
-            <svg
-              class="filter-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="3"></circle>
-              <path
-                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l .06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-              ></path>
-            </svg>
-            All
-          </button>
-          <button class="filter-btn" data-filter="code">
+          <button class="filter-btn active" data-filter="code">
             <svg
               class="filter-icon"
               viewBox="0 0 24 24"
@@ -204,18 +189,20 @@ layout: default
             />
             {% endif %}
             <div class="post-card-content">
-              <h3 class="post-card-title">
-                <a
-                  href="{{ post.url }}"
-                  style="color: inherit; text-decoration: none"
-                >
-                  {{ post.title }}
-                </a>
-              </h3>
-              <p class="post-card-excerpt">
-                {{ post.description | default: post.excerpt | strip_html |
-                truncate: 100 }}
-              </p>
+              <div class="post-card-main">
+                <h3 class="post-card-title">
+                  <a
+                    href="{{ post.url }}"
+                    style="color: inherit; text-decoration: none"
+                  >
+                    {{ post.title }}
+                  </a>
+                </h3>
+                <p class="post-card-excerpt">
+                  {{ post.description | default: post.excerpt | strip_html |
+                  truncate: 100 }}
+                </p>
+              </div>
               <div class="post-card-meta">
                 <span class="post-card-category"
                   >{{ post.categories.first | capitalize }}</span
@@ -481,12 +468,14 @@ layout: default
       // Remove active class from all buttons
       filterBtns.forEach((b) => b.classList.remove("active"));
 
-      // Add active class to the corresponding filter button
-      const activeBtn = document.querySelector(
-        `.filter-btn[data-filter="${filter}"]`
-      );
-      if (activeBtn) {
-        activeBtn.classList.add("active");
+      // Add active class to the corresponding filter button (only if not showing all)
+      if (filter !== "all") {
+        const activeBtn = document.querySelector(
+          `.filter-btn[data-filter="${filter}"]`
+        );
+        if (activeBtn) {
+          activeBtn.classList.add("active");
+        }
       }
 
       let visibleCount = 0;
@@ -521,7 +510,16 @@ layout: default
     // Handle filter button clicks
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
-        applyFilter(this.dataset.filter);
+        const clickedFilter = this.dataset.filter;
+
+        // If clicking the currently active filter, show all posts
+        if (this.classList.contains("active")) {
+          applyFilter("all");
+          // Remove active class from all buttons when showing all
+          filterBtns.forEach((b) => b.classList.remove("active"));
+        } else {
+          applyFilter(clickedFilter);
+        }
       });
     });
 
@@ -533,10 +531,9 @@ layout: default
       });
     });
 
-    // Initialize with count
+    // Initialize with code filter active
     const allPostsCount = postCards.length;
-    const sectionTitle = document.querySelector("#recent-heading");
-    sectionTitle.textContent = `Recent Posts (showing 12 of ${allPostsCount})`;
+    applyFilter("code");
 
     // Slider functionality
     const sliderTrack = document.getElementById("sliderTrack");

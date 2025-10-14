@@ -1782,6 +1782,7 @@ img + em {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
+  align-items: stretch;
 }
 
 .post-card {
@@ -1791,6 +1792,9 @@ img + em {
   overflow: hidden;
   transition: all 0.3s ease;
   border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .post-card:hover {
@@ -1807,6 +1811,11 @@ img + em {
 
 .post-card-content {
   padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 200px;
+  justify-content: space-between;
 }
 
 .post-card-title {
@@ -1824,7 +1833,7 @@ img + em {
 .post-card-excerpt {
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
-  margin: 0 0 var(--spacing-md) 0;
+  margin: 0;
   line-height: var(--line-height-relaxed);
 }
 
