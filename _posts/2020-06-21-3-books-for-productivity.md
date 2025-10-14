@@ -5,6 +5,7 @@ featured-image: /assets/post-media/2020-06-21/books.jpg
 featured-thumbnail: /assets/post-media/2020-06-21/books-sm.jpg
 description: Books I have found immensely valuable for productivity
 categories: productivity books
+featured: true
 ---
 
 ## Do the work

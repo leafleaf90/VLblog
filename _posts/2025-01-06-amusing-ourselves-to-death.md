@@ -5,6 +5,7 @@ featured-image: /assets/post-media/2025-01-06/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2025-01-06/cover_sm.jpg
 description: McLuhan, Postman and the benefits of a typographic mind
 categories: books
+featured: true
 ---
 
 You might have heard the phrase _“The medium is the message”_, coined by the Canadian communication theorist Marshall McLuhan. It refers to the fact that _how_ we consume information is important for how it shapes our understanding of it, and also what happens to our minds when consuming it. For example, we might read a 400-page book about the French Revolution or watch a documentary containing the same content. In this case, the _content_ of the message we receive is the same, but the _character_ of the message is wildly different. So, which one is better? Let’s look at what the American author Neil Postman said about the differences.

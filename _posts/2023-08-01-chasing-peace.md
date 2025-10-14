@@ -5,6 +5,7 @@ featured-image: /assets/post-media/2023-08-01/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-08-01/cover_sm.jpg
 description: A Curse of Modern Society
 categories: mindfulness
+featured: true
 ---
 
 I recently visited a luxurious spa hotel in the beautiful archipelago of Sweden. The surroundings were magnificent, the rooms spacious, the service great and in the air a sense of complete relaxation among the privileged visitors, most of which had left the big city to visit this oasis for just a day or two. But wait — there was something else too. Perhaps it wasn’t pure relaxation that circulated in the air. There was also the subtle, bitter taste of _demand_ for that relaxed state. The chase for it. We had all spent $400 per night, taken the trip to a remote area, turned off notifications and brought with us that book we haven’t gotten around to for the past 6 months. In other words: conditions are perfect! Now we simply _must_ be granted that ultimate state of bliss, don’t we?

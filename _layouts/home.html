@@ -33,51 +33,169 @@ layout: default
   <div class="main-layout">
     <!-- Main Content Area -->
     <main class="content-area" id="content">
-      <!-- Featured/Latest Post -->
-      <section aria-labelledby="latest-heading">
-        <h2 id="latest-heading" class="section-title">Latest Insights</h2>
+      <!-- Trending Articles Slider -->
+      <section aria-labelledby="trending-heading">
+        <h2 id="trending-heading" class="section-title">Trending Articles</h2>
 
-        {% for post in site.posts limit:1 %}
-        <article class="post-card featured-post">
-          {% if post.featured-image %}
-          <img
-            src="{{ post.featured-image }}"
-            alt="{{ post.title }}"
-            class="post-card-image"
-            loading="lazy"
-          />
-          {% endif %}
-          <div class="post-card-content">
-            <h3 class="post-card-title">
-              <a
-                href="{{ post.url }}"
-                style="color: inherit; text-decoration: none"
-              >
-                {{ post.title }}
-              </a>
-            </h3>
-            <p class="post-card-excerpt">
-              {{ post.description | default: post.excerpt | strip_html |
-              truncate: 150 }}
-            </p>
-            <div class="post-card-meta">
-              <span class="post-card-category"
-                >{{ post.categories.first | capitalize }}</span
-              >
-              <span>{{ post.date | date: "%B %d, %Y" }}</span>
+        <div class="slider-container">
+          <div class="slider-wrapper">
+            <div class="slider-track" id="sliderTrack">
+              {% assign featured_posts = site.posts | where: "featured", true %}
+              {% for post in featured_posts %}
+              <article class="slider-card">
+                {% if post.featured-image %}
+                <div class="slider-card-image">
+                  <img
+                    src="{{ post.featured-image }}"
+                    alt="{{ post.title }}"
+                    loading="lazy"
+                  />
+                  <div class="slider-card-overlay">
+                    <span class="trending-badge">🔥 Trending</span>
+                  </div>
+                </div>
+                {% endif %}
+                <div class="slider-card-content">
+                  <h3 class="slider-card-title">
+                    <a href="{{ post.url }}">{{ post.title }}</a>
+                  </h3>
+                  <p class="slider-card-excerpt">
+                    {{ post.description | default: post.excerpt | strip_html |
+                    truncatewords: 15 }}
+                  </p>
+                  <div class="slider-card-meta">
+                    <span class="slider-card-category">
+                      {{ post.categories.first | capitalize }}
+                    </span>
+                    <span class="slider-card-date">
+                      {{ post.date | date: "%b %d, %Y" }}
+                    </span>
+                  </div>
+                </div>
+              </article>
+              {% endfor %}
             </div>
           </div>
-        </article>
-        {% endfor %}
+
+          <!-- Slider Navigation -->
+          <div class="slider-nav">
+            <button class="slider-btn slider-prev" id="sliderPrev">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+            </button>
+            <button class="slider-btn slider-next" id="sliderNext">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Slider Dots -->
+          <div class="slider-dots" id="sliderDots">
+            {% for post in featured_posts %}
+            <button
+              class="slider-dot {% if forloop.first %}active{% endif %}"
+              data-slide="{{ forloop.index0 }}"
+            ></button>
+            {% endfor %}
+          </div>
+        </div>
       </section>
 
       <!-- Recent Posts Grid -->
       <section aria-labelledby="recent-heading">
         <h2 id="recent-heading" class="section-title">Recent Posts</h2>
+
+        <!-- Category Filter Selector -->
+        <div class="category-filter">
+          <button class="filter-btn active" data-filter="all">
+            <svg
+              class="filter-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l .06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              ></path>
+            </svg>
+            All
+          </button>
+          <button class="filter-btn" data-filter="code">
+            <svg
+              class="filter-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="16,18 22,12 16,6"></polyline>
+              <polyline points="8,6 2,12 8,18"></polyline>
+            </svg>
+            Code
+          </button>
+          <button class="filter-btn" data-filter="mindfulness">
+            <svg
+              class="filter-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            </svg>
+            Mindfulness
+          </button>
+          <button class="filter-btn" data-filter="life">
+            <svg
+              class="filter-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Life
+          </button>
+        </div>
+
         <div class="content-grid">
-          {% for post in site.posts offset:1 limit:6 %}
-          <article class="post-card">
-            {% if post.featured-thumbnail %}
+          {% assign code_cats =
+          "coding,vue,nuxt,firebase,javascript,jekyll,hosting,dart,flutter,openai"
+          | split: "," %} {% assign mindfulness_cats =
+          "productivity,minimalism,mindfulness,motivation,books" | split: "," %}
+          {% assign life_cats = "travel,thailand,movies" | split: "," %} {% for
+          post in site.posts %} {% assign main_category = "other" %} {% for
+          category in post.categories %} {% if code_cats contains category %} {%
+          assign main_category = "code" %} {% break %} {% elsif mindfulness_cats
+          contains category %} {% assign main_category = "mindfulness" %} {%
+          break %} {% elsif life_cats contains category %} {% assign
+          main_category = "life" %} {% break %} {% endif %} {% endfor %}
+
+          <article
+            class="post-card"
+            data-category="{{ main_category }}"
+            {%
+            if
+            forloop.index
+          >
+            12 %}style="display: none;"{% endif %}> {% if
+            post.featured-thumbnail %}
             <img
               src="{{ post.featured-thumbnail }}"
               alt="{{ post.title }}"
@@ -213,24 +331,125 @@ layout: default
       <div class="sidebar-section">
         <h3 class="sidebar-title">Explore Topics</h3>
         <ul class="category-list">
-          {% for category in site.categories %}
+          {% assign code_cats =
+          "coding,vue,nuxt,firebase,javascript,jekyll,hosting,dart,flutter,openai"
+          | split: "," %} {% assign mindfulness_cats =
+          "productivity,minimalism,mindfulness,motivation,books" | split: "," %}
+          {% assign life_cats = "travel,thailand,movies" | split: "," %} {%
+          assign code_count = 0 %} {% assign mindfulness_count = 0 %} {% assign
+          life_count = 0 %} {% for post in site.posts %} {% assign
+          post_categorized = false %} {% for category in post.categories %} {%
+          unless post_categorized %} {% if code_cats contains category %} {%
+          assign code_count = code_count | plus: 1 %} {% assign post_categorized
+          = true %} {% elsif mindfulness_cats contains category %} {% assign
+          mindfulness_count = mindfulness_count | plus: 1 %} {% assign
+          post_categorized = true %} {% elsif life_cats contains category %} {%
+          assign life_count = life_count | plus: 1 %} {% assign post_categorized
+          = true %} {% endif %} {% endunless %} {% endfor %} {% endfor %}
+
           <li class="category-item">
+            <a href="#" class="category-link" data-filter="code">
+              <svg
+                class="category-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="16,18 22,12 16,6"></polyline>
+                <polyline points="8,6 2,12 8,18"></polyline>
+              </svg>
+              <span>Code</span>
+              <span style="margin-left: auto; color: var(--color-text-light)"
+                >({{ code_count }})</span
+              >
+            </a>
+          </li>
+
+          <!-- Code subcategories -->
+          {% for category in site.categories %} {% if code_cats contains
+          category.first %}
+          <li class="category-item subcategory">
             <a
               href="/categories/#{{ category.first | slugify }}"
               class="category-link"
             >
-              <img
-                src="/assets/images/categories/{{ category.first }}.svg"
-                alt="{{ category.first }} icon"
-                class="category-icon"
-              />
               <span>{{ category.first | capitalize }}</span>
               <span style="margin-left: auto; color: var(--color-text-light)"
                 >({{ category.last.size }})</span
               >
             </a>
           </li>
-          {% endfor %}
+          {% endif %} {% endfor %}
+
+          <li class="category-item">
+            <a href="#" class="category-link" data-filter="mindfulness">
+              <svg
+                class="category-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+              <span>Mindfulness</span>
+              <span style="margin-left: auto; color: var(--color-text-light)"
+                >({{ mindfulness_count }})</span
+              >
+            </a>
+          </li>
+
+          <!-- Mindfulness subcategories -->
+          {% for category in site.categories %} {% if mindfulness_cats contains
+          category.first %}
+          <li class="category-item subcategory">
+            <a
+              href="/categories/#{{ category.first | slugify }}"
+              class="category-link"
+            >
+              <span>{{ category.first | capitalize }}</span>
+              <span style="margin-left: auto; color: var(--color-text-light)"
+                >({{ category.last.size }})</span
+              >
+            </a>
+          </li>
+          {% endif %} {% endfor %}
+
+          <li class="category-item">
+            <a href="#" class="category-link" data-filter="life">
+              <svg
+                class="category-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Life</span>
+              <span style="margin-left: auto; color: var(--color-text-light)"
+                >({{ life_count }})</span
+              >
+            </a>
+          </li>
+
+          <!-- Life subcategories -->
+          {% for category in site.categories %} {% if life_cats contains
+          category.first %}
+          <li class="category-item subcategory">
+            <a
+              href="/categories/#{{ category.first | slugify }}"
+              class="category-link"
+            >
+              <span>{{ category.first | capitalize }}</span>
+              <span style="margin-left: auto; color: var(--color-text-light)"
+                >({{ category.last.size }})</span
+              >
+            </a>
+          </li>
+          {% endif %} {% endfor %}
         </ul>
       </div>
 
@@ -239,8 +458,8 @@ layout: default
         <h3 class="sidebar-title">Quick Links</h3>
         <ul class="category-list">
           <li class="category-item">
-            <a href="/categories" class="category-link">
-              <span>All Categories</span>
+            <a href="/#recent-heading" class="category-link">
+              <span>Browse All Posts</span>
             </a>
           </li>
         </ul>
@@ -248,3 +467,172 @@ layout: default
     </aside>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Filter functionality
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const categoryLinks = document.querySelectorAll(
+      ".category-link[data-filter]"
+    );
+    const postCards = document.querySelectorAll(".post-card");
+
+    function applyFilter(filter) {
+      // Remove active class from all buttons
+      filterBtns.forEach((b) => b.classList.remove("active"));
+
+      // Add active class to the corresponding filter button
+      const activeBtn = document.querySelector(
+        `.filter-btn[data-filter="${filter}"]`
+      );
+      if (activeBtn) {
+        activeBtn.classList.add("active");
+      }
+
+      let visibleCount = 0;
+
+      postCards.forEach((card) => {
+        const shouldShow = filter === "all" || card.dataset.category === filter;
+
+        if (shouldShow) {
+          card.style.display = "block";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      // Update the section title to show count
+      const sectionTitle = document.querySelector("#recent-heading");
+      if (filter === "all") {
+        sectionTitle.textContent = `Recent Posts (${visibleCount})`;
+      } else {
+        const categoryName = filter.charAt(0).toUpperCase() + filter.slice(1);
+        sectionTitle.textContent = `${categoryName} Posts (${visibleCount})`;
+      }
+
+      // Scroll to posts section
+      document.querySelector("#recent-heading").scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    // Handle filter button clicks
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        applyFilter(this.dataset.filter);
+      });
+    });
+
+    // Handle sidebar category link clicks
+    categoryLinks.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        applyFilter(this.dataset.filter);
+      });
+    });
+
+    // Initialize with count
+    const allPostsCount = postCards.length;
+    const sectionTitle = document.querySelector("#recent-heading");
+    sectionTitle.textContent = `Recent Posts (showing 12 of ${allPostsCount})`;
+
+    // Slider functionality
+    const sliderTrack = document.getElementById("sliderTrack");
+    const sliderPrev = document.getElementById("sliderPrev");
+    const sliderNext = document.getElementById("sliderNext");
+    const sliderDots = document.querySelectorAll(".slider-dot");
+
+    if (sliderTrack) {
+      let currentSlide = 0;
+      const totalSlides = sliderDots.length;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function updateSlider() {
+        const translateX = -currentSlide * 100;
+        sliderTrack.style.transform = `translateX(${translateX}%)`;
+
+        // Update dots
+        sliderDots.forEach((dot, index) => {
+          dot.classList.toggle("active", index === currentSlide);
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      }
+
+      function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        const minSwipeDistance = 50;
+
+        if (Math.abs(swipeDistance) > minSwipeDistance) {
+          if (swipeDistance > 0) {
+            prevSlide();
+          } else {
+            nextSlide();
+          }
+        }
+      }
+
+      // Event listeners
+      if (sliderNext) {
+        sliderNext.addEventListener("click", nextSlide);
+      }
+
+      if (sliderPrev) {
+        sliderPrev.addEventListener("click", prevSlide);
+      }
+
+      // Touch/swipe support
+      sliderTrack.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      sliderTrack.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      // Dot navigation
+      sliderDots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          currentSlide = index;
+          updateSlider();
+        });
+      });
+
+      // Auto-play slider (pause on touch devices)
+      let autoPlayInterval;
+      const startAutoPlay = () => {
+        autoPlayInterval = setInterval(nextSlide, 5000);
+      };
+
+      const stopAutoPlay = () => {
+        clearInterval(autoPlayInterval);
+      };
+
+      // Detect if device supports touch
+      const isTouchDevice = "ontouchstart" in window;
+
+      if (!isTouchDevice) {
+        startAutoPlay();
+      }
+
+      // Pause auto-play on hover (desktop)
+      const sliderContainer = document.querySelector(".slider-container");
+      if (sliderContainer && !isTouchDevice) {
+        sliderContainer.addEventListener("mouseenter", stopAutoPlay);
+        sliderContainer.addEventListener("mouseleave", startAutoPlay);
+      }
+    }
+  });
+</script>
