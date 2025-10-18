@@ -2,6 +2,141 @@
 layout: default
 ---
 
+<style>
+  /* ===== CONTACT FORM ENHANCEMENT STYLES ===== */
+
+  /* Form Field Base Styles */
+  #contactModal .form-group input,
+  #contactModal .form-group textarea,
+  .contact-modal .form-group input,
+  .contact-modal .form-group textarea,
+  form#contactForm input,
+  form#contactForm textarea {
+    /* Layout & Sizing */
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1.5rem !important;
+    min-height: 60px !important;
+
+    /* Visual Design */
+    border: 2px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    background-color: #ffffff !important;
+    font-size: 1.1rem !important;
+
+    /* Interactions */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  /* Textarea Specific Styling */
+  #contactModal .form-group textarea,
+  .contact-modal .form-group textarea,
+  form#contactForm textarea {
+    min-height: 140px !important;
+    resize: vertical !important;
+    font-family: inherit !important;
+  }
+
+  /* Focus States */
+  #contactModal .form-group input:focus,
+  #contactModal .form-group textarea:focus,
+  .contact-modal .form-group input:focus,
+  .contact-modal .form-group textarea:focus,
+  form#contactForm input:focus,
+  form#contactForm textarea:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    outline: none !important;
+  }
+
+  /* Modal Layout */
+  #contactModal .modal-content,
+  .contact-modal .modal-content {
+    max-width: 750px !important;
+    width: 95% !important;
+    margin: 3% auto !important;
+    border-radius: 16px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  #contactModal .modal-body,
+  .contact-modal .modal-body {
+    padding: 2rem !important;
+  }
+
+  /* Form Structure */
+  #contactModal .contact-form,
+  .contact-modal .contact-form,
+  form#contactForm {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+
+  #contactModal .form-group,
+  .contact-modal .form-group {
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Label Styling */
+  #contactModal .form-group label,
+  .contact-modal .form-group label {
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Button Layout & Styling */
+  #contactModal .form-actions,
+  .contact-modal .form-actions {
+    display: flex !important;
+    gap: 1rem !important;
+    justify-content: flex-end !important;
+    margin-top: 1.5rem !important;
+  }
+
+  #contactModal .btn-send,
+  #contactModal .btn-cancel,
+  .contact-modal .btn-send,
+  .contact-modal .btn-cancel {
+    padding: 1rem 2rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    min-width: 120px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    #contactModal .modal-content,
+    .contact-modal .modal-content {
+      width: 98% !important;
+      margin: 1% auto !important;
+    }
+
+    #contactModal .modal-body,
+    .contact-modal .modal-body {
+      padding: 1.5rem !important;
+    }
+
+    #contactModal .form-group input,
+    #contactModal .form-group textarea,
+    .contact-modal .form-group input,
+    .contact-modal .form-group textarea,
+    form#contactForm input,
+    form#contactForm textarea {
+      padding: 1.25rem !important;
+      font-size: 1rem !important;
+    }
+  }
+</style>
+
 <!-- Hero Section -->
 <section class="hero-section" role="banner" aria-labelledby="hero-title">
   <div class="hero-container">
