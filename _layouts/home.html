@@ -3,20 +3,31 @@ layout: default
 ---
 
 <style>
-  /* ===== CONTACT FORM ENHANCEMENT STYLES ===== */
+  /* ===== CONTACT FORM ENHANCEMENT STYLES - AGGRESSIVE VERSION ===== */
 
-  /* Form Field Base Styles */
+  /* Form Field Base Styles - Multiple Selectors for Maximum Coverage */
+  #contactModal .form-group input[type="text"],
+  #contactModal .form-group input[type="email"],
   #contactModal .form-group input,
   #contactModal .form-group textarea,
+  .contact-modal .form-group input[type="text"],
+  .contact-modal .form-group input[type="email"],
   .contact-modal .form-group input,
   .contact-modal .form-group textarea,
+  form#contactForm input[type="text"],
+  form#contactForm input[type="email"],
   form#contactForm input,
-  form#contactForm textarea {
-    /* Layout & Sizing */
+  form#contactForm textarea,
+  input[name="name"],
+  input[name="email"],
+  textarea[name="message"] {
+    /* Layout & Sizing - Aggressive */
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
     padding: 1.5rem !important;
     min-height: 60px !important;
+    display: block !important;
 
     /* Visual Design */
     border: 2px solid #e5e7eb !important;
@@ -28,13 +39,27 @@ layout: default
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
   }
 
+  /* Additional form-specific selectors */
+  form[name="contact"] input,
+  form[name="contact"] textarea {
+    width: 100% !important;
+    padding: 1.5rem !important;
+    box-sizing: border-box !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    font-size: 1.1rem !important;
+    min-height: 60px !important;
+  }
+
   /* Textarea Specific Styling */
   #contactModal .form-group textarea,
   .contact-modal .form-group textarea,
-  form#contactForm textarea {
+  form#contactForm textarea,
+  textarea[name="message"] {
     min-height: 140px !important;
     resize: vertical !important;
     font-family: inherit !important;
+    height: 140px !important;
   }
 
   /* Focus States */
@@ -43,7 +68,10 @@ layout: default
   .contact-modal .form-group input:focus,
   .contact-modal .form-group textarea:focus,
   form#contactForm input:focus,
-  form#contactForm textarea:focus {
+  form#contactForm textarea:focus,
+  input[name="name"]:focus,
+  input[name="email"]:focus,
+  textarea[name="message"]:focus {
     border-color: #3b82f6 !important;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
     outline: none !important;
@@ -62,6 +90,8 @@ layout: default
   #contactModal .modal-body,
   .contact-modal .modal-body {
     padding: 2rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Form Structure */
@@ -71,6 +101,7 @@ layout: default
     display: flex !important;
     flex-direction: column !important;
     gap: 1.5rem !important;
+    width: 100% !important;
   }
 
   #contactModal .form-group,
@@ -78,6 +109,7 @@ layout: default
     display: flex !important;
     flex-direction: column !important;
     margin-bottom: 1.5rem !important;
+    width: 100% !important;
   }
 
   /* Label Styling */
@@ -89,6 +121,8 @@ layout: default
     text-transform: uppercase !important;
     letter-spacing: 0.05em !important;
     margin-bottom: 0.75rem !important;
+    display: block !important;
+    width: 100% !important;
   }
 
   /* Button Layout & Styling */
@@ -98,6 +132,7 @@ layout: default
     gap: 1rem !important;
     justify-content: flex-end !important;
     margin-top: 1.5rem !important;
+    width: 100% !important;
   }
 
   #contactModal .btn-send,
@@ -130,7 +165,10 @@ layout: default
     .contact-modal .form-group input,
     .contact-modal .form-group textarea,
     form#contactForm input,
-    form#contactForm textarea {
+    form#contactForm textarea,
+    input[name="name"],
+    input[name="email"],
+    textarea[name="message"] {
       padding: 1.25rem !important;
       font-size: 1rem !important;
     }
