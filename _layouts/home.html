@@ -147,12 +147,29 @@ layout: default
     transition: all 0.2s ease !important;
   }
 
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
+  /* Responsive Design - Multi-Breakpoint Approach */
+
+  /* Large Tablets and Small Laptops (769px - 1024px) */
+  @media (min-width: 769px) and (max-width: 1024px) {
     #contactModal .modal-content,
     .contact-modal .modal-content {
-      width: 98% !important;
-      margin: 1% auto !important;
+      max-width: 650px !important;
+      width: 90% !important;
+    }
+
+    #contactModal .modal-body,
+    .contact-modal .modal-body {
+      padding: 1.75rem !important;
+    }
+  }
+
+  /* Tablets (481px - 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    #contactModal .modal-content,
+    .contact-modal .modal-content {
+      max-width: 500px !important;
+      width: 92% !important;
+      margin: 2% auto !important;
     }
 
     #contactModal .modal-body,
@@ -171,6 +188,89 @@ layout: default
     textarea[name="message"] {
       padding: 1.25rem !important;
       font-size: 1rem !important;
+    }
+
+    /* Reduce textarea height slightly for tablets */
+    #contactModal .form-group textarea,
+    .contact-modal .form-group textarea,
+    form#contactForm textarea,
+    textarea[name="message"] {
+      min-height: 120px !important;
+      height: 120px !important;
+    }
+  }
+
+  /* Large Mobile Devices (401px - 480px) */
+  @media (min-width: 401px) and (max-width: 480px) {
+    #contactModal .modal-content,
+    .contact-modal .modal-content {
+      max-width: 420px !important;
+      width: 95% !important;
+      margin: 2% auto !important;
+    }
+
+    #contactModal .modal-body,
+    .contact-modal .modal-body {
+      padding: 1.25rem !important;
+    }
+
+    #contactModal .form-group input,
+    #contactModal .form-group textarea,
+    .contact-modal .form-group input,
+    .contact-modal .form-group textarea,
+    form#contactForm input,
+    form#contactForm textarea,
+    input[name="name"],
+    input[name="email"],
+    textarea[name="message"] {
+      padding: 1.1rem !important;
+      font-size: 1rem !important;
+    }
+  }
+
+  /* Small Mobile Devices (≤ 400px) */
+  @media (max-width: 400px) {
+    #contactModal .modal-content,
+    .contact-modal .modal-content {
+      width: 98% !important;
+      margin: 1% auto !important;
+    }
+
+    #contactModal .modal-body,
+    .contact-modal .modal-body {
+      padding: 1rem !important;
+    }
+
+    #contactModal .form-group input,
+    #contactModal .form-group textarea,
+    .contact-modal .form-group input,
+    .contact-modal .form-group textarea,
+    form#contactForm input,
+    form#contactForm textarea,
+    input[name="name"],
+    input[name="email"],
+    textarea[name="message"] {
+      padding: 1rem !important;
+      font-size: 0.95rem !important;
+    }
+
+    #contactModal .form-group,
+    .contact-modal .form-group {
+      margin-bottom: 1.25rem !important;
+    }
+
+    #contactModal .form-actions,
+    .contact-modal .form-actions {
+      flex-direction: column !important;
+      gap: 0.75rem !important;
+    }
+
+    #contactModal .btn-send,
+    #contactModal .btn-cancel,
+    .contact-modal .btn-send,
+    .contact-modal .btn-cancel {
+      width: 100% !important;
+      min-width: auto !important;
     }
   }
 </style>
