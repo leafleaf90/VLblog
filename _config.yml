@@ -29,6 +29,10 @@ twitter_username: viktorlovgren
 # github_username:
 port: 9999
 
+# Quotes Configuration
+# Google Docs integration for quotes - using your published document
+quotes_google_docs_url: "https://docs.google.com/document/d/e/2PACX-1vQQV8LAuvIYb1LOmPp8pe6cSJ83LKJ3wfq91lXDvR2oFnffzelX76yFm5S9Dr06Z5GNblIcft8dq_U4/pub"
+
 # Build settings
 theme: minima
 plugins:

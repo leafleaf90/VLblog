@@ -14,6 +14,9 @@ gem "minima", "~> 2.5"
 # Pin jekyll-sass-converter to avoid google-protobuf issues on Netlify
 gem "jekyll-sass-converter", "~> 2.2.0"
 
+# Required for Google Docs quotes parsing
+gem "nokogiri", "~> 1.13"
+
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
