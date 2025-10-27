@@ -725,16 +725,7 @@ description: "A curated collection of inspiring quotes"
         <span class="stat-label">People</span>
       </div>
     </div>
-    
-    <!-- DEBUG INFO -->
-    <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 12px;">
-      <strong>Debug Info:</strong><br>
-      site.data exists: {{ site.data | size }}<br>
-      site.data.quotes exists: {% if site.data.quotes %}YES{% else %}NO{% endif %}<br>
-      site.data.quotes size: {{ site.data.quotes.size | default: "undefined" }}<br>
-      site.data.quotes_by_topic exists: {% if site.data.quotes_by_topic %}YES{% else %}NO{% endif %}<br>
-      site.data.quotes_by_topic size: {{ site.data.quotes_by_topic.size | default: "undefined" }}<br>
-    </div>
+
   </header>
 
 {% if site.data.quotes_by_topic.size > 0 %}
@@ -951,6 +942,7 @@ function getTopicEmoji(topicName) {
 const topicEmojiMap = {
 'love': '❤️',
 'pain, struggle and resilience': '💪',
+'art': '🎨',
 'authenticity': '🎭',
 'productivity and focus': '🎯',
 'decisions and priorities': '⚖️',
