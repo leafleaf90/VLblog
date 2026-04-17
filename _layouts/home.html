@@ -157,6 +157,7 @@ layout: default
           <article
             class="post-card"
             data-category="{{ main_category }}"
+            data-categories="{{ post.categories | join: ',' }}"
             {%
             if
             forloop.index
@@ -341,7 +342,7 @@ layout: default
           {% for category in site.categories %}
             {% if group.categories contains category.first %}
           <li class="category-item subcategory">
-            <a href="/categories/#{{ category.first | slugify }}" class="category-link">
+            <a href="#" class="category-link subcategory-link" data-subcategory="{{ category.first }}">
               <span>{{ category.first | capitalize }}</span>
               <span style="margin-left: auto; color: var(--color-text-light)">({{ category.last.size }})</span>
             </a>
@@ -376,11 +377,11 @@ layout: default
     );
     const postCards = document.querySelectorAll(".post-card");
 
-    function applyFilter(filter) {
+    function applyFilter(filter, subcategory = null) {
       // Remove active class from all buttons
       filterBtns.forEach((b) => b.classList.remove("active"));
 
-      // Add active class to the corresponding filter button (only if not showing all)
+      // Highlight the matching group button (for both group and subcategory filters)
       if (filter !== "all") {
         const activeBtn = document.querySelector(
           `.filter-btn[data-filter="${filter}"]`
@@ -393,7 +394,13 @@ layout: default
       let visibleCount = 0;
 
       postCards.forEach((card) => {
-        const shouldShow = filter === "all" || card.dataset.category === filter;
+        let shouldShow;
+        if (subcategory) {
+          const cardCats = (card.dataset.categories || "").split(",");
+          shouldShow = cardCats.includes(subcategory);
+        } else {
+          shouldShow = filter === "all" || card.dataset.category === filter;
+        }
 
         if (shouldShow) {
           card.style.display = "block";
@@ -405,12 +412,12 @@ layout: default
 
       // Update the section title to show count
       const sectionTitle = document.querySelector("#recent-heading");
-      if (filter === "all") {
-        sectionTitle.textContent = `Recent Posts (${visibleCount})`;
-      } else {
-        const categoryName = filter.charAt(0).toUpperCase() + filter.slice(1);
-        sectionTitle.textContent = `${categoryName} Posts (${visibleCount})`;
-      }
+      const label = subcategory
+        ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
+        : filter === "all" ? null : filter.charAt(0).toUpperCase() + filter.slice(1);
+      sectionTitle.textContent = label
+        ? `${label} Posts (${visibleCount})`
+        : `Recent Posts (${visibleCount})`;
 
       // Scroll to posts section
       document.querySelector("#recent-heading").scrollIntoView({
@@ -427,7 +434,6 @@ layout: default
         // If clicking the currently active filter, show all posts
         if (this.classList.contains("active")) {
           applyFilter("all");
-          // Remove active class from all buttons when showing all
           filterBtns.forEach((b) => b.classList.remove("active"));
         } else {
           applyFilter(clickedFilter);
@@ -435,11 +441,25 @@ layout: default
       });
     });
 
-    // Handle sidebar category link clicks
+    // Handle sidebar group link clicks
     categoryLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
         e.preventDefault();
         applyFilter(this.dataset.filter);
+      });
+    });
+
+    // Handle sidebar subcategory link clicks
+    document.querySelectorAll(".subcategory-link").forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const sub = this.dataset.subcategory;
+        // Find the parent group for this subcategory to highlight the right button
+        const groupItem = this.closest("li").previousElementSibling;
+        const groupFilter = groupItem
+          ? (groupItem.querySelector("[data-filter]") || {}).dataset?.filter
+          : null;
+        applyFilter(groupFilter || "all", sub);
       });
     });
 
