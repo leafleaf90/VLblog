@@ -1,6 +1,11 @@
+{% if include.post.featured-thumbnail %}
+  {% assign card_thumb = include.post.featured-thumbnail %}
+{% elsif include.post.featured-image %}
+  {% assign card_thumb = include.post.featured-image | replace: '.jpg', '-sm.jpg' %}
+{% endif %}
 <div
   class="{%if include.latest %} large-blog-post {% endif %} blog-post"
-  style="background-image:url({{include.post.featured-thumbnail}});"
+  style="background-image:url({{card_thumb}});"
 >
   <div
     style="
@@ -12,7 +17,7 @@
     "
   ></div>
   <a class="blog-title" href="{{ include.post.url }}" style="z-index: 1"
-    >{{ include.post.title}}{% if post.is_series %}
+    >{{ include.post.title}}{% if include.post.is_series %}
     <p
       style="
         color: white;

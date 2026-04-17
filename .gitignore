@@ -3,3 +3,6 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+google-service-account.json
+service-account.json
+**/.DS_Store

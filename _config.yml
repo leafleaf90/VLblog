@@ -33,6 +33,15 @@ port: 9999
 # Google Docs integration for quotes - using your published document
 quotes_google_docs_url: "https://docs.google.com/document/d/e/2PACX-1vQQV8LAuvIYb1LOmPp8pe6cSJ83LKJ3wfq91lXDvR2oFnffzelX76yFm5S9Dr06Z5GNblIcft8dq_U4/pub"
 
+# Google Docs Posts Configuration
+# NOTE: google-service-account.json is stale and needs to be regenerated
+# before the Google Docs import will work. See GOOGLE_DOCS_POSTS_SETUP.md.
+google_docs_posts_enabled: true
+google_docs_posts_folder_id: "1hPZx27UyCHyvV-S1K74uoPQCcuYmVAOS"
+google_docs_posts_service_account_json: "google-service-account.json"
+google_docs_posts_cache_path: "_data/google_docs_posts_cache.json"
+google_docs_posts_output_dir: "_posts"
+
 # Build settings
 theme: minima
 plugins:

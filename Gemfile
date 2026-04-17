@@ -17,6 +17,10 @@ gem "jekyll-sass-converter", "~> 2.2.0"
 # Required for Google Docs quotes parsing
 gem "nokogiri", "~> 1.13"
 
+# Required for Google Drive API posts import
+gem "google-apis-drive_v3", "~> 0.57"
+gem "googleauth", "~> 1.11"
+
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins

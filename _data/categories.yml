@@ -1,0 +1,29 @@
+- group: code
+  label: Code
+  categories:
+    - coding
+    - vue
+    - nuxt
+    - firebase
+    - javascript
+    - jekyll
+    - hosting
+    - dart
+    - flutter
+    - openai
+
+- group: mindfulness
+  label: Mindfulness
+  categories:
+    - productivity
+    - minimalism
+    - mindfulness
+    - motivation
+    - books
+
+- group: life
+  label: Life
+  categories:
+    - travel
+    - thailand
+    - movies
