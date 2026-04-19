@@ -1,5 +1,10 @@
 node_modules
 
+# Local env / logs (never commit secrets)
+.env
+.env.local
+*.log
+
 _site
 .sass-cache
 .jekyll-cache
@@ -8,3 +13,4 @@ vendor
 google-service-account.json
 service-account.json
 **/.DS_Store
+TODO.md

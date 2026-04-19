@@ -10,8 +10,8 @@
  *    touching transparent pixels, get alpha reduced (kills hair halo not reached by flood).
  *
  * Usage:
- *   npm run defringe -- --input assets/images/profile.png --output assets/images/profile-clean.png
- *   npm run defringe -- --input assets/images/profile.png --in-place
+ *   npm run defringe -- --input assets/images/profile_new.png --output assets/images/profile-clean.png
+ *   npm run defringe -- --input assets/images/profile_new.png --in-place
  *     (writes profile.backup.png then overwrites input)
  *
  * Tune if needed: --fuzz 55 --halo-lum 210 --halo-sat 55
@@ -29,7 +29,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = join(__dirname, "..");
 
 function parseArgs(argv) {
-  let input = join(REPO, "assets/images/profile.png");
+  let input = join(REPO, "assets/images/profile_new.png");
   let output;
   let inPlace = false;
   let fuzz = 52;
