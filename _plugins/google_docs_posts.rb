@@ -52,6 +52,10 @@ module Jekyll
           output_path = output_relative ? File.expand_path(output_relative, site.source) : nil
 
           if cached_time && current_time && cached_time >= current_time && output_path && File.exist?(output_path)
+            Jekyll.logger.info 'GoogleDocs Posts:',
+                               "Skipped #{output_relative} (drive modifiedTime not newer than cache; " \
+                               "cached #{cached_entry['modified_time']}, drive #{modified_time}). " \
+                               'Clear this doc in _data/google_docs_posts_cache.json to force re-export.'
             next
           end
         end
@@ -201,9 +205,11 @@ module Jekyll
         raw: "---\n#{yaml_raw}\n---\n"
       }
     rescue Psych::SyntaxError => e
+      numbered = yaml_normalized.to_s.lines.take(25).map.with_index(1) { |l, i| format('%2d|%s', i, l.chomp) }
       Jekyll.logger.warn 'GoogleDocs Posts:',
                          "Invalid YAML in doc #{doc_id || 'unknown'} front matter: #{e.message} " \
                          '(use straight ASCII quotes " in values; avoid smart quotes from Google Docs). Skipping.'
+      Jekyll.logger.warn 'GoogleDocs Posts:', "Front matter YAML (first 25 lines):\n#{numbered.join("\n")}"
       nil
     rescue StandardError => e
       Jekyll.logger.warn 'GoogleDocs Posts:',
@@ -287,6 +293,9 @@ module Jekyll
 
     def normalize_google_docs_yaml(yaml_string)
       s = yaml_string.dup
+      # Drive's text/markdown export can add backslashes before URL punctuation inside
+      # double-quoted scalars (e.g. \%3D). Those are invalid YAML escapes and Psych aborts.
+      s.gsub!(/\\([%#&?=()])/, '\1')
       # Docs often style the first line as Heading 2 → "## title:" breaks YAML
       s.gsub!(/^##\s+(?=[A-Za-z0-9_-]+\s*:)/, '')
       # Markdown link pasted into a YAML value: [url](url) → use the target URL

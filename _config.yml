@@ -32,6 +32,8 @@ port: 9999
 # Quotes Configuration
 # Google Docs integration for quotes - using your published document
 quotes_google_docs_url: "https://docs.google.com/document/d/e/2PACX-1vQQV8LAuvIYb1LOmPp8pe6cSJ83LKJ3wfq91lXDvR2oFnffzelX76yFm5S9Dr06Z5GNblIcft8dq_U4/pub"
+# Verbose per-element parse logs (default off). Or: GOOGLE_DOCS_QUOTES_VERBOSE=1 bundle exec jekyll build
+google_docs_quotes_verbose: false
 
 # Google Docs Posts Configuration
 # See GOOGLE_DOCS_POSTS_SETUP.md for credential setup.

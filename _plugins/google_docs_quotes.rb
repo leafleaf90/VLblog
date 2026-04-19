@@ -8,6 +8,11 @@ module Jekyll
     safe true
     priority :high
 
+    def quotes_verbose?(site)
+      site.config['google_docs_quotes_verbose'] == true ||
+        ENV['GOOGLE_DOCS_QUOTES_VERBOSE'].to_s == '1'
+    end
+
     def generate(site)
       # Configuration - you'll need to set this in _config.yml
       docs_url = site.config['quotes_google_docs_url']
@@ -15,10 +20,11 @@ module Jekyll
       return unless docs_url
 
       timestamp = Time.now.strftime("%H:%M:%S")
-      Jekyll.logger.info "GoogleDocs Quotes:", "[#{timestamp}] Starting quotes generation"
+      verbose = quotes_verbose?(site)
+      Jekyll.logger.info "GoogleDocs Quotes:", "[#{timestamp}] Starting quotes generation" if verbose
 
       begin
-        result = fetch_quotes_from_google_docs(docs_url)
+        result = fetch_quotes_from_google_docs(docs_url, verbose: verbose)
         quotes = result[:quotes]
         raw_html = result[:raw_html]
         
@@ -27,12 +33,13 @@ module Jekyll
         site.data['quotes_by_topic'] = @quotes_by_topic || {}
         site.data['quotes_raw_html'] = raw_html
         
-        Jekyll.logger.info "GoogleDocs Quotes:", "[#{timestamp}] Successfully loaded #{quotes.length} quotes from Google Docs"
-        Jekyll.logger.info "GoogleDocs Quotes:", "[#{timestamp}] Set site.data['quotes'] with #{site.data['quotes'].length} items"
-        Jekyll.logger.info "GoogleDocs Quotes:", "[#{timestamp}] Set site.data['quotes_by_topic'] with #{site.data['quotes_by_topic'].keys.length} topics"
-        Jekyll.logger.info "GoogleDocs Quotes:", "Topics found: #{(@quotes_by_topic || {}).keys.join(', ')}"
-        (@quotes_by_topic || {}).each do |topic, topic_quotes|
-          Jekyll.logger.info "GoogleDocs Quotes:", "  #{topic}: #{topic_quotes.length} quotes"
+        topics = (@quotes_by_topic || {}).keys.length
+        Jekyll.logger.info 'GoogleDocs Quotes:', "Loaded #{quotes.length} quotes (#{topics} topics)."
+        if verbose
+          Jekyll.logger.info 'GoogleDocs Quotes:', "Topics: #{(@quotes_by_topic || {}).keys.join(', ')}"
+          (@quotes_by_topic || {}).each do |topic, topic_quotes|
+            Jekyll.logger.info 'GoogleDocs Quotes:', "  #{topic}: #{topic_quotes.length} quotes"
+          end
         end
         
       rescue Net::OpenTimeout, Net::ReadTimeout, Net::WriteTimeout => e
@@ -92,8 +99,8 @@ module Jekyll
       }
     end
 
-    def fetch_quotes_from_google_docs(docs_url)
-      Jekyll.logger.info "GoogleDocs Quotes:", "Fetching from: #{docs_url}"
+    def fetch_quotes_from_google_docs(docs_url, verbose: false)
+      Jekyll.logger.info 'GoogleDocs Quotes:', "Fetching from: #{docs_url}" if verbose
       
       uri = URI(docs_url)
       http = Net::HTTP.new(uri.host, uri.port)
@@ -108,9 +115,9 @@ module Jekyll
       
       request = Net::HTTP::Get.new(uri)
       
-      Jekyll.logger.info "GoogleDocs Quotes:", "Making HTTP request..."
+      Jekyll.logger.info 'GoogleDocs Quotes:', 'Making HTTP request...' if verbose
       response = http.request(request)
-      Jekyll.logger.info "GoogleDocs Quotes:", "Response received: #{response.code}"
+      Jekyll.logger.info 'GoogleDocs Quotes:', "Response received: #{response.code}" if verbose
       
       unless response.code == '200'
         raise "HTTP Error: #{response.code} #{response.message}"
@@ -123,9 +130,9 @@ module Jekyll
       
       # Parse the HTML content with proper encoding
       doc = Nokogiri::HTML(body, nil, 'UTF-8')
-      quotes = parse_quotes_from_html(doc)
+      quotes = parse_quotes_from_html(doc, verbose: verbose)
       
-      Jekyll.logger.info "GoogleDocs Quotes:", "Parsed #{quotes.length} quotes from document"
+      Jekyll.logger.info 'GoogleDocs Quotes:', "Parsed #{quotes.length} quotes from document" if verbose
       
       # Return both quotes and raw HTML for debugging
       {
@@ -134,17 +141,19 @@ module Jekyll
       }
     end
 
-    def parse_quotes_from_html(doc)
+    def parse_quotes_from_html(doc, verbose: false)
+      qinfo = ->(msg) { Jekyll.logger.info('GoogleDocs Quotes:', msg) if verbose }
+
       quotes_by_topic = {}
       current_topic = "General"
       quotes = []
       
-      Jekyll.logger.info "GoogleDocs Quotes:", "Starting to parse HTML content..."
+      qinfo.call('Starting to parse HTML content...')
       
       # Get all elements (both H1 and P) in document order
       all_elements = doc.css('h1, p')
       
-      Jekyll.logger.info "GoogleDocs Quotes:", "Found #{all_elements.length} elements to process (H1 + P tags)"
+      qinfo.call("Found #{all_elements.length} elements to process (H1 + P tags)")
       
       # Add timeout protection
       start_time = Time.now
@@ -175,24 +184,24 @@ module Jekyll
         end
         
         # Add progress logging every 50 elements
-        if processed_count % 50 == 0
-          Jekyll.logger.info "GoogleDocs Quotes:", "Processed #{processed_count}/#{all_elements.length} elements..."
+        if verbose && (processed_count % 50).zero?
+          qinfo.call("Processed #{processed_count}/#{all_elements.length} elements...")
         end
         
         # Check if this is an H1 (topic header)
         if element.name == 'h1'
           current_topic = clean_text_encoding(text)
           quotes_by_topic[current_topic] ||= []
-          Jekyll.logger.info "GoogleDocs Quotes:", "Found topic: #{current_topic}"
+          qinfo.call("Found topic: #{current_topic}")
           next
         end
         
         # Process paragraph elements
         if element.name == 'p'
-          Jekyll.logger.info "GoogleDocs Quotes:", "Processing paragraph under '#{current_topic}': '#{text.length > 50 ? text[0..50] + '...' : text}'"
+          qinfo.call("Processing paragraph under '#{current_topic}': '#{text.length > 50 ? text[0..50] + '...' : text}'")
         # Check if this is a structured quote starting with "Quote:"
         if text.start_with?('Quote:')
-          Jekyll.logger.info "GoogleDocs Quotes:", "Found quote start: '#{text.length > 50 ? text[0..50] + '...' : text}'"
+          qinfo.call("Found quote start: '#{text.length > 50 ? text[0..50] + '...' : text}'")
           
           # Extract quote text
           quote_text = clean_text_encoding(text.sub(/^Quote:\s*/, '').strip)
@@ -206,7 +215,7 @@ module Jekyll
           if i < all_elements.length
             next_element = all_elements[i]
             next_text = clean_text_encoding(next_element.text.strip)
-            Jekyll.logger.info "GoogleDocs Quotes:", "Next element (By): '#{next_text.length > 50 ? next_text[0..50] + '...' : next_text}'"
+            qinfo.call("Next element (By): '#{next_text.length > 50 ? next_text[0..50] + '...' : next_text}'")
             
             if next_text.start_with?('By:')
               by_text = clean_text_encoding(next_text.sub(/^By:\s*/, '').strip)
@@ -215,7 +224,7 @@ module Jekyll
               if i + 1 < all_elements.length
                 third_element = all_elements[i + 1]
                 third_text = clean_text_encoding(third_element.text.strip)
-                Jekyll.logger.info "GoogleDocs Quotes:", "Element +2 (Context?): '#{third_text.length > 50 ? third_text[0..50] + '...' : third_text}'"
+                qinfo.call("Element +2 (Context?): '#{third_text.length > 50 ? third_text[0..50] + '...' : third_text}'")
                 
                 if third_text.start_with?('Context:')
                   context_text = clean_text_encoding(third_text.sub(/^Context:\s*/, '').strip)
@@ -224,7 +233,7 @@ module Jekyll
                   if i + 2 < all_elements.length
                     fourth_element = all_elements[i + 2]
                     fourth_text = clean_text_encoding(fourth_element.text.strip)
-                    Jekyll.logger.info "GoogleDocs Quotes:", "Element +3 (URL?): '#{fourth_text.length > 50 ? fourth_text[0..50] + '...' : fourth_text}'"
+                    qinfo.call("Element +3 (URL?): '#{fourth_text.length > 50 ? fourth_text[0..50] + '...' : fourth_text}'")
                     
                     if fourth_text.start_with?('URL:')
                       url_text = clean_text_encoding(fourth_text.sub(/^URL:\s*/, '').strip)
@@ -252,9 +261,9 @@ module Jekyll
             quotes_by_topic[current_topic] ||= []
             quotes_by_topic[current_topic] << quote
             
-            Jekyll.logger.info "GoogleDocs Quotes:", "Found structured quote under #{current_topic}: '#{quote_text.length > 50 ? quote_text[0..50] + '...' : quote_text}' by #{by_text}"
-            Jekyll.logger.info "GoogleDocs Quotes:", " Context: #{context_text}" if context_text
-            Jekyll.logger.info "GoogleDocs Quotes:", " URL: #{url_text}" if url_text
+            qinfo.call("Found structured quote under #{current_topic}: '#{quote_text.length > 50 ? quote_text[0..50] + '...' : quote_text}' by #{by_text}")
+            qinfo.call(" Context: #{context_text}") if context_text
+            qinfo.call(" URL: #{url_text}") if url_text
             
             # Skip the elements we already processed
             skip_count = 1 # Skip the "By:" element
@@ -263,7 +272,7 @@ module Jekyll
             
             i += skip_count
             processed_count += skip_count
-            Jekyll.logger.info "GoogleDocs Quotes:", "Skipping #{skip_count} processed elements"
+            qinfo.call("Skipping #{skip_count} processed elements")
           end
         end
         end
@@ -271,7 +280,7 @@ module Jekyll
       
       @quotes_by_topic = quotes_by_topic
       
-      Jekyll.logger.info "GoogleDocs Quotes:", "Final count: #{quotes.length} quotes in #{quotes_by_topic.keys.length} topics"
+      qinfo.call("Final count: #{quotes.length} quotes in #{quotes_by_topic.keys.length} topics")
       
       quotes
     end
