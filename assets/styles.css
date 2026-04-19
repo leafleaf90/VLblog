@@ -1113,7 +1113,7 @@ h3 {
   font-size: 1em;
 }
 
-.blog-title:hover {
+.blog-post:hover .blog-title {
   opacity: 0.6;
 }
 
@@ -1170,6 +1170,70 @@ p.post-date:after {
   background-position: center;
   position: relative;
   text-align: center;
+}
+
+.blog-post-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.blog-post-hitbox {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.blog-post-hitbox:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  z-index: 4;
+}
+
+.blog-post-heading {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.blog-post-logos-wrap {
+  position: relative;
+  z-index: 3;
+}
+
+.blog-title-series {
+  display: block;
+  margin-top: 0.5rem;
+  color: white;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.35rem 0.75rem;
+}
+
+.blog-post .post-date,
+.blog-post .post-info {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.post-info-excerpt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-read-more {
+  display: inline-block;
+  margin-top: 0.5rem;
+  cursor: inherit;
 }
 
 .post-logos,
@@ -1234,7 +1298,7 @@ p.post-date:after {
 }
 
 .blog-post p,
-.blog-post a,
+.blog-post a:not(.blog-post-hitbox),
 .latest-blog-post a,
 .latest-blog-post p {
   color: white;
@@ -1712,6 +1776,7 @@ img + em {
 }
 
 .slider-card {
+  position: relative;
   min-width: 100%;
   max-width: 100%;
   display: flex;
@@ -1719,10 +1784,24 @@ img + em {
   overflow: hidden;
 }
 
+.slider-card-hitbox {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.slider-card-hitbox:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  z-index: 4;
+}
+
 .slider-card-image {
   position: relative;
+  z-index: 2;
   flex: 1;
   max-width: 50%;
+  pointer-events: none;
 }
 
 .slider-card-image img {
@@ -1748,11 +1827,14 @@ img + em {
 }
 
 .slider-card-content {
+  position: relative;
+  z-index: 2;
   flex: 1;
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  pointer-events: none;
 }
 
 .slider-card-title {
@@ -1760,15 +1842,12 @@ img + em {
   font-weight: 700;
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-md);
-}
-
-.slider-card-title a {
   color: var(--color-text-primary);
-  text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.slider-card-title a:hover {
+.slider-card:hover .slider-card-title,
+.slider-card:focus-within .slider-card-title {
   color: var(--color-primary);
 }
 
@@ -1804,6 +1883,7 @@ img + em {
   top: 50%;
   left: 0;
   right: 0;
+  z-index: 3;
   transform: translateY(-50%);
   display: flex;
   justify-content: space-between;
@@ -1840,6 +1920,8 @@ img + em {
 
 /* Slider Dots */
 .slider-dots {
+  position: relative;
+  z-index: 3;
   display: flex;
   justify-content: center;
   gap: var(--spacing-xs);
@@ -1951,6 +2033,7 @@ img + em {
 }
 
 .post-card {
+  position: relative;
   background: var(--color-bg-primary);
   border-radius: var(--radius-lg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -1964,6 +2047,19 @@ img + em {
   max-width: 100%;
 }
 
+.post-card-hitbox {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.post-card-hitbox:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  z-index: 4;
+}
+
 .post-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
@@ -1971,18 +2067,24 @@ img + em {
 }
 
 .post-card-image {
+  position: relative;
+  z-index: 0;
   width: 100%;
   height: 220px;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .post-card-content {
+  position: relative;
+  z-index: 2;
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 200px;
   justify-content: space-between;
+  pointer-events: none;
 }
 
 .post-card-title {
@@ -1993,7 +2095,8 @@ img + em {
   line-height: var(--line-height-tight);
 }
 
-.post-card-title a:hover {
+.post-card:hover .post-card-title,
+.post-card:focus-within .post-card-title {
   color: var(--color-primary);
 }
 

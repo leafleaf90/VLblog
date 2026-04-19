@@ -4,43 +4,32 @@
   {% assign card_thumb = include.post.featured-image | replace: '.jpg', '-sm.jpg' %}
 {% endif %}
 <div
-  class="{%if include.latest %} large-blog-post {% endif %} blog-post"
-  style="background-image:url({{card_thumb}});"
+  class="{% if include.latest %} large-blog-post {% endif %} blog-post"
+  style="background-image:url({{ card_thumb }});"
 >
-  <div
-    style="
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-    "
-  ></div>
-  <a class="blog-title" href="{{ include.post.url }}" style="z-index: 1"
-    >{{ include.post.title}}{% if include.post.is_series %}
-    <p
-      style="
-        color: white;
-        font-size: 0.9rem;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      "
+  <div class="blog-post-overlay"></div>
+  <div class="blog-post-heading">
+    <span class="blog-title"
+      >{{ include.post.title }}{% if include.post.is_series %}
+      <span class="blog-title-series">
+        Series: {{ include.post.series_title }}
+      </span>
+      {% endif %}</span
     >
-      Series: {{include.post.series_title}}
-    </p>
-    {% endif %}</a
-  >
-  <div style="z-index: 1">
-    {% if post.categories %} {% include components/post_logos.html
-    categories=include.post.categories %} {% endif %}
   </div>
+  {% if include.post.categories %}
+  <div class="blog-post-logos-wrap">
+    {% include components/post_logos.html categories=include.post.categories %}
+  </div>
+  {% endif %}
   <p class="post-date">{{ include.post.date | date: "%b %-d, %Y" }}</p>
   <div class="post-info">
-    <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-      {{include.post.description}}
-    </p>
-    <a href="{{include.post.url}}" class="blog-link white-link-button"
-      >Read More</a
-    >
+    <p class="post-info-excerpt">{{ include.post.description }}</p>
+    <span class="blog-link white-link-button post-read-more">Read More</span>
   </div>
+  <a
+    href="{{ include.post.url }}"
+    class="blog-post-hitbox"
+    aria-label="{{ include.post.title | append: ' — read post' | xml_escape }}"
+  ></a>
 </div>

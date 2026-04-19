@@ -43,6 +43,11 @@ layout: default
               {% assign featured_posts = site.posts | where: "featured", true %}
               {% for post in featured_posts %}
               <article class="slider-card">
+                <a
+                  href="{{ post.url }}"
+                  class="slider-card-hitbox"
+                  aria-label="{{ post.title | append: ' — read article' | xml_escape }}"
+                ></a>
                 {% if post.featured-image %}
                 <div class="slider-card-image">
                   <img
@@ -56,9 +61,7 @@ layout: default
                 </div>
                 {% endif %}
                 <div class="slider-card-content">
-                  <h3 class="slider-card-title">
-                    <a href="{{ post.url }}">{{ post.title }}</a>
-                  </h3>
+                  <h3 class="slider-card-title">{{ post.title }}</h3>
                   <p class="slider-card-excerpt">
                     {{ post.description | default: post.excerpt | strip_html |
                     truncatewords: 15 }}
@@ -158,11 +161,8 @@ layout: default
             class="post-card"
             data-category="{{ main_category }}"
             data-categories="{{ post.categories | join: ',' }}"
-            {%
-            if
-            forloop.index
+            {% if forloop.index > 12 %}style="display: none;"{% endif %}
           >
-            12 %}style="display: none;"{% endif %}>
             {% if post.featured-thumbnail %}
               {% assign post_thumb = post.featured-thumbnail %}
             {% elsif post.featured-image %}
@@ -178,14 +178,7 @@ layout: default
             {% endif %}
             <div class="post-card-content">
               <div class="post-card-main">
-                <h3 class="post-card-title">
-                  <a
-                    href="{{ post.url }}"
-                    style="color: inherit; text-decoration: none"
-                  >
-                    {{ post.title }}
-                  </a>
-                </h3>
+                <h3 class="post-card-title">{{ post.title }}</h3>
                 <p class="post-card-excerpt">
                   {{ post.description | default: post.excerpt | strip_html |
                   truncate: 100 }}
@@ -198,6 +191,11 @@ layout: default
                 <span>{{ post.date | date: "%b %d" }}</span>
               </div>
             </div>
+            <a
+              href="{{ post.url }}"
+              class="post-card-hitbox"
+              aria-label="{{ post.title | append: ' — read full post' | xml_escape }}"
+            ></a>
           </article>
           {% endfor %}
         </div>
