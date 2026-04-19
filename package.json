@@ -6,7 +6,9 @@
     "node": ">=18"
   },
   "scripts": {
-    "banner": "node scripts/fetch-post-banner.mjs"
+    "banner": "node scripts/fetch-post-banner.mjs",
+    "sync-banners": "node scripts/sync-remote-banner-images.mjs",
+    "defringe": "node scripts/defringe-white-halo.mjs"
   },
   "devDependencies": {
     "sharp": "^0.33.5"

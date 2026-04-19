@@ -166,7 +166,10 @@ layout: default
             {% if post.featured-thumbnail %}
               {% assign post_thumb = post.featured-thumbnail %}
             {% elsif post.featured-image %}
-              {% assign post_thumb = post.featured-image | replace: '.jpg', '-sm.jpg' %}
+              {% assign post_thumb = post.featured-image
+                | replace: '.webp', '-sm.webp'
+                | replace: '.jpeg', '-sm.jpeg'
+                | replace: '.jpg', '-sm.jpg' %}
             {% endif %}
             {% if post_thumb %}
             <img

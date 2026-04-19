@@ -1,0 +1,20 @@
+<script>
+  (function () {
+    var k = "vlblog-theme";
+    var el = document.documentElement;
+    try {
+      var s = localStorage.getItem(k);
+      if (s === "light" || s === "dark") {
+        el.setAttribute("data-theme", s);
+      } else {
+        var dark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        el.setAttribute("data-theme", dark ? "dark" : "light");
+      }
+    } catch (e) {
+      el.setAttribute("data-theme", "light");
+    }
+  })();
+</script>
+<meta name="color-scheme" content="light dark" />

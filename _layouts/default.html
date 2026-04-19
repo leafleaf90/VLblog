@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    {% include theme-head.html %}
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -15,7 +17,6 @@
 
       gtag("config", "G-N4J4YJSND7");
     </script>
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {%- assign seo_brand = site.title | replace: " - Home", "" | replace: " - home", "" -%}
     {%- assign seo_desc = page.description | default: site.description | strip -%}
@@ -52,6 +53,10 @@
     <link rel="stylesheet" href={{ "assets/base16_dark.css" | relative_url }} />
     <link rel="stylesheet" href={{ "assets/normalize.css" | relative_url }} />
     <link rel="stylesheet" href="https://use.typekit.net/idk2kll.css" />
+    <script
+      src="{{ 'assets/theme-toggle.js' | relative_url }}?v={{ site.time | date: '%s' }}"
+      defer
+    ></script>
 
     <!-- Critical Mobile CSS Override -->
     <style>
@@ -424,6 +429,49 @@
           <li><a href="/quotes">Quotes</a></li>
           <li><a href="/categories">Blog</a></li>
         </ul>
+        <button
+          type="button"
+          class="theme-toggle"
+          id="themeToggle"
+          aria-pressed="false"
+          aria-label="Switch to dark mode"
+        >
+          <span class="theme-toggle__icons" aria-hidden="true">
+            <svg
+              class="theme-toggle__icon theme-toggle__icon--sun"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              focusable="false"
+            >
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M19.07 4.93l-1.41 1.41M4.93 19.07l1.41-1.41"
+              />
+            </svg>
+            <svg
+              class="theme-toggle__icon theme-toggle__icon--moon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              focusable="false"
+            >
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+              />
+            </svg>
+          </span>
+        </button>
       </div>
     </nav>
 

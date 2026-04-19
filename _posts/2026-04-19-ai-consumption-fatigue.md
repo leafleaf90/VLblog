@@ -8,8 +8,9 @@ categories: ["ai", "mindfulness", "writing"]
 published: true
 slug: ai-consumption-fatigue
 featured: true
-featured-image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=100&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-featured-thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=100&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+featured-image: "/assets/post-media/ai-consumption-fatigue/header.webp"
+featured-thumbnail: "/assets/post-media/ai-consumption-fatigue/header-sm.webp"
+banner_source_url: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=100&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 ---
 
 Seeing the cursor blink on the blank page before starting the write-up here, wondering how best to begin this text, makes me realize we don’t do this much anymore. We can instead just throw in any kind of bullshit prompt about what we would like to communicate into our preferred AI model, and it’ll spit out the perfectly curated text to achieve our goal. Well, perfectly plain, that is. Perfectly boring. Perfectly vanilla. Perfectly stripped of any new ideas. Perfectly AI.

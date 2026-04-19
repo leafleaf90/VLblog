@@ -18,6 +18,12 @@ bundle exec jekyll build   # production build to _site/
 
 Config change requires server restart (`_config.yml` is not live-reloaded).
 
+## Light / dark theme
+
+- **`html[data-theme="dark"|"light"]`** is set by an inline script in `_includes/theme-head.html` (runs before paint: reads `localStorage["vlblog-theme"]`, else `prefers-color-scheme`).
+- **Toggle:** navbar control (`#themeToggle`) with sun/moon icons; logic in `assets/theme-toggle.js` (persists choice in `localStorage`; clear that key to follow the OS again).
+- **Styles:** `assets/styles.css` — `:root` keeps light defaults; `html[data-theme="dark"]` overrides semantic CSS variables plus a few components (navbar, cards, sidebar, slider, filters, contact modal).
+
 ## Project Structure
 
 ```
@@ -25,7 +31,7 @@ _layouts/         # home.html, post.html, default.html
 _includes/        # components/blog_post_card.html, agent_prompt.html, agent_reply.html (LLM UI mockups)
 _posts/           # Markdown posts (YYYY-MM-DD-slug.md)
 _drafts/          # Unpublished drafts
-_plugins/         # google_docs_posts.rb — custom Jekyll generator
+_plugins/         # google_docs_posts.rb, remote_banner_sync.rb (Drive import + remote hero → WebP)
 _data/            # google_docs_posts_cache.json, agent_prompts.yml, agent_replies.yml (named UI snippets)
 docs/             # contributor notes; see agent-prompt-mockups.md, agent-reply-mockups.md
 assets/
@@ -48,8 +54,8 @@ layout: post
 published: true
 categories: ["coding"]        # see Categories section below
 description: "Short summary used in cards and meta tags."
-featured-image: "/assets/post-media/post-title-slug/header.jpg"
-featured-thumbnail: "/assets/post-media/post-title-slug/header-sm.jpg"
+featured-image: "https://images.unsplash.com/photo-.../..."   # or local /assets/post-media/<slug>/header.webp
+featured-thumbnail: "https://images.unsplash.com/photo-.../..."   # optional; remote sync can rewrite both
 featured: true                # optional: shows in homepage trending slider
 is_series: true               # optional: enables series links footer
 series_title: "Series Name"   # required if is_series: true
@@ -73,10 +79,10 @@ Posts with categories outside these groups appear in "other" and are visible onl
 
 Posts can be authored in Google Docs and auto-imported at build time via `_plugins/google_docs_posts.rb`.
 
-- Docs must contain YAML front matter at the top (same fields as above)
-- Service account credentials read from `google-service-account.json` at repo root **or** env var `GOOGLE_DOCS_POSTS_SERVICE_ACCOUNT_JSON`
+- Docs must contain YAML front matter at the top (same fields as above). You may use **Unsplash `https://` URLs** for `featured-image` / `featured-thumbnail`; `_plugins/remote_banner_sync.rb` runs after import and calls `scripts/sync-remote-banner-images.mjs` to download (allowed hosts only), write WebP under `assets/post-media/<slug>/`, and patch `_posts` on disk before render.
+- Service account credentials: file at repo root per `_config.yml` (`google_docs_posts_service_account_json`, e.g. `google-service-account.json`, gitignored) **or** env var `GOOGLE_DOCS_POSTS_SERVICE_ACCOUNT_JSON`
 - Cache stored in `_data/google_docs_posts_cache.json`; docs only re-exported when modified
-- See `GOOGLE_DOCS_POSTS_SETUP.md` for full setup instructions
+- **Step-by-step publish workflow** (Docs → Unsplash → build → Git): see **`GOOGLE_DOCS_POSTS_SETUP.md`** → *Complete publish workflow*.
 
 **On Netlify**, set the env var `GOOGLE_DOCS_POSTS_SERVICE_ACCOUNT_JSON` to the full JSON content of the service account key.
 
@@ -97,7 +103,7 @@ Illustrated **AI reply** blocks (Gemini-style sparkle + actions + rule; Cursor-s
 
 ## Deployment
 
-Push to `main` triggers a Netlify build automatically. Build command: `bundle exec jekyll build`. Publish dir: `_site/`.
+Push to `main` triggers a Netlify build automatically. Build command: **`npm ci && bundle exec jekyll build`** (`netlify.toml`). Publish dir: `_site/`. Remote banner sync needs Node + `sharp` from `npm ci`.
 
 ## Netlify Forms
 

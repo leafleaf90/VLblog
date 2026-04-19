@@ -41,6 +41,13 @@ google_docs_posts_service_account_json: "google-service-account.json"
 google_docs_posts_cache_path: "_data/google_docs_posts_cache.json"
 google_docs_posts_output_dir: "_posts"
 
+# After Google Docs import: if a post has https featured-image / featured-thumbnail,
+# download, write WebP under assets/post-media/<slug>/, patch _posts (needs Node + sharp).
+remote_banner_sync_enabled: true
+# Only fetch from these hostnames (recommended on CI). If unset, any https URL is allowed.
+remote_banner_sync_allowed_hosts:
+  - images.unsplash.com
+
 # Build settings
 theme: minima
 plugins:

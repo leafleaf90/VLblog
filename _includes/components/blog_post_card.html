@@ -1,7 +1,10 @@
 {% if include.post.featured-thumbnail %}
   {% assign card_thumb = include.post.featured-thumbnail %}
 {% elsif include.post.featured-image %}
-  {% assign card_thumb = include.post.featured-image | replace: '.jpg', '-sm.jpg' %}
+  {% assign card_thumb = include.post.featured-image
+    | replace: '.webp', '-sm.webp'
+    | replace: '.jpeg', '-sm.jpeg'
+    | replace: '.jpg', '-sm.jpg' %}
 {% endif %}
 <div
   class="{% if include.latest %} large-blog-post {% endif %} blog-post"

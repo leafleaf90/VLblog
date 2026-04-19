@@ -6,8 +6,13 @@ layout: post
 published: true
 categories: ["coding"]
 description: "One or two sentence summary shown in post cards and meta tags."
-featured-image: "/assets/post-media/post-title-slug/header.jpg"
-# featured-thumbnail is derived automatically as header-sm.jpg; only set if filename differs
+featured-image: "/assets/post-media/post-title-slug/header.webp"
+featured-thumbnail: "/assets/post-media/post-title-slug/header-sm.webp"
+# Or run: npm run banner -- --slug post-title-slug --url "https://..." --write-yaml
+# (writes WebP + patches front matter; stores source in banner_source_url)
+#
+# End-to-end workflow (Google Docs + Unsplash + Git + Netlify):
+#   GOOGLE_DOCS_POSTS_SETUP.md → section "Complete publish workflow"
 featured: false
 # is_series: true
 # series_title: "Series Name"
