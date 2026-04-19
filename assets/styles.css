@@ -89,6 +89,9 @@ body {
   --color-overlay-medium: rgba(255, 255, 255, 0.5);
   --color-overlay-strong: rgba(255, 255, 255, 0.8);
 
+  /* Site owner avatar disk (hero + post byline); same in light and dark theme */
+  --profile-avatar-disk-bg: #0f172a;
+
   /* Typography */
   --font-size-xs: 1.2rem;
   --font-size-sm: 1.4rem;
@@ -618,13 +621,14 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   position: relative;
 }
 
+/* Fixed disk behind hero portrait (same in light + dark theme) */
 .hero-profile {
   z-index: 2;
   position: relative;
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background-color: var(--color-bg-primary);
+  background-color: var(--profile-avatar-disk-bg);
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.4s ease, transform 0.4s ease;
@@ -2571,6 +2575,8 @@ img + em {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  background-color: var(--profile-avatar-disk-bg);
+  overflow: hidden;
   object-fit: cover;
   object-position: center top;
   border: 2px solid rgba(99, 102, 241, 0.2);
