@@ -621,14 +621,24 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 .hero-profile {
   z-index: 2;
   position: relative;
-}
-
-.profile-image {
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  border: none;
+  background-color: #fff;
+  overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.hero-profile:hover {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: none;
   transition: all 0.4s ease;
   object-fit: cover;
   object-position: center top;
@@ -638,7 +648,6 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 
 .profile-image:hover {
   transform: translateY(-8px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
   /* filter: grayscale(0%) contrast(1.2); */
 }
 
@@ -2861,12 +2870,14 @@ img + em {
 
   .hero-profile {
     order: 1;
-  }
-
-  .profile-image {
     width: 220px;
     height: 220px;
     margin: 0 auto;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: 100%;
   }
 
   .hero-title {

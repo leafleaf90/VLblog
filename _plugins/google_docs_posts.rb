@@ -102,7 +102,16 @@ module Jekyll
 
         FileUtils.mkdir_p(File.dirname(output_path))
         clean_md = compose_clean_post_markdown(markdown)
-        File.write(output_path, normalize_markdown(clean_md || markdown))
+        out = normalize_markdown(clean_md || markdown)
+        unless jekyll_front_matter_delimited?(out)
+          Jekyll.logger.warn 'GoogleDocs Posts:',
+                             "Refusing to write #{output_relative}: missing a valid Jekyll front matter block " \
+                             '(need a line that is only `---`, then YAML, then another line that is only `---`, ' \
+                             'then the post body). The Drive export is malformed; fix the Doc or closing delimiter.'
+          next
+        end
+
+        File.write(output_path, out)
 
         cache['docs'][doc_id] = {
           'modified_time' => modified_time.to_s,
@@ -224,7 +233,27 @@ module Jekyll
       text.sub!(/\A(?:[ \t\u00A0\u200B-\u200D\uFEFF]*\n)+/, '')
       # Drive "text/markdown" export often escapes HR as "\---" (backslash + hyphens), not a real --- line
       text.gsub!(/^[ \t]*\\+[\u002d\u2013\u2014\u2212]{3,}[ \t]*$/m, "---\n")
+      # Drive often glues the closing fence to the previous line after long quoted URLs, e.g.
+      #   featured-thumbnail: "https://...%3D%3D"---
+      # so it is never a dash-only line and Jekyll renders the whole file as body.
+      split_glued_yaml_closing_fence!(text)
       text
+    end
+
+    # Split `"...---` onto two lines so fm_delimiter_indices can find the closing ---.
+    def split_glued_yaml_closing_fence!(text)
+      text.gsub!(
+        /^([A-Za-z0-9_.-]+:\s*"(?:[^"\\]|\\.)*")\s*(---)\s*$/m,
+        "\\1\n\\2"
+      )
+      text.gsub!(
+        /^([A-Za-z0-9_.-]+:\s*'(?:[^'\\]|\\.)*')\s*(---)\s*$/m,
+        "\\1\n\\2"
+      )
+      text.gsub!(
+        /^([A-Za-z0-9_.-]+:\s*\[[^\]]*\])\s*(---)\s*$/m,
+        "\\1\n\\2"
+      )
     end
 
     # True if the line is only "dashes" (Docs may insert spaces: "- - -" or use en/em dash).
@@ -287,6 +316,7 @@ module Jekyll
       return nil if inner.strip.empty?
 
       yaml_clean = normalize_google_docs_yaml(inner)
+      yaml_clean.sub!(/\A\n+/, '') # avoid `---` then blank lines before first key (some parsers are picky)
       body = lines[(end_idx + 1)..-1].join
       "---\n#{yaml_clean}\n---\n#{body}"
     end
@@ -321,9 +351,21 @@ module Jekyll
     end
 
     def normalize_markdown(markdown)
-      normalized = markdown.strip
-      normalized << "\n" unless normalized.end_with?("\n")
-      normalized
+      md = markdown.to_s.gsub("\r\n", "\n")
+      md.sub!(/\A[\s\uFEFF]+/, '')
+      md.rstrip!
+      md << "\n"
+    end
+
+    # True if the file has Jekyll-style delimiters: ---, YAML, ---, then body (body may be empty).
+    def jekyll_front_matter_delimited?(text)
+      t = text.to_s.gsub(/\r\n/, "\n").sub(/\A\uFEFF/, '')
+      return false unless t.start_with?("---\n")
+
+      return true if t.index("\n---\n", 4)
+
+      # Closing --- at EOF with no trailing newline after it (Drive / tooling edge case)
+      !!(t =~ /\A---\n([\s\S]*?)\n---\s*\z/m)
     end
 
     def load_cache(site_source, cache_path)

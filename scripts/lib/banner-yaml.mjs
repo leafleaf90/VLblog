@@ -28,13 +28,21 @@ export function stripYamlField(block, key) {
 }
 
 export function parseFrontMatterBlock(raw) {
-  if (!raw.startsWith("---")) return null;
-  const end = raw.indexOf("\n---\n", 4);
-  if (end === -1) return null;
-  return {
-    fm: raw.slice(4, end),
-    body: raw.slice(end + 5),
-  };
+  if (!raw || !raw.startsWith("---")) return null;
+  const n = raw.replace(/\r\n/g, "\n");
+  const end = n.indexOf("\n---\n", 4);
+  if (end !== -1) {
+    return {
+      fm: n.slice(4, end),
+      body: n.slice(end + 5),
+    };
+  }
+  // Closing --- at EOF without a following newline (Jekyll accepts this; indexOf("\n---\n") misses it)
+  const m = n.match(/^---\n([\s\S]*?)\n---\s*$/);
+  if (m) {
+    return { fm: m[1], body: "" };
+  }
+  return null;
 }
 
 /** Read a single `key: value` line from a front matter block (key may contain hyphens). */
