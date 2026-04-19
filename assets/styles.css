@@ -2345,6 +2345,59 @@ img + em {
   margin: var(--spacing-lg) 0;
 }
 
+/* Markdown / Google-Docs-export tables in posts */
+.post .content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-lg) 0;
+  font-size: 0.95em;
+  line-height: var(--line-height-normal);
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.post .content th,
+.post .content td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.post .content th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.post .content tbody tr:last-child td,
+.post .content tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.post .content tbody tr:hover td {
+  background: #fafafa;
+}
+
+.post .content table code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  background: #f3f4f6;
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .post .content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .main-layout {
@@ -3028,4 +3081,456 @@ form#contactForm {
     width: 100% !important;
     min-width: auto !important;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Agent / LLM composer UI mockups (blog posts)
+   Markup: _includes/components/agent_prompt.html — see docs/agent-prompt-mockups.md
+   -------------------------------------------------------------------------- */
+.post .content .agent-prompt,
+.agent-prompt {
+  --ap-radius: 14px;
+  --ap-bg: #1e1e1e;
+  --ap-border: #333;
+  --ap-text: #e8e8e8;
+  --ap-muted: #8a8a8a;
+  --ap-ghost-bg: #2a2a2a;
+  --ap-toolbar-icon: #a3a3a3;
+  --ap-submit-bg: #e8e8e8;
+  --ap-submit-fg: #111;
+  margin: var(--spacing-lg) 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ap-text);
+}
+
+.agent-prompt--claude {
+  --ap-bg: #1a1918;
+  --ap-border: #3d3834;
+  --ap-muted: #9a8f86;
+}
+
+.post .content .agent-prompt__caption {
+  margin-top: var(--spacing-sm);
+  margin-bottom: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.agent-prompt__chrome {
+  border-radius: var(--ap-radius);
+  background: var(--ap-bg);
+  border: 1px solid var(--ap-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.agent-prompt__body {
+  padding: 1rem 1rem 0.5rem;
+}
+
+.post .content .agent-prompt__text {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--ap-text);
+  font-size: inherit;
+  line-height: 1.45;
+}
+
+.agent-prompt__caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--ap-text);
+  animation: agent-prompt-caret-blink 1s step-end infinite;
+}
+
+@keyframes agent-prompt-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.agent-prompt__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem 0.75rem;
+  gap: 0.5rem;
+}
+
+.agent-prompt__toolbar-left,
+.agent-prompt__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.agent-prompt__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.agent-prompt__icon-btn--ghost {
+  background: var(--ap-ghost-bg);
+  color: var(--ap-toolbar-icon);
+}
+
+.agent-prompt__icon-btn--submit {
+  background: var(--ap-submit-bg);
+  color: var(--ap-submit-fg);
+}
+
+.agent-prompt__svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
+
+.agent-prompt__icon-btn--submit .agent-prompt__svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.agent-prompt__selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  color: var(--ap-muted);
+  font-size: 0.8125rem;
+  user-select: none;
+}
+
+.agent-prompt__chevron {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.88;
+}
+
+.agent-prompt--claude .agent-prompt__selector-label {
+  color: #c9b896;
+}
+
+/* Google Gemini chat input (illustrated) */
+.agent-prompt--gemini {
+  --ap-radius: 28px;
+  --ap-bg: #1e1f20;
+  --ap-border: #2c2d2f;
+  --ap-text: #c4c7cc;
+  --ap-muted: #9ca3af;
+  --ap-ghost-bg: transparent;
+  --ap-toolbar-icon: #c4c7c5;
+  --ap-submit-bg: transparent;
+  --ap-submit-fg: #ffffff;
+}
+
+.agent-prompt--gemini .agent-prompt__chrome {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.agent-prompt--gemini .agent-prompt__body {
+  padding: 1.25rem 1.25rem 0.65rem;
+}
+
+.agent-prompt--gemini .agent-prompt__text {
+  color: var(--ap-text);
+}
+
+.agent-prompt__toolbar--gemini {
+  padding: 0.35rem 1rem 1.1rem;
+}
+
+.agent-prompt__toolbar--gemini .agent-prompt__toolbar-left,
+.agent-prompt__toolbar--gemini .agent-prompt__toolbar-right {
+  gap: 0.65rem;
+}
+
+.agent-prompt__icon-btn--gemini-plain {
+  background: transparent;
+  color: var(--ap-toolbar-icon);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+}
+
+.agent-prompt__svg--stroke {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.agent-prompt__tools-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--ap-toolbar-icon);
+}
+
+.agent-prompt__svg--tools {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.agent-prompt__tools-label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--ap-toolbar-icon);
+  user-select: none;
+  letter-spacing: 0.01em;
+}
+
+.agent-prompt__selector--gemini {
+  color: var(--ap-muted);
+  font-size: 0.875rem;
+  gap: 0.15rem;
+}
+
+.agent-prompt__selector--gemini .agent-prompt__chevron {
+  opacity: 0.9;
+}
+
+.agent-prompt__icon-btn--gemini-send {
+  background: transparent;
+  color: #ffffff;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+}
+
+.agent-prompt__icon-btn--gemini-send .agent-prompt__svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+
+.post .content .agent-prompt__disclaimer,
+.agent-prompt__disclaimer {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #9ca3af;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  font-style: normal;
+}
+
+/* --------------------------------------------------------------------------
+   AI reply blocks (Gemini + Cursor) — see docs/agent-reply-mockups.md
+   -------------------------------------------------------------------------- */
+.post .content .agent-reply,
+.agent-reply {
+  margin: var(--spacing-lg) 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ar-text);
+}
+
+.agent-reply--gemini {
+  --ar-bg: #131314;
+  --ar-text: #e8eaed;
+  --ar-muted: #9aa0a6;
+  --ar-code-bg: #2d2e30;
+  --ar-code-fg: #e8eaed;
+  --ar-rule: rgba(255, 255, 255, 0.1);
+  --ar-radius: 12px;
+  --ar-pre-bg: #0e0e0f;
+}
+
+.agent-reply--cursor {
+  --ar-bg: #1e1e1e;
+  --ar-text: #d4d4d4;
+  --ar-muted: #888888;
+  --ar-code-bg: #26354a;
+  --ar-code-fg: #9cdcfe;
+  --ar-rule: rgba(255, 255, 255, 0.08);
+  --ar-radius: 8px;
+  --ar-pre-bg: #252526;
+}
+
+.agent-reply__surface {
+  background: var(--ar-bg);
+  border-radius: var(--ar-radius, 12px);
+  padding: 1.1rem 1.15rem 0.85rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.agent-reply--cursor .agent-reply__surface {
+  padding: 1.15rem 1.25rem 1rem;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.post .content .agent-reply__status,
+.agent-reply__status {
+  margin: 0 0 0.55rem;
+  padding: 0;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--ar-muted);
+}
+
+.agent-reply__main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.agent-reply__sparkle {
+  flex-shrink: 0;
+  width: 1.75rem;
+  padding-top: 0.15rem;
+}
+
+.agent-reply__sparkle-svg {
+  display: block;
+  width: 1.45rem;
+  height: 1.45rem;
+  filter: drop-shadow(0 0 6px rgba(138, 180, 248, 0.35));
+}
+
+.agent-reply__column {
+  flex: 1;
+  min-width: 0;
+}
+
+.agent-reply__column--full {
+  flex: 1 1 100%;
+}
+
+.post .content .agent-reply__title,
+.agent-reply__title {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8f9fa;
+  line-height: 1.35;
+}
+
+.post .content .agent-reply__body,
+.agent-reply__body {
+  color: var(--ar-text);
+}
+
+.post .content .agent-reply__body > p:first-child,
+.agent-reply__body > p:first-child {
+  margin-top: 0;
+}
+
+.post .content .agent-reply__body > p:last-child,
+.agent-reply__body > p:last-child {
+  margin-bottom: 0;
+}
+
+.post .content .agent-reply__body p,
+.agent-reply__body p {
+  margin: 0 0 0.85rem;
+  color: var(--ar-text);
+}
+
+.post .content .agent-reply__body strong,
+.agent-reply__body strong {
+  font-weight: 600;
+  color: #f1f3f4;
+}
+
+.agent-reply--cursor .agent-reply__body strong {
+  color: var(--ar-text);
+  font-weight: 600;
+}
+
+.post .content .agent-reply__body code,
+.agent-reply__body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--ar-code-bg);
+  color: var(--ar-code-fg, var(--ar-text));
+  padding: 0.12em 0.45em 0.15em;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.agent-reply--cursor .agent-reply__body code {
+  border-radius: 5px;
+  padding: 0.14em 0.42em 0.16em;
+  border-color: rgba(156, 220, 254, 0.12);
+}
+
+.post .content .agent-reply__body pre,
+.agent-reply__body pre {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--ar-pre-bg, #0e0e0f);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  font-size: 0.85em;
+}
+
+.post .content .agent-reply__body pre code,
+.agent-reply__body pre code {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font-size: inherit;
+}
+
+.agent-reply__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  padding-top: 0.35rem;
+}
+
+.agent-reply__action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--ar-muted);
+  border-radius: 999px;
+}
+
+.agent-reply__action-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.agent-reply__rule {
+  height: 1px;
+  margin-top: 1rem;
+  background: var(--ar-rule);
+}
+
+.agent-reply__actions + .agent-reply__rule {
+  margin-top: 0.65rem;
+}
+
+.post .content .agent-reply__caption,
+.agent-reply__caption {
+  margin-top: var(--spacing-sm);
+  margin-bottom: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+  font-style: italic;
 }

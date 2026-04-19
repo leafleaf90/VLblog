@@ -63,5 +63,9 @@ bundle exec jekyll build
 
 - Posts are written to \_posts/YYYY-MM-DD-slug.md.
 - Posts overwrite only when the Google Doc modified time is newer.
-- Cache is stored in .jekyll-cache/google_docs_posts_cache.json.
+- Cache path is set in `_config.yml` as `google_docs_posts_cache_path` (default in this repo: `_data/google_docs_posts_cache.json`).
 - If two docs share the same slug, only the first one will be used.
+- Put the opening `---` at the **top** of the document (only blank lines above it). Use **straight ASCII** `"` quotes in YAML, not curly “smart” quotes from Docs.
+- The importer normalizes BOM, CRLF, smart quotes, and `---` lines drawn with en/em dashes; if import still fails, read the **GoogleDocs Posts:** warning in the build log (YAML errors vs missing `---` block).
+- If the log says **no line of only `---`**: Google Docs often splits `---` across list items or converts it to a horizontal rule. Type **three hyphens alone on one line**, then Enter, twice (opening and closing). Use **Format → Clear formatting** on those lines, or paste `---` from a plain-text editor. The build log includes a short **export preview** so you can see what Drive actually returned.
+- Drive’s **Markdown export** often turns delimiter lines into **`\---`** (backslash + hyphens). The importer normalizes those back to `---` before parsing. If the preview still shows `\---` and import fails, re-save the Doc and rebuild so the cache re-fetches.

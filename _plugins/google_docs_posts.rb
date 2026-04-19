@@ -62,9 +62,8 @@ module Jekyll
           next
         end
 
-        front_matter = extract_front_matter(markdown)
+        front_matter = extract_front_matter(markdown, doc_id)
         unless front_matter
-          Jekyll.logger.warn 'GoogleDocs Posts:', "Missing front matter in doc #{doc_id}. Skipping."
           next
         end
 
@@ -98,7 +97,8 @@ module Jekyll
         output_path = File.expand_path(output_relative, site.source)
 
         FileUtils.mkdir_p(File.dirname(output_path))
-        File.write(output_path, normalize_markdown(markdown))
+        clean_md = compose_clean_post_markdown(markdown)
+        File.write(output_path, normalize_markdown(clean_md || markdown))
 
         cache['docs'][doc_id] = {
           'modified_time' => modified_time.to_s,
@@ -175,19 +175,133 @@ module Jekyll
       nil
     end
 
-    def extract_front_matter(markdown)
-      return nil unless markdown.start_with?('---')
+    def extract_front_matter(markdown, doc_id = nil)
+      # Google Docs / Windows exports: BOM, CRLF, blank lines before ---, curly quotes in YAML,
+      # body flush against closing ---, or --- drawn with special dash characters.
+      text = normalize_exported_markdown(markdown.to_s.dup)
+      yaml_raw, fm_reason = slice_yaml_front_matter_block(text)
+      unless yaml_raw
+        preview = text[0, 400].gsub("\n", ' \\n ')
+        hint = if text.lstrip.start_with?('#')
+                 ' This Doc’s export starts with a Markdown heading — in Google Docs, move the YAML block to the **very top** of the document (above the title), beginning with a line that is only `---`.'
+               else
+                 ''
+               end
+        Jekyll.logger.warn 'GoogleDocs Posts:',
+                           "Doc #{doc_id || 'unknown'}: #{fm_reason}. " \
+                           "Fix: two lines that are only `---` (three hyphens), with YAML between.#{hint} " \
+                           "Export preview: #{preview.inspect}"
+        return nil
+      end
 
-      match = markdown.match(/\A---\s*\n(.*?)\n---\s*\n/m)
-      return nil unless match
-
-      data = YAML.safe_load(match[1]) || {}
+      yaml_normalized = normalize_google_docs_yaml(yaml_raw)
+      data = YAML.safe_load(yaml_normalized) || {}
       {
         data: data,
-        raw: match[0]
+        raw: "---\n#{yaml_raw}\n---\n"
       }
-    rescue StandardError
+    rescue Psych::SyntaxError => e
+      Jekyll.logger.warn 'GoogleDocs Posts:',
+                         "Invalid YAML in doc #{doc_id || 'unknown'} front matter: #{e.message} " \
+                         '(use straight ASCII quotes " in values; avoid smart quotes from Google Docs). Skipping.'
       nil
+    rescue StandardError => e
+      Jekyll.logger.warn 'GoogleDocs Posts:',
+                         "Front matter error in doc #{doc_id || 'unknown'}: #{e.class.name} - #{e.message}. Skipping."
+      nil
+    end
+
+    def normalize_exported_markdown(text)
+      text.sub!(/\A\uFEFF/, '')
+      text.gsub!("\r\n", "\n")
+      # Strip leading blank / invisible-only lines so --- can be first real content
+      text.sub!(/\A(?:[ \t\u00A0\u200B-\u200D\uFEFF]*\n)+/, '')
+      # Drive "text/markdown" export often escapes HR as "\---" (backslash + hyphens), not a real --- line
+      text.gsub!(/^[ \t]*\\+[\u002d\u2013\u2014\u2212]{3,}[ \t]*$/m, "---\n")
+      text
+    end
+
+    # True if the line is only "dashes" (Docs may insert spaces: "- - -" or use en/em dash).
+    def dash_only_line?(line)
+      s = line.strip.gsub(/[\s\u00A0\u200B-\u200D\uFEFF]+/, '')
+      return false if s.length < 3
+
+      s.match?(/\A[\u002D\u2013\u2014\u2212]+\z/)
+    end
+
+    # Line indices of opening and closing --- delimiters, or nil if invalid.
+    def fm_delimiter_indices(lines)
+      start_idx = nil
+      lines.each_with_index do |line, i|
+        next unless dash_only_line?(line)
+
+        start_idx = i
+        break
+      end
+      return nil unless start_idx
+
+      end_idx = nil
+      ((start_idx + 1)...lines.length).each do |j|
+        next unless dash_only_line?(lines[j])
+
+        end_idx = j
+        break
+      end
+      return nil unless end_idx
+
+      [start_idx, end_idx]
+    end
+
+    # Returns [yaml_inner_string, :ok] or [nil, reason_symbol_string]
+    def slice_yaml_front_matter_block(text)
+      lines = text.lines
+      return [nil, 'empty export'] if lines.empty?
+
+      range = fm_delimiter_indices(lines)
+      unless range
+        return [nil, 'no line of only --- (use three hyphens on one line; avoid smart lists splitting them)']
+      end
+
+      start_idx, end_idx = range
+      inner = lines[(start_idx + 1)...end_idx].join
+      return [nil, 'nothing between opening --- and closing ---'] if inner.strip.empty?
+
+      [inner, :ok]
+    end
+
+    # Rewrite Drive export so written _posts/*.md has real --- and unescaped YAML (Jekyll requirement).
+    def compose_clean_post_markdown(markdown)
+      text = normalize_exported_markdown(markdown.to_s.dup)
+      lines = text.lines
+      range = fm_delimiter_indices(lines)
+      return nil unless range
+
+      start_idx, end_idx = range
+      inner = lines[(start_idx + 1)...end_idx].join
+      return nil if inner.strip.empty?
+
+      yaml_clean = normalize_google_docs_yaml(inner)
+      body = lines[(end_idx + 1)..-1].join
+      "---\n#{yaml_clean}\n---\n#{body}"
+    end
+
+    def normalize_google_docs_yaml(yaml_string)
+      s = yaml_string.dup
+      # Docs often style the first line as Heading 2 → "## title:" breaks YAML
+      s.gsub!(/^##\s+(?=[A-Za-z0-9_-]+\s*:)/, '')
+      # Markdown link pasted into a YAML value: [url](url) → use the target URL
+      s.gsub!(/\[https?:\/\/[^\]\s]+\]\((https?:\/\/[^)]+)\)/, '\1')
+      # Curly / typographic quotes break Psych in many Google Doc exports
+      s.tr!("\u201C\u201D", '"') # " "
+      s.tr!("\u2018\u2019", "'") # ' '
+      s.gsub!("\u00A0", ' ')
+      # Drive export escapes underscores in keys (is\_series → is_series)
+      s.gsub!('\_', '_')
+      # And escapes brackets / quotes in YAML-looking lines (categories: \[\"a\"\])
+      s.gsub!('\[', '[')
+      s.gsub!('\]', ']')
+      s.gsub!('\"', '"')
+      s
     end
 
     def parse_date(value)

@@ -35,8 +35,8 @@ module Jekyll
           Jekyll.logger.info "GoogleDocs Quotes:", "  #{topic}: #{topic_quotes.length} quotes"
         end
         
-      rescue Net::TimeoutError => e
-        Jekyll.logger.warn "GoogleDocs Quotes:", "[#{timestamp}] Timeout error: #{e.message}"
+      rescue Net::OpenTimeout, Net::ReadTimeout, Net::WriteTimeout => e
+        Jekyll.logger.warn "GoogleDocs Quotes:", "[#{timestamp}] Network timeout: #{e.message}"
         Jekyll.logger.warn "GoogleDocs Quotes:", "Google Docs request timed out, using fallback quotes"
         
         # Use fallback quotes for timeout

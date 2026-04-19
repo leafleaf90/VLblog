@@ -1,0 +1,13 @@
+# Reusable agent / LLM UI examples for {% include components/agent_prompt.html id="..." %}
+# Keys are arbitrary slugs. Override any field from the post via include params.
+
+docs_for_humans_and_agents:
+  variant: cursor
+  footer_label: Composer 2
+  text: |-
+    Add all the docs necessary for humans and agents to understand and build on this project. Use best-practice docs writing.
+
+gemini_placeholder:
+  variant: gemini
+  footer_label: Fast
+  text: "Test the…"

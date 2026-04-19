@@ -1,0 +1,14 @@
+{
+  "name": "vlblog-tools",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "banner": "node scripts/fetch-post-banner.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}

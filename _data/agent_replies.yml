@@ -1,0 +1,30 @@
+# Reusable AI reply UI examples for {% include components/agent_reply.html id="..." %}
+# Body is Markdown (bold, inline code, paragraphs). Only use trusted author content.
+
+gemini_reply_opening:
+  variant: gemini
+  show_sparkle: true
+  show_actions: false
+  show_rule: true
+  body: |
+    To ensure your dev agent handles this with the precision of a senior frontend engineer, you need to provide clear technical constraints and specific CSS/layout targets.
+
+    Since you are using **Nuxt 4** and likely a utility-first framework like Tailwind or a sophisticated CSS-in-JS setup, use the following prompt.
+
+gemini_reply_pro_tip:
+  variant: gemini
+  title: "Pro-Tip for the Implementation:"
+  show_sparkle: false
+  show_actions: true
+  show_rule: false
+  body: |
+    Since you're building this in **Nuxt**, you might want to ask the agent to specifically look at your `tailwind.config.js` (if you're using it) to define a custom color for the "humanity" highlights so they feel integrated into the "quiet luxury" theme you like—think **#EBDCCB** (parchment) or a very desaturated **#8B7E74** (walnut tone) for the highlights instead of "AI-blue."
+
+cursor_reply_sample:
+  variant: cursor
+  status: "Worked for 49s"
+  show_sparkle: false
+  show_actions: false
+  show_rule: false
+  body: |
+    When you combine **Jekyll + Markdown +** **Google Docs → posts**, remember what actually runs at build time: Liquid includes are ideal for **"repo-only"** workflows, but anything that never passes through Jekyll still needs **plain HTML** (or another compile step). Shared styling for these UI mockups lives in `assets/styles.css`.

@@ -1,0 +1,180 @@
+{% comment %}
+  Illustrated agent-composer UI for blog posts (not interactive).
+
+  Params:
+  - text (optional if id set): prompt body, HTML-escaped; newlines preserved via CSS pre-wrap
+  - id (optional): key in site.data.agent_prompts
+  - variant: cursor | claude | gemini (default cursor, or from data row)
+  - footer_label: e.g. Composer 2, Fast (Gemini), Claude (defaults by variant)
+  - disclaimer: optional line under the box (Gemini defaults to Google's disclaimer)
+  - hide_disclaimer: set true to omit Gemini default disclaimer
+  - caption: optional figure caption below the mock / disclaimer
+
+  Multiline: {% capture p %}...{% endcapture %}{% include components/agent_prompt.html text=prompt %}
+{% endcomment %}
+
+{% assign ap_row = nil %}
+{% if include.id and include.id != "" %}
+  {% assign ap_row = site.data.agent_prompts[include.id] %}
+{% endif %}
+
+{% assign ap_variant = "cursor" %}
+{% assign ap_footer = "" %}
+{% assign ap_text = "" %}
+{% assign ap_disclaimer = "" %}
+
+{% if ap_row %}
+  {% assign ap_variant = ap_row.variant | default: "cursor" %}
+  {% assign ap_footer = ap_row.footer_label | default: "" %}
+  {% assign ap_text = ap_row.text | default: "" %}
+  {% assign ap_disclaimer = ap_row.disclaimer | default: "" %}
+{% endif %}
+
+{% if include.variant and include.variant != "" %}
+  {% assign ap_variant = include.variant %}
+{% endif %}
+{% if include.footer_label and include.footer_label != "" %}
+  {% assign ap_footer = include.footer_label %}
+{% endif %}
+{% if include.text and include.text != "" %}
+  {% assign ap_text = include.text %}
+{% endif %}
+{% if include.disclaimer %}
+  {% assign ap_disclaimer = include.disclaimer %}
+{% endif %}
+
+{% if ap_footer == "" %}
+  {% if ap_variant == "claude" %}
+    {% assign ap_footer = "Claude" %}
+  {% elsif ap_variant == "gemini" %}
+    {% assign ap_footer = "Fast" %}
+  {% else %}
+    {% assign ap_footer = "Composer 2" %}
+  {% endif %}
+{% endif %}
+
+{% assign ap_text = ap_text | strip %}
+{% assign ap_disclaimer = ap_disclaimer | strip %}
+
+{% if ap_variant == "gemini" %}
+  {% if include.hide_disclaimer == true or include.hide_disclaimer == "true" %}
+    {% assign ap_disclaimer = "" %}
+  {% elsif ap_disclaimer == "" %}
+    {% assign ap_disclaimer = "Gemini is AI and can make mistakes." %}
+  {% endif %}
+{% endif %}
+
+<figure class="agent-prompt agent-prompt--{{ ap_variant }}">
+  <div class="agent-prompt__mock">
+    <div class="agent-prompt__chrome">
+      <div class="agent-prompt__body">
+        <p class="agent-prompt__text">
+          {{ ap_text | escape }}<span class="agent-prompt__caret" aria-hidden="true"></span>
+        </p>
+      </div>
+      <div
+        class="agent-prompt__toolbar{% if ap_variant == "gemini" %} agent-prompt__toolbar--gemini{% endif %}"
+        aria-hidden="true"
+      >
+        {% if ap_variant == "gemini" %}
+          <div class="agent-prompt__toolbar-left">
+            <span class="agent-prompt__icon-btn agent-prompt__icon-btn--gemini-plain">
+              <svg class="agent-prompt__svg agent-prompt__svg--stroke" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  d="M12 5v14M5 12h14"
+                />
+              </svg>
+            </span>
+            <span class="agent-prompt__tools-row">
+              <svg class="agent-prompt__svg agent-prompt__svg--tools" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <line
+                  x1="5"
+                  y1="8"
+                  x2="19"
+                  y2="8"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <circle cx="15" cy="8" r="2.25" fill="currentColor" />
+                <line
+                  x1="5"
+                  y1="16"
+                  x2="19"
+                  y2="16"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <circle cx="9" cy="16" r="2.25" fill="currentColor" />
+              </svg>
+              <span class="agent-prompt__tools-label">Tools</span>
+            </span>
+          </div>
+          <div class="agent-prompt__toolbar-right">
+            <span class="agent-prompt__selector agent-prompt__selector--gemini">
+              <span class="agent-prompt__selector-label">{{ ap_footer | escape }}</span>
+              <svg class="agent-prompt__svg agent-prompt__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M7 10l5 5 5-5H7z" />
+              </svg>
+            </span>
+            <span class="agent-prompt__icon-btn agent-prompt__icon-btn--gemini-send">
+              <svg class="agent-prompt__svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2v7z"
+                />
+              </svg>
+            </span>
+          </div>
+        {% else %}
+          <div class="agent-prompt__toolbar-left">
+            <span class="agent-prompt__icon-btn agent-prompt__icon-btn--ghost">
+              <svg class="agent-prompt__svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+              </svg>
+            </span>
+            <span class="agent-prompt__selector">
+              <span class="agent-prompt__selector-label">{{ ap_footer | escape }}</span>
+              <svg class="agent-prompt__svg agent-prompt__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M7 10l5 5 5-5H7z" />
+              </svg>
+            </span>
+          </div>
+          <div class="agent-prompt__toolbar-right">
+            <span class="agent-prompt__icon-btn agent-prompt__icon-btn--ghost">
+              <svg class="agent-prompt__svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  d="M12 14c1.66 0 3-1.34 3-3V8a3 3 0 10-6 0v3c0 1.66 1.34 3 3 3z"
+                />
+                <path
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  d="M9 18h6M10 21h4"
+                />
+              </svg>
+            </span>
+            <span class="agent-prompt__icon-btn agent-prompt__icon-btn--submit">
+              <svg class="agent-prompt__svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 5l7 7h-4v7H9v-7H5l7-7z" />
+              </svg>
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% if ap_disclaimer != "" %}
+    <p class="agent-prompt__disclaimer">{{ ap_disclaimer | escape }}</p>
+  {% endif %}
+  {% if include.caption and include.caption != "" %}
+    <figcaption class="agent-prompt__caption">{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>

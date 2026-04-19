@@ -20,10 +20,12 @@
     - mindfulness
     - motivation
     - books
+    - writing
 
 - group: life
   label: Life
   categories:
+    - ai
     - travel
     - thailand
     - movies

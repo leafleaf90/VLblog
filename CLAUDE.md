@@ -22,11 +22,12 @@ Config change requires server restart (`_config.yml` is not live-reloaded).
 
 ```
 _layouts/         # home.html, post.html, default.html
-_includes/        # components/blog_post_card.html
+_includes/        # components/blog_post_card.html, agent_prompt.html, agent_reply.html (LLM UI mockups)
 _posts/           # Markdown posts (YYYY-MM-DD-slug.md)
 _drafts/          # Unpublished drafts
 _plugins/         # google_docs_posts.rb — custom Jekyll generator
-_data/            # google_docs_posts_cache.json
+_data/            # google_docs_posts_cache.json, agent_prompts.yml, agent_replies.yml (named UI snippets)
+docs/             # contributor notes; see agent-prompt-mockups.md, agent-reply-mockups.md
 assets/
   styles.css      # Main stylesheet
   post-media/     # Post images, organized by post slug/date
@@ -63,8 +64,8 @@ The homepage filters and sidebar group posts into three buckets:
 | Group | Categories |
 |---|---|
 | **Code** | coding, vue, nuxt, firebase, javascript, jekyll, hosting, dart, flutter, openai |
-| **Mindfulness** | productivity, minimalism, mindfulness, motivation, books |
-| **Life** | travel, thailand, movies |
+| **Mindfulness** | productivity, minimalism, mindfulness, motivation, books, writing |
+| **Life** | ai, travel, thailand, movies |
 
 Posts with categories outside these groups appear in "other" and are visible only under "all".
 
@@ -82,6 +83,12 @@ Posts can be authored in Google Docs and auto-imported at build time via `_plugi
 ## Quotes Page
 
 `quotes.md` — content is static/manually maintained Markdown. There is also infrastructure in `_config.yml` (`quotes_google_docs_url`) for fetching quotes from a published Google Doc, but the current page content is hardcoded.
+
+## Agent prompt mockups in posts
+
+Illustrated Cursor-style / Claude-style / Gemini-style **composer** boxes (static HTML, no JS) for example prompts: `_includes/components/agent_prompt.html`, `_data/agent_prompts.yml`, [`docs/agent-prompt-mockups.md`](docs/agent-prompt-mockups.md).
+
+Illustrated **AI reply** blocks (Gemini-style sparkle + actions + rule; Cursor-style status line + panel): `_includes/components/agent_reply.html`, `_data/agent_replies.yml`, [`docs/agent-reply-mockups.md`](docs/agent-reply-mockups.md).
 
 ## Sensitive Files
 

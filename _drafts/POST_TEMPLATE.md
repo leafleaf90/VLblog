@@ -19,3 +19,9 @@ Intro paragraph.
 ## Section Heading
 
 Content here.
+
+<!-- Optional: illustrated agent/LLM prompt UI — docs/agent-prompt-mockups.md
+     Example: {% raw %}{% include components/agent_prompt.html id="docs_for_humans_and_agents" %}{% endraw %} -->
+<!-- Optional: illustrated AI reply — docs/agent-reply-mockups.md
+     Examples: {% raw %}{% include components/agent_reply.html id="gemini_reply_opening" %}{% endraw %}
+               {% raw %}{% include components/agent_reply.html id="cursor_reply_sample" %}{% endraw %} -->

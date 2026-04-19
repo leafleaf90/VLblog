@@ -1,0 +1,197 @@
+{% comment %}
+  Illustrated AI reply block (Gemini- or Cursor-style) for blog posts — not interactive.
+
+  Params:
+  - body (markdown, optional if id): supports paragraphs, **bold**, `inline code`
+  - id: key in site.data.agent_replies
+  - variant: gemini | cursor (default gemini)
+  - status: optional meta line (e.g. "Worked for 49s") — typical for Cursor; plain text, escaped
+  - title: optional plain-text heading (e.g. "Pro-Tip for the Implementation:")
+  - show_sparkle: default true for gemini only; always hidden for cursor
+  - show_actions: default false; thumbs / refresh / copy / more row (decorative)
+  - show_rule: default true for gemini, false for cursor; thin separator under the block (or under actions)
+  - caption: optional figure caption
+
+  Multiline body: {% capture b %}...**bold**...{% endcapture %}{% include components/agent_reply.html body=b %}
+
+  Body is passed through markdownify — use only trusted author content.
+{% endcomment %}
+
+{% assign ar_row = nil %}
+{% if include.id and include.id != "" %}
+  {% assign ar_row = site.data.agent_replies[include.id] %}
+{% endif %}
+
+{% assign ar_variant = "gemini" %}
+{% assign ar_title = "" %}
+{% assign ar_body = "" %}
+{% assign ar_status = "" %}
+
+{% if ar_row %}
+  {% assign ar_variant = ar_row.variant | default: "gemini" %}
+  {% assign ar_title = ar_row.title | default: "" %}
+  {% assign ar_body = ar_row.body | default: "" %}
+  {% assign ar_status = ar_row.status | default: "" %}
+{% endif %}
+
+{% if include.variant and include.variant != "" %}
+  {% assign ar_variant = include.variant %}
+{% endif %}
+{% if include.title %}
+  {% assign ar_title = include.title | strip %}
+{% endif %}
+{% if include.body and include.body != "" %}
+  {% assign ar_body = include.body %}
+{% endif %}
+{% if include.status %}
+  {% assign ar_status = include.status | strip %}
+{% endif %}
+
+{% assign ar_title = ar_title | strip %}
+{% assign ar_body = ar_body | strip %}
+{% assign ar_status = ar_status | strip %}
+
+{% assign show_sparkle = false %}
+{% if ar_variant == "gemini" %}
+  {% assign show_sparkle = true %}
+{% endif %}
+{% if ar_row %}
+  {% if ar_row.show_sparkle == false %}
+    {% assign show_sparkle = false %}
+  {% elsif ar_row.show_sparkle == true %}
+    {% assign show_sparkle = true %}
+  {% endif %}
+{% endif %}
+{% if include.show_sparkle == "false" or include.show_sparkle == false %}
+  {% assign show_sparkle = false %}
+{% elsif include.show_sparkle == "true" or include.show_sparkle == true %}
+  {% assign show_sparkle = true %}
+{% endif %}
+
+{% assign show_actions = false %}
+{% if ar_row %}
+  {% if ar_row.show_actions == true or ar_row.show_actions == "true" %}
+    {% assign show_actions = true %}
+  {% endif %}
+{% endif %}
+{% if include.show_actions == "true" or include.show_actions == true %}
+  {% assign show_actions = true %}
+{% elsif include.show_actions == "false" or include.show_actions == false %}
+  {% assign show_actions = false %}
+{% endif %}
+
+{% assign show_rule = false %}
+{% if ar_variant == "gemini" %}
+  {% assign show_rule = true %}
+{% endif %}
+{% if ar_row %}
+  {% if ar_row.show_rule == true %}
+    {% assign show_rule = true %}
+  {% elsif ar_row.show_rule == false %}
+    {% assign show_rule = false %}
+  {% endif %}
+{% endif %}
+{% if include.show_rule == "false" or include.show_rule == false %}
+  {% assign show_rule = false %}
+{% elsif include.show_rule == "true" or include.show_rule == true %}
+  {% assign show_rule = true %}
+{% endif %}
+
+{% if ar_body == "" %}
+  <!-- agent_reply: set body= or id= with a non-empty body in _data/agent_replies.yml -->
+{% else %}
+<figure class="agent-reply agent-reply--{{ ar_variant }}">
+  <div class="agent-reply__surface">
+    {% if ar_status != "" %}
+      <p class="agent-reply__status">{{ ar_status | escape }}</p>
+    {% endif %}
+    <div class="agent-reply__main">
+      {% if show_sparkle and ar_variant == "gemini" %}
+        <div class="agent-reply__sparkle" aria-hidden="true">
+          <svg class="agent-reply__sparkle-svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="#8ab4f8"
+              d="M12 2.5l2.35 6.05L20.5 11l-6.15 2.45L12 19.5l-2.35-6.05L3.5 11l6.15-2.45L12 2.5z"
+            />
+          </svg>
+        </div>
+      {% endif %}
+      <div class="agent-reply__column{% unless show_sparkle and ar_variant == "gemini" %} agent-reply__column--full{% endunless %}">
+        {% if ar_title != "" %}
+          <p class="agent-reply__title">{{ ar_title | escape }}</p>
+        {% endif %}
+        <div class="agent-reply__body">{{ ar_body | markdownify }}</div>
+      </div>
+    </div>
+    {% if show_actions %}
+      <div class="agent-reply__actions" aria-hidden="true">
+        <span class="agent-reply__action-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"
+            />
+          </svg>
+        </span>
+        <span class="agent-reply__action-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10 15v5a3 3 0 003 3l4-9V3H5.72a2 2 0 00-2 1.7l-1.38 9a2 2 0 002 2.3H10zm7-13h3a2 2 0 012 2v7a2 2 0 01-2 2h-3"
+            />
+          </svg>
+        </span>
+        <span class="agent-reply__action-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m3-4l-4 4 4 4"
+            />
+          </svg>
+        </span>
+        <span class="agent-reply__action-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect
+              x="9"
+              y="9"
+              width="11"
+              height="11"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <span class="agent-reply__action-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="6" r="1.25" fill="currentColor" />
+            <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+            <circle cx="12" cy="18" r="1.25" fill="currentColor" />
+          </svg>
+        </span>
+      </div>
+    {% endif %}
+    {% if show_rule %}
+      <div class="agent-reply__rule" aria-hidden="true"></div>
+    {% endif %}
+  </div>
+  {% if include.caption and include.caption != "" %}
+    <figcaption class="agent-reply__caption">{{ include.caption }}</figcaption>
+  {% endif %}
+</figure>
+{% endif %}
