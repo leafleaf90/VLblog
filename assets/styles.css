@@ -211,6 +211,22 @@ body {
   gap: var(--spacing-sm);
 }
 
+.navbar-brand .red {
+  color: #dc2626;
+}
+
+html[data-theme="dark"] .navbar-brand .red {
+  color: #f87171;
+}
+
+.hero-title .red {
+  color: #dc2626;
+}
+
+html[data-theme="dark"] .hero-title .red {
+  color: #f87171;
+}
+
 .navbar-nav {
   display: flex;
   gap: var(--spacing-xl);
@@ -638,21 +654,27 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
+/* Larger than the disk + overflow on .hero-profile so a small upward move
+   never reveals the flat background under the artwork */
 .profile-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 108%;
+  height: 108%;
+  max-width: none;
   border: none;
-  transition: all 0.4s ease;
+  border-radius: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s ease, filter 0.4s ease;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 42%;
   filter: contrast(1.2);
   display: block;
 }
 
-.profile-image:hover {
-  transform: translateY(-8px);
-  /* filter: grayscale(0%) contrast(1.2); */
+.hero-profile:hover .profile-image {
+  transform: translate(-50%, calc(-50% - 5px));
 }
 
 /* Updated Layout Structure */
@@ -783,6 +805,11 @@ code {
   text-align: left;
 }
 
+/* Match body padding-top so filter scroll / #recent-heading sit below fixed navbar */
+#recent-heading {
+  scroll-margin-top: calc(80px + var(--spacing-sm));
+}
+
 /* Sidebar Components */
 .sidebar-section {
   margin-bottom: var(--spacing-xl);
@@ -790,6 +817,13 @@ code {
 
 .sidebar-section:last-child {
   margin-bottom: 0;
+}
+
+/* Quick Links: group shortcuts only on small screens (desktop has Explore Topics) */
+@media (min-width: 769px) {
+  .sidebar-quick-filter {
+    display: none;
+  }
 }
 
 .sidebar-title {
@@ -1880,9 +1914,13 @@ img + em {
   gap: var(--spacing-xs);
   margin-bottom: var(--spacing-2xl);
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .filter-btn {
+  /* Cancel global `* { max-width: 100% }` which can break flex + SVG sizing in WebKit */
+  max-width: none;
+  flex: 0 0 auto;
   background: var(--color-bg-primary);
   color: var(--color-text-secondary);
   border: 2px solid #e5e7eb;
@@ -1903,6 +1941,11 @@ img + em {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+}
+
+.filter-btn .filter-icon {
+  flex-shrink: 0;
+  max-width: none;
 }
 
 .filter-icon {
@@ -2882,8 +2925,8 @@ img + em {
   }
 
   .profile-image {
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: 110%;
   }
 
   .hero-title {

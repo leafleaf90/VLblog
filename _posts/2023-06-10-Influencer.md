@@ -1,12 +1,11 @@
 ---
-
-## title: "Influencer - Location Scouting!"
-
-layout: post  
-featured-image: /assets/post-media/2023-06-10/cover_lg.jpg  
-featured-thumbnail: /assets/post-media/2023-06-10/cover_sm.jpg  
-description: The Beach for Gen Z  
+title: "Influencer - Location Scouting!"
+layout: post
+featured-image: /assets/post-media/2023-06-10/cover_lg.jpg
+featured-thumbnail: /assets/post-media/2023-06-10/cover_sm.jpg
+description: "The Beach for Gen Z"
 categories: movies thailand
+---
 
 ## Leo out
 

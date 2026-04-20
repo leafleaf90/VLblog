@@ -303,8 +303,8 @@ layout: default
 
     <!-- Sidebar -->
     <aside class="sidebar" role="complementary">
-      <!-- Categories/Topics -->
-      <div class="sidebar-section">
+      <!-- Categories/Topics (hidden on small screens via default.html — pills in main are primary) -->
+      <div class="sidebar-section sidebar-section--topics">
         <h3 class="sidebar-title">Explore Topics</h3>
         <ul class="category-list">
           {% for group in site.data.categories %}
@@ -355,7 +355,7 @@ layout: default
       </div>
 
       <!-- Quick Links -->
-      <div class="sidebar-section">
+      <div class="sidebar-section sidebar-section--quick-links">
         <h3 class="sidebar-title">Quick Links</h3>
         <ul class="category-list">
           <li class="category-item">
@@ -363,6 +363,16 @@ layout: default
               <span>Browse All Posts</span>
             </a>
           </li>
+          {% for group in site.data.categories %}
+          <li class="category-item sidebar-quick-filter">
+            <a
+              href="{{ site.baseurl }}/?group={{ group.group }}"
+              class="category-link"
+            >
+              <span>{{ group.label }} posts</span>
+            </a>
+          </li>
+          {% endfor %}
         </ul>
       </div>
     </aside>
@@ -378,11 +388,35 @@ layout: default
     );
     const postCards = document.querySelectorAll(".post-card");
 
-    function applyFilter(filter, subcategory = null) {
-      // Remove active class from all buttons
+    const CATEGORY_TO_GROUP = {
+      {%- assign cg_first = true -%}
+      {%- for g in site.data.categories -%}
+      {%- for c in g.categories -%}
+      {%- unless cg_first -%},{%- endunless -%}
+      {%- assign cg_first = false -%}
+      {{ c | downcase | jsonify }}: {{ g.group | jsonify }}
+      {%- endfor -%}
+      {%- endfor -%}
+    };
+
+    function syncFilterToUrl(filter, subcategory) {
+      const path = location.pathname || "/";
+      const sp = new URLSearchParams();
+      if (subcategory) {
+        sp.set("cat", String(subcategory).toLowerCase());
+      } else if (filter && filter !== "all") {
+        sp.set("group", filter);
+      }
+      const qs = sp.toString();
+      history.replaceState(null, "", qs ? path + "?" + qs : path);
+    }
+
+    function applyFilter(filter, subcategory = null, options = {}) {
+      const scroll = options.scroll !== false;
+      const syncUrl = options.syncUrl !== false;
+
       filterBtns.forEach((b) => b.classList.remove("active"));
 
-      // Highlight the matching group button (for both group and subcategory filters)
       if (filter !== "all") {
         const activeBtn = document.querySelector(
           `.filter-btn[data-filter="${filter}"]`
@@ -393,12 +427,17 @@ layout: default
       }
 
       let visibleCount = 0;
+      const subKey = subcategory
+        ? String(subcategory).toLowerCase()
+        : null;
 
       postCards.forEach((card) => {
         let shouldShow;
-        if (subcategory) {
-          const cardCats = (card.dataset.categories || "").split(",");
-          shouldShow = cardCats.includes(subcategory);
+        if (subKey) {
+          const cardCats = (card.dataset.categories || "")
+            .split(",")
+            .map((s) => s.trim().toLowerCase());
+          shouldShow = cardCats.includes(subKey);
         } else {
           shouldShow = filter === "all" || card.dataset.category === filter;
         }
@@ -411,20 +450,26 @@ layout: default
         }
       });
 
-      // Update the section title to show count
       const sectionTitle = document.querySelector("#recent-heading");
-      const label = subcategory
-        ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
-        : filter === "all" ? null : filter.charAt(0).toUpperCase() + filter.slice(1);
+      const label = subKey
+        ? subKey.charAt(0).toUpperCase() + subKey.slice(1)
+        : filter === "all"
+          ? null
+          : filter.charAt(0).toUpperCase() + filter.slice(1);
       sectionTitle.textContent = label
         ? `${label} Posts (${visibleCount})`
         : `Recent Posts (${visibleCount})`;
 
-      // Scroll to posts section
-      document.querySelector("#recent-heading").scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      if (syncUrl) {
+        syncFilterToUrl(filter, subcategory);
+      }
+
+      if (scroll) {
+        document.querySelector("#recent-heading").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }
 
     // Handle filter button clicks
@@ -434,10 +479,10 @@ layout: default
 
         // If clicking the currently active filter, show all posts
         if (this.classList.contains("active")) {
-          applyFilter("all");
+          applyFilter("all", null);
           filterBtns.forEach((b) => b.classList.remove("active"));
         } else {
-          applyFilter(clickedFilter);
+          applyFilter(clickedFilter, null);
         }
       });
     });
@@ -464,9 +509,24 @@ layout: default
       });
     });
 
-    // Initialize with first category group active
-    const allPostsCount = postCards.length;
-    applyFilter("{{ site.data.categories[0].group }}");
+    const params = new URLSearchParams(location.search);
+    const catParam = (params.get("cat") || "").trim().toLowerCase();
+    const groupParam = (params.get("group") || "").trim().toLowerCase();
+    const defaultGroup = "{{ site.data.categories[0].group }}";
+
+    if (catParam) {
+      const grp = CATEGORY_TO_GROUP[catParam];
+      applyFilter(grp || "all", catParam, { scroll: true, syncUrl: true });
+    } else if (
+      groupParam &&
+      [{% for g in site.data.categories %}{{ g.group | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}].includes(
+        groupParam
+      )
+    ) {
+      applyFilter(groupParam, null, { scroll: true, syncUrl: true });
+    } else {
+      applyFilter(defaultGroup, null, { scroll: false, syncUrl: false });
+    }
 
     // Slider functionality
     const sliderTrack = document.getElementById("sliderTrack");

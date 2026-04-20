@@ -1,6 +1,6 @@
 <a
   class="post-logos-single post-logos-single-link"
-  href="{{site.baseurl}}/categories/#{{include.category|slugize}}"
+  href="{{ site.baseurl }}/?cat={{ include.category | strip | downcase | uri_escape }}"
 >
   <img
     src="/assets/images/categories/{{include.category}}.svg"
