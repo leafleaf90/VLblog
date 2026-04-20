@@ -8,7 +8,8 @@
   "scripts": {
     "banner": "node scripts/fetch-post-banner.mjs",
     "sync-banners": "node scripts/sync-remote-banner-images.mjs",
-    "defringe": "node scripts/defringe-white-halo.mjs"
+    "defringe": "node scripts/defringe-white-halo.mjs",
+    "optimize-images": "node scripts/optimize-images.mjs"
   },
   "devDependencies": {
     "sharp": "^0.33.5"
