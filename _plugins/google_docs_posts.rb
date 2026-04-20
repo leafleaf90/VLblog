@@ -50,8 +50,10 @@ module Jekyll
           current_time = Time.parse(modified_time.to_s) rescue nil
           output_relative = cached_entry['output_path']
           output_path = output_relative ? File.expand_path(output_relative, site.source) : nil
+          file_exists = output_path && File.exist?(output_path)
+          cached_unpublished = cached_entry['unpublished']
 
-          if cached_time && current_time && cached_time >= current_time && output_path && File.exist?(output_path)
+          if cached_time && current_time && cached_time >= current_time && output_relative && (file_exists || cached_unpublished)
             Jekyll.logger.info 'GoogleDocs Posts:',
                                "Skipped #{output_relative} (drive modifiedTime not newer than cache; " \
                                "cached #{cached_entry['modified_time']}, drive #{modified_time}). " \
@@ -86,7 +88,25 @@ module Jekyll
         end
 
         if data.key?('published') && data['published'] == false
-          Jekyll.logger.info 'GoogleDocs Posts:', "Doc #{doc_id} is unpublished. Skipping."
+          output_filename = "#{date.strftime('%Y-%m-%d')}-#{slug}.md"
+          output_relative = File.join(output_dir, output_filename)
+          output_path = File.expand_path(output_relative, site.source)
+
+          if File.exist?(output_path)
+            FileUtils.rm_f(output_path)
+            Jekyll.logger.info 'GoogleDocs Posts:',
+                               "Removed #{output_relative} (doc #{doc_id} has published: false)."
+          else
+            Jekyll.logger.info 'GoogleDocs Posts:',
+                               "Doc #{doc_id} is unpublished; no existing file at #{output_relative} to remove."
+          end
+
+          cache['docs'][doc_id] = {
+            'modified_time' => modified_time.to_s,
+            'slug' => slug,
+            'output_path' => output_relative,
+            'unpublished' => true
+          }
           next
         end
 
@@ -116,7 +136,8 @@ module Jekyll
         cache['docs'][doc_id] = {
           'modified_time' => modified_time.to_s,
           'slug' => slug,
-          'output_path' => output_relative
+          'output_path' => output_relative,
+          'unpublished' => false
         }
 
         Jekyll.logger.info 'GoogleDocs Posts:', "Wrote #{output_relative} from doc #{doc_id}."
