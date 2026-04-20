@@ -8,11 +8,16 @@ require 'google/apis/drive_v3'
 require 'googleauth'
 
 module Jekyll
-  class GoogleDocsPostsGenerator < Generator
-    safe true
-    priority :high
+  # Runs during :site, :after_init — before Site#process → read — so written/deleted
+  # _posts files affect this build. (A Generator runs after read, so removals were too late.)
+  class GoogleDocsPostsSync
+    def self.run!(site)
+      new.run!(site)
+    rescue StandardError => e
+      Jekyll.logger.warn 'GoogleDocs Posts:', "Failed to import posts: #{e.class.name} - #{e.message}"
+    end
 
-    def generate(site)
+    def run!(site)
       config = site.config
 
       return unless config['google_docs_posts_enabled']
@@ -144,8 +149,6 @@ module Jekyll
       end
 
       save_cache(site.source, cache_path, cache)
-    rescue StandardError => e
-      Jekyll.logger.warn 'GoogleDocs Posts:', "Failed to import posts: #{e.class.name} - #{e.message}"
     end
 
     private
@@ -403,5 +406,9 @@ module Jekyll
       FileUtils.mkdir_p(File.dirname(full_path))
       File.write(full_path, JSON.pretty_generate(cache))
     end
+  end
+
+  Jekyll::Hooks.register :site, :after_init, priority: :high do |site|
+    GoogleDocsPostsSync.run!(site)
   end
 end

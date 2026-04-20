@@ -18,11 +18,18 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Viktor Lovgren - Home
+title: Viktor Lövgren
+author: Viktor Lövgren
+# Used when a page has no featured-image (homepage, quotes, etc.)
+default_social_image: /assets/images/profile_new.png
 email: mail@viktorlovgren.com
-description: >- # this means to ignore newlines until "baseurl:"
-  I like to use technology to supercharge solutions for environmental
-  sustainability and mental well-being.
+# Hero (`home.html`) + default meta when a page omits `description` (keep in sync)
+tagline: >-
+  I use technology to supercharge solutions for environmental sustainability
+  and mental well-being.
+description: >-
+  I use technology to supercharge solutions for environmental sustainability
+  and mental well-being.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.viktorlovgren.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: viktorlovgren

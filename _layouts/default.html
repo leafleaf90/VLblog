@@ -19,14 +19,18 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {%- assign seo_brand = site.title | replace: " - Home", "" | replace: " - home", "" -%}
-    {%- assign seo_desc = page.description | default: site.description | strip -%}
+    {%- assign seo_desc = page.description | default: site.tagline | default: site.description | strip -%}
     {%- assign canonical_url = page.url | absolute_url -%}
+    {%- assign social_image = page.featured-image | default: site.default_social_image -%}
     {% if page.title %}
     <title>{{ page.title }} | {{ seo_brand }}</title>
     {% else %}
     <title>{{ site.title }}</title>
     {% endif %}
     <meta name="description" content="{{ seo_desc | xml_escape }}" />
+    {% if site.author %}
+    <meta name="author" content="{{ site.author | xml_escape }}" />
+    {% endif %}
     <link rel="canonical" href="{{ canonical_url }}" />
     <link
       rel="apple-touch-icon"
@@ -364,10 +368,11 @@
     limit:1 %}
     <meta property="article:section" content="{{ category | xml_escape }}" />
     {% endfor %} {% endif %}
-    {% if page.featured-image %}
+    {% if social_image %}
+    <meta property="og:image" content="{{ social_image | absolute_url }}" />
     <meta
-      property="og:image"
-      content="{{ page.featured-image | absolute_url }}"
+      property="og:image:alt"
+      content="{% if page.featured-image %}{{ page.title | xml_escape }}{% else %}{{ site.title | xml_escape }}{% endif %}"
     />
     {% endif %}
     <meta name="twitter:card" content="summary_large_image" />
@@ -380,11 +385,24 @@
     <meta name="twitter:title" content="{{ site.title | xml_escape }}" />
     {% endif %}
     <meta name="twitter:description" content="{{ seo_desc | xml_escape }}" />
-    {% if page.featured-image %}
-    <meta
-      name="twitter:image"
-      content="{{ page.featured-image | absolute_url }}"
-    />
+    {% if social_image %}
+    <meta name="twitter:image" content="{{ social_image | absolute_url }}" />
+    {% endif %}
+    {% if page.path == 'index.markdown' %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": {{ site.title | jsonify }},
+        "url": {{ '/' | absolute_url | jsonify }},
+        "description": {{ seo_desc | jsonify }},
+        "publisher": {
+          "@type": "Person",
+          "name": {{ site.author | default: site.title | jsonify }},
+          "url": {{ '/about/' | absolute_url | jsonify }}
+        }
+      }
+    </script>
     {% endif %}
     {% if page.date %}
     <script type="application/ld+json">
