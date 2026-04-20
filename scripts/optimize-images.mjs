@@ -12,11 +12,11 @@
  *   --quality <1-100>   WebP quality (default: 92)
  *   --max <px>         If the longest edge exceeds this, scale down (default: 1600; 0 = no cap)
  *   --social-card PATH After processing inputs, write one OG/Twitter image from the first input
- *   --bg R,G,B         Letterbox background for --social-card (default: 18,18,20)
+ *   --bg R,G,B         Letterbox background for --social-card (default: 0,0,0 pitch black)
  */
 
 import { stat } from "fs/promises";
-import { basename, dirname, extname, join } from "path";
+import { basename, dirname, extname, join, resolve } from "path";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
@@ -31,7 +31,7 @@ function parseArgs(argv) {
   let quality = 92;
   let maxEdge = 1600;
   let socialCard = null;
-  let bg = { r: 18, g: 18, b: 20 };
+  let bg = { r: 0, g: 0, b: 0 };
 
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
@@ -74,6 +74,10 @@ async function optimizeOne(absPath, { quality, maxEdge }) {
   const dir = dirname(absPath);
   const base = basename(absPath, ext);
   const outPath = join(dir, `${base}.webp`);
+  if (resolve(absPath) === resolve(outPath)) {
+    console.log(`Skip (already WebP at output path): ${basename(outPath)}`);
+    return;
+  }
 
   let pipeline = sharp(absPath).rotate();
 
