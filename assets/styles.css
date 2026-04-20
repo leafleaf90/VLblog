@@ -405,14 +405,14 @@ html[data-theme="dark"] .contact-modal .modal-body p {
 }
 
 html[data-theme="dark"] .contact-modal .form-group label {
-  color: var(--color-text-secondary);
+  color: #e2e8f0;
 }
 
 html[data-theme="dark"] .contact-modal .form-group input,
 html[data-theme="dark"] .contact-modal .form-group textarea {
-  background: var(--color-bg-primary) !important;
-  border-color: #475569 !important;
-  color: var(--color-text-primary) !important;
+  background: #f1f5f9 !important;
+  border-color: #64748b !important;
+  color: #0f172a !important;
 }
 
 html[data-theme="dark"] .contact-modal .close-btn {
@@ -421,6 +421,7 @@ html[data-theme="dark"] .contact-modal .close-btn {
 
 html[data-theme="dark"] .contact-modal .close-btn:hover {
   color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* New Layout Structure */
@@ -2086,6 +2087,12 @@ img + em {
   pointer-events: none;
 }
 
+/* Anchor copy vs. strong hero art: slight surface lift + divider (dark: #1e293b panel) */
+.slider-card:has(.slider-card-image) .slider-card-content {
+  background: var(--color-bg-secondary);
+  border-left: 1px solid var(--color-bg-tertiary);
+}
+
 .slider-card-title {
   font-size: var(--font-size-xl);
   font-weight: 700;
@@ -2418,6 +2425,14 @@ img + em {
   color: var(--color-text-primary);
 }
 
+.projects-section .section-title--projects-sub {
+  margin-top: calc(var(--spacing-2xl) + var(--spacing-xl));
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -2426,6 +2441,11 @@ img + em {
   margin: 0 auto;
   justify-items: center;
   width: 100%;
+  color: var(--color-text-primary);
+}
+
+.projects-grid--previous {
+  margin-bottom: 0;
 }
 
 /* Responsive adjustments for projects grid */
@@ -2450,13 +2470,16 @@ img + em {
 }
 
 .project-card {
-  background: var(--color-bg-primary);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease, background 0.25s ease;
   text-align: center;
-  border: 1px solid #f1f5f9;
+  border: 1px solid rgba(148, 163, 184, 0.35);
   width: 100%;
   max-width: min(320px, 100%);
   display: flex;
@@ -2465,21 +2488,109 @@ img + em {
   overflow: hidden;
 }
 
+html[data-theme="dark"] .project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(148, 163, 184, 0.18);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
 .project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  border-color: #e2e8f0;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+  border-color: rgba(37, 99, 235, 0.45);
+}
+
+html[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  border-color: rgba(96, 165, 250, 0.5);
 }
 
 .project-logo {
   width: 100px;
   height: 100px;
-  margin: 0 auto var(--spacing-lg);
-  border-radius: var(--radius-lg);
+  margin: 0 auto var(--spacing-md);
+  border-radius: var(--radius-md);
   object-fit: contain;
-  background: #f8fafc;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.project-logo--svg {
   padding: var(--spacing-sm);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Em Dash Patrol: favicon marks from emdashpatrol nuxt.config — dark mark on light cards, light mark on dark cards */
+.project-logo-wrap--edp {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--spacing-md);
+}
+
+.project-logo-wrap--edp .project-logo--edp {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  width: 100px;
+  height: 100px;
+}
+
+html[data-theme="light"] .project-logo--edp-light {
+  opacity: 0;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .project-logo--edp-dark {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 15 Pages asset is light-on-transparent; force black mark in light theme */
+html[data-theme="light"] .project-logo--15pages {
+  filter: brightness(0);
+}
+
+html[data-theme="dark"] .project-logo--15pages {
+  filter: none;
+}
+
+/* Blue Tiki asset is dark-on-transparent; invert to white on dark cards */
+html[data-theme="dark"] .project-logo--bluetiki {
+  filter: brightness(0) invert(1);
+}
+
+html[data-theme="light"] .project-logo--bluetiki {
+  filter: none;
+}
+
+.project-tags {
+  list-style: none;
+  margin: 0 0 var(--spacing-md) 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.project-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  color: var(--color-text-secondary);
+  background: rgba(148, 163, 184, 0.12);
+}
+
+html[data-theme="dark"] .project-tag {
+  border-color: rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-secondary);
 }
 
 .project-title {
@@ -2495,11 +2606,17 @@ img + em {
   margin: 0 0 var(--spacing-xl) 0;
   line-height: var(--line-height-normal);
   flex-grow: 1;
+  min-height: 6.5rem;
 }
 
-/* Project Card Button - Match Hero CTA Style */
+/* Project Card Button — clearer primary action */
 .project-card .button {
-  background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #1f2937 100%);
+  background: linear-gradient(
+    128deg,
+    #1e40af 0%,
+    #2563eb 55%,
+    #b91c1c 100%
+  );
   color: var(--color-text-inverse);
   padding: var(--spacing-sm) var(--spacing-xl);
   border-radius: 50px;
@@ -2508,12 +2625,12 @@ img + em {
   font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 6px 20px rgba(31, 41, 55, 0.3);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
   display: inline-block;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: auto;
 }
 
@@ -2527,7 +2644,7 @@ img + em {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.12),
     transparent
   );
   transition: left 0.6s ease;
@@ -2539,9 +2656,9 @@ img + em {
 
 .project-card .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(31, 41, 55, 0.4);
-  background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #374151 100%);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+  filter: brightness(1.05);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 /* Modern Blog Post Header Styles - Riverside Inspired */
@@ -3252,6 +3369,23 @@ textarea[name="message"]:focus {
   outline: none !important;
 }
 
+html[data-theme="dark"] #contactModal .form-group input,
+html[data-theme="dark"] #contactModal .form-group textarea,
+html[data-theme="dark"] .contact-modal .form-group input,
+html[data-theme="dark"] .contact-modal .form-group textarea {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #64748b !important;
+}
+
+html[data-theme="dark"] #contactModal .form-group input:focus,
+html[data-theme="dark"] #contactModal .form-group textarea:focus,
+html[data-theme="dark"] .contact-modal .form-group input:focus,
+html[data-theme="dark"] .contact-modal .form-group textarea:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.22) !important;
+}
+
 #contactModal .modal-content,
 .contact-modal .modal-content {
   max-width: 750px !important;
@@ -3287,14 +3421,19 @@ form#contactForm {
 
 #contactModal .form-group label,
 .contact-modal .form-group label {
-  font-size: 0.95rem !important;
+  font-size: 0.8125rem !important;
   font-weight: 600 !important;
   color: #374151 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  margin-bottom: 0.75rem !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 0.5rem !important;
   display: block !important;
   width: 100% !important;
+}
+
+html[data-theme="dark"] #contactModal .form-group label,
+html[data-theme="dark"] .contact-modal .form-group label {
+  color: #e2e8f0 !important;
 }
 
 #contactModal .form-actions,
@@ -3316,6 +3455,53 @@ form#contactForm {
   border-radius: 8px !important;
   min-width: 120px !important;
   transition: all 0.2s ease !important;
+}
+
+#contactModal .btn-send,
+.contact-modal .btn-send {
+  border: none !important;
+  background: linear-gradient(
+    128deg,
+    #1e40af 0%,
+    #2563eb 55%,
+    #b91c1c 100%
+  ) !important;
+  color: #fff !important;
+}
+
+#contactModal .btn-send:hover,
+.contact-modal .btn-send:hover {
+  filter: brightness(1.06);
+}
+
+#contactModal .btn-send:disabled,
+.contact-modal .btn-send:disabled {
+  filter: none !important;
+  background: #9ca3af !important;
+}
+
+#contactModal .btn-cancel,
+.contact-modal .btn-cancel {
+  background: transparent !important;
+  color: #475569 !important;
+  border: 2px solid #cbd5e1 !important;
+}
+
+#contactModal .btn-cancel:hover,
+.contact-modal .btn-cancel:hover {
+  background: rgba(148, 163, 184, 0.18) !important;
+  border-color: #94a3b8 !important;
+}
+
+html[data-theme="dark"] #contactModal .btn-cancel,
+html[data-theme="dark"] .contact-modal .btn-cancel {
+  color: #cbd5e1 !important;
+  border-color: #64748b !important;
+}
+
+html[data-theme="dark"] #contactModal .btn-cancel:hover,
+html[data-theme="dark"] .contact-modal .btn-cancel:hover {
+  background: rgba(148, 163, 184, 0.1) !important;
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {

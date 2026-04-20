@@ -204,7 +204,7 @@ layout: default
       <!-- Projects Section -->
       <section class="projects-section" aria-labelledby="projects-heading">
         <h2 id="projects-heading" class="section-title">Current Projects</h2>
-        <div class="projects-grid">
+        <div class="projects-grid projects-grid--current">
           <article class="project-card">
             <img
               src="/assets/images/vm_logo.png"
@@ -213,11 +213,16 @@ layout: default
               loading="lazy"
             />
             <h3 class="project-title">Vegan Monkey</h3>
+            <ul class="project-tags" aria-label="Tech stack">
+              <li class="project-tag">Nuxt</li>
+              <li class="project-tag">Vue</li>
+              <li class="project-tag">Firebase</li>
+              <li class="project-tag">Algolia</li>
+              <li class="project-tag">Cloudinary</li>
+            </ul>
             <p class="project-description">
-              A webapp that consolidates all plant-based products, dishes,
-              services and experiences in Bangkok. Built with
-              <span class="milka-baked">Vue.js</span> and
-              <span class="milka-baked">Firebase</span>.
+              A webapp that consolidates plant-based products, dishes, services,
+              and experiences in Bangkok.
             </p>
             <a
               href="https://www.veganmonkey.co"
@@ -232,14 +237,19 @@ layout: default
             <img
               src="/assets/images/15pages_logo.png"
               alt="15 Pages logo"
-              class="project-logo"
+              class="project-logo project-logo--15pages"
               loading="lazy"
-              style="background-color: darkgray"
             />
             <h3 class="project-title">15 Pages</h3>
+            <ul class="project-tags" aria-label="Tech stack">
+              <li class="project-tag">Nuxt</li>
+              <li class="project-tag">Vue</li>
+              <li class="project-tag">Tailwind</li>
+              <li class="project-tag">Supabase</li>
+            </ul>
             <p class="project-description">
-              My book summaries and a service to help incentivize
-              <span class="milka-baked">more reading</span>. Work in progress.
+              Book summaries and tools to help incentivize more reading. Work in
+              progress.
             </p>
             <a
               href="https://www.15pages.com"
@@ -251,17 +261,68 @@ layout: default
           </article>
 
           <article class="project-card">
+            <div class="project-logo-wrap project-logo-wrap--edp">
+              <img
+                src="/assets/images/emdashpatrol_logo.svg"
+                alt=""
+                width="100"
+                height="100"
+                class="project-logo project-logo--edp project-logo--edp-light"
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                src="/assets/images/emdashpatrol_logo_dark.svg"
+                alt=""
+                width="100"
+                height="100"
+                class="project-logo project-logo--edp project-logo--edp-dark"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <h3 class="project-title">Em Dash Patrol</h3>
+            <ul class="project-tags" aria-label="Tech stack">
+              <li class="project-tag">Nuxt</li>
+              <li class="project-tag">Vue</li>
+              <li class="project-tag">Gemini</li>
+            </ul>
+            <p class="project-description">
+              Rule-based scan for AI-writing tells in pasted prose (em dashes,
+              throat-clearing openers, hype verbs), optional Gemini roast,
+              privacy-minded logging.
+            </p>
+            <a
+              href="https://www.emdashpatrol.com"
+              class="button"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Visit Site</a
+            >
+          </article>
+        </div>
+
+        <h2
+          id="projects-previous-heading"
+          class="section-title section-title--projects-sub"
+        >
+          Previous Projects
+        </h2>
+        <div class="projects-grid projects-grid--previous">
+          <article class="project-card">
             <img
               src="/assets/images/bluetiki_logo.png"
               alt="Blue Tiki logo"
-              class="project-logo"
+              class="project-logo project-logo--bluetiki"
               loading="lazy"
             />
             <h3 class="project-title">Blue Tiki</h3>
+            <ul class="project-tags" aria-label="Project type">
+              <li class="project-tag">Crypto</li>
+            </ul>
             <p class="project-description">
-              <span class="milka-baked">Crypto token</span> launched to reward
-              eco-positive actions through collaboration with various
-              sustainability partners.
+              Crypto token launched to reward eco-positive actions through
+              collaboration with sustainability partners.
             </p>
             <a
               href="https://www.btiki.com"
@@ -280,11 +341,12 @@ layout: default
               loading="lazy"
             />
             <h3 class="project-title">Stop Football Plastic</h3>
+            <ul class="project-tags" aria-label="Focus">
+              <li class="project-tag">Impact</li>
+            </ul>
             <p class="project-description">
-              Vision to stop
-              <span class="milka-baked">1.34 million</span> single-use plastic
-              bottles through collaboration with football clubs in South East
-              Asia.
+              Vision to stop 1.34 million single-use plastic bottles through
+              collaboration with football clubs in South East Asia.
             </p>
             <a
               href="https://www.stopfootballplastic.com"
