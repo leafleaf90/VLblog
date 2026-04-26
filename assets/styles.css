@@ -120,6 +120,7 @@ body {
   --max-width: 1200px;
   --sidebar-width: 320px;
   --content-width: calc(100% - var(--sidebar-width) - var(--spacing-xl));
+  --nav-offset: 80px;
 
   /* Post tables (light) */
   --table-border: #e5e7eb;
@@ -175,7 +176,7 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
   margin: 0;
-  padding-top: 80px; /* Account for fixed navbar */
+  padding-top: var(--nav-offset); /* Account for fixed navbar */
 }
 
 /* Modern Navigation */
@@ -596,11 +597,11 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 
 .hero-section.profile-scroll-active .hero-scroll-stage {
   position: fixed;
-  top: 80px;
+  top: var(--nav-offset);
   left: 0;
   right: 0;
-  height: calc(100vh - 80px);
-  height: calc(100svh - 80px);
+  height: calc(100vh - var(--nav-offset));
+  height: calc(100svh - var(--nav-offset));
   min-height: 0;
   display: flex;
   align-items: center;
@@ -766,49 +767,47 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   z-index: 4;
   width: max-content;
   margin: 0;
-  padding: 0.65rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 999px;
-  color: var(--color-text-primary);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.14);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1vw, 1.08rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.25;
   text-align: center;
   text-transform: uppercase;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
   pointer-events: none;
 }
 
 html[data-theme="dark"] .profile-scroll-hint {
-  border-color: rgba(148, 163, 184, 0.35);
-  background: rgba(15, 23, 42, 0.76);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  color: rgba(255, 255, 255, 0.74);
 }
 
 .profile-scroll-hint-icon {
-  display: inline-block;
+  display: block;
   transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .profile-scroll-hint-icon--arrow {
-  width: 0.42rem;
-  height: 0.42rem;
-  margin-left: 0.58rem;
+  width: 0.52rem;
+  height: 0.52rem;
+  margin: 0.45rem auto 0;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
-  transform: translateY(-0.12rem) rotate(45deg);
+  transform: rotate(45deg);
   animation: profileScrollHintNudge 1.35s ease-in-out infinite;
 }
 
 .profile-scroll-hint-icon--smile {
-  margin-left: 0.5rem;
+  position: absolute;
+  left: 50%;
+  top: 1.45rem;
   opacity: 0;
   font-size: 1.05em;
   font-weight: 800;
-  transform: translateY(0.25rem) rotate(-8deg);
+  letter-spacing: 0;
+  transform: translateX(-50%) translateY(0.25rem) rotate(-8deg);
 }
 
 .profile-scroll-hint-text {
@@ -840,7 +839,7 @@ html[data-theme="dark"] .profile-scroll-hint {
 
 .hero-section.profile-scroll-thanks .profile-scroll-hint-icon--smile {
   opacity: 1;
-  transform: translateY(0) rotate(0deg);
+  transform: translateX(-50%) translateY(0) rotate(0deg);
 }
 
 .hero-section.profile-scroll-complete .profile-scroll-hint {
@@ -851,11 +850,11 @@ html[data-theme="dark"] .profile-scroll-hint {
 @keyframes profileScrollHintNudge {
   0%,
   100% {
-    transform: translateY(-0.18rem) rotate(45deg);
+    transform: translateY(-0.05rem) rotate(45deg);
   }
 
   50% {
-    transform: translateY(0.1rem) rotate(45deg);
+    transform: translateY(0.22rem) rotate(45deg);
   }
 }
 
@@ -1045,7 +1044,7 @@ pre code {
 
 /* Match body padding-top so filter scroll / #recent-heading sit below fixed navbar */
 #recent-heading {
-  scroll-margin-top: calc(80px + var(--spacing-sm));
+  scroll-margin-top: calc(var(--nav-offset) + var(--spacing-sm));
 }
 
 /* Sidebar Components */
@@ -3178,8 +3177,12 @@ html[data-theme="dark"] .project-tag {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --nav-offset: 70px;
+  }
+
   body {
-    padding-top: 70px;
+    padding-top: var(--nav-offset);
   }
 
   .navbar {

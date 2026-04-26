@@ -28,11 +28,9 @@ default_social_image_height: 630
 email: mail@viktorlovgren.com
 # Hero (`home.html`) + default meta when a page omits `description` (keep in sync)
 tagline: >-
-  I use technology to supercharge solutions for environmental sustainability
-  and mental well-being.
+  Software, sanity, and the ongoing quest for fewer tabs open.
 description: >-
-  I use technology to supercharge solutions for environmental sustainability
-  and mental well-being.
+  Software, sanity, and the ongoing quest for fewer tabs open.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.viktorlovgren.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: viktorlovgren

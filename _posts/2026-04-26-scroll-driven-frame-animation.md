@@ -298,13 +298,19 @@ For the profile image itself, the canvas and fallback image sit on top of each o
 
 ## 6. Preload Frames In Batches
 
-Do not try to draw frames before they are loaded. That causes flicker and blank canvas frames.
+Do not try to draw a frame before it is loaded. That causes flicker and blank canvas frames.
 
-Also, do not request all frames at once. Browsers limit concurrent connections anyway, and a huge burst can make the page feel worse. Load them in batches.
+Also, do not request all frames at once. Browsers limit concurrent connections anyway, and a huge burst can make the page feel worse. Load the first few frames with priority, then load the rest in batches.
+
+That means the animation can start responding quickly. If the user scrolls ahead before the exact target frame has loaded, draw the closest loaded frame until the correct one arrives.
 
 ```js
+const initialFrameCount = Math.min(9, totalFrames);
 const batchSize = 12;
 const frames = new Array(totalFrames);
+const loadedFrameIndexes = new Set();
+let loadedCount = 0;
+let readyToDraw = false;
 
 function frameUrl(index) {
   return `/assets/images/profile-frames/frame-${String(index + 1).padStart(4, "0")}.webp`;
@@ -320,26 +326,50 @@ function loadImage(src) {
   });
 }
 
-async function preloadFrames() {
-  for (let i = 0; i < totalFrames; i += batchSize) {
-    const end = Math.min(i + batchSize, totalFrames);
-    const batch = await Promise.all(
-      Array.from({ length: end - i }, (_, offset) => loadImage(frameUrl(i + offset)))
-    );
+async function loadFrameBatch(start, end) {
+  const batch = await Promise.all(
+    Array.from({ length: end - start }, (_, offset) => {
+      const index = start + offset;
+      return loadImage(frameUrl(index)).then((img) => ({ index, img }));
+    })
+  );
 
-    batch.forEach((img, offset) => {
-      frames[i + offset] = img;
-    });
+  batch.forEach(({ index, img }) => {
+    if (!loadedFrameIndexes.has(index)) {
+      loadedFrameIndexes.add(index);
+      loadedCount += 1;
+    }
+    frames[index] = img;
+  });
 
-    root.style.setProperty("--profile-scroll-progress", `${(end / totalFrames) * 100}%`);
+  root.style.setProperty("--profile-scroll-progress", `${(loadedCount / totalFrames) * 100}%`);
+}
+
+function closestLoadedFrameIndex(targetIndex) {
+  if (frames[targetIndex]) return targetIndex;
+
+  for (let distance = 1; distance < totalFrames; distance += 1) {
+    const before = targetIndex - distance;
+    const after = targetIndex + distance;
+    if (before >= 0 && frames[before]) return before;
+    if (after < totalFrames && frames[after]) return after;
   }
 
-  loaded = true;
+  return null;
+}
+
+async function preloadFrames() {
+  await loadFrameBatch(0, initialFrameCount);
+  readyToDraw = true;
   root.classList.add("is-ready");
+
+  for (let i = initialFrameCount; i < totalFrames; i += batchSize) {
+    await loadFrameBatch(i, Math.min(i + batchSize, totalFrames));
+  }
 }
 ```
 
-The loading progress can drive a small bar. Once all frames are ready, the canvas fades in over the fallback image.
+The loading progress can drive a small bar. Once the first batch is ready, the canvas fades in over the fallback image while the remaining frames keep loading.
 
 ## 7. Map Scroll Progress To A Frame
 
@@ -393,8 +423,11 @@ function drawFrame(index) {
 }
 
 function tick() {
-  if (loaded && currentFrame !== drawnFrame) {
-    drawFrame(currentFrame);
+  if (readyToDraw) {
+    const drawableFrame = closestLoadedFrameIndex(currentFrame);
+    if (drawableFrame !== null && drawableFrame !== drawnFrame) {
+      drawFrame(drawableFrame);
+    }
   }
 
   window.requestAnimationFrame(tick);
@@ -408,7 +441,7 @@ window.requestAnimationFrame(tick);
 This separation is the main performance trick:
 
 - Scroll handler: calculate target frame.
-- Animation frame loop: draw only if needed.
+- Animation frame loop: draw the target frame, or the nearest loaded frame, only if needed.
 
 ## 9. Respect Reduced Motion
 

@@ -16,13 +16,26 @@
   const totalFrames = Number(root.dataset.frameCount || 0);
   const frameWidth = Number(root.dataset.frameWidth || canvas.width);
   const frameHeight = Number(root.dataset.frameHeight || canvas.height);
+  const initialFrameCount = Math.min(9, totalFrames);
   const batchSize = 12;
   const frames = new Array(totalFrames);
+  const loadedFrameIndexes = new Set();
   let currentFrame = 0;
   let drawnFrame = -1;
-  let loaded = false;
+  let readyToDraw = false;
+  let loadedCount = 0;
   let rafId = 0;
 
+  function syncNavOffset() {
+    const nav = document.querySelector(".navbar");
+    if (!(nav instanceof HTMLElement)) return;
+    const height = Math.ceil(nav.getBoundingClientRect().height);
+    if (height > 0) {
+      document.documentElement.style.setProperty("--nav-offset", `${height}px`);
+    }
+  }
+
+  syncNavOffset();
   section.classList.add("profile-scroll-active");
 
   function frameUrl(index) {
@@ -41,6 +54,10 @@
 
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
+  }
+
+  function setLoadingProgress() {
+    root.style.setProperty("--profile-scroll-progress", `${(loadedCount / totalFrames) * 100}%`);
   }
 
   function pinnedTopOffset() {
@@ -73,33 +90,69 @@
     drawnFrame = index;
   }
 
+  function closestLoadedFrameIndex(targetIndex) {
+    if (frames[targetIndex]) return targetIndex;
+
+    for (let distance = 1; distance < totalFrames; distance += 1) {
+      const before = targetIndex - distance;
+      const after = targetIndex + distance;
+      if (before >= 0 && frames[before]) return before;
+      if (after < totalFrames && frames[after]) return after;
+    }
+
+    return null;
+  }
+
   function tick() {
-    if (loaded && currentFrame !== drawnFrame) {
-      drawFrame(currentFrame);
+    if (readyToDraw) {
+      const drawableFrame = closestLoadedFrameIndex(currentFrame);
+      if (drawableFrame !== null && drawableFrame !== drawnFrame) {
+        drawFrame(drawableFrame);
+      }
     }
     rafId = window.requestAnimationFrame(tick);
   }
 
-  async function preloadFrames() {
-    for (let i = 0; i < totalFrames; i += batchSize) {
-      const end = Math.min(i + batchSize, totalFrames);
-      const batch = await Promise.all(
-        Array.from({ length: end - i }, (_, offset) => loadImage(frameUrl(i + offset)))
-      );
-      batch.forEach((img, offset) => {
-        frames[i + offset] = img;
-      });
-      root.style.setProperty("--profile-scroll-progress", `${(end / totalFrames) * 100}%`);
-    }
+  async function loadFrameBatch(start, end) {
+    const batch = await Promise.all(
+      Array.from({ length: end - start }, (_, offset) => {
+        const index = start + offset;
+        return loadImage(frameUrl(index)).then((img) => ({ index, img }));
+      })
+    );
 
-    loaded = true;
+    batch.forEach(({ index, img }) => {
+      if (!loadedFrameIndexes.has(index)) {
+        loadedFrameIndexes.add(index);
+        loadedCount += 1;
+      }
+      frames[index] = img;
+    });
+    setLoadingProgress();
+  }
+
+  async function preloadFrames() {
+    await loadFrameBatch(0, initialFrameCount);
+    readyToDraw = true;
     updateTargetFrame();
-    drawFrame(currentFrame);
+    drawFrame(closestLoadedFrameIndex(currentFrame) ?? 0);
     root.classList.add("is-ready");
+
+    for (let i = initialFrameCount; i < totalFrames; i += batchSize) {
+      const end = Math.min(i + batchSize, totalFrames);
+      await loadFrameBatch(i, end);
+    }
   }
 
   window.addEventListener("scroll", updateTargetFrame, { passive: true });
-  window.addEventListener("resize", updateTargetFrame, { passive: true });
+  window.addEventListener(
+    "resize",
+    () => {
+      syncNavOffset();
+      updateTargetFrame();
+    },
+    { passive: true }
+  );
   rafId = window.requestAnimationFrame(tick);
 
   preloadFrames().catch((error) => {
