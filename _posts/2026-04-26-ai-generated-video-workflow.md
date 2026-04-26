@@ -214,7 +214,7 @@ consistently messy through the whole video.
 
 It can work, but if one tiny thing fails, the whole clip is compromised. Maybe the coffee mug disappears. Maybe the wrong Viktor sits down. Maybe the glitch is perfect but the face is not.
 
-Also notice the added negative prompts for phantom limbs, as I had some issues witht the hand on shoulder being a third hand... You will see issues like this, and will have to build out the pormpt as you go.
+Also notice the added negative prompts for phantom limbs, as I had some issues witht the hand on shoulder being a third hand... You will see issues like this, and will have to build out the prompt as you go.
 
 The better version is much smaller. Example from a later video:
 
@@ -301,9 +301,7 @@ The edit matters a lot. The rhythm needs help.
 
 After the edit started to work visually, I added sound effects and music.
 
-For that, I used [Freesound](http://freesound.org/). It is a useful place to find small sounds that make the scene feel less like a silent render test and more like an actual clip.
-
-As always with sound libraries, check the license before using anything publicly.
+For that, I used [Freesound](http://freesound.org/).
 
 ## 7. Add Subtitles In Veed
 
