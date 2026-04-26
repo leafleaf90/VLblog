@@ -49,6 +49,11 @@ comments: true
           src="{{ page.featured-image }}"
           alt="{{ page.title }}"
           class="post-featured-image"
+          {% if page.featured_image_width %}width="{{ page.featured_image_width }}"{% endif %}
+          {% if page.featured_image_height %}height="{{ page.featured_image_height }}"{% endif %}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
       </div>
       {% endif %}

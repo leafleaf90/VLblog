@@ -3,7 +3,7 @@ title: "Primitive Risk Analysis"
 layout: post
 featured-image: /assets/post-media/2020-06-14/risk.jpg
 featured-thumbnail: /assets/post-media/2020-06-14/risk-sm.jpg
-description: An entrepreneurial scientist’s robust approach
+description: "A simple risk-analysis method for making decisions under uncertainty."
 categories: productivity
 ---
 

@@ -3,7 +3,7 @@ title: "Getting The Thai Driver License"
 layout: post
 featured-image: /assets/post-media/2023-09-11/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-09-11/cover_sm.jpg
-description: A short guide
+description: "Notes from getting a Thai driver license, including the process, requirements, and practical gotchas."
 categories: thailand
 ---
 

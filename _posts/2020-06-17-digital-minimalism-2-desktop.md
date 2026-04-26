@@ -3,7 +3,7 @@ title: "Digital Minimalism - Part 2: Desktop"
 layout: post
 featured-image: /assets/post-media/2020-06-17/header.jpg
 featured-thumbnail: /assets/post-media/2020-06-17/header-sm.jpg
-description: Guidelines forcing me to keep my desktop and browser in order.
+description: "Desktop rules and habits that helped me keep files, browser tabs, and visual clutter under control."
 categories: minimalism
 ---
 

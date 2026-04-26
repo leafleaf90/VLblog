@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2020-06-03/coffee-computer.jpg
 featured-thumbnail: /assets/post-media/2020-06-03/coffee-computer-sm.jpg
-description: 1 minute setup for small-scale form handling with Netlify
+description: "How to add a small form to a static site using Netlify Forms without building a backend."
 categories: hosting
 ---
+
+## What you'll learn
+
+- How Netlify Forms can handle submissions for a static site.
+- What attributes and hidden fields the form needs.
+- The main trade-off with free-tier form handling.
 
 ## An easy solution to a common problem
 

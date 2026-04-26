@@ -3,7 +3,7 @@
 title: The increasing AI-content consumption fatigue  
 layout: post  
 is_series: false  
-description: "Is it just me, or is this getting out of hand?"  
+description: "Why AI-generated content can feel exhausting, and what that means for reading, writing, and attention."
 date: "2026-04-19"  
 categories: ["ai", "mindfulness", "writing"]  
 published: true  

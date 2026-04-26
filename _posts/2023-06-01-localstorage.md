@@ -3,9 +3,15 @@ title: "Persist user settings with localStorage"
 layout: post
 featured-image: /assets/post-media/2023-06-01/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-01/cover_sm.jpg
-description: A walkthrough
+description: "How to persist Vue user settings with localStorage and keep the interface in sync."
 categories: javascript vue
 ---
+
+## What you'll learn
+
+- When localStorage is enough for user preferences.
+- How to persist simple Vue settings in the browser.
+- Why larger apps usually need a real state management layer.
 
 NOTE: a better solution using Pinia for store management in Vue can be found in [this post]({% post_url 2024-03-13-pinia-store %}). if you are still interested in how to set something like this up without state management, keep reading.
 

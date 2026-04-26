@@ -3,9 +3,15 @@ title: "Tailwind Safelist"
 layout: post
 featured-image: /assets/post-media/2024-01-08/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-01-08/cover_sm.jpg
-description: Watch out! Your class might be missing.
+description: "Why Tailwind can drop dynamic classes and how to use a safelist when generated class names disappear."
 categories: coding
 ---
+
+## What you'll learn
+
+- Why Tailwind may remove dynamic class names.
+- How generated class strings can disappear from the final CSS.
+- How to use a safelist when dynamic classes are unavoidable.
 
 **The problem**
 

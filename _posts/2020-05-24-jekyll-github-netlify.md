@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2020-04-28/server.jpg
 featured-thumbnail: /assets/post-media/2020-04-28/server-sm.jpg
-description: Automated build with GitHub and Netlify
+description: "How to deploy a Jekyll blog with GitHub and Netlify for a simple automated static-site workflow."
 categories: jekyll hosting
 ---
+
+## What you'll learn
+
+- How to prepare a Jekyll site for Netlify.
+- How GitHub and Netlify work together for automated deploys.
+- Which build files matter for a small static site.
 
 This blog is built with the static site generator Jekyll (see [last post]({% post_url 2020-05-20-getting-started-with-jekyll %})). Static sites are easy, and usually free, to host.
 

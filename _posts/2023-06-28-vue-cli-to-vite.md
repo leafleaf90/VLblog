@@ -3,9 +3,15 @@ title: "Migrate from Vue CLI to Vite"
 layout: post
 featured-image: /assets/post-media/2023-06-28/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-28/cover_sm.jpg
-description: Lightning speed!
+description: "A short migration note on moving a Vue project from Vue CLI to Vite for faster local development."
 categories: vue
 ---
+
+## What you'll learn
+
+- Why Vite feels faster than Vue CLI in development.
+- What changes when moving an existing Vue project.
+- When a migration is probably worth the bother.
 
 ## What ain’t broken…
 

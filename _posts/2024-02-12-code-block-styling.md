@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2024-02-12/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-12/cover_sm.jpg
-description: Rouge with Jekyll
+description: "How to style Jekyll code blocks with Rouge instead of leaving snippets to fend for themselves."
 categories: coding jekyll
 ---
+
+## What you'll learn
+
+- How Jekyll highlights code blocks with Rouge.
+- Why basic `code` styling is not enough for syntax highlighting.
+- How to apply a Rouge theme to improve code readability.
 
 I used to show style my code snippets with some very simple CSS. It looked something like this:
 

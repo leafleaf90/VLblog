@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2024-02-14/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-14/cover_sm.jpg
-description: Step-by-step to make it work
+description: "How to deploy a Nuxt 3 frontend with Firebase Hosting and Firestore-backed data."
 categories: firebase nuxt
 ---
+
+## What you'll learn
+
+- How to connect a Nuxt 3 app to Firestore.
+- How Firebase Hosting can serve a Nuxt frontend.
+- Where the setup differs from a more straightforward Vercel deploy.
 
 **Background**
 

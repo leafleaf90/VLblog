@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2024-03-13/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-03-13/cover_sm.jpg
-description: Example of managing location and language settings in Vue3 using Pinia
+description: "How Pinia simplifies Vue state management for location and language settings compared with manual localStorage listeners."
 categories: vue
 ---
+
+## What you'll learn
+
+- How to install Pinia and set up a root store.
+- How stores can replace manual localStorage event listeners.
+- How to manage shared location and language state in Vue.
 
 **Background**
 

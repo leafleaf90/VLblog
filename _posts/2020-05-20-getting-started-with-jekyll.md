@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2020-04-27/kickin-back.jpg
 featured-thumbnail: /assets/post-media/2020-04-27/kickin-back-sm.jpg
-description: Build and host static websites with ease
+description: "A beginner-friendly walkthrough for creating a static blog with Jekyll, Liquid, Markdown, and simple hosting."
 categories: jekyll
 ---
+
+## What you'll learn
+
+- How to create a basic Jekyll site.
+- How Jekyll uses Markdown, Liquid, and layouts.
+- How to think about hosting a simple static blog.
 
 Jekyll is a static site generator written in Ruby that was released in 2008. It allows you to reuse components without any hassle and suits well if all you need an easy way to publish blog posts or launch simple static websites.
 

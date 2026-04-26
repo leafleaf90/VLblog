@@ -3,7 +3,7 @@ title: "50 days of meditation"
 layout: post
 featured-image: /assets/post-media/2020-07-05/meditation.jpg
 featured-thumbnail: /assets/post-media/2020-07-05/meditation-sm.jpg
-description: Building the habit
+description: "Notes from building a 50-day meditation habit and what changed once the novelty wore off."
 categories: mindfulness
 ---
 

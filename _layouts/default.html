@@ -22,6 +22,12 @@
     {%- assign seo_desc = page.description | default: site.tagline | default: site.description | strip -%}
     {%- assign canonical_url = page.url | absolute_url -%}
     {%- assign social_image = page.featured-image | default: site.default_social_image -%}
+    {%- assign social_image_width = page.featured_image_width | default: site.default_social_image_width -%}
+    {%- assign social_image_height = page.featured_image_height | default: site.default_social_image_height -%}
+    {%- assign author_url = '/about/' | absolute_url -%}
+    {%- assign author_id = author_url | append: '#person' -%}
+    {%- assign website_id = '/' | absolute_url | append: '#website' -%}
+    {%- assign seo_topics = page.keywords | default: page.categories -%}
     {% if page.title %}
     <title>{{ page.title }} | {{ seo_brand }}</title>
     {% else %}
@@ -104,273 +110,6 @@
         }
       }
 
-      /* Contact Modal Styles */
-      .contact-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1000;
-      }
-
-      .modal-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(4px);
-      }
-
-      .modal-content {
-        position: relative;
-        background: white;
-        border-radius: 12px;
-        max-width: 700px;
-        width: 95%;
-        max-height: 85vh;
-        overflow-y: auto;
-        margin: 3% auto;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2rem;
-        border-bottom: 1px solid #e5e7eb;
-      }
-
-      .modal-header h3 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #111827;
-      }
-
-      .close-btn {
-        background: none;
-        border: none;
-        font-size: 1.75rem;
-        line-height: 1;
-        cursor: pointer;
-        color: #6b7280;
-        padding: 0;
-        min-width: 44px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        transition: background-color 0.2s;
-      }
-
-      .close-btn:hover {
-        background-color: #f3f4f6;
-        color: #111827;
-      }
-
-      .modal-body {
-        padding: 2rem;
-      }
-
-      .modal-body p {
-        margin: 0 0 2rem 0;
-        color: #6b7280;
-        line-height: 1.6;
-        font-size: 1.1rem;
-      }
-
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .form-group label {
-        font-weight: 600;
-        color: #374151;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-        text-transform: none;
-        letter-spacing: 0.02em;
-      }
-
-      .form-group input,
-      .form-group textarea {
-        padding: 1.25rem !important;
-        border: 2px solid #d1d5db !important;
-        border-radius: 10px !important;
-        font-size: 1.1rem !important;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        min-height: 50px !important;
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus {
-        outline: none !important;
-        border-color: #3b82f6 !important;
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
-      }
-
-      .form-group textarea {
-        resize: vertical !important;
-        min-height: 140px !important;
-        font-family: inherit !important;
-      }
-
-      .form-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
-      }
-
-      .btn-send,
-      .btn-cancel {
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        border: none;
-        font-size: 1rem;
-      }
-
-      .btn-send {
-        flex: 0 1 auto;
-        min-width: 9rem;
-      }
-
-      .btn-send:hover {
-        filter: brightness(1.06);
-      }
-
-      .btn-send:disabled {
-        filter: none;
-        background: #9ca3af !important;
-        cursor: not-allowed;
-      }
-
-      .btn-cancel {
-        flex: 0 1 auto;
-        min-width: 7rem;
-      }
-
-      /* Contact Trigger: blue + logo dot red (VL.), less flat than pure #3b82f6 */
-      .contact-trigger {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        color: white;
-        border: none;
-        border-radius: 50px;
-        padding: 0.75rem 1.25rem;
-        font-weight: 600;
-        cursor: pointer;
-        background: linear-gradient(
-          128deg,
-          #1e40af 0%,
-          #2563eb 55%,
-          #b91c1c 100%
-        );
-        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.22),
-          0 6px 18px rgba(185, 28, 28, 0.12);
-        transition: transform 0.2s ease, box-shadow 0.2s ease,
-          filter 0.2s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        z-index: 100;
-      }
-
-      .contact-trigger:hover {
-        background: linear-gradient(
-          128deg,
-          #2563eb 0%,
-          #3b82f6 50%,
-          #dc2626 100%
-        );
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25),
-          0 10px 28px rgba(220, 38, 38, 0.18);
-      }
-
-      html[data-theme="dark"] .contact-trigger {
-        background: linear-gradient(
-          128deg,
-          #0f172a 0%,
-          #1d4ed8 52%,
-          #9f1239 100%
-        );
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5),
-          0 6px 18px rgba(248, 113, 113, 0.12);
-      }
-
-      html[data-theme="dark"] .contact-trigger:hover {
-        background: linear-gradient(
-          128deg,
-          #172554 0%,
-          #2563eb 48%,
-          #be123c 100%
-        );
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55),
-          0 10px 26px rgba(248, 113, 113, 0.2);
-      }
-
-      .contact-trigger svg {
-        width: 1.25rem;
-        height: 1.25rem;
-      }
-
-      @media (max-width: 480px) {
-        .contact-trigger {
-          bottom: 1rem;
-          right: 1rem;
-          padding: 0.625rem 1rem;
-          font-size: 0.875rem;
-        }
-
-        .modal-content {
-          margin: 2% auto;
-          width: 95%;
-          max-width: none;
-        }
-
-        .modal-header,
-        .modal-body {
-          padding: 1rem;
-        }
-      }
-
-      /* Desktop improvements */
-      @media (min-width: 768px) {
-        .modal-content {
-          max-width: 650px;
-          margin: 8% auto;
-        }
-
-        .form-group input,
-        .form-group textarea {
-          font-size: 1.1rem;
-          padding: 1.25rem;
-        }
-
-        .contact-form {
-          gap: 2rem;
-        }
-      }
     </style>
     {% if jekyll.environment == 'production' and site.google_analytics %} {%
     include analytics.html %} {% endif %}
@@ -403,22 +142,25 @@
     limit:1 %}
     <meta property="article:section" content="{{ category | xml_escape }}" />
     {% endfor %} {% endif %}
+    {% if page.date and page.categories %} {% for category in page.categories %}
+    <meta property="article:tag" content="{{ category | xml_escape }}" />
+    {% endfor %} {% endif %}
     {% if social_image %}
     <meta property="og:image" content="{{ social_image | absolute_url }}" />
     <meta
       property="og:image:alt"
       content="{% if page.featured-image %}{{ page.title | xml_escape }}{% else %}{{ site.title | xml_escape }}{% endif %}"
     />
-    {% unless page.featured-image %}{% if site.default_social_image_width %}
+    {% if social_image_width and social_image_height %}
     <meta
       property="og:image:width"
-      content="{{ site.default_social_image_width }}"
+      content="{{ social_image_width }}"
     />
     <meta
       property="og:image:height"
-      content="{{ site.default_social_image_height }}"
+      content="{{ social_image_height }}"
     />
-    {% endif %}{% endunless %}
+    {% endif %}
     {% endif %}
     <meta name="twitter:card" content="summary_large_image" />
     {% if site.twitter_username %}
@@ -433,18 +175,44 @@
     {% if social_image %}
     <meta name="twitter:image" content="{{ social_image | absolute_url }}" />
     {% endif %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": {{ author_id | jsonify }},
+        "name": "Viktor Lövgren",
+        "url": {{ author_url | jsonify }},
+        "jobTitle": "Software developer",
+        "description": {{ site.description | jsonify }},
+        "knowsAbout": [
+          "software development",
+          "static sites",
+          "Jekyll",
+          "Vue",
+          "Nuxt",
+          "Firebase",
+          "JavaScript",
+          "digital minimalism",
+          "productivity"
+        ],
+        "sameAs": [
+          "https://x.com/viktor_lovgren",
+          "https://www.linkedin.com/in/viktorlovgren/",
+          "https://www.goodreads.com/viktorlovgren"
+        ]
+      }
+    </script>
     {% if page.path == 'index.markdown' %}
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": {{ website_id | jsonify }},
         "name": {{ site.title | jsonify }},
         "url": {{ '/' | absolute_url | jsonify }},
         "description": {{ seo_desc | jsonify }},
         "publisher": {
-          "@type": "Person",
-          "name": {{ site.author | default: site.title | jsonify }},
-          "url": {{ '/about/' | absolute_url | jsonify }}
+          "@id": {{ author_id | jsonify }}
         }
       }
     </script>
@@ -456,24 +224,47 @@
         "@type": "BlogPosting",
         "headline": {{ page.title | default: site.title | jsonify }},
         "description": {{ seo_desc | jsonify }},
+        {% if seo_topics %}"keywords": {{ seo_topics | join: ", " | jsonify }},{% endif %}
         "datePublished": "{{ page.date | date_to_xmlschema }}"{% if page.updated_date %},
         "dateModified": "{{ page.updated_date | date_to_xmlschema }}"{% else %},
         "dateModified": "{{ page.date | date_to_xmlschema }}"{% endif %},
         "author": {
-          "@type": "Person",
-          "name": "Viktor Lövgren",
-          "url": {{ '/about/' | absolute_url | jsonify }}
+          "@id": {{ author_id | jsonify }}
         },
         "publisher": {
-          "@type": "Person",
-          "name": "Viktor Lövgren",
-          "url": {{ site.url | jsonify }}
+          "@id": {{ author_id | jsonify }}
         },
         "mainEntityOfPage": {
           "@type": "WebPage",
           "@id": {{ canonical_url | jsonify }}
         }{% if page.featured-image %},
         "image": [{{ page.featured-image | absolute_url | jsonify }}]{% endif %}
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": {{ "/" | absolute_url | jsonify }}
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": {{ "/blog/" | absolute_url | jsonify }}
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ page.title | jsonify }},
+            "item": {{ canonical_url | jsonify }}
+          }
+        ]
       }
     </script>
     {% endif %}
@@ -487,6 +278,7 @@
         </a>
         <ul class="navbar-nav">
           <li><a href="/">Home</a></li>
+          <li><a href="/blog/">Blog</a></li>
           <li><a href="/books">Books</a></li>
           <li><a href="/quotes">Quotes</a></li>
         </ul>
@@ -539,24 +331,29 @@
     <div style="min-height: 100vh; max-width: 100vw; overflow-x: clip">
       <div>{{ content }}</div>
     </div>
-    <footer style="padding-top: 6rem; padding-bottom: 6rem">
-      <p>&copy; Viktor Lövgren {{ site.time | date: "%Y" }}</p>
+    <footer class="site-footer">
+      <p class="site-footer__copyright">&copy; Viktor Lövgren {{ site.time | date: "%Y" }}</p>
       <a
-        style="
-          margin-left: 1.5rem;
-
-          text-decoration: none;
-          color: white;
-        "
+        class="site-footer__link site-footer__email"
         href="mailto:mail@viktorlovgren.com"
         >mail@viktorlovgren.com</a
       >
-      <a
-        style="margin-left: 1.5rem"
-        href="https://x.com/viktor_lovgren"
-        target="_blank"
-        ><img style="width: 50px" src="/assets/images/x.svg" alt=""
-      /></a>
+      <div class="site-footer__socials" aria-label="Social links">
+        <a
+          class="site-footer__icon-link"
+          href="https://x.com/viktor_lovgren"
+          target="_blank"
+          rel="me noopener"
+          ><img src="/assets/images/x.svg" alt="X profile"
+        /></a>
+        <a
+          class="site-footer__icon-link"
+          href="https://www.linkedin.com/in/viktorlovgren/"
+          target="_blank"
+          rel="me noopener"
+          ><img src="/assets/images/linkedin.svg" alt="LinkedIn profile"
+        /></a>
+      </div>
     </footer>
 
     <!-- Contact Modal -->
@@ -631,28 +428,12 @@
         const cancelBtn = document.getElementById("cancelBtn");
         const overlay = document.querySelector(".modal-overlay");
         const form = document.getElementById("contactForm");
+        const footer = document.querySelector(".site-footer");
 
         // Open modal
         function openModal() {
           modal.style.display = "block";
           document.body.style.overflow = "hidden";
-
-          // Force style application for form fields
-          setTimeout(() => {
-            const inputs = modal.querySelectorAll(
-              ".form-group input, .form-group textarea"
-            );
-            inputs.forEach((input) => {
-              input.style.padding = "1.5rem";
-              input.style.border = "3px solid #d1d5db";
-              input.style.borderRadius = "12px";
-              input.style.fontSize = "1.2rem";
-              input.style.minHeight =
-                input.tagName === "TEXTAREA" ? "150px" : "60px";
-              input.style.width = "100%";
-              input.style.boxSizing = "border-box";
-            });
-          }, 10);
         }
 
         // Close modal
@@ -713,6 +494,20 @@
             submitBtn.textContent = originalText;
           }
         });
+
+        if (footer && "IntersectionObserver" in window) {
+          const footerObserver = new IntersectionObserver(
+            ([entry]) => {
+              document.body.classList.toggle(
+                "is-footer-visible",
+                entry.isIntersecting
+              );
+            },
+            { threshold: 0.05 }
+          );
+
+          footerObserver.observe(footer);
+        }
       });
     </script>
   </body>

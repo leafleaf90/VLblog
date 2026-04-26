@@ -3,7 +3,7 @@ title: "Chasing Peace"
 layout: post
 featured-image: /assets/post-media/2023-08-01/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-08-01/cover_sm.jpg
-description: A Curse of Modern Society
+description: "A personal reflection on chasing calm in a society that keeps handing you more inputs."
 categories: mindfulness
 featured: true
 ---

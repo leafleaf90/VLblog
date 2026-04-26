@@ -3,9 +3,15 @@ title: "Deploy Nuxt on Vercel"
 layout: post
 featured-image: /assets/post-media/2023-10-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-10-03/cover_sm.jpg
-description: Great option for SSR apps
+description: "How to deploy a Nuxt app on Vercel, including preview builds and common dependency issues."
 categories: nuxt hosting
 ---
+
+## What you'll learn
+
+- How to connect a Nuxt app to Vercel.
+- How preview and production deploys fit into the workflow.
+- Which dependency/build issues may appear along the way.
 
 I recently moved my SSR Nuxt3 applications from Firebase hosting over to Vercel, as the Firebase hosting requires some gymnastics to work with server-side rendering (you need to use Google Cloud function to reroute to the hosting). The deployment process to Vercel is more straightforward:
 

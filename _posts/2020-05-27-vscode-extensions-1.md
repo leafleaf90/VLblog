@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-05-23/vscode.jpg
 featured-thumbnail: /assets/post-media/2020-05-23/vscode-sm.jpg
 updated_date: 2023-05-24
-description: Extensions that enhances VSCode
+description: "Visual VSCode extensions that make the editor easier to use without turning it into a casino."
 categories: productivity
 ---
 

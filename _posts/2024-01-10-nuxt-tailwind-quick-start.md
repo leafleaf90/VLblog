@@ -3,9 +3,15 @@ title: "Nuxt + Tailwind"
 layout: post
 featured-image: /assets/post-media/2024-01-10/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-01-10/cover_sm.jpg
-description: Get up and running
+description: "A quick setup guide for using Tailwind in a Nuxt project."
 categories: coding
 ---
+
+## What you'll learn
+
+- How to start a Nuxt project.
+- How to add Tailwind to the setup.
+- Why utility classes can speed up small frontend builds.
 
 If you want to get up and running quickly with a new web project, it is usually a good idea to utilize a CSS framework. Apart from being able to decrease your time to market, it also relieves some concerns about cross-browser compatibility. You have several CSS frameworks to choose from. Bootstrap is a popular option, and I used it for a long time. Recently I’ve been reaching more often for Tailwind. I find it to be less opinionated and gives me a bit more freedom to achieve what I want. Try them both out and then choose the one you like better and stick with it, as most of the benefits come when you learn the utility classes by heart and don’t have to consult the docs all the time. Mixing the two can become confusing.
 

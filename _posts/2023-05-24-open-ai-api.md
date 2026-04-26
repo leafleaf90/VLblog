@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2023-05-24/cover-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-24/cover-sm.jpg
-description: Utilize a cloud function to call the OpenAI endpoints
+description: "How to call OpenAI from a Vue frontend through a cloud function instead of exposing secrets in the browser."
 categories: coding vue openai
 ---
+
+## What you'll learn
+
+- Why OpenAI calls should go through a backend function.
+- How a Vue frontend can request AI-generated text safely.
+- How to keep API keys out of browser code.
 
 ## Powering our "Insta Mode"
 

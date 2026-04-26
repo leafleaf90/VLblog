@@ -3,9 +3,15 @@ title: "Reset Firebase user passwords"
 layout: post
 featured-image: /assets/post-media/2023-06-13/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-13/cover_sm.jpg
-description: Easy password reset using the Firebase SDK
+description: "How to reset Firebase user passwords with the Firebase SDK and a small admin workflow."
 categories: vue firebase
 ---
+
+## What you'll learn
+
+- How Firebase Auth sends password reset emails.
+- How to expose a small reset flow in a Vue interface.
+- What to keep client-side for this specific auth task.
 
 You can trigger a password reset for your users from the client side using the sendPasswordResetEmail method from the Firebase Auth SDK. In our app we have a HTML div just below the sign in form to trigger this method:
 

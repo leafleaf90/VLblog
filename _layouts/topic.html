@@ -1,0 +1,27 @@
+---
+layout: default
+---
+
+<main class="page-container topic-page" aria-labelledby="topic-heading">
+  <header class="topic-page__header">
+    <p class="topic-page__eyebrow">Topic</p>
+    <h1 id="topic-heading">{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
+  </header>
+
+  {% assign topic_posts = site.posts | where_exp: "post", "post.categories contains page.topic" %}
+  {% if topic_posts.size > 0 %}
+  <section aria-labelledby="topic-posts-heading">
+    <h2 id="topic-posts-heading" class="section-title">Posts About {{ page.title }}</h2>
+    <div class="content-grid">
+      {% for post in topic_posts %}
+        {% unless post.published == false %}
+          {% include components/blog_post_card.html post=post %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </section>
+  {% else %}
+  <p>No posts in this topic yet. Suspiciously tidy.</p>
+  {% endif %}
+</main>

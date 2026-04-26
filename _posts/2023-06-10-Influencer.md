@@ -3,7 +3,7 @@ title: "Influencer - Location Scouting!"
 layout: post
 featured-image: /assets/post-media/2023-06-10/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-10/cover_sm.jpg
-description: "The Beach for Gen Z"
+description: "A location-scouting note on Thailand, tourism, and the strange geography of influencer culture."
 categories: movies thailand
 ---
 

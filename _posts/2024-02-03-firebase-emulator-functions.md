@@ -5,9 +5,15 @@ is_series: true
 series_title: "Firebase Emulator Suit"
 featured-image: /assets/post-media/2024-02-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-03/cover_sm.jpg
-description: Test Cloud Functions Locally
+description: "How to test Firebase Cloud Functions locally with the Firebase emulator suite."
 categories: coding firebase
 ---
+
+## What you'll learn
+
+- How to add Firebase emulators to a project.
+- How local testing helps when cloud functions get slower to deploy.
+- How to test a function before sending it back into the cloud.
 
 If you’ve been writing and deploying Firebase cloud functions for your project, you know it takes a good minute (at least) to deploy changes. When in the development phase, it’s beneficial to be able to test them locally rather than deploying to Firebase with each change to run a test.
 

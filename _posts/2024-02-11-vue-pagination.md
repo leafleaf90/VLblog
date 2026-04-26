@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building 15 Pages"
 featured-image: /assets/post-media/2024-02-11/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-11/cover_sm.jpg
-description: Reusable pagination
+description: "How to build a reusable pagination component in Vue for cleaner list navigation."
 categories: coding vue
 ---
+
+## What you'll learn
+
+- How to design a reusable Vue pagination component.
+- How to use `v-model` for two-way binding with a parent component.
+- Which pagination state the parent actually needs to know about.
 
 If you are developing an application doing any kind of data presentation in the front-end, you will almost always need pagination to break the data up into smaller chunks for the user to browse. It might be both for improved UX but also for data loading reasons, to load the data on-demand when user goes between the pages. On [**15 Pages**](https://www.15pages.com){:target="\_blank"}, we have it in the list of the user’s saved books, for example. To be able to reuse the functionality in other places, we placed it in a component that can be dropped in wherever we need it. It looks like this:
 

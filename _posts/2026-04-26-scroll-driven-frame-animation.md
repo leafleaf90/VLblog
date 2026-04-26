@@ -2,14 +2,22 @@
 title: "How to make a scroll-driven video animation with FFMPEG, WebP frames, and canvas"
 layout: post
 is_series: false
-description: "A step-by-step guide to turning a short video into a smooth scroll-controlled frame animation for a static Jekyll site."
+description: "How I turned a short video into a scroll-controlled WebP frame animation using FFMPEG, canvas, and vanilla JavaScript."
 date: "2026-04-26"
 categories: ["coding", "javascript", "jekyll"]
 published: true
 slug: scroll-driven-frame-animation
 featured-image: "/assets/post-media/2026-04-26/header.webp"
 featured-thumbnail: "/assets/post-media/2026-04-26/header-sm.webp"
+featured_image_width: 1600
+featured_image_height: 528
 ---
+
+## What you'll learn
+
+- How to turn a short video into a WebP frame sequence.
+- How to draw frames to a canvas based on scroll progress.
+- How to balance file size, frame rate, and perceived smoothness.
 
 This is a particular kind of web animation to give your website a bit of life.
 

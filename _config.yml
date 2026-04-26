@@ -34,6 +34,10 @@ description: >-
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.viktorlovgren.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: viktorlovgren
+social_links:
+  - https://x.com/viktor_lovgren
+  - https://www.linkedin.com/in/viktorlovgren/
+  - https://www.goodreads.com/viktorlovgren
 # github_username:
 port: 9999
 

@@ -3,9 +3,15 @@ title: "Nuxt cookies and server middleware"
 layout: post
 featured-image: /assets/post-media/2023-09-23/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-09-23/cover_sm.jpg
-description: For easy API route guards and more
+description: "How to use cookies and server middleware in Nuxt for lightweight API route guards."
 categories: coding nuxt
 ---
+
+## What you'll learn
+
+- How to store user data with Nuxt's `useCookie`.
+- How to read cookies server-side in middleware.
+- How cookies can support lightweight route guards.
 
 Nuxt gives you many utilities and composables out of the box that simplifies development. In this article, we will look at how the useCookie composable can be used together with getCookie on the server-side as a middleware to implement route guards in your app.
 

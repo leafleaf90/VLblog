@@ -5,9 +5,15 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2023-05-22/excel.jpg
 featured-thumbnail: /assets/post-media/2023-05-22/excel.jpg
-description: Utilize a cloud function to generate CSV files on-demand
+description: "How to generate CSV exports from Vue and Firebase using a cloud function."
 categories: coding vue firebase
 ---
+
+## What you'll learn
+
+- How to request a CSV export from a Vue frontend.
+- How a Firebase cloud function can generate the file.
+- How to keep export logic reusable across an app.
 
 ## "Exports, please!"
 

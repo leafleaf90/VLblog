@@ -3,9 +3,15 @@ title: "Generate QR codes on demand"
 layout: post
 featured-image: /assets/post-media/2023-05-29/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-29/cover_sm.jpg
-description: Javascript solution
+description: "How to generate QR codes in a Vue app using JavaScript libraries and reusable components."
 categories: javascript vue
 ---
+
+## What you'll learn
+
+- Which QR code packages can do the heavy lifting.
+- How to wrap QR generation in a reusable Vue component.
+- How to trigger generated downloads from the interface.
 
 ## The Challenge
 

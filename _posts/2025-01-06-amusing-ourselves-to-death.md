@@ -3,7 +3,7 @@ title: "Are we amusing ourselves to death?"
 layout: post
 featured-image: /assets/post-media/2025-01-06/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2025-01-06/cover_sm.jpg
-description: McLuhan, Postman and the benefits of a typographic mind
+description: "Reflections on McLuhan, Postman, and why the medium still has a habit of quietly eating the message."
 categories: books
 featured: true
 ---

@@ -2,14 +2,22 @@
 title: "Set up a Buttondown newsletter with Jekyll and a custom signup form"
 layout: post
 is_series: false
-description: "A practical setup for adding a Buttondown email signup form to a Jekyll blog without exposing API keys or adding a backend."
+description: "How to add a custom Buttondown signup form to a Jekyll blog without exposing API keys or building a backend."
 date: "2026-04-26"
 categories: ["coding", "jekyll"]
 published: true
 slug: buttondown-newsletter-jekyll-custom-form
 featured-image: "/assets/post-media/buttondown-newsletter-jekyll-custom-form/header.webp"
 featured-thumbnail: "/assets/post-media/buttondown-newsletter-jekyll-custom-form/header-sm.webp"
+featured_image_width: 1600
+featured_image_height: 528
 ---
+
+## What you'll learn
+
+- How to connect a custom signup form to Buttondown.
+- Why the embed endpoint does not require a public API key.
+- How to keep the implementation portable beyond Jekyll.
 
 I wanted a simple email list for this blog.
 

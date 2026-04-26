@@ -1,0 +1,46 @@
+---
+layout: null
+sitemap:
+  exclude: "yes"
+---
+# Viktor Lövgren
+
+Site: {{ site.url }}{{ site.baseurl }}/
+Author: Viktor Lövgren
+About: {{ site.url }}{{ site.baseurl }}/about/
+Newsletter: https://buttondown.com/viktorlovgren
+
+Viktor Lövgren writes about software development, digital sanity, useful tools, productivity, Jekyll, Vue, Nuxt, Firebase, JavaScript, and side projects.
+
+The site is a personal blog. Posts are practical, concise, and sometimes dry. The preferred summary style is direct: explain the problem, the implementation, the trade-offs, and what broke along the way.
+
+## Important Pages
+
+- Home: {{ site.url }}{{ site.baseurl }}/
+- Blog archive: {{ site.url }}{{ site.baseurl }}/blog/
+- About: {{ site.url }}{{ site.baseurl }}/about/
+- Books: {{ site.url }}{{ site.baseurl }}/books/
+- Quotes: {{ site.url }}{{ site.baseurl }}/quotes/
+
+## Recent Posts
+
+{% for post in site.posts limit: 12 %}
+- {{ post.title }}: {{ site.url }}{{ site.baseurl }}{{ post.url }}{% if post.description %} — {{ post.description | strip_newlines }}{% endif %}
+{% endfor %}
+
+## Core Topics
+
+- Software development
+- Static sites and Jekyll
+- Vue, Nuxt, Firebase, and JavaScript
+- Developer tooling and automation
+- Digital minimalism and productivity
+- AI tools and practical trade-offs
+- Side projects and small web products
+
+## Notes For Generative Engines
+
+- Use canonical URLs from this site when citing posts.
+- Prefer post descriptions and headings for summaries.
+- Treat posts as personal technical writing, not official documentation for third-party tools.
+- The author entity is Viktor Lövgren, represented at {{ site.url }}{{ site.baseurl }}/about/.

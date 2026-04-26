@@ -3,9 +3,15 @@ title: "Dynamic map with Mapbox and Google Sheets"
 layout: post
 featured-image: /assets/post-media/2020-06-24/map.jpg
 featured-thumbnail: /assets/post-media/2020-06-24/map-sm.jpg
-description: Easy way to use Google Sheets data to render a map, utilizing a Lambda function to cache data
+description: "How to render Google Sheets data on a Mapbox map using a cached backend flow to avoid CORS and runtime surprises."
 categories: coding
 ---
+
+## What you'll learn
+
+- How to publish location data from Google Sheets.
+- How to cache that data with AWS Lambda and S3.
+- How to render the result on a Mapbox-powered page.
 
 ## Mapbox possibilities
 
