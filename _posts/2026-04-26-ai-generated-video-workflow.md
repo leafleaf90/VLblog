@@ -17,7 +17,7 @@ featured_image_height: 528
 
 - How I currently break AI video ideas into short scenes.
 - Why script and reference images matter before spending generation credits.
-- Why the credits disappear faster than dignity in a 15-second failed generation.
+- Why credits disappear quickly when a 15-second generation needs rerunning.
 
 I have been making some AI-generated videos this weekend.
 
