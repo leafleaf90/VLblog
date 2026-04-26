@@ -75,6 +75,10 @@ The homepage filters and sidebar group posts into three buckets:
 
 Posts with categories outside these groups appear in "other" and are visible only under "all".
 
+## Post Media Images
+
+Use slug-named folders for new post assets and optimize source banners into `header.webp` (`1600x528`) and `header-sm.webp` (`800x264`). See `docs/post-media-images.md` for the full convention, `sharp` command, verification steps, and cleanup rules.
+
 ## Google Docs → Posts Integration
 
 Posts can be authored in Google Docs and auto-imported at build time via `_plugins/google_docs_posts.rb`.
