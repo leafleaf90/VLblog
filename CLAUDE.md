@@ -75,6 +75,10 @@ The homepage filters and sidebar group posts into three buckets:
 
 Posts with categories outside these groups appear in "other" and are visible only under "all".
 
+## Writing Style
+
+Keep blog humor dry and restrained. Do not add forced analogy jokes, whimsical AI-ish punchlines, or lines like "when the hand turns into a decorative fork" / "burned a small invoice." Prefer clarity and the author's existing voice over extra jokes.
+
 ## Post Media Images
 
 Use slug-named folders for new post assets and optimize source banners into `header.webp` (`1600x528`) and `header-sm.webp` (`800x264`). See `docs/post-media-images.md` for the full convention, `sharp` command, verification steps, and cleanup rules.
