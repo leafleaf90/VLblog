@@ -584,6 +584,43 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   overflow: hidden;
 }
 
+.hero-section.profile-scroll-active {
+  height: 420vh;
+  padding: 0;
+  overflow: visible;
+}
+
+.hero-scroll-stage {
+  min-height: 420px;
+}
+
+.hero-section.profile-scroll-active .hero-scroll-stage {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 80px);
+  height: calc(100svh - 80px);
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-section.profile-scroll-active.profile-scroll-complete .hero-scroll-stage {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  width: 100%;
+}
+
+.hero-section.profile-scroll-active .hero-profile {
+  width: clamp(260px, 38vw, 520px);
+  height: clamp(260px, 38vw, 520px);
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.18);
+}
+
 .hero-section::before {
   content: "";
   position: absolute;
@@ -638,6 +675,14 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   position: relative;
 }
 
+.hero-profile-wrap {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
 /* Fixed disk behind hero portrait (same in light + dark theme) */
 .hero-profile {
   z-index: 2;
@@ -653,6 +698,165 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 
 .hero-profile:hover {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.profile-scroll {
+  isolation: isolate;
+}
+
+.profile-scroll-canvas,
+.profile-scroll-fallback {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: none;
+  border-radius: 0;
+  transform: translate(-50%, calc(-50% + 6px));
+  object-fit: contain;
+  object-position: 72% center;
+  filter: contrast(1.2);
+  display: block;
+}
+
+.profile-scroll-canvas {
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.4s ease, filter 0.4s ease;
+  z-index: 2;
+}
+
+.profile-scroll.is-ready .profile-scroll-canvas {
+  opacity: 1;
+}
+
+.profile-scroll.is-ready .profile-scroll-fallback {
+  opacity: 0;
+}
+
+.profile-scroll-loader {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  width: min(140px, 54%);
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateX(-50%);
+  z-index: 3;
+  transition: opacity 0.3s ease;
+}
+
+.profile-scroll-loader-bar {
+  display: block;
+  width: var(--profile-scroll-progress, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transition: width 0.2s ease;
+}
+
+.profile-scroll.is-ready .profile-scroll-loader {
+  opacity: 0;
+}
+
+.profile-scroll-hint {
+  z-index: 4;
+  width: max-content;
+  margin: 0;
+  padding: 0.65rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.14);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .profile-scroll-hint {
+  border-color: rgba(148, 163, 184, 0.35);
+  background: rgba(15, 23, 42, 0.76);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+}
+
+.profile-scroll-hint-icon {
+  display: inline-block;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.profile-scroll-hint-icon--arrow {
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-left: 0.58rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-0.12rem) rotate(45deg);
+  animation: profileScrollHintNudge 1.35s ease-in-out infinite;
+}
+
+.profile-scroll-hint-icon--smile {
+  margin-left: 0.5rem;
+  opacity: 0;
+  font-size: 1.05em;
+  font-weight: 800;
+  transform: translateY(0.25rem) rotate(-8deg);
+}
+
+.profile-scroll-hint-text {
+  display: inline-block;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.profile-scroll-hint-text--thanks {
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  transform: translateX(-50%) translateY(0.35rem);
+}
+
+.hero-section.profile-scroll-thanks .profile-scroll-hint-text--scroll {
+  opacity: 0;
+  transform: translateY(-0.35rem);
+}
+
+.hero-section.profile-scroll-thanks .profile-scroll-hint-text--thanks {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.hero-section.profile-scroll-thanks .profile-scroll-hint-icon--arrow {
+  opacity: 0;
+  transform: translateY(-0.35rem) rotate(45deg);
+}
+
+.hero-section.profile-scroll-thanks .profile-scroll-hint-icon--smile {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+}
+
+.hero-section.profile-scroll-complete .profile-scroll-hint {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes profileScrollHintNudge {
+  0%,
+  100% {
+    transform: translateY(-0.18rem) rotate(45deg);
+  }
+
+  50% {
+    transform: translateY(0.1rem) rotate(45deg);
+  }
 }
 
 /* Full portrait inside the disk: contain avoids zoom-crop; disk shows as a ring
@@ -678,6 +882,26 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 
 .hero-profile:hover .profile-image {
   transform: translate(-50%, calc(-50% + 1px));
+}
+
+.hero-profile:hover .profile-scroll-canvas {
+  transform: translate(-50%, calc(-50% + 1px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section.profile-scroll-active {
+    height: auto;
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .hero-section.profile-scroll-active .hero-scroll-stage {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    height: auto;
+    min-height: 420px;
+  }
 }
 
 /* Updated Layout Structure */
@@ -710,16 +934,27 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 }
 
 code {
+  padding: 0.12em 0.38em;
+  display: inline;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-tertiary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.92em;
+}
+
+pre code {
   padding: var(--spacing-md);
   display: block;
   overflow: auto;
   border-radius: var(--radius-md);
-  background-color: var(--color-bg-tertiary);
+  background-color: transparent;
+  font-size: 1em;
 }
 
 .highlight {
   border-radius: var(--radius-xl);
   margin: 0;
+  overflow: hidden;
 }
 
 .book-image {
@@ -3041,6 +3276,10 @@ html[data-theme="dark"] .project-tag {
     width: 220px;
     height: 220px;
     margin: 0 auto;
+  }
+
+  .hero-profile-wrap {
+    order: 1;
   }
 
   .hero-title {

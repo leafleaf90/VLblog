@@ -4,23 +4,52 @@ layout: default
 
 <!-- Hero Section -->
 <section class="hero-section" role="banner" aria-labelledby="hero-title">
-  <div class="hero-container">
-    <div class="hero-content">
-      <h1 id="hero-title" class="hero-title">
-        Hi, I'm <span class="milka">Viktor<span class="red">.</span></span>
-      </h1>
-      <p class="hero-subtitle">{{ site.tagline }}</p>
-      <div class="hero-cta">
-        <a href="#content" class="button">Explore My Work</a>
+  <div class="hero-scroll-stage">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 id="hero-title" class="hero-title">
+          Hi, I'm <span class="milka">Viktor<span class="red">.</span></span>
+        </h1>
+        <p class="hero-subtitle">{{ site.tagline }}</p>
+        <div class="hero-cta">
+          <a href="#content" class="button">Explore My Work</a>
+        </div>
       </div>
-    </div>
-    <div class="hero-profile">
-      <img
-        src="/assets/images/profile_new.webp"
-        alt="Profile photo of Viktor Lövgren"
-        class="profile-image"
-        loading="eager"
-      />
+      <div class="hero-profile-wrap">
+        <div
+          class="hero-profile profile-scroll"
+          data-profile-scroll
+          data-frame-count="89"
+          data-frame-width="850"
+          data-frame-height="934"
+        >
+          <canvas
+            class="profile-scroll-canvas"
+            width="850"
+            height="934"
+            aria-hidden="true"
+          ></canvas>
+          <img
+            src="/assets/images/profile_start_placeholder.webp"
+            alt="Profile photo of Viktor Lövgren"
+            class="profile-image profile-scroll-fallback"
+            loading="eager"
+          />
+          <div class="profile-scroll-loader" aria-hidden="true">
+            <span class="profile-scroll-loader-bar"></span>
+          </div>
+        </div>
+        <p class="profile-scroll-hint" aria-live="polite">
+          <span class="profile-scroll-hint-text profile-scroll-hint-text--scroll">
+            Scroll to make me happier
+          </span>
+          <span class="profile-scroll-hint-text profile-scroll-hint-text--thanks">
+            Thanks!
+          </span>
+          <span class="profile-scroll-hint-icon profile-scroll-hint-icon--arrow" aria-hidden="true"></span>
+          <span class="profile-scroll-hint-icon profile-scroll-hint-icon--smile" aria-hidden="true">:)</span>
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -685,3 +714,4 @@ layout: default
     }
   });
 </script>
+<script src="{{ '/assets/profile-scroll.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
