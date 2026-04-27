@@ -3,6 +3,7 @@
   categories:
     - coding
     - cybersecurity
+    - ai-tools
     - vue
     - nuxt
     - firebase
@@ -13,9 +14,10 @@
     - flutter
     - openai
 
-- group: mindfulness
-  label: Mindfulness
+- group: digital-life
+  label: Digital Life
   categories:
+    - ai
     - productivity
     - minimalism
     - mindfulness
@@ -23,10 +25,9 @@
     - books
     - writing
 
-- group: life
-  label: Life
+- group: personal
+  label: Personal
   categories:
-    - ai
     - travel
     - thailand
     - movies

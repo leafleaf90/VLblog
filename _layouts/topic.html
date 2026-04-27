@@ -9,6 +9,8 @@ layout: default
     <p>{{ page.description }}</p>
   </header>
 
+  {% include components/topic_pills.html current_topic=page.topic %}
+
   {% assign topic_posts = site.posts | where_exp: "post", "post.categories contains page.topic" %}
   {% if topic_posts.size > 0 %}
   <section aria-labelledby="topic-posts-heading">
@@ -16,7 +18,7 @@ layout: default
     <div class="content-grid">
       {% for post in topic_posts %}
         {% unless post.published == false %}
-          {% include components/blog_post_card.html post=post %}
+          {% include components/post_card.html post=post %}
         {% endunless %}
       {% endfor %}
     </div>

@@ -75,9 +75,9 @@ posts_in_series.size > 1 %}
 
     <span style="font-style: italic">Series</span>
   </h3>
-  <div class="posts-container">
+  <div class="content-grid">
     {% for post in posts_in_series %} {% if post.title != page.title %} {%
-    include components/blog_post_card.html post=post %} {% endif %} {% endfor %}
+    include components/post_card.html post=post %} {% endif %} {% endfor %}
   </div>
 </div>
 {% endif %} {% endif %}

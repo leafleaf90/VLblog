@@ -1,0 +1,126 @@
+- category: Productivity
+  books:
+    - title: Deep Work
+      subtitle: Rules for Focused Success in a Distracted World
+      author: Cal Newport
+      image: /assets/images/books/cal-newport-deep-work.jpg
+      summary: >-
+        The best guide I've read on how to navigate the current landscape of
+        constant distractions that we impose on ourselves. Newport makes the case
+        for limiting your exposure to all kinds of online distractions and
+        instead do the work. You can't afford not to read this one.
+      goodreads_url: https://www.goodreads.com/book/show/25744928-deep-work
+      author_url: https://www.goodreads.com/author/show/147891.Cal_Newport
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2071855657
+      goodreads_review: >-
+        A must-read in this day and age. "I'll live the focused life, because
+        it's the best kind there is."
+
+- category: Spirituality
+  books:
+    - title: Way of the Peaceful Warrior
+      subtitle: A Book That Changes Lives
+      author: Dan Millman
+      image: /assets/images/books/dan-millman-way-of-the-peaceful-warrior.jpg
+      summary: >-
+        A fantastic book about a young gymnasts spiritual journey and awakening.
+        Read and re-read. Makes you ponder what really matters in life.
+      goodreads_url: https://www.goodreads.com/book/show/2255.Way_of_the_Peaceful_Warrior
+      author_url: https://www.goodreads.com/author/show/1539.Dan_Millman
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2556724202
+      goodreads_review: >-
+        As we move through this fast-paced world, chasing whatever success we
+        hope to achieve this quarter, year, or lifetime, it's such a gift to find
+        a book like this. To make us stop for a moment. "There are no ordinary
+        moments."
+
+    - title: 10% Happier
+      author: Dan Harris
+      image: /assets/images/books/dan-harris-10-percent-happier.jpg
+      summary: >-
+        The story of news-anchor Dan Harris and his discovery of meditation as a
+        way to handle his anxiety and increase overall satisfaction in life. Many
+        people start out as sceptics when it comes to the area of meditation or
+        spirituality in general. Therefore Harris' story is incredibly helpful as
+        it shows in real-time how the author is convinced about the utility of
+        the practice.
+      goodreads_url: https://www.goodreads.com/book/show/18505796-10-happier
+      author_url: https://www.goodreads.com/author/show/7890536.Dan_Harris
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2039877845
+      goodreads_review: >-
+        Many useful tools for everyday mindfulness can be found here and written
+        in Harris' usual funny, self-deprecating way.
+
+    - title: The Four Agreements
+      subtitle: A Practical Guide to Personal Freedom
+      author: Miguel Ruiz
+      image: /assets/images/books/don-miguel-ruiz-the-four-agreements.jpg
+      summary: >-
+        Spiritual must-read. Don Miguel Ruiz highlights what behaviors we all
+        should nurture - and which ones to abolish.
+      goodreads_url: https://www.goodreads.com/book/show/6596.The_Four_Agreements
+      author_url: https://www.goodreads.com/author/show/4402.Miguel_Ruiz
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2336596204
+      goodreads_review: >-
+        Profound insights, paired with practical, actionable methods.
+      notes_url: https://drive.google.com/file/d/1l3uHKRqf0OT55Z8F44pE4lCUXMsTwJ-n/view?usp=sharing
+
+- category: Business
+  books:
+    - title: Anything You Want
+      author: Derek Sivers
+      image: /assets/images/books/derek-sivers-anything-you-want.jpg
+      summary: >-
+        I recommend the audio version of this book, read by Sivers himself. This
+        is a short listen, not much more than one hour, but packed with so many
+        valuable lessons about building a company with customer satisfaction as
+        the main goal. Even just the insights in the chapter "Why I gave my
+        company to charity" is worth your money for this one.
+
+    - title: The Effective Executive
+      author: Peter F. Drucker
+      image: /assets/images/books/peter-f-drucker-the-effective-executive.jpg
+      summary: >-
+        The framework offered by Drucker applies to more people than you might
+        think. Drucker's definition of an executive is basically anyone that
+        makes decisions in an organization. The parts on how to get the right
+        things done also applies largely to anyone working for themselves.
+      details_intro: >-
+        What I like is that the focus is on the strength of individuals, rather
+        than on the weaknesses. There are many concrete recommendations. For
+        example, when promoting employees, Drucker says to ask these questions:
+      details:
+        - What has he or she done well?
+        - What, therefore, is this person likely to be able to do well?
+        - What does this person have to learn or acquire to get the full benefit from their strength?
+        - If I had a son or daughter, would I be willing to have them work under this person?
+      notes_url: https://drive.google.com/file/d/1dAWGDdf2I9okowDZ8uoyIpxoquY6KfrR/view?usp=sharing
+
+- category: Biographies
+  books:
+    - title: Open
+      author: Andre Agassi
+      image: /assets/images/books/andre-agassi-open.jpg
+      summary: >-
+        Agassi was drilled by his ruthless father from a young age to become the
+        best tennis player in world. He succeeded. This is the story of what it
+        cost. Agassi's rebel mentality is an inspirational light in a
+        surprisingly dark story.
+
+- category: Fiction
+  books:
+    - title: Stoner
+      author: John Williams
+      image: /assets/images/books/john-williams-stoner.jpg
+      summary: >-
+        A beautiful, epic, slow-moving tale of the life of a scholar and teacher.
+        Shows just what a life can be - full of disappointments, but also with
+        glimmers of hope and moments of pure joy.

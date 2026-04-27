@@ -44,6 +44,10 @@ The source should be short. Think 3 to 6 seconds. I created mine using:
 
 For scroll-driven animation, every exported frame becomes a file the browser needs to load. A 4-second video at 24 fps becomes about 96 frames. That is smooth, but it can get heavy quickly if you also keep the original video dimensions.
 
+<blockquote class="pull-quote">
+  <p>Every exported frame becomes a file the browser needs to load.</p>
+</blockquote>
+
 Good source video rules:
 
 - Keep it short.

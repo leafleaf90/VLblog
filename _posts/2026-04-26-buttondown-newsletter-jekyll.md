@@ -37,6 +37,10 @@ I use Jekyll here, but the Jekyll part is not the important part. The same idea 
 
 The important part is that Buttondown gives you a public embed endpoint. You can post a normal HTML form to that endpoint. No API key is needed in the browser.
 
+<blockquote class="pull-quote">
+  <p>No API key is needed in the browser.</p>
+</blockquote>
+
 ## The Shape Of The Setup
 
 The setup is:
@@ -149,11 +153,11 @@ The include looks like this:
       id="newsletter-heading-{{ newsletter_variant }}"
       class="newsletter-signup__title"
     >
-      Software, sanity, and the occasional useful rabbit hole.
+      Forever Closing Tabs
     </h2>
     <p class="newsletter-signup__copy">
-      Get new posts by email. No spam, no growth hacks, no heroic promises
-      about inbox zero.
+      Software, sanity, and the occasional useful rabbit hole. Get new posts by
+      email. No spam, no growth hacks, no heroic promises about inbox zero.
     </p>
 
     <form
@@ -180,8 +184,9 @@ The include looks like this:
       </button>
     </form>
 
-    <p class="newsletter-signup__note" data-newsletter-status>
-      Double opt-in is enabled. Unsubscribe whenever the tabs get too many.
+    <p class="newsletter-signup__note" data-newsletter-status aria-live="polite">
+      After subscribing, check your inbox for the confirmation email. If it is
+      not there, check spam or junk.
     </p>
   </div>
 </section>
@@ -341,7 +346,10 @@ I wanted the page to stay put, so I added a tiny enhancement that targets a hidd
   frame.addEventListener("load", function () {
     if (!activeForm) return;
 
-    setStatus(activeForm, "Thanks. Check your inbox to confirm the subscription.");
+    setStatus(
+      activeForm,
+      "Almost done. Check your inbox to confirm the subscription. If you do not see it, check spam or junk."
+    );
     activeForm.reset();
     activeForm = null;
   });
@@ -350,7 +358,7 @@ I wanted the page to stay put, so I added a tiny enhancement that targets a hidd
     form.addEventListener("submit", function () {
       activeForm = form;
       form.target = frameName;
-      setStatus(form, "Subscribing...");
+      setStatus(form, "Submitting. The confirmation email is the important part.");
     });
   });
 })();

@@ -57,99 +57,115 @@ layout: default
 {% include newsletter_signup.html variant="home" username="viktorlovgren" %}
 
 <div class="page-container">
-  <!-- Main Layout: Content + Sidebar -->
-  <div class="main-layout">
-    <!-- Main Content Area -->
-    <main class="content-area" id="content">
-      <!-- Trending Articles Slider -->
-      <section aria-labelledby="trending-heading">
-        <h2 id="trending-heading" class="section-title">Trending Articles</h2>
+  <main class="home-main content-area" id="content">
+    <!-- Trending Articles Slider -->
+    <section aria-labelledby="trending-heading">
+      <h2 id="trending-heading" class="section-title">Trending Articles</h2>
 
-        <div class="slider-container">
-          <div class="slider-wrapper">
-            <div class="slider-track" id="sliderTrack">
-              {% assign featured_posts = site.posts | where: "featured", true %}
-              {% for post in featured_posts %}
-              <article class="slider-card">
-                <a
-                  href="{{ post.url }}"
-                  class="slider-card-hitbox"
-                  aria-label="{{ post.title | append: ' — read article' | xml_escape }}"
-                ></a>
-                {% if post.featured-image %}
-                <div class="slider-card-image">
-                  <img
-                    src="{{ post.featured-image }}"
-                    alt="{{ post.title }}"
-                    loading="lazy"
-                  />
-                  <div class="slider-card-overlay">
-                    <span class="trending-badge">🔥 Trending</span>
-                  </div>
-                </div>
-                {% endif %}
-                <div class="slider-card-content">
-                  <h3 class="slider-card-title">{{ post.title }}</h3>
-                  <p class="slider-card-excerpt">
-                    {{ post.description | default: post.excerpt | strip_html |
-                    truncatewords: 15 }}
-                  </p>
-                  <div class="slider-card-meta">
-                    <span class="post-card-category">
-                      {{ post.categories.first | capitalize }}
-                    </span>
-                    <span class="slider-card-date">
-                      {{ post.date | date: "%b %d, %Y" }}
-                    </span>
-                  </div>
-                </div>
-              </article>
-              {% endfor %}
-            </div>
-          </div>
-
-          <!-- Slider Navigation -->
-          <div class="slider-nav">
-            <button class="slider-btn slider-prev" id="sliderPrev">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="15,18 9,12 15,6"></polyline>
-              </svg>
-            </button>
-            <button class="slider-btn slider-next" id="sliderNext">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <polyline points="9,18 15,12 9,6"></polyline>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Slider Dots -->
-          <div class="slider-dots" id="sliderDots">
+      <div class="slider-container">
+        <div class="slider-wrapper">
+          <div class="slider-track" id="sliderTrack">
+            {% assign featured_posts = site.posts | where: "featured", true %}
             {% for post in featured_posts %}
-            <button
-              class="slider-dot {% if forloop.first %}active{% endif %}"
-              data-slide="{{ forloop.index0 }}"
-            ></button>
+            <article class="slider-card">
+              <a
+                href="{{ post.url }}"
+                class="slider-card-hitbox"
+                aria-label="{{ post.title | append: ' — read article' | xml_escape }}"
+              ></a>
+              {% if post.featured-image %}
+              <div class="slider-card-image">
+                <img
+                  src="{{ post.featured-image }}"
+                  alt="{{ post.title }}"
+                  loading="lazy"
+                />
+                <div class="slider-card-overlay">
+                  <span class="trending-badge">🔥 Trending</span>
+                </div>
+              </div>
+              {% endif %}
+              <div class="slider-card-content">
+                <h3 class="slider-card-title">{{ post.title }}</h3>
+                <p class="slider-card-excerpt">
+                  {{ post.description | default: post.excerpt | strip_html |
+                  truncatewords: 15 }}
+                </p>
+                <div class="slider-card-meta">
+                  {% assign slider_category = post.categories.first %}
+                  {% capture slider_category_label %}
+                    {% case slider_category %}
+                    {% when "ai" %}AI
+                    {% when "ai-tools" %}AI Tools
+                    {% when "javascript" %}JavaScript
+                    {% when "vue" %}Vue
+                    {% when "nuxt" %}Nuxt
+                    {% when "firebase" %}Firebase
+                    {% when "jekyll" %}Jekyll
+                    {% else %}{{ slider_category | replace: "-", " " | capitalize }}
+                    {% endcase %}
+                  {% endcapture %}
+                  <span class="post-card-category">
+                    {{ slider_category_label | strip }}
+                  </span>
+                  <span class="slider-card-date">
+                    {{ post.date | date: "%b %d, %Y" }}
+                  </span>
+                </div>
+              </div>
+            </article>
             {% endfor %}
           </div>
         </div>
-      </section>
 
-      <!-- Recent Posts Grid -->
-      <section aria-labelledby="recent-heading">
-        <h2 id="recent-heading" class="section-title">Recent Posts</h2>
+        <!-- Slider Navigation -->
+        <div class="slider-nav">
+          <button class="slider-btn slider-prev" id="sliderPrev">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+          </button>
+          <button class="slider-btn slider-next" id="sliderNext">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </button>
+        </div>
 
-        <!-- Category Filter Selector -->
-        <div class="category-filter">
+        <!-- Slider Dots -->
+        <div class="slider-dots" id="sliderDots">
+          {% for post in featured_posts %}
+          <button
+            class="slider-dot {% if forloop.first %}active{% endif %}"
+            data-slide="{{ forloop.index0 }}"
+          ></button>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Posts Grid -->
+    <section aria-labelledby="recent-heading">
+      <h2 id="recent-heading" class="section-title">Recent Posts</h2>
+
+      <div class="post-browse" aria-label="Browse posts">
+        <p class="section-filter-label">Browse Posts</p>
+        <div class="post-browse__row">
+          <p class="post-browse__label">Sections</p>
+          <div class="category-filter">
+          <button class="filter-btn filter-btn--all" data-filter="all">
+            All Posts
+          </button>
           {% for group in site.data.categories %}
           <button class="filter-btn {% if forloop.first %}active{% endif %}" data-filter="{{ group.group }}">
             <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -157,9 +173,9 @@ layout: default
               {% when 'code' %}
                 <polyline points="16,18 22,12 16,6"></polyline>
                 <polyline points="8,6 2,12 8,18"></polyline>
-              {% when 'mindfulness' %}
+              {% when 'digital-life' %}
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-              {% when 'life' %}
+              {% when 'personal' %}
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               {% endcase %}
@@ -167,7 +183,46 @@ layout: default
             {{ group.label }}
           </button>
           {% endfor %}
+          </div>
         </div>
+
+        <div class="topic-filter-groups">
+          {% for group in site.data.categories %}
+          <div class="topic-filter-group" data-topic-group="{{ group.group }}" {% unless forloop.first %}hidden{% endunless %}>
+            <p class="post-browse__label">{{ group.label }} topics</p>
+            <div class="topic-filter-list">
+              {% for category in group.categories %}
+                {% assign category_posts = site.categories[category] %}
+                {% if category_posts %}
+                  {% capture category_label %}
+                    {% case category %}
+                    {% when "ai" %}AI
+                    {% when "ai-tools" %}AI Tools
+                    {% when "javascript" %}JavaScript
+                    {% when "vue" %}Vue
+                    {% when "nuxt" %}Nuxt
+                    {% when "firebase" %}Firebase
+                    {% when "jekyll" %}Jekyll
+                    {% when "openai" %}OpenAI
+                    {% else %}{{ category | replace: "-", " " | capitalize }}
+                    {% endcase %}
+                  {% endcapture %}
+                  <button
+                    class="topic-filter-btn"
+                    data-topic="{{ category }}"
+                    data-topic-group="{{ group.group }}"
+                    data-topic-label="{{ category_label | strip }}"
+                  >
+                    <span>{{ category_label | strip }}</span>
+                    <span>{{ category_posts.size }}</span>
+                  </button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
 
         <div class="content-grid">
           {% for post in site.posts %}
@@ -185,49 +240,11 @@ layout: default
             {% endunless %}
           {% endfor %}
 
-          <article
-            class="post-card"
-            data-category="{{ main_category }}"
-            data-categories="{{ post.categories | join: ',' }}"
-            {% if forloop.index > 12 %}style="display: none;"{% endif %}
-          >
-            {% if post.featured-thumbnail %}
-              {% assign post_thumb = post.featured-thumbnail %}
-            {% elsif post.featured-image %}
-              {% assign post_thumb = post.featured-image
-                | replace: '.webp', '-sm.webp'
-                | replace: '.jpeg', '-sm.jpeg'
-                | replace: '.jpg', '-sm.jpg' %}
-            {% endif %}
-            {% if post_thumb %}
-            <img
-              src="{{ post_thumb }}"
-              alt="{{ post.title }}"
-              class="post-card-image"
-              loading="lazy"
-            />
-            {% endif %}
-            <div class="post-card-content">
-              <div class="post-card-main">
-                <h3 class="post-card-title">{{ post.title }}</h3>
-                <p class="post-card-excerpt">
-                  {{ post.description | default: post.excerpt | strip_html |
-                  truncate: 100 }}
-                </p>
-              </div>
-              <div class="post-card-meta">
-                <span class="post-card-category"
-                  >{{ post.categories.first | capitalize }}</span
-                >
-                <span>{{ post.date | date: "%b %d" }}</span>
-              </div>
-            </div>
-            <a
-              href="{{ post.url }}"
-              class="post-card-hitbox"
-              aria-label="{{ post.title | append: ' — read full post' | xml_escape }}"
-            ></a>
-          </article>
+          {% assign hide_post = false %}
+          {% if forloop.index > 12 %}
+            {% assign hide_post = true %}
+          {% endif %}
+          {% include components/post_card.html post=post main_category=main_category hidden=hide_post %}
           {% endfor %}
         </div>
       </section>
@@ -389,148 +406,75 @@ layout: default
           </article>
         </div>
       </section>
-    </main>
-
-    <!-- Sidebar -->
-    <aside class="sidebar" role="complementary">
-      <!-- Categories/Topics (hidden on small screens via default.html — pills in main are primary) -->
-      <div class="sidebar-section sidebar-section--topics">
-        <h3 class="sidebar-title">Explore Topics</h3>
-        <ul class="category-list">
-          {% for group in site.data.categories %}
-            {% assign group_count = 0 %}
-            {% for post in site.posts %}
-              {% assign post_counted = false %}
-              {% for cat in post.categories %}
-                {% unless post_counted %}
-                  {% if group.categories contains cat %}
-                    {% assign group_count = group_count | plus: 1 %}
-                    {% assign post_counted = true %}
-                  {% endif %}
-                {% endunless %}
-              {% endfor %}
-            {% endfor %}
-
-          <li class="category-item">
-            <a href="#" class="category-link" data-filter="{{ group.group }}">
-              <svg class="category-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                {% case group.group %}
-                {% when 'code' %}
-                  <polyline points="16,18 22,12 16,6"></polyline>
-                  <polyline points="8,6 2,12 8,18"></polyline>
-                {% when 'mindfulness' %}
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                {% when 'life' %}
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                {% endcase %}
-              </svg>
-              <span>{{ group.label }}</span>
-              <span style="margin-left: auto; color: var(--color-text-light)">({{ group_count }})</span>
-            </a>
-          </li>
-
-          {% for category in site.categories %}
-            {% if group.categories contains category.first %}
-          <li class="category-item subcategory">
-            <a href="#" class="category-link subcategory-link" data-subcategory="{{ category.first }}">
-              <span>{{ category.first | capitalize }}</span>
-              <span style="margin-left: auto; color: var(--color-text-light)">({{ category.last.size }})</span>
-            </a>
-          </li>
-            {% endif %}
-          {% endfor %}
-          {% endfor %}
-        </ul>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="sidebar-section sidebar-section--quick-links">
-        <h3 class="sidebar-title">Quick Links</h3>
-        <ul class="category-list">
-          <li class="category-item">
-            <a href="/#recent-heading" class="category-link">
-              <span>Browse All Posts</span>
-            </a>
-          </li>
-          {% for group in site.data.categories %}
-          <li class="category-item sidebar-quick-filter">
-            <a
-              href="{{ site.baseurl }}/?group={{ group.group }}"
-              class="category-link"
-            >
-              <span>{{ group.label }} posts</span>
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </aside>
-  </div>
+  </main>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Filter functionality
     const filterBtns = document.querySelectorAll(".filter-btn");
-    const categoryLinks = document.querySelectorAll(
-      ".category-link[data-filter]"
-    );
+    const topicBtns = document.querySelectorAll(".topic-filter-btn");
+    const topicGroups = document.querySelectorAll(".topic-filter-group");
     const postCards = document.querySelectorAll(".post-card");
 
-    const CATEGORY_TO_GROUP = {
-      {%- assign cg_first = true -%}
+    const SECTION_LABELS = {
       {%- for g in site.data.categories -%}
-      {%- for c in g.categories -%}
-      {%- unless cg_first -%},{%- endunless -%}
-      {%- assign cg_first = false -%}
-      {{ c | downcase | jsonify }}: {{ g.group | jsonify }}
-      {%- endfor -%}
+      {{ g.group | jsonify }}: {{ g.label | jsonify }}{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
     };
+    const VALID_GROUPS = Object.keys(SECTION_LABELS);
 
-    function syncFilterToUrl(filter, subcategory) {
+    function syncFilterToUrl(filter, topic = null) {
       const path = location.pathname || "/";
       const sp = new URLSearchParams();
-      if (subcategory) {
-        sp.set("cat", String(subcategory).toLowerCase());
-      } else if (filter && filter !== "all") {
+      if (filter && filter !== "all") {
         sp.set("group", filter);
+      }
+      if (topic) {
+        sp.set("topic", topic);
       }
       const qs = sp.toString();
       history.replaceState(null, "", qs ? path + "?" + qs : path);
     }
 
-    function applyFilter(filter, subcategory = null, options = {}) {
+    function setActiveSection(filter) {
+      filterBtns.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.filter === filter);
+      });
+    }
+
+    function setActiveTopic(activeBtn = null) {
+      topicBtns.forEach((btn) => {
+        btn.classList.toggle("active", btn === activeBtn);
+      });
+    }
+
+    function updateTopicGroups(filter) {
+      topicGroups.forEach((group) => {
+        group.hidden =
+          filter !== "all" && group.dataset.topicGroup !== filter;
+      });
+    }
+
+    function getPostCategories(card) {
+      return (card.dataset.categories || "")
+        .split(",")
+        .map((category) => category.trim())
+        .filter(Boolean);
+    }
+
+    function applyFilter(filter, options = {}) {
       const scroll = options.scroll !== false;
       const syncUrl = options.syncUrl !== false;
 
-      filterBtns.forEach((b) => b.classList.remove("active"));
-
-      if (filter !== "all") {
-        const activeBtn = document.querySelector(
-          `.filter-btn[data-filter="${filter}"]`
-        );
-        if (activeBtn) {
-          activeBtn.classList.add("active");
-        }
-      }
+      setActiveSection(filter);
+      setActiveTopic();
+      updateTopicGroups(filter);
 
       let visibleCount = 0;
-      const subKey = subcategory
-        ? String(subcategory).toLowerCase()
-        : null;
 
       postCards.forEach((card) => {
-        let shouldShow;
-        if (subKey) {
-          const cardCats = (card.dataset.categories || "")
-            .split(",")
-            .map((s) => s.trim().toLowerCase());
-          shouldShow = cardCats.includes(subKey);
-        } else {
-          shouldShow = filter === "all" || card.dataset.category === filter;
-        }
+        const shouldShow = filter === "all" || card.dataset.category === filter;
 
         if (shouldShow) {
           card.style.display = "block";
@@ -541,17 +485,52 @@ layout: default
       });
 
       const sectionTitle = document.querySelector("#recent-heading");
-      const label = subKey
-        ? subKey.charAt(0).toUpperCase() + subKey.slice(1)
-        : filter === "all"
-          ? null
-          : filter.charAt(0).toUpperCase() + filter.slice(1);
+      const label = filter === "all" ? null : SECTION_LABELS[filter];
       sectionTitle.textContent = label
         ? `${label} Posts (${visibleCount})`
         : `Recent Posts (${visibleCount})`;
 
       if (syncUrl) {
-        syncFilterToUrl(filter, subcategory);
+        syncFilterToUrl(filter);
+      }
+
+      if (scroll) {
+        document.querySelector("#recent-heading").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+
+    function applyTopicFilter(topicBtn, options = {}) {
+      const scroll = options.scroll !== false;
+      const syncUrl = options.syncUrl !== false;
+      const topic = topicBtn.dataset.topic;
+      const parentGroup = topicBtn.dataset.topicGroup;
+      const topicLabel = topicBtn.dataset.topicLabel || topic;
+
+      setActiveSection(parentGroup);
+      setActiveTopic(topicBtn);
+      updateTopicGroups(parentGroup);
+
+      let visibleCount = 0;
+
+      postCards.forEach((card) => {
+        const shouldShow = getPostCategories(card).includes(topic);
+
+        if (shouldShow) {
+          card.style.display = "block";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      const sectionTitle = document.querySelector("#recent-heading");
+      sectionTitle.textContent = `${topicLabel} Posts (${visibleCount})`;
+
+      if (syncUrl) {
+        syncFilterToUrl(parentGroup, topic);
       }
 
       if (scroll) {
@@ -565,57 +544,35 @@ layout: default
     // Handle filter button clicks
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", function () {
-        const clickedFilter = this.dataset.filter;
-
-        // If clicking the currently active filter, show all posts
-        if (this.classList.contains("active")) {
-          applyFilter("all", null);
-          filterBtns.forEach((b) => b.classList.remove("active"));
-        } else {
-          applyFilter(clickedFilter, null);
-        }
-      });
-    });
-
-    // Handle sidebar group link clicks
-    categoryLinks.forEach((link) => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
         applyFilter(this.dataset.filter);
       });
     });
 
-    // Handle sidebar subcategory link clicks
-    document.querySelectorAll(".subcategory-link").forEach((link) => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        const sub = this.dataset.subcategory;
-        // Find the parent group for this subcategory to highlight the right button
-        const groupItem = this.closest("li").previousElementSibling;
-        const groupFilter = groupItem
-          ? (groupItem.querySelector("[data-filter]") || {}).dataset?.filter
-          : null;
-        applyFilter(groupFilter || "all", sub);
+    topicBtns.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        applyTopicFilter(this);
       });
     });
 
     const params = new URLSearchParams(location.search);
-    const catParam = (params.get("cat") || "").trim().toLowerCase();
     const groupParam = (params.get("group") || "").trim().toLowerCase();
+    const topicParam = (params.get("topic") || "").trim().toLowerCase();
     const defaultGroup = "{{ site.data.categories[0].group }}";
+    const topicParamBtn = Array.from(topicBtns).find(
+      (btn) => btn.dataset.topic === topicParam
+    );
 
-    if (catParam) {
-      const grp = CATEGORY_TO_GROUP[catParam];
-      applyFilter(grp || "all", catParam, { scroll: true, syncUrl: true });
+    if (topicParamBtn) {
+      applyTopicFilter(topicParamBtn, { scroll: true, syncUrl: true });
+    } else if (groupParam === "all") {
+      applyFilter("all", { scroll: true, syncUrl: true });
     } else if (
       groupParam &&
-      [{% for g in site.data.categories %}{{ g.group | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}].includes(
-        groupParam
-      )
+      VALID_GROUPS.includes(groupParam)
     ) {
-      applyFilter(groupParam, null, { scroll: true, syncUrl: true });
+      applyFilter(groupParam, { scroll: true, syncUrl: true });
     } else {
-      applyFilter(defaultGroup, null, { scroll: false, syncUrl: false });
+      applyFilter(defaultGroup, { scroll: false, syncUrl: false });
     }
 
     // Slider functionality

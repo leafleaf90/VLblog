@@ -1,0 +1,59 @@
+{% assign post_obj = include.post %}
+{% assign post_thumb = nil %}
+{% if post_obj.featured-thumbnail %}
+  {% assign post_thumb = post_obj.featured-thumbnail %}
+{% elsif post_obj.featured-image %}
+  {% assign post_thumb = post_obj.featured-image
+    | replace: '.webp', '-sm.webp'
+    | replace: '.jpeg', '-sm.jpeg'
+    | replace: '.jpg', '-sm.jpg' %}
+{% endif %}
+
+<article
+  class="post-card"
+  {% if include.main_category %}data-category="{{ include.main_category }}"{% endif %}
+  {% if post_obj.categories %}data-categories="{{ post_obj.categories | join: ',' }}"{% endif %}
+  {% if include.hidden %}style="display: none;"{% endif %}
+>
+  {% if post_thumb %}
+  <img
+    src="{{ post_thumb }}"
+    alt="{{ post_obj.title }}"
+    class="post-card-image"
+    loading="lazy"
+  />
+  {% endif %}
+  <div class="post-card-content">
+    <div class="post-card-main">
+      <h3 class="post-card-title">{{ post_obj.title }}</h3>
+      <p class="post-card-excerpt">
+        {{ post_obj.description | default: post_obj.excerpt | strip_html | truncate: 100 }}
+      </p>
+    </div>
+    <div class="post-card-meta">
+      <span class="post-card-topics">
+        {% for category in post_obj.categories limit: 2 %}
+          {% capture category_label %}
+            {% case category %}
+            {% when "ai" %}AI
+            {% when "ai-tools" %}AI Tools
+            {% when "javascript" %}JavaScript
+            {% when "vue" %}Vue
+            {% when "nuxt" %}Nuxt
+            {% when "firebase" %}Firebase
+            {% when "jekyll" %}Jekyll
+            {% else %}{{ category | replace: "-", " " | capitalize }}
+            {% endcase %}
+          {% endcapture %}
+          <span class="post-card-category">{{ category_label | strip }}</span>
+        {% endfor %}
+      </span>
+      <span>{{ post_obj.date | date: "%b %d" }}</span>
+    </div>
+  </div>
+  <a
+    href="{{ post_obj.url }}"
+    class="post-card-hitbox"
+    aria-label="{{ post_obj.title | append: ' — read full post' | xml_escape }}"
+  ></a>
+</article>

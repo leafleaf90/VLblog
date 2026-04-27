@@ -1,0 +1,13 @@
+<div class="topic-nav-block">
+  <p class="topic-nav-block__label">{{ include.label | default: "Browse by topic" }}</p>
+  <nav class="topic-links" aria-label="Specific topic pages">
+    <a href="/topics/jekyll/" {% if include.current_topic == "jekyll" %}aria-current="page"{% endif %}>Jekyll</a>
+    <a href="/topics/vue/" {% if include.current_topic == "vue" %}aria-current="page"{% endif %}>Vue</a>
+    <a href="/topics/nuxt/" {% if include.current_topic == "nuxt" %}aria-current="page"{% endif %}>Nuxt</a>
+    <a href="/topics/firebase/" {% if include.current_topic == "firebase" %}aria-current="page"{% endif %}>Firebase</a>
+    <a href="/topics/javascript/" {% if include.current_topic == "javascript" %}aria-current="page"{% endif %}>JavaScript</a>
+    <a href="/topics/productivity/" {% if include.current_topic == "productivity" %}aria-current="page"{% endif %}>Productivity</a>
+    <a href="/topics/digital-minimalism/" {% if include.current_topic == "minimalism" %}aria-current="page"{% endif %}>Digital Minimalism</a>
+    <a href="/topics/ai-tools/" {% if include.current_topic == "ai" %}aria-current="page"{% endif %}>AI Tools</a>
+  </nav>
+</div>

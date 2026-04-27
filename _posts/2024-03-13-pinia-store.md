@@ -19,6 +19,10 @@ categories: vue
 
 In [this post]({% post_url 2023-06-01-localstorage %}) we explored how to persist user settings for location and language using only localstorage and listeners to listen for changes of the settings. This is an overly verbose method which soon becomes difficult to maintain. A much smoother way is to utilize a state management tool, such as [Pinia](https://pinia.vuejs.org/). Pinia lets you set up and manage stores easily, and you won't need any explicit event listeners set up. Below we will take a look at how we implemented Pinia for the location and language states on [_**Vegan Monkey**_](https://app.veganmonkey.co){:target="\_blank"}.
 
+<blockquote class="pull-quote">
+  <p>Pinia lets you manage shared state without explicit event listeners.</p>
+</blockquote>
+
 ### 1. Install Pinia and set up the root store
 
 Start by installing Pinia in your project. In the terminal:

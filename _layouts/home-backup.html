@@ -72,16 +72,16 @@ layout: default
         Latest Post<span class="milka red">.</span>
       </h2>
       {% for post in site.posts limit:1 %} {% include
-      components/blog_post_card.html post=post latest=true %} {% endfor %}
+      components/post_card.html post=post %} {% endfor %}
     </div>
 
     <div class="older-posts gradient-bg older-posts-section">
       <h2 class="older-posts-title">
         Older Posts<span class="milka red">.</span>
       </h2>
-      <div class="posts-container">
+      <div class="content-grid">
         {% for post in site.posts offset:1 %} {% include
-        components/blog_post_card.html post=post %} {% endfor %}
+        components/post_card.html post=post %} {% endfor %}
       </div>
     </div>
   </section>

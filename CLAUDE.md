@@ -28,7 +28,7 @@ Config change requires server restart (`_config.yml` is not live-reloaded).
 
 ```
 _layouts/         # home.html, post.html, default.html
-_includes/        # components/blog_post_card.html, agent_prompt.html, agent_reply.html (LLM UI mockups)
+_includes/        # components/post_card.html, agent_prompt.html, agent_reply.html (LLM UI mockups)
 _posts/           # Markdown posts (YYYY-MM-DD-slug.md)
 _drafts/          # Unpublished drafts
 _plugins/         # google_docs_posts.rb, remote_banner_sync.rb (Drive import + remote hero → WebP)
@@ -65,19 +65,21 @@ updated_date: "2026-03-01"    # optional: shown in post header
 
 ## Categories
 
-The homepage filters and sidebar group posts into three buckets:
+The homepage groups posts into broad sections. Topic pages are separate, specific subject pages.
 
 | Group | Categories |
 |---|---|
-| **Code** | coding, vue, nuxt, firebase, javascript, jekyll, hosting, dart, flutter, openai |
-| **Mindfulness** | productivity, minimalism, mindfulness, motivation, books, writing |
-| **Life** | ai, travel, thailand, movies |
+| **Code** | coding, cybersecurity, ai-tools, vue, nuxt, firebase, javascript, jekyll, hosting, dart, flutter, openai |
+| **Digital Life** | ai, productivity, minimalism, mindfulness, motivation, books, writing |
+| **Personal** | travel, thailand, movies |
 
 Posts with categories outside these groups appear in "other" and are visible only under "all".
 
 ## Writing Style
 
 Keep blog humor dry and restrained. Do not add forced analogy jokes, whimsical AI-ish punchlines, or lines like "when the hand turns into a decorative fork" / "burned a small invoice." Prefer clarity and the author's existing voice over extra jokes.
+
+Pull quotes should highlight ideas already present in nearby text. Keep factual or technical quotes very close to the body wording. Summary quotes may be lightly tightened for display, but must not introduce new information only in the quote.
 
 ## Post Media Images
 

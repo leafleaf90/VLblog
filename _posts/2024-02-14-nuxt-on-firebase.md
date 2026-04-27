@@ -194,6 +194,11 @@ Now, we have to make some changes to the Firebase settings in the firebase.json 
 {% endhighlight %}
 
 If you don’t specify a codebase here, you might overwrite functions deployed by your other apps in the same project.
+
+<blockquote class="pull-quote">
+  <p>If you do not specify a codebase, you might overwrite functions deployed by your other apps.</p>
+</blockquote>
+
 You need to set the source of the function to .output/server because this is where the build process will put the server function that we will deploy. If you want to deploy other regular cloud functions from this code base, you can specify several sources specifying an array as the source value.
 
 Since we have several sites in this project, we also need to specify the target for the deployments, so that Firebase knows which site to deploy to:

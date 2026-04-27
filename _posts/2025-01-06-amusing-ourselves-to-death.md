@@ -26,6 +26,10 @@ Remember that this book was published in 1985. Just imagine what Postman would h
 
 With modern technology, especially smartphones, we are no longer required to do anything actively. We just consume. And consume. And consume… And we certainly don’t have to waste any precious brainpower to think about what we’re consuming.
 
+<blockquote class="pull-quote">
+  <p>With modern technology, especially smartphones, we are no longer required to do anything actively. We just consume.</p>
+</blockquote>
+
 ## The way forward
 
 So what is the way out of this downward spiral of our minds? Is there a way we claw our way back to a typographic mind? What seems clear is that by reading more quality books in 2025, we can build our attention span back up again, grow our abilities to think critically, and in the process also feel better. It feels good to focus, to be in the zone!

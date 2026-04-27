@@ -37,7 +37,7 @@
     window.clearTimeout(fallbackTimer);
     setStatus(
       activeForm,
-      "Thanks. Check your inbox to confirm the subscription.",
+      "Almost done. Check your inbox to confirm the subscription. If you do not see it, check spam or junk.",
       "success"
     );
     activeForm.reset();
@@ -48,14 +48,14 @@
     form.addEventListener("submit", function () {
       activeForm = form;
       form.target = frameName;
-      setStatus(form, "Sending you to the tiny email goblin...", "loading");
+      setStatus(form, "Submitting. The confirmation email is the important part.", "loading");
 
       fallbackTimer = window.setTimeout(function () {
         if (!activeForm) return;
 
         setStatus(
           activeForm,
-          "Thanks. Check your inbox to confirm the subscription.",
+          "Almost done. Check your inbox to confirm the subscription. If you do not see it, check spam or junk.",
           "success"
         );
         activeForm.reset();
