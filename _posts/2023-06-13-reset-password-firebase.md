@@ -3,6 +3,8 @@ title: "Reset Firebase user passwords"
 layout: post
 featured-image: /assets/post-media/2023-06-13/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-13/cover_sm.jpg
+featured_image_width: 1920
+featured_image_height: 1282
 description: "How to reset Firebase user passwords with the Firebase SDK and a small admin workflow."
 categories: vue firebase
 ---

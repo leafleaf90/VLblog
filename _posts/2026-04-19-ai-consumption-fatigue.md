@@ -10,6 +10,8 @@ slug: ai-consumption-fatigue
 featured: true    
 featured-image: "/assets/post-media/ai-consumption-fatigue/header.webp"  
 featured-thumbnail: "/assets/post-media/ai-consumption-fatigue/header-sm.webp"
+featured_image_width: 720
+featured_image_height: 900
 
 banner_source_url: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=100&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"  
 

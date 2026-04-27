@@ -3,6 +3,8 @@ title: "Sets And Duplicates"
 layout: post
 featured-image: /assets/post-media/2023-05-17/junior-dev-trick-1-sets-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-17/junior-dev-trick-1-sets-sm.jpg
+featured_image_width: 1920
+featured_image_height: 970
 description: "A small Dart trick for removing duplicates from collections with sets."
 categories: dart
 ---

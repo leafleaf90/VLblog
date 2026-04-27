@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 /**
  * Convert raster images to WebP with sharp (strip metadata, optional downscale).
- * Optional: build a 1200×630 “social card” so link previews do not crop a square headshot.
+ * Optional: build 1200×630 WebP for Open Graph. Default fit is `cover` (full frame, center crop);
+ * use `--social-fit contain` to letterbox (e.g. a square headshot with colored bars).
  *
  * Examples:
  *   npm run optimize-images -- assets/images/profile_new.png
  *   npm run optimize-images -- assets/images/foo.png assets/images/bar.jpg
  *   npm run optimize-images -- assets/images/profile_new.png --social-card assets/images/og-default.webp
+ *   npm run optimize-images -- assets/images/wide_og.png --social-card assets/images/wide-og-1200.webp --social-fit cover
  *
  * Flags:
  *   --quality <1-100>   WebP quality (default: 92)
  *   --max <px>         If the longest edge exceeds this, scale down (default: 1600; 0 = no cap)
- *   --social-card PATH After processing inputs, write one OG/Twitter image from the first input
- *   --bg R,G,B         Letterbox background for --social-card (default: 0,0,0 pitch black)
+ *   --social-card PATH After processing inputs, write one 1200×630 OG image from the first input
+ *   --social-fit <mode>  With --social-card: "cover" (center crop, fills 1200×630) or "contain" (letterbox; default cover)
+ *   --bg R,G,B         Letterbox background for --social-card in contain mode (default: 0,0,0)
  */
 
 import { stat } from "fs/promises";
@@ -31,6 +34,7 @@ function parseArgs(argv) {
   let quality = 92;
   let maxEdge = 1600;
   let socialCard = null;
+  let socialFit = "cover";
   let bg = { r: 0, g: 0, b: 0 };
 
   for (let i = 2; i < argv.length; i++) {
@@ -47,6 +51,11 @@ function parseArgs(argv) {
       socialCard = argv[++i];
       continue;
     }
+    if (a === "--social-fit" || a === "--card-fit") {
+      const m = (argv[++i] || "").toLowerCase();
+      if (m === "cover" || m === "contain") socialFit = m;
+      continue;
+    }
     if (a === "--bg") {
       const parts = argv[++i].split(",").map((x) => Number(x.trim()));
       if (parts.length === 3 && parts.every((n) => Number.isFinite(n)))
@@ -59,7 +68,7 @@ function parseArgs(argv) {
     }
     files.push(join(REPO, a));
   }
-  return { files, quality, maxEdge, socialCard, bg };
+  return { files, quality, maxEdge, socialCard, socialFit, bg };
 }
 
 const RASTER = new Set([".png", ".jpg", ".jpeg", ".webp", ".tif", ".tiff"]);
@@ -103,25 +112,30 @@ async function optimizeOne(absPath, { quality, maxEdge }) {
   );
 }
 
-async function writeSocialCard(absPath, outPath, { quality, bg }) {
-  await sharp(absPath)
-    .rotate()
-    .resize(OG_W, OG_H, {
-      fit: "contain",
-      position: "centre",
-      background: { ...bg, alpha: 1 },
-    })
+async function writeSocialCard(absPath, outPath, { quality, socialFit, bg }) {
+  const fit = socialFit === "cover" ? "cover" : "contain";
+  const pipeline = sharp(absPath).rotate().resize(OG_W, OG_H, {
+    fit,
+    position: "centre",
+    ...(fit === "contain"
+      ? { background: { ...bg, alpha: 1 } }
+      : {}),
+  });
+
+  await pipeline
     .webp({ quality: Math.min(quality, 90), effort: 6 })
     .toFile(join(REPO, outPath));
 
   const bytes = (await stat(join(REPO, outPath))).size;
   console.log(
-    `Social card ${outPath} (${OG_W}×${OG_H}, contain) → ${(bytes / 1024).toFixed(0)} KB`,
+    `Social card ${outPath} (${OG_W}×${OG_H}, ${fit}) → ${(bytes / 1024).toFixed(0)} KB`,
   );
 }
 
 async function main() {
-  const { files, quality, maxEdge, socialCard, bg } = parseArgs(process.argv);
+  const { files, quality, maxEdge, socialCard, socialFit, bg } = parseArgs(
+    process.argv,
+  );
   if (files.length === 0) {
     console.error(
       "Usage: node scripts/optimize-images.mjs <path-from-repo-root> [...] [--flags]\n" +
@@ -140,7 +154,7 @@ async function main() {
 
   if (socialCard) {
     const relOut = socialCard.replace(/^\//, "");
-    await writeSocialCard(files[0], relOut, { quality, bg });
+    await writeSocialCard(files[0], relOut, { quality, socialFit, bg });
   }
 }
 

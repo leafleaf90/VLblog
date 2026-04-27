@@ -3,6 +3,8 @@ title: "Persist user settings with localStorage"
 layout: post
 featured-image: /assets/post-media/2023-06-01/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-01/cover_sm.jpg
+featured_image_width: 1918
+featured_image_height: 1189
 description: "How to persist Vue user settings with localStorage and keep the interface in sync."
 categories: javascript vue
 ---

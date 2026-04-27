@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2023-05-22/excel.jpg
 featured-thumbnail: /assets/post-media/2023-05-22/excel.jpg
+featured_image_width: 1920
+featured_image_height: 1293
 description: "How to generate CSV exports from Vue and Firebase using a cloud function."
 categories: vue firebase
 ---

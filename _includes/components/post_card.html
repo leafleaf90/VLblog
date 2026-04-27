@@ -45,7 +45,16 @@
             {% else %}{{ category | replace: "-", " " | capitalize }}
             {% endcase %}
           {% endcapture %}
-          <span class="post-card-category">{{ category_label | strip }}</span>
+          {% capture topic_hub %}{% include topic_hub_url.html category=category %}{% endcapture %}
+          {% assign topic_hub = topic_hub | strip %}
+          {% if topic_hub != "" %}
+            <a
+              class="post-card-category"
+              href="{{ topic_hub | relative_url }}"
+            >{{ category_label | strip }}</a>
+          {% else %}
+            <span class="post-card-category">{{ category_label | strip }}</span>
+          {% endif %}
         {% endfor %}
       </span>
       <span>{{ post_obj.date | date: "%b %d" }}</span>

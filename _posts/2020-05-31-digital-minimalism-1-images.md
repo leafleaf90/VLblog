@@ -3,6 +3,8 @@ title: "Digital minimalism - Part 1: Images"
 layout: post
 featured-image: /assets/post-media/2020-05-31/minimal.jpg
 featured-thumbnail: /assets/post-media/2020-05-31/minimal-sm.jpg
+featured_image_width: 1918
+featured_image_height: 1161
 description: "How I organized an image library to reduce clutter and make old photos easier to find."
 categories: digital-minimalism
 ---

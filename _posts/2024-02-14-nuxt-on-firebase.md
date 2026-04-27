@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2024-02-14/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-14/cover_sm.jpg
+featured_image_width: 2304
+featured_image_height: 1536
 description: "How to deploy a Nuxt 3 frontend with Firebase Hosting and Firestore-backed data."
 categories: firebase nuxt
 ---

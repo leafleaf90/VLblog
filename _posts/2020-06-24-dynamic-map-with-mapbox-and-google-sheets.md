@@ -3,6 +3,8 @@ title: "Dynamic map with Mapbox and Google Sheets"
 layout: post
 featured-image: /assets/post-media/2020-06-24/map.jpg
 featured-thumbnail: /assets/post-media/2020-06-24/map-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1280
 description: "How to render Google Sheets data on a Mapbox map using a cached backend flow to avoid CORS and runtime surprises."
 categories: javascript
 ---

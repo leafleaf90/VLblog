@@ -3,6 +3,8 @@ title: "Digital Minimalism - Part 2: Desktop"
 layout: post
 featured-image: /assets/post-media/2020-06-17/header.jpg
 featured-thumbnail: /assets/post-media/2020-06-17/header-sm.jpg
+featured_image_width: 1918
+featured_image_height: 857
 description: "Desktop rules and habits that helped me keep files, browser tabs, and visual clutter under control."
 categories: digital-minimalism
 ---

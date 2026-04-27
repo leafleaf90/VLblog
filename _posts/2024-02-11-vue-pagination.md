@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building 15 Pages"
 featured-image: /assets/post-media/2024-02-11/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-11/cover_sm.jpg
+featured_image_width: 5506
+featured_image_height: 3665
 description: "How to build a reusable pagination component in Vue for cleaner list navigation."
 categories: vue
 ---

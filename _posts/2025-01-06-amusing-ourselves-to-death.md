@@ -3,6 +3,8 @@ title: "Are we amusing ourselves to death?"
 layout: post
 featured-image: /assets/post-media/2025-01-06/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2025-01-06/cover_sm.jpg
+featured_image_width: 1920
+featured_image_height: 1440
 description: "Reflections on McLuhan, Postman, and why the medium still has a habit of quietly eating the message."
 categories: books
 featured: true

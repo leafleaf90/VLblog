@@ -3,6 +3,8 @@ title: "Migrate from Vue CLI to Vite"
 layout: post
 featured-image: /assets/post-media/2023-06-28/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-06-28/cover_sm.jpg
+featured_image_width: 2600
+featured_image_height: 1302
 description: "A short migration note on moving a Vue project from Vue CLI to Vite for faster local development."
 categories: vue
 ---

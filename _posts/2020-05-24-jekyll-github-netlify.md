@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2020-04-28/server.jpg
 featured-thumbnail: /assets/post-media/2020-04-28/server-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1077
 description: "How to deploy a Jekyll blog with GitHub and Netlify for a simple automated static-site workflow."
 categories: jekyll deployment
 ---

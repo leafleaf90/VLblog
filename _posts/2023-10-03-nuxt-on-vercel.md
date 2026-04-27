@@ -3,6 +3,8 @@ title: "Deploy Nuxt on Vercel"
 layout: post
 featured-image: /assets/post-media/2023-10-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-10-03/cover_sm.jpg
+featured_image_width: 2000
+featured_image_height: 1333
 description: "How to deploy a Nuxt app on Vercel, including preview builds and common dependency issues."
 categories: nuxt deployment
 ---

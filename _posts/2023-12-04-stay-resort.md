@@ -3,6 +3,8 @@ title: "Stay Resort"
 layout: post
 featured-image: /assets/post-media/2023-12-14/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-12-14/cover_sm.jpg
+featured_image_width: 1024
+featured_image_height: 673
 description: "A practical review of Stay Resort in Phuket, covering the fitness setup, location, price, and whether the stay is worth it."
 categories: travel
 ---

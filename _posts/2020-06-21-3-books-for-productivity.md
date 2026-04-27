@@ -3,6 +3,8 @@ title: "3 Books for Productivity"
 layout: post
 featured-image: /assets/post-media/2020-06-21/books.jpg
 featured-thumbnail: /assets/post-media/2020-06-21/books-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1280
 description: "Three productivity books that were actually useful, plus what stuck after reading them."
 categories: productivity books
 featured: true

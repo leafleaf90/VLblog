@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2024-03-13/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-03-13/cover_sm.jpg
+featured_image_width: 1920
+featured_image_height: 1079
 description: "How Pinia simplifies Vue state management for location and language settings compared with manual localStorage listeners."
 categories: vue
 ---

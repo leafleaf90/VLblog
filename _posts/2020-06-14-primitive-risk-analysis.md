@@ -3,6 +3,8 @@ title: "Primitive Risk Analysis"
 layout: post
 featured-image: /assets/post-media/2020-06-14/risk.jpg
 featured-thumbnail: /assets/post-media/2020-06-14/risk-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1280
 description: "A simple risk-analysis method for making decisions under uncertainty."
 categories: productivity
 ---

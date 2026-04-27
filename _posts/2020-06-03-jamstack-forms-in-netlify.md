@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2020-06-03/coffee-computer.jpg
 featured-thumbnail: /assets/post-media/2020-06-03/coffee-computer-sm.jpg
+featured_image_width: 1917
+featured_image_height: 943
 description: "How to add a small form to a static site using Netlify Forms without building a backend."
 categories: deployment
 ---

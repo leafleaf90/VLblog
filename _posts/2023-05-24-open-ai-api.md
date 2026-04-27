@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building Vegan Monkey"
 featured-image: /assets/post-media/2023-05-24/cover-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-24/cover-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1365
 description: "How to call OpenAI from a Vue frontend through a cloud function instead of exposing secrets in the browser."
 categories: vue ai-tools
 ---

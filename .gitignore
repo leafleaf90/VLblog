@@ -28,6 +28,9 @@ Thumbs.db
 # Netlify (local state; never credentials in repo; use Netlify UI / env in dashboard)
 .netlify/
 
+# Local mirror of pruned /assets (see one-time cleanup); not in repo, restorable on disk
+archived-assets/
+
 # Temp / local scratch
 tmp/
 temp/

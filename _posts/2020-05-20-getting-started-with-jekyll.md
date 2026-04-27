@@ -5,6 +5,8 @@ is_series: true
 series_title: "Building this blog"
 featured-image: /assets/post-media/2020-04-27/kickin-back.jpg
 featured-thumbnail: /assets/post-media/2020-04-27/kickin-back-sm.jpg
+featured_image_width: 1920
+featured_image_height: 969
 description: "A beginner-friendly walkthrough for creating a static blog with Jekyll, Liquid, Markdown, and simple hosting."
 categories: jekyll
 ---

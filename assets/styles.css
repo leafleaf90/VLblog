@@ -3472,6 +3472,29 @@ html[data-theme="dark"] .post-browse {
   text-transform: uppercase;
 }
 
+.post-browse__hub-cta {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.blog-page .post-browse__hub-cta {
+  text-align: left;
+}
+
+.post-browse__hub-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+
+.post-browse__hub-link:hover,
+.post-browse__hub-link:focus-visible {
+  border-bottom-color: var(--color-primary);
+  outline: none;
+}
+
 .post-browse__row {
   display: grid;
   gap: var(--spacing-sm);
@@ -4044,9 +4067,12 @@ html[data-theme="dark"] .topic-filter-btn {
 }
 
 .post-card-topics {
+  position: relative;
+  z-index: 3;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  pointer-events: auto;
 }
 
 .post-card-category {
@@ -4058,6 +4084,28 @@ html[data-theme="dark"] .topic-filter-btn {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 10px;
+}
+
+a.post-card-category {
+  text-decoration: none;
+}
+
+a.post-card-category:hover,
+a.post-card-category:focus-visible {
+  background: #e2e8f0;
+  color: var(--color-primary-dark);
+  outline: none;
+}
+
+html[data-theme="dark"] a.post-card-category {
+  background: rgba(51, 65, 85, 0.9);
+  color: var(--color-primary-light);
+}
+
+html[data-theme="dark"] a.post-card-category:hover,
+html[data-theme="dark"] a.post-card-category:focus-visible {
+  background: rgba(71, 85, 105, 0.95);
+  color: #e2e8f0;
 }
 
 /* Projects Section - Refined */

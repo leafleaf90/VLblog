@@ -79,11 +79,17 @@
                 {% else %}{{ category | replace: "-", " " | capitalize }}
                 {% endcase %}
               {% endcapture %}
+              {% capture topic_hub %}{% include topic_hub_url.html category=category %}{% endcapture %}
+              {% assign topic_hub = topic_hub | strip %}
               <button
                 class="topic-filter-btn"
                 data-topic="{{ category }}"
                 data-topic-group="{{ group.group }}"
                 data-topic-label="{{ category_label | strip }}"
+                {% if topic_hub != "" %}
+                  data-topic-hub="{{ topic_hub | relative_url }}"
+                {% endif %}
+                type="button"
               >
                 <span>{{ category_label | strip }}</span>
                 <span>{{ category_posts.size }}</span>
@@ -94,6 +100,10 @@
       </div>
       {% endfor %}
     </div>
+
+    <p class="post-browse__hub-cta" data-post-browse-hub-cta hidden>
+      <a class="post-browse__hub-link" data-post-browse-hub-link href="#"></a>
+    </p>
   </div>
 
   <div class="content-grid" data-post-browse-grid>

@@ -25,7 +25,24 @@
     if (!grid) {
       return;
     }
+    const hubCta = root.querySelector("[data-post-browse-hub-cta]");
+    const hubLink = root.querySelector("[data-post-browse-hub-link]");
     const postCards = grid.querySelectorAll(".post-card");
+
+    function setHubCtaFromTopicButton(topicBtn) {
+      if (!hubCta || !hubLink) {
+        return;
+      }
+      const hub = topicBtn && topicBtn.dataset.topicHub;
+      if (hub) {
+        hubLink.href = hub;
+        const label = (topicBtn.dataset.topicLabel || "Topic").trim();
+        hubLink.textContent = `View ${label} topic page →`;
+        hubCta.hidden = false;
+      } else {
+        hubCta.hidden = true;
+      }
+    }
 
     let config;
     try {
@@ -148,6 +165,8 @@
       if (scroll && scrollTarget) {
         scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+
+      setHubCtaFromTopicButton(null);
     }
 
     function applyTopicFilter(topicBtn, options) {
@@ -186,6 +205,8 @@
       if (scroll && scrollTarget) {
         scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" });
       }
+
+      setHubCtaFromTopicButton(topicBtn);
     }
 
     filterBtns.forEach((btn) => {

@@ -3,6 +3,8 @@ title: "E-reader or physical books?"
 layout: post
 featured-image: /assets/post-media/2020-07-01/ereader.jpg
 featured-thumbnail: /assets/post-media/2020-07-01/ereader-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1280
 description: "A comparison of e-readers and physical books, with notes on convenience, focus, and reading habits."
 categories: books
 ---

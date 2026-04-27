@@ -3,6 +3,8 @@ title: "My Portable Office Setup"
 layout: post
 featured-image: /assets/post-media/2020-06-10/work_station_medium.jpg
 featured-thumbnail: /assets/post-media/2020-06-10/work_station_medium-sm.jpg
+featured_image_width: 1385
+featured_image_height: 893
 description: "The portable work setup I use to stay productive without carrying half an electronics store."
 categories: productivity digital-minimalism
 ---

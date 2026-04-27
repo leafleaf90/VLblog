@@ -3,6 +3,8 @@ title: "Nuxt + Tailwind"
 layout: post
 featured-image: /assets/post-media/2024-01-10/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-01-10/cover_sm.jpg
+featured_image_width: 1920
+featured_image_height: 1159
 description: "A quick setup guide for using Tailwind in a Nuxt project."
 categories: nuxt tailwind
 ---

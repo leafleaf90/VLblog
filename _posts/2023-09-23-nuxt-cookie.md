@@ -3,6 +3,8 @@ title: "Nuxt cookies and server middleware"
 layout: post
 featured-image: /assets/post-media/2023-09-23/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-09-23/cover_sm.jpg
+featured_image_width: 2000
+featured_image_height: 2500
 description: "How to use cookies and server middleware in Nuxt for lightweight API route guards."
 categories: nuxt
 ---

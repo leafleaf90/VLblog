@@ -3,6 +3,8 @@ title: "Staying motivated while learning to code"
 layout: post
 featured-image: /assets/post-media/2020-06-07/mac.jpg
 featured-thumbnail: /assets/post-media/2020-06-07/mac-sm.jpg
+featured_image_width: 1920
+featured_image_height: 1280
 description: "Tools and habits that helped me stay consistent while learning to code, without pretending motivation is a stable resource."
 categories: motivation
 ---

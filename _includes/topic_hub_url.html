@@ -1,0 +1,14 @@
+{% comment %}Output only: relative hub path or nothing. category=slug{% endcomment -%}
+{%- case include.category -%}
+  {%- when "jekyll" -%}/topics/jekyll/
+  {%- when "vue" -%}/topics/vue/
+  {%- when "nuxt" -%}/topics/nuxt/
+  {%- when "firebase" -%}/topics/firebase/
+  {%- when "javascript" -%}/topics/javascript/
+  {%- when "tailwind" -%}/topics/tailwind/
+  {%- when "deployment" -%}/topics/deployment/
+  {%- when "productivity" -%}/topics/productivity/
+  {%- when "digital-minimalism" -%}/topics/digital-minimalism/
+  {%- when "ai" -%}/topics/ai/
+  {%- when "ai-tools" -%}/topics/ai-tools/
+{%- endcase -%}

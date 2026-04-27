@@ -21,8 +21,8 @@
 title: Viktor Lövgren
 author: Viktor Lövgren
 # Used when a page has no featured-image (homepage, quotes, etc.)
-# 1200×630 WebP (letterboxed) so Facebook/Slack/Twitter do not crop a square portrait
-default_social_image: /assets/images/og-default.webp
+# 1200×630 WebP from wide_og.png (center crop: npm run optimize-images -- assets/images/wide_og.png --social-card assets/images/wide-og-1200.webp --social-fit cover)
+default_social_image: /assets/images/wide-og-1200.webp
 default_social_image_width: 1200
 default_social_image_height: 630
 email: mail@viktorlovgren.com

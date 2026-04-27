@@ -3,6 +3,8 @@ title: "Breathwork"
 layout: post
 featured-image: /assets/post-media/2023-05-25/breathwork-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-25/breathwork-sm.jpg
+featured_image_width: 2782
+featured_image_height: 1667
 description: "A short note on breathwork as a simple habit for regulating stress and attention."
 categories: mindfulness
 ---
