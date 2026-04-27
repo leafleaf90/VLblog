@@ -1,0 +1,32 @@
+<dialog
+  id="newsletterSignupModal"
+  class="newsletter-modal"
+  aria-labelledby="newsletter-heading-modal"
+>
+  <div class="newsletter-modal__wrap">
+    <div
+      class="newsletter-modal__underlay"
+      data-newsletter-modal-close
+      aria-hidden="true"
+      tabindex="-1"
+    ></div>
+    <div class="newsletter-modal__panel">
+      <div class="newsletter-modal__header">
+        <button
+          type="button"
+          class="newsletter-modal__close"
+          data-newsletter-modal-close
+          aria-label="Close"
+        >
+          <span class="newsletter-modal__close-x" aria-hidden="true">×</span>
+        </button>
+      </div>
+      {% include newsletter_signup.html variant="modal" username="viktorlovgren" %}
+      <p class="newsletter-modal__footer">
+        <button type="button" class="newsletter-modal__later" data-newsletter-modal-close>
+          Not now
+        </button>
+      </p>
+    </div>
+  </div>
+</dialog>

@@ -1,0 +1,150 @@
+{% comment %}
+  Shared browse/filter UI for post grids.
+
+  Required:
+  - page_context: "home" | "blog" (drives default titles/scroll targets)
+
+  Optional:
+  - show_initial_limit: if set, only first N post cards are shown until filtered
+{% endcomment %}
+
+{% assign _ctx = include.page_context | default: "home" %}
+
+{% if _ctx == "blog" %}
+  {% assign _posts_title = "All Posts" %}
+  {% assign _posts_title_base = "All Posts" %}
+  {% assign _empty_title = "All Posts" %}
+{% else %}
+  {% assign _posts_title = "Recent Posts" %}
+  {% assign _posts_title_base = "Recent Posts" %}
+  {% assign _empty_title = "Recent Posts" %}
+{% endif %}
+
+{% assign _scroll_target = "posts-list-heading" %}
+
+<div class="post-browse-root" data-post-browse="{{ _ctx }}">
+  <div class="post-browse" aria-label="Browse posts">
+    <p class="section-filter-label">Browse Posts</p>
+    <div class="post-browse__row">
+      <p class="post-browse__label">Sections</p>
+      <div class="category-filter">
+        <button class="filter-btn filter-btn--all" data-filter="all">All Posts</button>
+        {% for group in site.data.categories %}
+        <button
+          class="filter-btn {% if forloop.first %}active{% endif %}"
+          data-filter="{{ group.group }}"
+        >
+          <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            {% case group.group %}
+            {% when 'code' %}
+              <polyline points="16,18 22,12 16,6"></polyline>
+              <polyline points="8,6 2,12 8,18"></polyline>
+            {% when 'digital-life' %}
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+            {% when 'personal' %}
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            {% endcase %}
+          </svg>
+          {{ group.label }}
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="topic-filter-groups">
+      {% for group in site.data.categories %}
+      <div
+        class="topic-filter-group"
+        data-topic-group="{{ group.group }}"
+        {% unless forloop.first %}hidden{% endunless %}
+      >
+        <p class="post-browse__label">{{ group.label }} topics</p>
+        <div class="topic-filter-list">
+          {% for category in group.categories %}
+            {% assign category_posts = site.categories[category] %}
+            {% if category_posts %}
+              {% capture category_label %}
+                {% case category %}
+                {% when "ai" %}AI
+                {% when "ai-tools" %}AI Tools
+                {% when "javascript" %}JavaScript
+                {% when "vue" %}Vue
+                {% when "nuxt" %}Nuxt
+                {% when "firebase" %}Firebase
+                {% when "jekyll" %}Jekyll
+                {% when "tailwind" %}Tailwind
+                {% when "deployment" %}Deployment
+                {% when "digital-minimalism" %}Digital Minimalism
+                {% else %}{{ category | replace: "-", " " | capitalize }}
+                {% endcase %}
+              {% endcapture %}
+              <button
+                class="topic-filter-btn"
+                data-topic="{{ category }}"
+                data-topic-group="{{ group.group }}"
+                data-topic-label="{{ category_label | strip }}"
+              >
+                <span>{{ category_label | strip }}</span>
+                <span>{{ category_posts.size }}</span>
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="content-grid" data-post-browse-grid>
+    {% for post in site.posts %}
+      {% unless post.published == false %}
+      {% assign main_category = "other" %}
+      {% assign group_found = false %}
+      {% for group in site.data.categories %}
+        {% unless group_found %}
+          {% for cat in group.categories %}
+            {% if post.categories contains cat %}
+              {% assign main_category = group.group %}
+              {% assign group_found = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endunless %}
+      {% endfor %}
+
+      {% assign hide_post = false %}
+      {% if include.show_initial_limit %}
+        {% if forloop.index > include.show_initial_limit %}
+          {% assign hide_post = true %}
+        {% endif %}
+      {% endif %}
+      {% include components/post_card.html post=post main_category=main_category hidden=hide_post %}
+      {% endunless %}
+    {% endfor %}
+  </div>
+
+  <script type="application/json" id="post-browse-config-{{ _ctx }}">
+  {
+    "pageContext": {{ _ctx | jsonify }},
+    "postsHeadingId": "posts-list-heading",
+    "postsTitle": {{ _posts_title | jsonify }},
+    "postsTitleBase": {{ _posts_title_base | jsonify }},
+    "emptySectionTitle": {{ _empty_title | jsonify }},
+    "scrollTargetId": {{ _scroll_target | jsonify }},
+    "defaultGroup": {{ site.data.categories[0].group | jsonify }},
+    "initialLimit": {% if include.show_initial_limit %}true{% else %}false{% endif %},
+    "sectionLabels": {
+      {%- assign _label_index = 0 -%}
+      {%- for g in site.data.categories -%}
+      {%- assign _label_index = _label_index | plus: 1 -%}
+      {{ g.group | jsonify }}: {{ g.label | jsonify }}{% if _label_index < site.data.categories.size %},{% endif %}
+      {%- endfor -%}
+    }
+  }
+  </script>
+
+  <script
+    src="{{ 'assets/post-browse.js' | relative_url }}?v={{ site.time | date: '%s' }}"
+  ></script>
+</div>

@@ -38,6 +38,26 @@
   syncNavOffset();
   section.classList.add("profile-scroll-active");
 
+  const hintWrap = section.querySelector(".profile-scroll-hint-wrap");
+  if (hintWrap && "IntersectionObserver" in window) {
+    const offscreenIo = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) {
+            section.style.setProperty("--profile-hint-offscreen", "1");
+            continue;
+          }
+          const raw = 1 - entry.intersectionRatio;
+          const dead = 0.1;
+          const t = raw <= dead ? 0 : (raw - dead) / (1 - dead);
+          section.style.setProperty("--profile-hint-offscreen", String(clamp(t, 0, 1)));
+        }
+      },
+      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0] }
+    );
+    offscreenIo.observe(hintWrap);
+  }
+
   function frameUrl(index) {
     return `/assets/images/profile-frames/frame-${String(index + 1).padStart(4, "0")}.webp`;
   }
@@ -72,14 +92,31 @@
     const maxScroll = section.offsetHeight - stageHeight;
     if (maxScroll <= 0) {
       currentFrame = 0;
-      section.classList.remove("profile-scroll-complete");
+      section.classList.remove(
+        "profile-scroll-complete",
+        "profile-scroll-thanks",
+        "profile-scroll-keep",
+        "profile-scroll-hint-scrolling"
+      );
+      section.style.removeProperty("--profile-hint-progress");
+      section.style.removeProperty("--profile-hint-exit");
       return;
     }
 
     const progress = clamp((window.scrollY - start) / maxScroll, 0, 1);
     currentFrame = Math.min(Math.floor(progress * (totalFrames - 1)), totalFrames - 1);
-    section.classList.toggle("profile-scroll-thanks", progress >= 0.82);
+    /* Phases: intro → nudge to continue (keep) → thank-you (longer band so it’s easy to read) */
+    const keepStart = 0.35;
+    const thanksStart = 0.63;
+    section.classList.toggle("profile-scroll-keep", progress >= keepStart && progress < thanksStart);
+    section.classList.toggle("profile-scroll-thanks", progress >= thanksStart);
     section.classList.toggle("profile-scroll-complete", progress >= 1);
+    section.classList.toggle("profile-scroll-hint-scrolling", progress > 0.04 && progress < 1);
+    section.style.setProperty("--profile-hint-progress", String(progress));
+    /* Dissolve the cue only in the last part of the runway so “Thanks!” stays legible */
+    const exitStart = 0.88;
+    const exitRaw = progress > exitStart ? (progress - exitStart) / (1 - exitStart) : 0;
+    section.style.setProperty("--profile-hint-exit", String(clamp(exitRaw, 0, 1)));
   }
 
   function drawFrame(index) {

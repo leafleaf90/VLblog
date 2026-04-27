@@ -2,7 +2,7 @@
 
 This document explains the **illustrated agent-composer** component used in blog posts to show example prompts (Cursor Composer, Claude, Google Gemini, and similar UIs) without screenshots.
 
-**AI reply blocks** (Gemini sparkle + actions / rule; Cursor status + panel) are documented separately: [`agent-reply-mockups.md`](agent-reply-mockups.md).
+**AI reply blocks** (Gemini sparkle + actions / rule; Cursor status + panel) are documented separately: `[agent-reply-mockups.md](agent-reply-mockups.md)`.
 
 ## Why this exists
 
@@ -13,16 +13,18 @@ This document explains the **illustrated agent-composer** component used in blog
 
 ## What was implemented
 
-| Piece | Role |
-|--------|------|
+
+| Piece                                    | Role                                                                                                                                                                                                   |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `_includes/components/agent_prompt.html` | Renders the mock: prompt area, blinking caret, decorative toolbar (marked `aria-hidden`), optional disclaimer line, optional caption. Body text is HTML-escaped; newlines use `white-space: pre-wrap`. |
-| `assets/styles.css` | Scoped `.agent-prompt` rules and `--ap-*` variables; `.agent-prompt--claude` and `.agent-prompt--gemini` skins (Gemini uses a larger radius, different toolbar, paper-plane send). |
-| `_data/agent_prompts.yml` | Optional catalog of named examples; posts reference them by `id`. |
+| `assets/styles.css`                      | Scoped `.agent-prompt` rules and `--ap-*` variables; `.agent-prompt--claude` and `.agent-prompt--gemini` skins (Gemini uses a larger radius, different toolbar, paper-plane send).                     |
+| `_data/agent_prompts.yml`                | Optional catalog of named examples; posts reference them by `id`.                                                                                                                                      |
+
 
 ### Accessibility
 
 - Prompt copy is **not** inside `aria-hidden`; screen readers read the paragraph like normal content.
-- The fake toolbar (Cursor/Claude: plus, model, mic, up-arrow send; Gemini: plus, Tools, speed label, paper plane) is **`aria-hidden="true"`** so it is not announced as interactive controls.
+- The fake toolbar (Cursor/Claude: plus, model, mic, up-arrow send; Gemini: plus, Tools, speed label, paper plane) is `**aria-hidden="true"`** so it is not announced as interactive controls.
 
 ### Google Docs–sourced posts
 
@@ -101,8 +103,8 @@ Default footer labels if omitted: **Composer 2** for `cursor`, **Claude** for `c
 
 ## Changing the look
 
-- Edit **`assets/styles.css`** under the `Agent / LLM composer UI mockups` section.
-- Prefer **`--ap-*` variables** on `.agent-prompt` / `.agent-prompt--claude` / `.agent-prompt--gemini` before adding one-off rules.
+- Edit `**assets/styles.css`** under the `Agent / LLM composer UI mockups` section.
+- Prefer `**--ap-*` variables** on `.agent-prompt` / `.agent-prompt--claude` / `.agent-prompt--gemini` before adding one-off rules.
 
 ## Adding a new catalog entry
 

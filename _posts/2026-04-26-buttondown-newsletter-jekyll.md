@@ -4,7 +4,7 @@ layout: post
 is_series: false
 description: "How to add a custom Buttondown signup form to a Jekyll blog without exposing API keys or building a backend."
 date: "2026-04-26"
-categories: ["coding", "jekyll"]
+categories: ["jekyll"]
 published: true
 slug: buttondown-newsletter-jekyll-custom-form
 featured-image: "/assets/post-media/buttondown-newsletter-jekyll-custom-form/header.webp"

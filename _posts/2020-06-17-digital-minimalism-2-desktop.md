@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-06-17/header.jpg
 featured-thumbnail: /assets/post-media/2020-06-17/header-sm.jpg
 description: "Desktop rules and habits that helped me keep files, browser tabs, and visual clutter under control."
-categories: minimalism
+categories: digital-minimalism
 ---
 
 These are guidelines I <em>try</em> to follow, rather than rules I strictly adhere to. Many times it seems I relax for a minute and my desktop is completely cluttered with saved screenshots of unknown origin and Excel files with confusingly similar names that <em>just might</em> contain the formula that will make or break Q2 for the whole company. But these guidelines help me keep the confusion to a minimum.

@@ -39,16 +39,28 @@ layout: default
             <span class="profile-scroll-loader-bar"></span>
           </div>
         </div>
-        <p class="profile-scroll-hint" aria-live="polite">
-          <span class="profile-scroll-hint-text profile-scroll-hint-text--scroll">
-            Scroll to make me happier
-          </span>
-          <span class="profile-scroll-hint-text profile-scroll-hint-text--thanks">
-            Thanks!
-          </span>
-          <span class="profile-scroll-hint-icon profile-scroll-hint-icon--arrow" aria-hidden="true"></span>
-          <span class="profile-scroll-hint-icon profile-scroll-hint-icon--smile" aria-hidden="true">:)</span>
-        </p>
+        <div class="profile-scroll-hint-wrap" aria-live="polite">
+          <div class="profile-scroll-hint-rail" aria-hidden="true">
+            <span class="profile-scroll-hint-rail-fill"></span>
+          </div>
+          <div class="profile-scroll-hint-main">
+            <p class="profile-scroll-hint">
+              <span class="profile-scroll-hint-text profile-scroll-hint-text--scroll">
+                Scroll to make me happier
+              </span>
+              <span class="profile-scroll-hint-text profile-scroll-hint-text--keep">
+                Keep going…
+              </span>
+              <span class="profile-scroll-hint-text profile-scroll-hint-text--thanks">
+                Thanks! <span class="profile-scroll-hint-emoji" aria-hidden="true">🙏</span>
+              </span>
+            </p>
+            <div class="profile-scroll-hint-cue" aria-hidden="true">
+              <span class="profile-scroll-hint-glow"></span>
+              <span class="profile-scroll-hint-icon profile-scroll-hint-icon--arrow"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -102,6 +114,9 @@ layout: default
                     {% when "nuxt" %}Nuxt
                     {% when "firebase" %}Firebase
                     {% when "jekyll" %}Jekyll
+                    {% when "tailwind" %}Tailwind
+                    {% when "deployment" %}Deployment
+                    {% when "digital-minimalism" %}Digital Minimalism
                     {% else %}{{ slider_category | replace: "-", " " | capitalize }}
                     {% endcase %}
                   {% endcapture %}
@@ -155,426 +170,173 @@ layout: default
     </section>
 
     <!-- Recent Posts Grid -->
-    <section aria-labelledby="recent-heading">
-      <h2 id="recent-heading" class="section-title">Recent Posts</h2>
+    <section aria-labelledby="posts-list-heading">
+      <h2 id="posts-list-heading" class="section-title">Recent Posts</h2>
+      {% include components/post_browse.html page_context="home" show_initial_limit=12 %}
+    </section>
 
-      <div class="post-browse" aria-label="Browse posts">
-        <p class="section-filter-label">Browse Posts</p>
-        <div class="post-browse__row">
-          <p class="post-browse__label">Sections</p>
-          <div class="category-filter">
-          <button class="filter-btn filter-btn--all" data-filter="all">
-            All Posts
-          </button>
-          {% for group in site.data.categories %}
-          <button class="filter-btn {% if forloop.first %}active{% endif %}" data-filter="{{ group.group }}">
-            <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              {% case group.group %}
-              {% when 'code' %}
-                <polyline points="16,18 22,12 16,6"></polyline>
-                <polyline points="8,6 2,12 8,18"></polyline>
-              {% when 'digital-life' %}
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-              {% when 'personal' %}
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              {% endcase %}
-            </svg>
-            {{ group.label }}
-          </button>
-          {% endfor %}
-          </div>
-        </div>
+    <!-- Projects Section -->
+    <section class="projects-section" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="section-title">Current Projects</h2>
+      <div class="projects-grid projects-grid--current">
+        <article class="project-card">
+          <img
+            src="/assets/images/vm_logo.png"
+            alt="Vegan Monkey logo"
+            class="project-logo"
+            loading="lazy"
+          />
+          <h3 class="project-title">Vegan Monkey</h3>
+          <ul class="project-tags" aria-label="Tech stack">
+            <li class="project-tag">Nuxt</li>
+            <li class="project-tag">Vue</li>
+            <li class="project-tag">Firebase</li>
+            <li class="project-tag">Algolia</li>
+            <li class="project-tag">Cloudinary</li>
+          </ul>
+          <p class="project-description">
+            A webapp that consolidates plant-based products, dishes, services,
+            and experiences in Bangkok.
+          </p>
+          <a
+            href="https://www.veganmonkey.co"
+            class="button"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Visit Site</a
+          >
+        </article>
 
-        <div class="topic-filter-groups">
-          {% for group in site.data.categories %}
-          <div class="topic-filter-group" data-topic-group="{{ group.group }}" {% unless forloop.first %}hidden{% endunless %}>
-            <p class="post-browse__label">{{ group.label }} topics</p>
-            <div class="topic-filter-list">
-              {% for category in group.categories %}
-                {% assign category_posts = site.categories[category] %}
-                {% if category_posts %}
-                  {% capture category_label %}
-                    {% case category %}
-                    {% when "ai" %}AI
-                    {% when "ai-tools" %}AI Tools
-                    {% when "javascript" %}JavaScript
-                    {% when "vue" %}Vue
-                    {% when "nuxt" %}Nuxt
-                    {% when "firebase" %}Firebase
-                    {% when "jekyll" %}Jekyll
-                    {% when "openai" %}OpenAI
-                    {% else %}{{ category | replace: "-", " " | capitalize }}
-                    {% endcase %}
-                  {% endcapture %}
-                  <button
-                    class="topic-filter-btn"
-                    data-topic="{{ category }}"
-                    data-topic-group="{{ group.group }}"
-                    data-topic-label="{{ category_label | strip }}"
-                  >
-                    <span>{{ category_label | strip }}</span>
-                    <span>{{ category_posts.size }}</span>
-                  </button>
-                {% endif %}
-              {% endfor %}
-            </div>
+        <article class="project-card">
+          <img
+            src="/assets/images/15pages_logo.png"
+            alt="15 Pages logo"
+            class="project-logo project-logo--15pages"
+            loading="lazy"
+          />
+          <h3 class="project-title">15 Pages</h3>
+          <ul class="project-tags" aria-label="Tech stack">
+            <li class="project-tag">Nuxt</li>
+            <li class="project-tag">Vue</li>
+            <li class="project-tag">Tailwind</li>
+            <li class="project-tag">Supabase</li>
+          </ul>
+          <p class="project-description">
+            Book summaries and tools to help incentivize more reading. Work in
+            progress.
+          </p>
+          <a
+            href="https://www.15pages.com"
+            class="button"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Visit Site</a
+          >
+        </article>
+
+        <article class="project-card">
+          <div class="project-logo-wrap project-logo-wrap--edp">
+            <img
+              src="/assets/images/emdashpatrol_logo.svg"
+              alt=""
+              width="100"
+              height="100"
+              class="project-logo project-logo--edp project-logo--edp-light"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/assets/images/emdashpatrol_logo_dark.svg"
+              alt=""
+              width="100"
+              height="100"
+              class="project-logo project-logo--edp project-logo--edp-dark"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
-          {% endfor %}
-        </div>
+          <h3 class="project-title">Em Dash Patrol</h3>
+          <ul class="project-tags" aria-label="Tech stack">
+            <li class="project-tag">Nuxt</li>
+            <li class="project-tag">Vue</li>
+            <li class="project-tag">Gemini</li>
+          </ul>
+          <p class="project-description">
+            Rule-based scan for AI-writing tells in pasted prose (em dashes,
+            throat-clearing openers, hype verbs), optional Gemini roast,
+            privacy-minded logging.
+          </p>
+          <a
+            href="https://www.emdashpatrol.com"
+            class="button"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Visit Site</a
+          >
+        </article>
       </div>
 
-        <div class="content-grid">
-          {% for post in site.posts %}
-          {% assign main_category = "other" %}
-          {% assign group_found = false %}
-          {% for group in site.data.categories %}
-            {% unless group_found %}
-              {% for cat in group.categories %}
-                {% if post.categories contains cat %}
-                  {% assign main_category = group.group %}
-                  {% assign group_found = true %}
-                  {% break %}
-                {% endif %}
-              {% endfor %}
-            {% endunless %}
-          {% endfor %}
+      <h2
+        id="projects-previous-heading"
+        class="section-title section-title--projects-sub"
+      >
+        Previous Projects
+      </h2>
+      <div class="projects-grid projects-grid--previous">
+        <article class="project-card">
+          <img
+            src="/assets/images/bluetiki_logo.png"
+            alt="Blue Tiki logo"
+            class="project-logo project-logo--bluetiki"
+            loading="lazy"
+          />
+          <h3 class="project-title">Blue Tiki</h3>
+          <ul class="project-tags" aria-label="Project type">
+            <li class="project-tag">Crypto</li>
+          </ul>
+          <p class="project-description">
+            Crypto token launched to reward eco-positive actions through
+            collaboration with sustainability partners.
+          </p>
+          <a
+            href="https://www.btiki.com"
+            class="button"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Visit Site</a
+          >
+        </article>
 
-          {% assign hide_post = false %}
-          {% if forloop.index > 12 %}
-            {% assign hide_post = true %}
-          {% endif %}
-          {% include components/post_card.html post=post main_category=main_category hidden=hide_post %}
-          {% endfor %}
-        </div>
-      </section>
-
-      <!-- Projects Section -->
-      <section class="projects-section" aria-labelledby="projects-heading">
-        <h2 id="projects-heading" class="section-title">Current Projects</h2>
-        <div class="projects-grid projects-grid--current">
-          <article class="project-card">
-            <img
-              src="/assets/images/vm_logo.png"
-              alt="Vegan Monkey logo"
-              class="project-logo"
-              loading="lazy"
-            />
-            <h3 class="project-title">Vegan Monkey</h3>
-            <ul class="project-tags" aria-label="Tech stack">
-              <li class="project-tag">Nuxt</li>
-              <li class="project-tag">Vue</li>
-              <li class="project-tag">Firebase</li>
-              <li class="project-tag">Algolia</li>
-              <li class="project-tag">Cloudinary</li>
-            </ul>
-            <p class="project-description">
-              A webapp that consolidates plant-based products, dishes, services,
-              and experiences in Bangkok.
-            </p>
-            <a
-              href="https://www.veganmonkey.co"
-              class="button"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Visit Site</a
-            >
-          </article>
-
-          <article class="project-card">
-            <img
-              src="/assets/images/15pages_logo.png"
-              alt="15 Pages logo"
-              class="project-logo project-logo--15pages"
-              loading="lazy"
-            />
-            <h3 class="project-title">15 Pages</h3>
-            <ul class="project-tags" aria-label="Tech stack">
-              <li class="project-tag">Nuxt</li>
-              <li class="project-tag">Vue</li>
-              <li class="project-tag">Tailwind</li>
-              <li class="project-tag">Supabase</li>
-            </ul>
-            <p class="project-description">
-              Book summaries and tools to help incentivize more reading. Work in
-              progress.
-            </p>
-            <a
-              href="https://www.15pages.com"
-              class="button"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Visit Site</a
-            >
-          </article>
-
-          <article class="project-card">
-            <div class="project-logo-wrap project-logo-wrap--edp">
-              <img
-                src="/assets/images/emdashpatrol_logo.svg"
-                alt=""
-                width="100"
-                height="100"
-                class="project-logo project-logo--edp project-logo--edp-light"
-                loading="lazy"
-                decoding="async"
-              />
-              <img
-                src="/assets/images/emdashpatrol_logo_dark.svg"
-                alt=""
-                width="100"
-                height="100"
-                class="project-logo project-logo--edp project-logo--edp-dark"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="project-title">Em Dash Patrol</h3>
-            <ul class="project-tags" aria-label="Tech stack">
-              <li class="project-tag">Nuxt</li>
-              <li class="project-tag">Vue</li>
-              <li class="project-tag">Gemini</li>
-            </ul>
-            <p class="project-description">
-              Rule-based scan for AI-writing tells in pasted prose (em dashes,
-              throat-clearing openers, hype verbs), optional Gemini roast,
-              privacy-minded logging.
-            </p>
-            <a
-              href="https://www.emdashpatrol.com"
-              class="button"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Visit Site</a
-            >
-          </article>
-        </div>
-
-        <h2
-          id="projects-previous-heading"
-          class="section-title section-title--projects-sub"
-        >
-          Previous Projects
-        </h2>
-        <div class="projects-grid projects-grid--previous">
-          <article class="project-card">
-            <img
-              src="/assets/images/bluetiki_logo.png"
-              alt="Blue Tiki logo"
-              class="project-logo project-logo--bluetiki"
-              loading="lazy"
-            />
-            <h3 class="project-title">Blue Tiki</h3>
-            <ul class="project-tags" aria-label="Project type">
-              <li class="project-tag">Crypto</li>
-            </ul>
-            <p class="project-description">
-              Crypto token launched to reward eco-positive actions through
-              collaboration with sustainability partners.
-            </p>
-            <a
-              href="https://www.btiki.com"
-              class="button"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Visit Site</a
-            >
-          </article>
-
-          <article class="project-card">
-            <img
-              src="/assets/images/sfp_logo.png"
-              alt="Stop Football Plastic logo"
-              class="project-logo"
-              loading="lazy"
-            />
-            <h3 class="project-title">Stop Football Plastic</h3>
-            <ul class="project-tags" aria-label="Focus">
-              <li class="project-tag">Impact</li>
-            </ul>
-            <p class="project-description">
-              Vision to stop 1.34 million single-use plastic bottles through
-              collaboration with football clubs in South East Asia.
-            </p>
-            <a
-              href="https://www.stopfootballplastic.com"
-              class="button"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Visit Site</a
-            >
-          </article>
-        </div>
-      </section>
+        <article class="project-card">
+          <img
+            src="/assets/images/sfp_logo.png"
+            alt="Stop Football Plastic logo"
+            class="project-logo"
+            loading="lazy"
+          />
+          <h3 class="project-title">Stop Football Plastic</h3>
+          <ul class="project-tags" aria-label="Focus">
+            <li class="project-tag">Impact</li>
+          </ul>
+          <p class="project-description">
+            Vision to stop 1.34 million single-use plastic bottles through
+            collaboration with football clubs in South East Asia.
+          </p>
+          <a
+            href="https://www.stopfootballplastic.com"
+            class="button"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Visit Site</a
+          >
+        </article>
+      </div>
+    </section>
   </main>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Filter functionality
-    const filterBtns = document.querySelectorAll(".filter-btn");
-    const topicBtns = document.querySelectorAll(".topic-filter-btn");
-    const topicGroups = document.querySelectorAll(".topic-filter-group");
-    const postCards = document.querySelectorAll(".post-card");
-
-    const SECTION_LABELS = {
-      {%- for g in site.data.categories -%}
-      {{ g.group | jsonify }}: {{ g.label | jsonify }}{% unless forloop.last %},{% endunless %}
-      {%- endfor -%}
-    };
-    const VALID_GROUPS = Object.keys(SECTION_LABELS);
-
-    function syncFilterToUrl(filter, topic = null) {
-      const path = location.pathname || "/";
-      const sp = new URLSearchParams();
-      if (filter && filter !== "all") {
-        sp.set("group", filter);
-      }
-      if (topic) {
-        sp.set("topic", topic);
-      }
-      const qs = sp.toString();
-      history.replaceState(null, "", qs ? path + "?" + qs : path);
-    }
-
-    function setActiveSection(filter) {
-      filterBtns.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.filter === filter);
-      });
-    }
-
-    function setActiveTopic(activeBtn = null) {
-      topicBtns.forEach((btn) => {
-        btn.classList.toggle("active", btn === activeBtn);
-      });
-    }
-
-    function updateTopicGroups(filter) {
-      topicGroups.forEach((group) => {
-        group.hidden =
-          filter !== "all" && group.dataset.topicGroup !== filter;
-      });
-    }
-
-    function getPostCategories(card) {
-      return (card.dataset.categories || "")
-        .split(",")
-        .map((category) => category.trim())
-        .filter(Boolean);
-    }
-
-    function applyFilter(filter, options = {}) {
-      const scroll = options.scroll !== false;
-      const syncUrl = options.syncUrl !== false;
-
-      setActiveSection(filter);
-      setActiveTopic();
-      updateTopicGroups(filter);
-
-      let visibleCount = 0;
-
-      postCards.forEach((card) => {
-        const shouldShow = filter === "all" || card.dataset.category === filter;
-
-        if (shouldShow) {
-          card.style.display = "block";
-          visibleCount++;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      const sectionTitle = document.querySelector("#recent-heading");
-      const label = filter === "all" ? null : SECTION_LABELS[filter];
-      sectionTitle.textContent = label
-        ? `${label} Posts (${visibleCount})`
-        : `Recent Posts (${visibleCount})`;
-
-      if (syncUrl) {
-        syncFilterToUrl(filter);
-      }
-
-      if (scroll) {
-        document.querySelector("#recent-heading").scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }
-
-    function applyTopicFilter(topicBtn, options = {}) {
-      const scroll = options.scroll !== false;
-      const syncUrl = options.syncUrl !== false;
-      const topic = topicBtn.dataset.topic;
-      const parentGroup = topicBtn.dataset.topicGroup;
-      const topicLabel = topicBtn.dataset.topicLabel || topic;
-
-      setActiveSection(parentGroup);
-      setActiveTopic(topicBtn);
-      updateTopicGroups(parentGroup);
-
-      let visibleCount = 0;
-
-      postCards.forEach((card) => {
-        const shouldShow = getPostCategories(card).includes(topic);
-
-        if (shouldShow) {
-          card.style.display = "block";
-          visibleCount++;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      const sectionTitle = document.querySelector("#recent-heading");
-      sectionTitle.textContent = `${topicLabel} Posts (${visibleCount})`;
-
-      if (syncUrl) {
-        syncFilterToUrl(parentGroup, topic);
-      }
-
-      if (scroll) {
-        document.querySelector("#recent-heading").scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }
-
-    // Handle filter button clicks
-    filterBtns.forEach((btn) => {
-      btn.addEventListener("click", function () {
-        applyFilter(this.dataset.filter);
-      });
-    });
-
-    topicBtns.forEach((btn) => {
-      btn.addEventListener("click", function () {
-        applyTopicFilter(this);
-      });
-    });
-
-    const params = new URLSearchParams(location.search);
-    const groupParam = (params.get("group") || "").trim().toLowerCase();
-    const topicParam = (params.get("topic") || "").trim().toLowerCase();
-    const defaultGroup = "{{ site.data.categories[0].group }}";
-    const topicParamBtn = Array.from(topicBtns).find(
-      (btn) => btn.dataset.topic === topicParam
-    );
-
-    if (topicParamBtn) {
-      applyTopicFilter(topicParamBtn, { scroll: true, syncUrl: true });
-    } else if (groupParam === "all") {
-      applyFilter("all", { scroll: true, syncUrl: true });
-    } else if (
-      groupParam &&
-      VALID_GROUPS.includes(groupParam)
-    ) {
-      applyFilter(groupParam, { scroll: true, syncUrl: true });
-    } else {
-      applyFilter(defaultGroup, { scroll: false, syncUrl: false });
-    }
-
     // Slider functionality
     const sliderTrack = document.getElementById("sliderTrack");
     const sliderPrev = document.getElementById("sliderPrev");

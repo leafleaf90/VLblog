@@ -7,8 +7,8 @@ description: >-
   The full reading log lives on Goodreads.
 ---
 
-<main class="books-page">
-  <div class="container books-page__inner">
+<main class="page-container page-container--text books-page">
+  <div class="books-page__inner">
     <header class="books-page__header">
       <h1>Book Recommendations<span class="milka red">.</span></h1>
       <p>
@@ -37,7 +37,7 @@ description: >-
       <h2 id="books-{{ section.category | slugify }}">{{ section.category }}</h2>
       <div class="book-category">
         {% for book in section.books %}
-        <article class="gradient-bg card-container book-card text-left">
+        <article class="book-card">
           <div class="book-card__copy">
             <h3>
               {% if book.goodreads_url %}
@@ -100,7 +100,14 @@ description: >-
 
             {% if book.goodreads_review %}
             <div class="book-card-goodreads">
-              <blockquote>{{ book.goodreads_review }}</blockquote>
+              <p class="book-card-goodreads__label">From my Goodreads review:</p>
+              <blockquote>
+                {% assign review_paragraphs = book.goodreads_review | split: "
+" %}
+                {% for paragraph in review_paragraphs %}
+                <p>{{ paragraph | strip | escape | newline_to_br }}</p>
+                {% endfor %}
+              </blockquote>
             </div>
             {% endif %}
           </div>

@@ -2,8 +2,8 @@
 layout: topic
 title: "AI Tools"
 permalink: /topics/ai-tools/
-topic: ai
+topic: ai-tools
 description: >-
-  AI-related posts about tool use, content fatigue, practical trade-offs, and
+  Practical AI tool posts about workflows, integrations, generated media, and
   keeping the robots useful without giving them the house keys.
 ---

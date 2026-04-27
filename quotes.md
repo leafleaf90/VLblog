@@ -5,713 +5,77 @@ permalink: /quotes/
 description: "A curated collection of inspiring quotes"
 ---
 
-<style>
-/* Modern, minimalistic quotes page */
-.quotes-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.6;
-}
+<link rel="stylesheet" href="{{ '/assets/quotes-page.css' | relative_url }}?v={{ site.time | date: '%s' }}" />
 
-.page-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.page-title {
-  font-size: 3.5rem;
-  font-weight: 300;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-}
-
-.page-subtitle {
-  font-size: 1.375rem;
-  color: #666;
-  font-weight: 400;
-  max-width: 500px;
-  margin: 0 auto 2rem;
-}
-
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
-  padding: 1.5rem;
-  background: #fafafa;
-  border-radius: 12px;
-  border: 1px solid #e5e5e5;
-}
-
-.stat {
-  text-align: center;
-}
-
-.stat-number {
-  display: block;
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 1rem;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-}
-
-.topics-nav {
-  margin-bottom: 3rem;
-  padding: 1.5rem;
-  background: #fafafa;
-  border-radius: 12px;
-  border: 1px solid #e5e5e5;
-}
-
-.nav-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #1a1a1a;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.topic-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.topic-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  color: #555;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.2s ease;
-}
-
-.topic-tag:hover {
-  border-color: #007bff;
-  color: #007bff;
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.topic-count {
-  background: #f0f0f0;
-  color: #666;
-  font-size: 0.75rem;
-  padding: 2px 6px;
-  border-radius: 10px;
-}
-
-.topic-emoji,
-.section-emoji {
-  margin-right: 0.5rem;
-  font-size: 1.2em;
-}
-
-.topic-with-emoji {
-  display: flex;
-  align-items: center;
-}
-
-.quotes-section {
-  margin-bottom: 4rem;
-}
-
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-bottom: 0.5rem;
-  border-bottom: 3px solid #e5e5e5;
-}
-
-.quotes-list {
-  display: grid;
-  gap: 2rem;
-}
-
-.quote {
-  padding: 2rem;
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-  cursor: pointer;
-}
-
-.quote:hover {
-  border-color: #ddd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
-
-.quote-profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #f0f0f0;
-  flex-shrink: 0;
-  margin-top: 0.5rem;
-  transition: filter 0.3s ease;
-}
-
-
-.quote-content-wrapper {
-  flex: 1;
-  min-width: 0;
-}
-
-.quote-text {
-  font-size: 1.75rem;
-  line-height: 1.6;
-  color: #1a1a1a;
-  margin-bottom: 1.5rem;
-  position: relative;
-  font-weight: 500;
-}
-
-.quote-text::before {
-  content: '"';
-  font-size: 6rem;
-  color: #f0f0f0;
-  position: absolute;
-  left: -0.5rem;
-  top: -2.5rem;
-  font-family: Georgia, serif;
-  line-height: 1;
-  z-index: 0;
-}
-
-.quote-content {
-  position: relative;
-  z-index: 1;
-}
-
-  .quote-author {
-    font-weight: 600;
-    color: #666;
-    margin-top: 0.75rem;
-    font-size: 1.125rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .quote-profile-pic {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #f0f0f0;
-    flex-shrink: 0;
-    margin-top: 0.5rem;
-  }.quote-author::before {
-  content: '— ';
-  color: #999;
-}
-
-.quote-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.quote-context {
-  font-size: 1.5rem;
-  color: #777;
-  /* font-style: italic; */
-  flex: 1;
-}
-
-.quote-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid #e5e5e5;
-  border-radius: 20px;
-  transition: all 0.2s ease;
-  background: #fafafa;
-}
-
-.quote-link:hover {
-  border-color: #007bff;
-  background: #007bff;
-  color: #fff;
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.quote-link::after {
-  content: '↗';
-  font-size: 0.75rem;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 3rem 2rem;
-  color: #888;
-}
-
-.empty-state h3 {
-  font-size: 1.25rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-}
-
-/* Quote Modal */
-.quote-modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  cursor: pointer;
-}
-
-.quote-modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 900px;
-  width: 90vw;
-  max-height: 90vh;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  cursor: default;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.quote-modal-main {
-  display: flex;
-  flex: 1;
-  align-items: flex-start;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.quote-modal-img {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #f0f0f0;
-  flex-shrink: 0;
-}
-
-
-.quote-modal-content-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 300px;
-}
-
-.quote-modal-body {
-  order: 1;
-  margin-bottom: 2rem;
-}
-
-.quote-modal-header-info {
-  order: 2;
-  margin-bottom: 1.5rem;
-}
-
-.quote-modal-footer {
-  order: 3;
-  display: flex;
-  justify-content: flex-start;
-  margin-top: auto;
-}
-
-.quote-modal-author {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 0.5rem 0;
-}
-
-.quote-modal-context {
-  font-size: 2rem;
-  color: #666;
-  /* font-style: italic; */
-  margin: 0;
-}
-
-.context-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 600;
-  border-bottom: 1px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.context-link:hover {
-  color: #0056b3;
-  border-bottom-color: #0056b3;
-  text-decoration: none;
-}
-
-.quote-modal-body {
-  order: 1;
-  margin-bottom: 2rem;
-}
-
-.quote-modal-text {
-  font-size: 2.25rem;
-  line-height: 1.5;
-  color: #1a1a1a;
-  position: relative;
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-.quote-modal-text::before {
-  content: '"';
-  font-size: 5rem;
-  color: #f0f0f0;
-  position: absolute;
-  left: -0.75rem;
-  top: -2rem;
-  font-family: Georgia, serif;
-  line-height: 1;
-  z-index: 0;
-}
-
-.quote-modal-text-content {
-  position: relative;
-  z-index: 1;
-}
-
-.quote-modal-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #007bff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.875rem 1.5rem;
-  border: 2px solid #007bff;
-  border-radius: 25px;
-  transition: all 0.2s ease;
-  background: #fff;
-}
-
-.quote-modal-link:hover {
-  background: #007bff;
-  color: #fff;
-  text-decoration: none;
-  transform: translateY(-1px);
-}
-
-.quote-modal-link::after {
-  content: '↗';
-  font-size: 0.875rem;
-}
-
-.quote-modal-close {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #999;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  z-index: 10;
-}
-
-.quote-modal-close:hover {
-  background: #f0f0f0;
-  color: #333;
-}
-
-.quote-modal-navigation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.5rem 2rem;
-  border-top: 1px solid #f0f0f0;
-  background: #fafafa;
-}
-
-.quote-modal-nav {
-  background: rgba(255, 255, 255, 0.95);
-  border: 2px solid #ddd;
-  font-size: 1.5rem;
-  color: #666;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s ease;
-  position: static;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.quote-modal-nav:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: #007bff;
-  color: #007bff;
-  transform: scale(1.1);
-}
-
-.quote-modal-nav:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-  transform: scale(0.9);
-}
-
-.quote-profile-pic {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #f0f0f0;
-  flex-shrink: 0;
-  margin-top: 0.5rem;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .quotes-page {
-    padding: 2rem 1rem;
-  }
-  
-  .page-title {
-    font-size: 2.75rem;
-  }
-  
-  .page-subtitle {
-    font-size: 1.25rem;
-  }
-  
-  .stats {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .stat-number {
-    font-size: 2rem;
-  }
-  
-  .topic-tags {
-    justify-content: center;
-  }
-  
-  .quote {
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .quote-profile-pic {
-    width: 60px;
-    height: 60px;
-    align-self: center;
-    margin-top: 0;
-  }
-  
-  .quote-text {
-    font-size: 1.5rem;
-    line-height: 1.5;
-  }
-  
-  .quote-author {
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 1.25rem;
-  }
-  
-  .quote-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .quote-modal-content {
-    width: 95vw;
-    max-width: none;
-    flex-direction: column;
-  }
-  
-  .quote-modal-main {
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-  
-  .quote-modal-img {
-    width: 200px;
-    height: 200px;
-    align-self: center;
-  }
-  
-  .quote-modal-content-section {
-    min-height: auto;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .quote-modal-header-info {
-    text-align: center;
-  }
-  
-  .quote-modal-body {
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .quote-modal-author {
-    font-size: 1.75rem;
-  }
-  
-  .quote-modal-context {
-    font-size: 1.125rem;
-  }
-  
-  .quote-modal-text {
-    font-size: 1.5rem;
-  }
-  
-  .quote-modal-footer {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .quotes-page {
-    padding: 1.5rem 1rem;
-  }
-  
-  .page-title {
-    font-size: 2.25rem;
-  }
-  
-  .quote {
-    padding: 1.25rem;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  
-  .quote-text {
-    font-size: 1.375rem;
-  }
-  
-  .quote-profile-pic {
-    width: 50px;
-    height: 50px;
-    align-self: center;
-    margin-top: 0;
-  }
-  
-  .quote-text::before {
-    font-size: 4rem;
-    left: -0.75rem;
-    top: -1.5rem;
-  }
-  
-  .quote-modal-main {
-    padding: 1.25rem;
-  }
-  
-  .quote-modal-img {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .quote-modal-content-section {
-    text-align: center;
-    align-items: center;
-  }
-  
-  .quote-modal-header-info {
-    text-align: center;
-  }
-  
-  .quote-modal-author {
-    font-size: 1.5rem;
-  }
-  
-  .quote-modal-context {
-    font-size: 1rem;
-  }
-  
-  .quote-modal-text {
-    font-size: 1.375rem;
-  }
-  
-  .quote-modal-text::before {
-    font-size: 3rem;
-    left: -0.5rem;
-    top: -1rem;
-  }
-}
-</style>
-
+<main class="page-container page-container--text" aria-labelledby="quotes-page-title">
 <div class="quotes-page">
-  <header class="page-header">
-    <h1 class="page-title">My Favorite Quotes</h1>
-    <p class="page-subtitle">Quotes and sayings that I've collected throughout the years, organized by category. Some are wise, some are silly, and some I just find inspiring.</p>
-    
-    <div class="stats">
+  <div class="quotes-hero-card">
+    <header class="quotes-header">
+      <p class="quotes-eyebrow">Commonplace book</p>
+      <h1 class="quotes-hero-title" id="quotes-page-title">Words for hard days<span class="milka red">.</span></h1>
+      <p class="quotes-lede">Quotes I return to when I need courage, perspective, discipline, or a useful kick in the head.</p>
+    </header>
+
+    {% if site.data.quotes.size > 0 %}
+    <script type="application/json" id="quotes-hero-data">
+    [
+    {% for q in site.data.quotes %}
+      {% assign author_clean = q.author | split: '(' | first | strip %}
+      {% assign author_filename = author_clean | slugify | replace: '-', '_' %}
+      {% assign profile_href = '/assets/quote_profiles/' | append: author_filename | append: '.jpg' | relative_url %}
+      {
+        "text": {{ q.text | jsonify }},
+        "author": {{ q.author | jsonify }},
+        "context": {{ q.context | default: "" | jsonify }},
+        "url": {{ q.url | default: "" | jsonify }},
+        "profile": {{ profile_href | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ]
+    </script>
+
+    <section id="featured-quote" class="quotes-feature" hidden>
+      <p class="quotes-feature__kicker">Today’s word of wisdom</p>
+      <div class="quotes-feature__portrait">
+        <img
+          id="featured-quote-avatar"
+          class="quotes-feature__avatar"
+          src=""
+          alt=""
+          width="176"
+          height="176"
+          hidden
+        />
+      </div>
+      <div class="quotes-feature__body">
+        <blockquote class="quotes-feature__blockquote">
+          <p id="featured-quote-text" class="quotes-feature__text"></p>
+        </blockquote>
+        <p id="featured-quote-caption" class="quotes-feature__caption"></p>
+      </div>
+    </section>
+
+    <div class="quotes-hero-fallback" id="quotes-hero-fallback">
+      <p class="quotes-feature__kicker">Today’s word of wisdom</p>
+      <div class="quotes-hero-fallback__row">
+        {% assign fq = site.data.quotes | first %}
+        {% assign fq_author_clean = fq.author | split: '(' | first | strip %}
+        {% assign fq_fn = fq_author_clean | slugify | replace: '-', '_' %}
+        {% assign fq_src = '/assets/quote_profiles/' | append: fq_fn | append: '.jpg' | relative_url %}
+        <div class="quotes-feature__portrait">
+          <img class="quotes-feature__avatar" src="{{ fq_src }}" alt="" width="176" height="176" onerror="var p=this.closest('.quotes-feature__portrait'); var r=this.closest('.quotes-hero-fallback__row'); if(p){p.style.display='none';} if(r){r.classList.add('quotes-hero-fallback--no-portrait');}" />
+        </div>
+        <div class="quotes-feature__body">
+          <blockquote class="quotes-feature__blockquote">
+            <p class="quotes-feature__text">{{ fq.text | escape }}</p>
+          </blockquote>
+          <p class="quotes-feature__caption">— {{ fq.author | escape }}{% if fq.context %}<span class="quotes-feature__context"> · {{ fq.context | escape }}</span>{% endif %}</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="quotes-stats">
       <div class="stat">
         <span class="stat-number">{{ site.data.quotes.size | default: 0 }}</span>
         <span class="stat-label">Quotes</span>
@@ -725,12 +89,11 @@ description: "A curated collection of inspiring quotes"
         <span class="stat-label">People</span>
       </div>
     </div>
-
-  </header>
+  </div>
 
 {% if site.data.quotes_by_topic.size > 0 %}
 
-<nav class="topics-nav"><h2 class="nav-title">Browse by Topic</h2>
+<nav class="topics-nav"><h2 class="nav-title">Find words for</h2>
 
 <div class="topic-tags">
 {% for topic_data in site.data.quotes_by_topic %}
@@ -789,10 +152,6 @@ description: "A curated collection of inspiring quotes"
 
 {% else %}
 
-{% else %}
-
-{% else %}
-
 <div class="empty-state">
 <h3>No quotes available yet</h3>
 <p>Quotes are being loaded from Google Docs. Please check back soon!</p>
@@ -835,9 +194,97 @@ description: "A curated collection of inspiring quotes"
   </div>
 </div>
 
-</div><script>
-// Smooth scrolling for topic navigation
-document.addEventListener('DOMContentLoaded', function() {
+</div>
+</main>
+<script>
+function randomQuoteIndex(n) {
+  return Math.floor(Math.random() * n);
+}
+
+function initFeaturedQuoteHero() {
+  const root = document.getElementById("featured-quote");
+  const dataEl = document.getElementById("quotes-hero-data");
+  const fallback = document.getElementById("quotes-hero-fallback");
+  const page = document.querySelector(".quotes-page");
+  if (!root || !dataEl) {
+    return;
+  }
+
+  var quotes;
+  try {
+    quotes = JSON.parse(dataEl.textContent);
+  } catch (e) {
+    return;
+  }
+  if (!Array.isArray(quotes) || quotes.length === 0) {
+    return;
+  }
+
+  const q = quotes[randomQuoteIndex(quotes.length)];
+  const img = document.getElementById("featured-quote-avatar");
+  const bq = document.getElementById("featured-quote-text");
+  const cap = document.getElementById("featured-quote-caption");
+
+  if (bq) {
+    bq.textContent = q.text || "";
+  }
+
+  if (cap) {
+    cap.textContent = "";
+    const spAuthor = document.createElement("span");
+    spAuthor.textContent = q.author || "";
+    cap.appendChild(spAuthor);
+    if (q.context && String(q.context).trim()) {
+      const spCtx = document.createElement("span");
+      spCtx.className = "quotes-feature__context";
+      spCtx.innerHTML = convertMediumToEmoji(String(q.context));
+      cap.appendChild(spCtx);
+    }
+  }
+
+  const profileUrl = q.profile && String(q.profile).trim() ? String(q.profile).trim() : "";
+  root.classList.add("quotes-feature--no-avatar");
+  if (img) {
+    img.hidden = true;
+    img.removeAttribute("src");
+  }
+  if (img && profileUrl) {
+    img.alt = q.author ? q.author : "";
+    img.addEventListener(
+      "load",
+      function onFeaturedLoad() {
+        img.hidden = false;
+        root.classList.remove("quotes-feature--no-avatar");
+      },
+      { once: true }
+    );
+    img.addEventListener(
+      "error",
+      function onFeaturedError() {
+        img.hidden = true;
+        img.removeAttribute("src");
+        img.alt = "";
+        root.classList.add("quotes-feature--no-avatar");
+      },
+      { once: true }
+    );
+    img.src = profileUrl;
+  } else if (img) {
+    img.alt = "";
+  }
+
+  root.hidden = false;
+  if (fallback) {
+    fallback.setAttribute("hidden", "");
+  }
+  if (page) {
+    page.classList.add("js-quotes-hero");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initFeaturedQuoteHero();
+
   // Convert medium types to emojis in all quote contexts
   const quoteContexts = document.querySelectorAll('.quote-context');
   quoteContexts.forEach(context => {
@@ -1052,8 +499,6 @@ processedText = processedText.replace(
 );
 
 return processedText;
-
-return processedText;
 }
 
 function openQuoteModal(quoteElement) {
@@ -1096,12 +541,14 @@ modalImg.alt = profileImg.alt;
 modalImg.style.display = 'block';
 } else {
 modalImg.style.display = 'none';
-}if (context && context.trim()) {
+}
+if (context && context.trim()) {
 modalContext.innerHTML = convertMediumToEmoji(context);
 modalContext.style.display = 'block';
 } else {
 modalContext.style.display = 'none';
-}if (url && url.trim()) {
+}
+if (url && url.trim()) {
 modalLink.href = url;
 modalLink.style.display = 'inline-flex';
 } else {

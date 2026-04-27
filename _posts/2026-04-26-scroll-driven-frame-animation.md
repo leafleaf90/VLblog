@@ -4,7 +4,7 @@ layout: post
 is_series: false
 description: "How I turned a short video into a scroll-controlled WebP frame animation using FFMPEG, canvas, and vanilla JavaScript."
 date: "2026-04-26"
-categories: ["coding", "javascript", "jekyll"]
+categories: ["javascript", "jekyll"]
 published: true
 slug: scroll-driven-frame-animation
 featured-image: "/assets/post-media/2026-04-26/header.webp"
@@ -18,6 +18,7 @@ featured_image_height: 528
 - How to turn a short video into a WebP frame sequence.
 - How to draw frames to a canvas based on scroll progress.
 - How to balance file size, frame rate, and perceived smoothness.
+- **Update:** How to drive a scroll hint and ambient background from the same `progress` using CSS variables on the hero (see the April 27, 2026 section near the end).
 
 This is a particular kind of web animation to give your website a bit of life.
 
@@ -211,16 +212,28 @@ Here is a simplified version of the structure:
           </div>
         </div>
 
-        <p class="profile-scroll-hint" aria-live="polite">
-          <span class="profile-scroll-hint-text profile-scroll-hint-text--scroll">
-            Scroll to make me happier
-          </span>
-          <span class="profile-scroll-hint-text profile-scroll-hint-text--thanks">
-            Thanks!
-          </span>
-          <span class="profile-scroll-hint-icon profile-scroll-hint-icon--arrow" aria-hidden="true"></span>
-          <span class="profile-scroll-hint-icon profile-scroll-hint-icon--smile" aria-hidden="true">:)</span>
-        </p>
+        <div class="profile-scroll-hint-wrap" aria-live="polite">
+          <div class="profile-scroll-hint-rail" aria-hidden="true">
+            <span class="profile-scroll-hint-rail-fill"></span>
+          </div>
+          <div class="profile-scroll-hint-main">
+            <p class="profile-scroll-hint">
+              <span class="profile-scroll-hint-text profile-scroll-hint-text--scroll">
+                Scroll to make me happier
+              </span>
+              <span class="profile-scroll-hint-text profile-scroll-hint-text--keep">
+                Keep going…
+              </span>
+              <span class="profile-scroll-hint-text profile-scroll-hint-text--thanks">
+                Thanks! <span class="profile-scroll-hint-emoji" aria-hidden="true">🙏</span>
+              </span>
+            </p>
+            <div class="profile-scroll-hint-cue" aria-hidden="true">
+              <span class="profile-scroll-hint-glow"></span>
+              <span class="profile-scroll-hint-icon profile-scroll-hint-icon--arrow"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -239,11 +252,11 @@ If you replace the video later, update these values. One bug I hit while optimiz
 
 ## 5. Pin The Scene With CSS
 
-The page needs a "runway" for scrolling. In this example, the hero is `420vh` tall, while the actual visible scene is fixed in the viewport until the scroll progress reaches the end.
+The page needs a "runway" for scrolling. In this example, the hero is `500vh` tall, while the actual visible scene is fixed in the viewport until the scroll progress reaches the end.
 
 ```css
 .hero-section.profile-scroll-active {
-  height: 420vh;
+  height: 500vh;
   padding: 0;
   overflow: visible;
 }
@@ -411,7 +424,8 @@ function updateTargetFrame() {
     totalFrames - 1
   );
 
-  section.classList.toggle("profile-scroll-thanks", progress >= 0.82);
+  section.classList.toggle("profile-scroll-keep", progress >= 0.35 && progress < 0.63);
+  section.classList.toggle("profile-scroll-thanks", progress >= 0.63);
   section.classList.toggle("profile-scroll-complete", progress >= 1);
 }
 ```
@@ -492,21 +506,148 @@ One small UX detail I like is a scroll hint. On my blog landing page it starts a
 Scroll to make me happier
 ```
 
-Near the end of the scroll it changes to:
+Partway through the scroll range it nudges again:
 
 ```text
-Thanks! :)
+Keep going…
+```
+
+Near the end it changes to:
+
+```text
+Thanks! 🙏
 ```
 
 This kind of cue matters because scroll-driven animation is not always obvious. If the user does not realize they are controlling the animation, the effect is wasted.
 
+The hero uses a tall scroll runway (`500vh`) so there is enough distance to read each line. The “thanks” band starts around 63% progress and runs for a longer stretch than the middle “keep going” nudge.
+
 You can time copy changes with the same progress value used for frames:
 
 ```js
-section.classList.toggle("profile-scroll-thanks", progress >= 0.82);
+section.classList.toggle("profile-scroll-keep", progress >= 0.35 && progress < 0.63);
+section.classList.toggle("profile-scroll-thanks", progress >= 0.63);
 ```
 
 Then CSS can swap labels, icons, opacity, or anything else.
+
+## Update (April 27, 2026): A richer cue, shared progress variables, and scroll-linked background
+
+After the first version of this post, I reworked the landing scroll so the **same** scroll `progress` value drives the frame index, a **visual hint** (rail, copy phases, dissolve), and a **subtle background wash** behind the pinned scene. None of this requires new scroll listeners beyond what you already have in `updateTargetFrame`. The idea is to set **CSS custom properties on the hero section** once per scroll event, then let CSS handle rails, opacity, blur, and gradients.
+
+### Connect `progress` to the section
+
+Inside the same handler where you compute `progress` from `window.scrollY`, write a few variables on the section element (the one with the tall `500vh` runway). I use `closest(".hero-section")` from the `[data-profile-scroll]` root.
+
+```js
+const keepStart = 0.35;
+const thanksStart = 0.63;
+
+section.classList.toggle("profile-scroll-keep", progress >= keepStart && progress < thanksStart);
+section.classList.toggle("profile-scroll-thanks", progress >= thanksStart);
+section.classList.toggle("profile-scroll-complete", progress >= 1);
+section.classList.toggle("profile-scroll-hint-scrolling", progress > 0.04 && progress < 1);
+
+section.style.setProperty("--profile-hint-progress", String(progress));
+
+const exitStart = 0.88;
+const exitRaw = progress > exitStart ? (progress - exitStart) / (1 - exitStart) : 0;
+section.style.setProperty("--profile-hint-exit", String(Math.max(0, Math.min(1, exitRaw))));
+```
+
+What each piece is for:
+
+| Variable / class | Role |
+| --- | --- |
+| `--profile-hint-progress` | `0`–`1`, same as scroll progress. Feeds the **vertical rail fill**, optional glow strength, and the **ambient background** layer. |
+| `--profile-hint-exit` | Ramps up only in the **last** part of the scroll (here, from `0.88` to `1`). Used to **fade and blur** the hint so it dissolves instead of snapping off. |
+| `profile-scroll-hint-scrolling` | True while the user is actively in the journey. Handy for “lit up” text/icon treatment while scrolling. |
+| `profile-scroll-keep` / `profile-scroll-thanks` | Swap the three copy lines (`Scroll…` → `Keep going…` → `Thanks! 🙏`) with plain CSS. |
+| `profile-scroll-complete` | Scroll reached the end; the stage un-pins (per the earlier CSS in this post). |
+
+If `maxScroll <= 0`, clear the classes and **remove** `--profile-hint-progress` and `--profile-hint-exit` so nothing looks half-stuck.
+
+**Do not confuse** `--profile-hint-progress` with the **loader** bar on the canvas container. I still use `--profile-scroll-progress` on the profile root for “how many frames have loaded” (a percentage width). The hint and background use the **scroll** progress on the section.
+
+### Optional: when the hint leaves the viewport
+
+The fixed scene can end, and the hint can scroll away. A small `IntersectionObserver` on the hint wrapper sets `--profile-hint-offscreen` on the same section (`0`–`1`) so CSS can add a little extra fade or blur when the cue is not on screen. Use a small **dead zone** so minor clipping does not flicker the value.
+
+```js
+const hintWrap = section.querySelector(".profile-scroll-hint-wrap");
+if (hintWrap && "IntersectionObserver" in window) {
+  new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) {
+          section.style.setProperty("--profile-hint-offscreen", "1");
+          continue;
+        }
+        const raw = 1 - entry.intersectionRatio;
+        const dead = 0.1;
+        const t = raw <= dead ? 0 : (raw - dead) / (1 - dead);
+        section.style.setProperty(
+          "--profile-hint-offscreen",
+          String(Math.max(0, Math.min(1, t)))
+        );
+      }
+    },
+    { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0] }
+  ).observe(hintWrap);
+}
+```
+
+Run that once after you know the section and hint exist (for example when you add `profile-scroll-active` to the hero).
+
+### CSS: rail and hint use the same variables
+
+The **rail** is a track with a fill whose **height** is a percentage of progress:
+
+```css
+.profile-scroll-hint-rail-fill {
+  height: calc(var(--profile-hint-progress, 0) * 100%);
+  /* gradient, rounded caps, etc. */
+}
+```
+
+The **wrap** around the hint can combine exit and offscreen, for example:
+
+```css
+.profile-scroll-hint-wrap {
+  opacity: max(0, calc(1 - var(--profile-hint-exit) * 0.98 - var(--profile-hint-offscreen) * 0.2));
+}
+```
+
+I keep the full layout (borderless cue, type, light theme) in the site stylesheet rather than in this post, but the **data flow** is always: **JS sets variables on `.hero-section` → CSS reads `var(--profile-hint-…)`**.
+
+### CSS: background color behind the profile
+
+To tie the **environment** to progress without repainting in JavaScript, add a **pseudo-element** on the **pinned stage** (below the real content, above the page background). Use the **same** `--profile-hint-progress` with a `0` fallback so reduced-motion users (where my script bails out early) get **no extra tint** by default.
+
+```css
+.hero-section.profile-scroll-active .hero-scroll-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 88% at 58% 40%,
+    color-mix(in srgb, #22d3ee 32%, transparent) 0%,
+    color-mix(in srgb, #6366f1 18%, transparent) 42%,
+    transparent 70%
+  );
+  opacity: calc(var(--profile-hint-progress, 0) * 0.44);
+  transition: opacity 0.2s ease-out;
+}
+
+/* Lighter hand on the light theme hero */
+html[data-theme="light"] .hero-section.profile-scroll-active .hero-scroll-stage::before {
+  /* Softer stops + lower max opacity, e.g. 0.26 * progress */
+}
+```
+
+The **content** of the stage (headline, profile, canvas) keeps a **higher `z-index`**, so this reads as atmosphere behind the scene, not a second focal layer—unless you push the numbers too high. Tune only the **opacity multipliers** if you need it a bit bolder or quieter.
 
 ## Things To Watch Out For
 

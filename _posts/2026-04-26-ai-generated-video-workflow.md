@@ -4,7 +4,7 @@ layout: post
 is_series: false
 description: "A quick overview of this past weekend's workflow for making short AI-generated videos with Gemini, Nano Banana, Higgsfield, Seedance, CapCut, and Veed."
 date: "2026-04-26"
-categories: ["coding", "ai"]
+categories: ["ai-tools"]
 published: true
 slug: ai-generated-video-workflow
 featured-image: "/assets/post-media/ai-generated-video-workflow/header.webp"

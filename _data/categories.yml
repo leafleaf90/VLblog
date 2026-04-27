@@ -1,25 +1,22 @@
 - group: code
   label: Code
   categories:
-    - coding
-    - cybersecurity
     - ai-tools
     - vue
     - nuxt
     - firebase
     - javascript
     - jekyll
-    - hosting
+    - tailwind
+    - deployment
     - dart
-    - flutter
-    - openai
 
 - group: digital-life
   label: Digital Life
   categories:
     - ai
     - productivity
-    - minimalism
+    - digital-minimalism
     - mindfulness
     - motivation
     - books

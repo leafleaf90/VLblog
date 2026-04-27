@@ -4,7 +4,7 @@ This directory can contain profile pictures for quote authors.
 
 ## Current Status
 
-Profile pictures are currently **not displayed** on the quotes page to maintain a clean, minimalistic design focused on the text content.
+Profile pictures (JPGs in this folder) are used for **list cards**, the **quote modal**, and the **random line** hero on `/quotes/`. The image path is derived from the author name; if a file is missing, the image is hidden and text still shows.
 
 ## Future Implementation
 

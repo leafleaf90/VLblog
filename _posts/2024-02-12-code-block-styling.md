@@ -6,7 +6,7 @@ series_title: "Building this blog"
 featured-image: /assets/post-media/2024-02-12/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-12/cover_sm.jpg
 description: "How to style Jekyll code blocks with Rouge instead of leaving snippets to fend for themselves."
-categories: coding jekyll
+categories: jekyll
 ---
 
 ## What you'll learn

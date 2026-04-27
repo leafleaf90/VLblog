@@ -36,10 +36,12 @@ If a post has no custom image, omit these fields and let the site use the defaul
 
 Generate two WebP variants:
 
-| File | Size | Use |
-|---|---:|---|
-| `header.webp` | `1600x528` | main post hero and social image |
-| `header-sm.webp` | `800x264` | thumbnails/cards |
+
+| File             | Size       | Use                             |
+| ---------------- | ---------- | ------------------------------- |
+| `header.webp`    | `1600x528` | main post hero and social image |
+| `header-sm.webp` | `800x264`  | thumbnails/cards                |
+
 
 Both use the same wide aspect ratio. Source images can be larger or a different aspect ratio; crop them intentionally during optimization.
 

@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2023-10-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2023-10-03/cover_sm.jpg
 description: "How to deploy a Nuxt app on Vercel, including preview builds and common dependency issues."
-categories: nuxt hosting
+categories: nuxt deployment
 ---
 
 ## What you'll learn

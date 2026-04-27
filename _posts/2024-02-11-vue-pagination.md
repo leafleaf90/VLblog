@@ -6,7 +6,7 @@ series_title: "Building 15 Pages"
 featured-image: /assets/post-media/2024-02-11/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-11/cover_sm.jpg
 description: "How to build a reusable pagination component in Vue for cleaner list navigation."
-categories: coding vue
+categories: vue
 ---
 
 ## What you'll learn

@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2023-05-17/junior-dev-trick-1-sets-lg.jpg
 featured-thumbnail: /assets/post-media/2023-05-17/junior-dev-trick-1-sets-sm.jpg
 description: "A Dart note on why set equality may not behave the way you expect."
-categories: coding dart
+categories: dart
 ---
 
 ## The Problem

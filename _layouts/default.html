@@ -72,6 +72,10 @@
       defer
     ></script>
     <script
+      src="{{ 'assets/newsletter-modal.js' | relative_url }}?v={{ site.time | date: '%s' }}"
+      defer
+    ></script>
+    <script
       src="{{ 'assets/video-embeds.js' | relative_url }}?v={{ site.time | date: '%s' }}"
       defer
     ></script>
@@ -359,6 +363,8 @@
         /></a>
       </div>
     </footer>
+
+    {% include newsletter_signup_modal.html %}
 
     <!-- Contact Modal -->
     <div id="contactModal" class="contact-modal">

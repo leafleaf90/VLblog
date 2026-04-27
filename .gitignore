@@ -3,7 +3,15 @@ node_modules
 # Local env / logs (never commit secrets)
 .env
 .env.local
+.env.*.local
+# If you add .env.example for docs, un-ignore: !.env.example
 *.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Ruby: Bundler local config (vendor/ already ignored below)
+.bundle/
 
 _site
 .sass-cache
@@ -13,4 +21,26 @@ vendor
 google-service-account.json
 service-account.json
 **/.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Netlify (local state; never credentials in repo; use Netlify UI / env in dashboard)
+.netlify/
+
+# Temp / local scratch
+tmp/
+temp/
+*.tmp
+
+# Local agent / editor + personal task lists (not part of published site)
+.cursor/
+CLAUDE.md
 TODO.md
+TODOS.md
+todos/
+
+# Local newsletter planning (see newsletter-drafts/README.md)
+newsletter-drafts/*.md
+!newsletter-drafts/README.md
+!newsletter-drafts/ideas.example.md

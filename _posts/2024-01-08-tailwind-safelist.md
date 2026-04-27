@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2024-01-08/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-01-08/cover_sm.jpg
 description: "Why Tailwind can drop dynamic classes and how to use a safelist when generated class names disappear."
-categories: coding
+categories: tailwind
 ---
 
 ## What you'll learn

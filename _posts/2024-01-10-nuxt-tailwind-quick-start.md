@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2024-01-10/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-01-10/cover_sm.jpg
 description: "A quick setup guide for using Tailwind in a Nuxt project."
-categories: coding
+categories: nuxt tailwind
 ---
 
 ## What you'll learn

@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-05-31/minimal.jpg
 featured-thumbnail: /assets/post-media/2020-05-31/minimal-sm.jpg
 description: "How I organized an image library to reduce clutter and make old photos easier to find."
-categories: minimalism
+categories: digital-minimalism
 ---
 
 ## Images everywhere...

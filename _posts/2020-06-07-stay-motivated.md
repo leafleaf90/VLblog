@@ -4,7 +4,7 @@ layout: post
 featured-image: /assets/post-media/2020-06-07/mac.jpg
 featured-thumbnail: /assets/post-media/2020-06-07/mac-sm.jpg
 description: "Tools and habits that helped me stay consistent while learning to code, without pretending motivation is a stable resource."
-categories: motivation coding
+categories: motivation
 ---
 
 ## When the going gets tough...

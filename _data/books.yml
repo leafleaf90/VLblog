@@ -35,8 +35,9 @@
       goodreads_review: >-
         As we move through this fast-paced world, chasing whatever success we
         hope to achieve this quarter, year, or lifetime, it's such a gift to find
-        a book like this. To make us stop for a moment. "There are no ordinary
-        moments."
+        a book like this. To make us stop for a moment.
+
+        "There are no ordinary moments."
 
     - title: 10% Happier
       author: Dan Harris
@@ -84,8 +85,16 @@
         valuable lessons about building a company with customer satisfaction as
         the main goal. Even just the insights in the chapter "Why I gave my
         company to charity" is worth your money for this one.
+      goodreads_url: https://www.goodreads.com/book/show/11878168-anything-you-want
+      author_url: https://www.goodreads.com/author/show/2766361.Derek_Sivers
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2207152285
+      goodreads_review: >-
+        A short read with an astonishing amount of value packed into it!
 
     - title: The Effective Executive
+      subtitle: The Definitive Guide to Getting the Right Things Done
       author: Peter F. Drucker
       image: /assets/images/books/peter-f-drucker-the-effective-executive.jpg
       summary: >-
@@ -93,6 +102,14 @@
         think. Drucker's definition of an executive is basically anyone that
         makes decisions in an organization. The parts on how to get the right
         things done also applies largely to anyone working for themselves.
+      goodreads_url: https://www.goodreads.com/book/show/48019.The_Effective_Executive
+      author_url: https://www.goodreads.com/author/show/12008.Peter_F_Drucker
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2181245984
+      goodreads_review: >-
+        Actionable advice. No-bullshit approach. Highly recommended for anyone
+        wanting to become more efficient in any field of life.
       details_intro: >-
         What I like is that the focus is on the strength of individuals, rather
         than on the weaknesses. There are many concrete recommendations. For
@@ -114,6 +131,22 @@
         best tennis player in world. He succeeded. This is the story of what it
         cost. Agassi's rebel mentality is an inspirational light in a
         surprisingly dark story.
+      goodreads_url: https://www.goodreads.com/book/show/6480781-open
+      author_url: https://www.goodreads.com/author/show/54066.Andre_Agassi
+      rating: 4
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2179209626
+      goodreads_review: >-
+        Great anecdotes. Also a, for me, surprising amount of solitude and
+        darkness in Agassi's search for meaning. Well-written all the way
+        through.
+
+        It does feel like he feels the need to explain and justify each
+        lost game a bit too much. It's something I can identify with, always
+        having to find a reason when a match doesn't go your way. But sometimes
+        you just lose, right?
+
+        Anyways, strong autobiography.
 
 - category: Fiction
   books:
@@ -124,3 +157,20 @@
         A beautiful, epic, slow-moving tale of the life of a scholar and teacher.
         Shows just what a life can be - full of disappointments, but also with
         glimmers of hope and moments of pure joy.
+      goodreads_url: https://www.goodreads.com/book/show/166997.Stoner
+      author_url: https://www.goodreads.com/author/show/51229.John_Williams
+      rating: 5
+      rating_out_of: 5
+      review_url: https://www.goodreads.com/review/show/2114460455
+      goodreads_review: >-
+        Some might say it's slow. To those I say: read it again.
+
+        "In his extreme
+        youth Stoner had thought of love as an absolute state of being to which,
+        if one were lucky, one might find access; in his maturity he had decided
+        it was the heaven of a false religion, toward which one ought to gaze
+        with an amused disbelief, a gently familiar contempt, and an embarrassed
+        nostalgia. Now in his middle age he began to know that it was neither a
+        state of grace nor an illusion; he saw it as a human act of becoming, a
+        condition that was invented and modified moment by moment and day by
+        day, by the will and the intelligence and the heart."

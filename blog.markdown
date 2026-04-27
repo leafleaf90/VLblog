@@ -7,22 +7,17 @@ description: >-
   productivity, and side projects.
 ---
 
-<main class="page-container" aria-labelledby="blog-archive-heading">
+<main class="page-container page-container--text blog-page" aria-labelledby="blog-archive-heading">
   <section class="content-area">
-    <h1 id="blog-archive-heading" class="section-title">All Posts</h1>
-    <p>
-      Notes on software, tools, productivity, and the small operational hazards
-      of trying to make useful things.
-    </p>
+    <header class="books-page__header">
+      <h1 id="blog-archive-heading">Blog<span class="milka red">.</span></h1>
+      <p>
+        Notes on software, tools, productivity, and the small operational hazards
+        of trying to make useful things.
+      </p>
+    </header>
 
-    {% include components/topic_pills.html %}
-
-    <div class="content-grid">
-      {% for post in site.posts %}
-        {% unless post.published == false %}
-          {% include components/post_card.html post=post %}
-        {% endunless %}
-      {% endfor %}
-    </div>
+    <h2 id="posts-list-heading" class="section-title left-align">All Posts</h2>
+    {% include components/post_browse.html page_context="blog" %}
   </section>
 </main>

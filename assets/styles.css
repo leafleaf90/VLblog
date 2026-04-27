@@ -1,7 +1,7 @@
 ---
 ---
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900&display=swap");
 
 /* CRITICAL VIEWPORT PROTECTION */
 html {
@@ -100,6 +100,8 @@ body {
   --font-size-xl: 2.4rem;
   --font-size-2xl: 3rem;
   --font-size-3xl: 3.6rem;
+  /* Hero H1 cap (one step above 3xl for large viewports) */
+  --font-size-4xl: 4.2rem;
 
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
@@ -126,6 +128,15 @@ body {
   --table-border: #e5e7eb;
   --table-header-bg: #f3f4f6;
   --table-row-hover-bg: #eef2f7;
+
+  /* Inline content links: thin line instead of default underline */
+  --link-prose-line: color-mix(in srgb, var(--color-primary) 32%, transparent);
+  --link-prose-line-hover: color-mix(in srgb, var(--color-primary) 52%, transparent);
+  --link-external-line: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  --link-external-line-hover: color-mix(in srgb, var(--color-primary) 72%, transparent);
+  /* :visited (only color is reliably stylable; line cue follows via color on hairline) */
+  --link-visited-fg: color-mix(in srgb, var(--color-primary) 68%, var(--color-text-secondary) 32%);
+  --link-visited-fg-external: color-mix(in srgb, var(--color-primary) 60%, #64748b 40%);
 }
 
 /* Dark theme: semantic tokens (toggle sets html[data-theme="dark"]) */
@@ -156,6 +167,14 @@ html[data-theme="dark"] {
   --table-border: #334155;
   --table-header-bg: #1e293b;
   --table-row-hover-bg: #334155;
+
+  /* Links on dark page backgrounds: slightly stronger mix */
+  --link-prose-line: color-mix(in srgb, var(--color-primary) 40%, transparent);
+  --link-prose-line-hover: color-mix(in srgb, var(--color-primary) 60%, transparent);
+  --link-external-line: color-mix(in srgb, var(--color-primary) 55%, transparent);
+  --link-external-line-hover: color-mix(in srgb, var(--color-primary) 80%, transparent);
+  --link-visited-fg: color-mix(in srgb, var(--color-primary) 64%, #94a3b8 36%);
+  --link-visited-fg-external: color-mix(in srgb, #93c5fd 58%, #64748b 42%);
 }
 
 html {
@@ -177,6 +196,185 @@ body {
   background-color: var(--color-bg-primary);
   margin: 0;
   padding-top: var(--nav-offset); /* Account for fixed navbar */
+}
+
+/* --------------------------------------------------------------------------
+   Prose & off-site links (posts, about, books/topic page intros, book cards)
+   - Replaces the default “floating” underline with a soft hairline
+     (text-decoration: none + box-shadow).
+   - Off-site = http(s) href not pointing at this site (subdomain of viktorlovgren.com
+     is treated as on-site for styling).
+   - Opt out: add class "link--plain" to an anchor to keep it visually neutral.
+   - UI chrome: nav, topic pills, post hitboxes, pill buttons, footer icon links
+     are not targeted by these :where() scopes.
+   - Scopes include .books-page__header and .topic-page__header so intro copy
+     matches .post .content (links that only sit in .book-card were missing before).
+   -------------------------------------------------------------------------- */
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  )
+  a:not(.book-card-link):not(.link--plain) {
+  text-decoration: none;
+  text-decoration-skip-ink: auto;
+  font-weight: 600;
+  color: var(--color-primary);
+  box-shadow: 0 1px 0 0 var(--link-prose-line);
+  transition:
+    color 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+/* Visited: subtle wash (browsers may only apply color reliably; privacy limits vary) */
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  )
+  a:where(:visited):not(.book-card-link):not(.link--plain) {
+  color: var(--link-visited-fg);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--link-visited-fg) 38%, transparent);
+}
+
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  )
+  a:not(.book-card-link):not(.link--plain):hover {
+  color: var(--color-primary-dark);
+  box-shadow: 0 1px 0 0 var(--link-prose-line-hover);
+}
+
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  )
+  a:not(.book-card-link):not(.link--plain):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 0 var(--link-prose-line-hover);
+}
+
+/* Slightly stronger cue for true off-site http(s) URLs */
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  ) a[href^="http"]:not([href*="viktorlovgren.com"]):not([href*="127.0.0.1"]):not(
+    [href*="localhost"]
+  ):not(.book-card-link):not(.link--plain) {
+  color: var(--color-primary);
+  font-weight: 700;
+  box-shadow: 0 1px 0 0 var(--link-external-line);
+}
+
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  ) a[href^="http"]:not([href*="viktorlovgren.com"]):not([href*="127.0.0.1"]):not(
+    [href*="localhost"]
+  ):where(:visited):not(.book-card-link):not(.link--plain) {
+  color: var(--link-visited-fg-external);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, var(--link-visited-fg-external) 42%, transparent);
+}
+
+:where(
+    .post .content,
+    .about-page,
+    .books-page__header,
+    .topic-page__header,
+    .books-page .book-card
+  ) a[href^="http"]:not([href*="viktorlovgren.com"]):not([href*="127.0.0.1"]):not(
+    [href*="localhost"]
+  ):not(.book-card-link):not(.link--plain):hover {
+  color: var(--color-primary-dark);
+  box-shadow: 0 1px 0 0 var(--link-external-line-hover);
+}
+
+/* Book cards: light link color on the dark card (overrides "inherit" on title/author) */
+.books-page .book-card a:not(.book-card-link):not(.link--plain) {
+  color: #c4ddfd;
+  box-shadow: 0 1px 0 0 color-mix(in srgb, #93c5fd 50%, transparent);
+  font-weight: 700;
+}
+
+.books-page .book-card a:where(:visited):not(.book-card-link):not(.link--plain) {
+  color: color-mix(in srgb, #c4ddfd 68%, #64748b 32%);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, #93c5fd 34%, transparent);
+}
+
+.books-page .book-card a:not(.book-card-link):not(.link--plain):hover {
+  color: #e5f0ff;
+  box-shadow: 0 1px 0 0 #93c5fd;
+}
+
+.books-page
+  .book-card
+  a[href^="http"]:not([href*="viktorlovgren.com"]):not([href*="127.0.0.1"]):not([href*="localhost"]):not(.book-card-link):not(.link--plain) {
+  color: #dbeafe;
+  font-weight: 800;
+  box-shadow: 0 1px 0 0 color-mix(in srgb, #60a5fa 58%, transparent);
+}
+
+.books-page
+  .book-card
+  a[href^="http"]:not([href*="viktorlovgren.com"]):not([href*="127.0.0.1"]):not([href*="localhost"]):where(:visited):not(.book-card-link):not(
+    .link--plain
+  ) {
+  color: color-mix(in srgb, #dbeafe 62%, #64748b 38%);
+  box-shadow: 0 1px 0 0 color-mix(in srgb, #60a5fa 40%, transparent);
+}
+
+.books-page
+  .book-card
+  a[href^="http"]:not([href*="viktorlovgren.com"]):not([href*="127.0.0.1"]):not([href*="localhost"]):not(.book-card-link):not(.link--plain):hover {
+  color: #f0f6ff;
+  box-shadow: 0 1px 0 0 #7dd3fc;
+}
+
+/* Code blocks: keep default monospace look; do not add hairline to links in code */
+.post .content :is(pre, code) a,
+.post .content pre a,
+.post .content code a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  text-underline-offset: 0.2em;
+  box-shadow: none;
+}
+
+a.link--plain,
+a.link--plain:hover {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  box-shadow: none;
+  background: none;
+  border: none;
+}
+
+a.link--plain:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .site-footer {
@@ -321,14 +519,6 @@ html[data-theme="dark"] .navbar-brand .red {
   color: #f87171;
 }
 
-.hero-title .red {
-  color: #dc2626;
-}
-
-html[data-theme="dark"] .hero-title .red {
-  color: #f87171;
-}
-
 .navbar-nav {
   display: flex;
   gap: var(--spacing-xl);
@@ -365,6 +555,26 @@ html[data-theme="dark"] .hero-title .red {
 
 .navbar-nav a:hover::after {
   width: 100%;
+}
+
+/* Light theme: page ground + nav weight (grey-on-lavender reads "flat") */
+html[data-theme="light"] body {
+  background-color: #f1f5f9;
+}
+
+html[data-theme="light"] .navbar {
+  background: rgba(248, 250, 252, 0.92);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+html[data-theme="light"] .navbar-nav a {
+  color: #475569;
+  font-weight: 600;
+}
+
+html[data-theme="light"] .navbar-nav a:hover {
+  color: #1d4ed8;
 }
 
 /* Light / dark theme toggle (sun = light, moon = dark; active icon matches current theme) */
@@ -619,6 +829,23 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
     padding: var(--spacing-sm) var(--spacing-md) !important;
     font-size: var(--font-size-sm) !important;
   }
+
+  /* Blog: keep titles + filters aligned with /books/ (overrides .section-title / .content-grid above) */
+  .blog-page h2.section-title.left-align,
+  .blog-page .section-title.left-align {
+    text-align: left !important;
+  }
+
+  .blog-page .content-grid {
+    max-width: none !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .blog-page .category-filter {
+    justify-content: flex-start !important;
+  }
 }
 
 /* Extra small screens - iPhone SE and similar */
@@ -644,6 +871,11 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   .section-title {
     font-size: var(--font-size-lg) !important;
     text-align: center !important;
+  }
+
+  .blog-page h2.section-title.left-align,
+  .blog-page .section-title.left-align {
+    text-align: left !important;
   }
 }
 
@@ -687,7 +919,8 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
 }
 
 .hero-section.profile-scroll-active {
-  height: 420vh;
+  /* Longer runway so each phase (especially thanks) is easier to catch */
+  height: 500vh;
   padding: 0;
   overflow: visible;
 }
@@ -715,6 +948,33 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   top: auto;
   bottom: 0;
   width: 100%;
+}
+
+/* Scroll-linked ambient: bias toward the portrait side; strength follows --profile-hint-progress on .hero-section */
+.hero-section.profile-scroll-active .hero-scroll-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 88% at 58% 40%,
+    color-mix(in srgb, #22d3ee 32%, transparent) 0%,
+    color-mix(in srgb, #6366f1 18%, transparent) 42%,
+    transparent 70%
+  );
+  opacity: calc(var(--profile-hint-progress, 0) * 0.44);
+  transition: opacity 0.2s ease-out;
+}
+
+html[data-theme="light"] .hero-section.profile-scroll-active .hero-scroll-stage::before {
+  background: radial-gradient(
+    ellipse 100% 88% at 58% 40%,
+    color-mix(in srgb, #0ea5e9 18%, transparent) 0%,
+    color-mix(in srgb, #6366f1 12%, transparent) 45%,
+    transparent 72%
+  );
+  opacity: calc(var(--profile-hint-progress, 0) * 0.26);
 }
 
 .hero-section.profile-scroll-active .hero-profile {
@@ -864,98 +1124,313 @@ html[data-theme="dark"] .contact-modal .close-btn:hover {
   opacity: 0;
 }
 
-.profile-scroll-hint {
+/* Borderless scroll cue: vertical progress rail + label + energy orb; sits on the hero */
+.profile-scroll-hint-wrap {
+  /* Subtle so the illustration stays primary; “energy” (cyan) is very diffused, no hard box */
   z-index: 4;
-  width: max-content;
-  margin: 0;
-  padding: 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(0.9rem, 1vw, 1.08rem);
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  line-height: 1.25;
-  text-align: center;
-  text-transform: uppercase;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
-  transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 26rem;
+  margin: 0 auto;
+  padding: 0.6rem 0.35rem;
+  /* Progress / exit / offscreen set on .hero-section (inherited) */
+  --profile-hint-exit: 0;
+  --profile-hint-offscreen: 0;
+  pointer-events: auto;
+  isolation: isolate;
+  filter: drop-shadow(0 20px 56px color-mix(in srgb, #22d3ee 20%, transparent));
+  opacity: max(0, calc(1 - var(--profile-hint-exit) * 0.98 - var(--profile-hint-offscreen) * 0.2));
+  transform: translateY(calc(var(--profile-hint-exit) * 4px + var(--profile-hint-offscreen) * 2px));
+  transition: opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
 }
 
-html[data-theme="dark"] .profile-scroll-hint {
-  color: rgba(255, 255, 255, 0.74);
+@supports (filter: blur(1px)) {
+  .profile-scroll-hint-wrap {
+    --hint-blur: calc((var(--profile-hint-exit) * 0.75 + var(--profile-hint-offscreen) * 0.4) * 10px);
+    filter: drop-shadow(0 20px 56px color-mix(in srgb, #22d3ee 20%, transparent)) blur(var(--hint-blur));
+  }
+}
+
+.profile-scroll-hint-rail {
+  position: relative;
+  flex: 0 0 auto;
+  width: 5px;
+  height: 4.85rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-text-inverse) 18%, transparent);
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-text-inverse) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, #22d3ee 8%, transparent);
+}
+
+.profile-scroll-hint-rail-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(var(--profile-hint-progress, 0) * 100%);
+  border-radius: inherit;
+  background: linear-gradient(0deg, var(--color-primary) 0%, #a78bfa 100%);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--color-primary-light) 55%, transparent);
+  transition: height 0.1s linear;
+}
+
+.profile-scroll-hint-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 0.6rem;
+  min-width: 0;
+  animation: profileScrollHintDrift 3s ease-in-out infinite;
+}
+
+.profile-scroll-hint {
+  z-index: 1;
+  position: relative;
+  display: grid;
+  grid-template-areas: "label";
+  place-items: center;
+  min-height: 3.35rem;
+  width: 100%;
+  margin: 0;
+  font-family: "Poppins", system-ui, sans-serif;
+  /* ~15.5–18px: legible as instruction copy, still clearly below hero headline scale */
+  font-size: clamp(0.98rem, 1.65vw, 1.12rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.38;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.64);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Resting: very quiet; strong states only on hover or while scrolling the hero */
+.profile-scroll-hint-wrap:hover .profile-scroll-hint {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.hero-section.profile-scroll-hint-scrolling .profile-scroll-hint {
+  color: #7dd3fc;
+  text-shadow: 0 0 20px color-mix(in srgb, #22d3ee 35%, transparent);
+}
+
+.hero-section.profile-scroll-hint-scrolling:not(:hover) .profile-scroll-hint {
+  /* Brighter on scroll, still reads as “electric” on dark hero */
+  color: color-mix(in srgb, #f0f9ff 80%, #38bdf8 20%);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="light"] .profile-scroll-hint {
+  color: color-mix(in srgb, #0f172a 62%, #64748b 38%);
+  text-shadow: 0 1px 1px color-mix(in srgb, #fff 30%, transparent);
+}
+
+html[data-theme="light"] .profile-scroll-hint-wrap:hover .profile-scroll-hint {
+  color: #0f172a;
+}
+
+html[data-theme="light"] .hero-section.profile-scroll-hint-scrolling .profile-scroll-hint {
+  color: var(--color-primary);
+  text-shadow: none;
+}
+
+html[data-theme="light"] .profile-scroll-hint-rail {
+  background: color-mix(in srgb, #0f172a 16%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, #0f172a 12%, transparent),
+    0 0 0 1px color-mix(in srgb, #3b82f6 10%, transparent);
+}
+
+.profile-scroll-hint-cue {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.5rem;
+}
+
+.profile-scroll-hint-glow {
+  position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  z-index: 0;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, #ffffff 45%, #22d3ee 55%) 0%,
+    transparent 70%
+  );
+  opacity: calc(0.26 + var(--profile-hint-progress, 0) * 0.45);
+  transform: scale(calc(0.95 + var(--profile-hint-progress, 0) * 0.2));
+  animation: profileScrollHintPulse 4.5s ease-in-out infinite;
+  filter: blur(2.5px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: box-shadow;
+  box-shadow: 0 0 40px 14px color-mix(in srgb, #22d3ee 24%, transparent);
 }
 
 .profile-scroll-hint-icon {
-  display: block;
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  position: relative;
+  z-index: 1;
+  color: color-mix(in srgb, #ffffff 70%, #93c5fd 30%);
+  transition: opacity 0.22s ease, transform 0.22s ease, color 0.3s ease;
+}
+
+.hero-section.profile-scroll-hint-scrolling .profile-scroll-hint-icon--arrow {
+  color: color-mix(in srgb, #7dd3fc 50%, #c4b5fd 50%);
+}
+
+.profile-scroll-hint-wrap:hover .profile-scroll-hint-icon--arrow {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="light"] .profile-scroll-hint-icon--arrow {
+  color: color-mix(in srgb, var(--color-primary) 60%, #64748b 40%);
 }
 
 .profile-scroll-hint-icon--arrow {
-  width: 0.52rem;
-  height: 0.52rem;
-  margin: 0.45rem auto 0;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
+  display: block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-right: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
   transform: rotate(45deg);
   animation: profileScrollHintNudge 1.35s ease-in-out infinite;
 }
 
-.profile-scroll-hint-icon--smile {
-  position: absolute;
-  left: 50%;
-  top: 1.45rem;
-  opacity: 0;
-  font-size: 1.05em;
-  font-weight: 800;
-  letter-spacing: 0;
-  transform: translateX(-50%) translateY(0.25rem) rotate(-8deg);
-}
-
 .profile-scroll-hint-text {
-  display: inline-block;
-  transition: opacity 0.22s ease, transform 0.22s ease;
+  grid-area: label;
+  max-width: 24rem;
+  margin: 0;
+  transition: opacity 0.24s ease, transform 0.24s ease;
 }
 
+.profile-scroll-hint-emoji {
+  display: inline;
+  font-style: normal;
+  font-size: 1.12em;
+  line-height: 0;
+  vertical-align: 0.08em;
+  margin-left: 0.12em;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, #22d3ee 25%, transparent));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-scroll-hint-wrap {
+    filter: drop-shadow(0 16px 40px color-mix(in srgb, #22d3ee 12%, transparent));
+    transform: none;
+  }
+
+  .profile-scroll-hint-main {
+    animation: none;
+  }
+
+  .profile-scroll-hint-glow {
+    animation: none;
+    opacity: 0.2;
+  }
+
+  .profile-scroll-hint-icon--arrow {
+    animation: none;
+  }
+}
+
+.profile-scroll-hint-text--keep,
 .profile-scroll-hint-text--thanks {
-  position: absolute;
-  left: 50%;
   opacity: 0;
-  transform: translateX(-50%) translateY(0.35rem);
+  transform: translateY(0.2rem);
+  pointer-events: none;
 }
 
-.hero-section.profile-scroll-thanks .profile-scroll-hint-text--scroll {
+/* Mid-scroll: nudge to continue */
+.hero-section.profile-scroll-keep .profile-scroll-hint-text--scroll {
   opacity: 0;
-  transform: translateY(-0.35rem);
+  transform: translateY(-0.45rem);
+  pointer-events: none;
+}
+
+.hero-section.profile-scroll-keep .profile-scroll-hint-text--keep {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: none;
+}
+
+.hero-section.profile-scroll-keep .profile-scroll-hint-text--thanks {
+  opacity: 0;
+  transform: translateY(0.2rem);
+  pointer-events: none;
+}
+
+/* Final “thanks” (still before full scroll complete) */
+.hero-section.profile-scroll-thanks .profile-scroll-hint-text--scroll,
+.hero-section.profile-scroll-thanks .profile-scroll-hint-text--keep {
+  opacity: 0;
+  transform: translateY(-0.45rem);
+  pointer-events: none;
 }
 
 .hero-section.profile-scroll-thanks .profile-scroll-hint-text--thanks {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
+  pointer-events: none;
 }
 
 .hero-section.profile-scroll-thanks .profile-scroll-hint-icon--arrow {
   opacity: 0;
-  transform: translateY(-0.35rem) rotate(45deg);
+  transform: translateY(-0.25rem) rotate(45deg);
+  animation: none;
+  pointer-events: none;
 }
 
-.hero-section.profile-scroll-thanks .profile-scroll-hint-icon--smile {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0) rotate(0deg);
-}
-
-.hero-section.profile-scroll-complete .profile-scroll-hint {
-  opacity: 0;
-  transform: translateY(8px);
+.hero-section.profile-scroll-complete .profile-scroll-hint-wrap {
+  pointer-events: none;
 }
 
 @keyframes profileScrollHintNudge {
   0%,
   100% {
-    transform: translateY(-0.05rem) rotate(45deg);
+    transform: translateY(-0.08rem) rotate(45deg);
   }
 
   50% {
-    transform: translateY(0.22rem) rotate(45deg);
+    transform: translateY(0.28rem) rotate(45deg);
+  }
+}
+
+@keyframes profileScrollHintDrift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes profileScrollHintPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 22px 6px color-mix(in srgb, #22d3ee 12%, transparent);
+  }
+
+  50% {
+    box-shadow: 0 0 40px 14px color-mix(in srgb, #7dd3fc 24%, #a78bfa 8%);
   }
 }
 
@@ -1009,6 +1484,12 @@ html[data-theme="dark"] .profile-scroll-hint {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
+}
+
+/* Blog, books, and similar pages: same horizontal gutter as .page-container + shared vertical padding */
+.page-container--text {
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-2xl);
 }
 
 .main-layout {
@@ -1075,62 +1556,114 @@ pre code {
 
 .book-image {
   max-width: 80vw;
-  width: 200px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  width: 145px;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
 }
 
-.books-page {
-  padding: var(--spacing-2xl) var(--spacing-sm);
-}
+/* .books-page: main also uses .page-container + .page-container--text for the same column as /blog/ */
 
 .books-page__inner {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: 1100px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 .books-page__header {
-  max-width: 760px;
-  margin: 0 auto var(--spacing-xl);
-  text-align: center;
+  max-width: none;
+  width: 100%;
+  margin: 0 0 var(--spacing-xl);
+  text-align: left;
+  color: var(--color-text-primary);
 }
 
 .books-page__header h1 {
   margin-top: 0;
+  color: var(--color-text-primary);
+  text-align: left;
 }
 
 .books-page__header p {
   margin: var(--spacing-xs) 0 0;
+  color: var(--color-text-secondary);
+  font-size: clamp(1.6rem, 2vw, 1.9rem);
+  line-height: 1.7;
+  text-align: left;
+  max-width: 65ch;
 }
 
 .books-section {
   width: 100%;
-  max-width: 980px;
-  margin-right: auto;
+  max-width: 100%;
+  margin-right: 0;
   margin-bottom: var(--spacing-xl);
-  margin-left: auto;
+  margin-left: 0;
 }
 
 .books-section > h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
   text-align: left;
+}
+
+.books-section > h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.28);
+}
+
+.books-page .book-category {
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
 }
 
 .book-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(170px, 210px);
+  grid-template-columns: minmax(130px, 160px) minmax(0, 1fr);
   gap: var(--spacing-lg);
   align-items: center;
-  margin-right: 0;
-  margin-left: 0;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(1.6rem, 4vw, 2.4rem);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: var(--radius-lg);
   background:
-    radial-gradient(circle at 100% 0%, rgba(96, 165, 250, 0.22), transparent 34%),
-    linear-gradient(135deg, #111827 0%, #1f2937 56%, #0f172a 100%);
+    radial-gradient(circle at 0% 0%, rgba(96, 165, 250, 0.14), transparent 34%),
+    linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.98));
+  color: var(--color-text-inverse);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+  text-align: left;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.book-card:hover {
+  border-color: rgba(96, 165, 250, 0.42);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.32);
+  transform: translateY(-2px);
+}
+
+.book-card__media {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.book-card__copy {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 .book-card h3 {
-  margin: 0;
+  margin: 0 0 clamp(0.45rem, 0.55em, 0.85rem);
+  font-size: clamp(2.1rem, 3vw, 2.8rem);
+  line-height: 1.12;
 }
 
 .book-card h3 a,
@@ -1185,10 +1718,27 @@ pre code {
   border-left: 3px solid rgba(255, 255, 255, 0.34);
 }
 
+.book-card-goodreads__label {
+  margin: 0 0 0.35rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .book-card-goodreads blockquote {
   margin: 0;
   color: rgba(255, 255, 255, 0.86);
   font-style: italic;
+}
+
+.book-card-goodreads blockquote p {
+  margin: 0 0 var(--spacing-sm);
+}
+
+.book-card-goodreads blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 .book-card-details {
@@ -1265,23 +1815,43 @@ pre code {
   }
 
   .book-card__media {
+    grid-column: 1;
+    grid-row: 1;
     order: -1;
+  }
+
+  .book-card__copy {
+    grid-column: 1;
+    grid-row: 2;
   }
 }
 
 .hero-title {
-  font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-3xl));
-  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-4xl));
+  font-weight: 700;
   margin: 0 0 var(--spacing-lg) 0;
   color: var(--color-text-primary);
   line-height: var(--line-height-tight);
+}
+
+/* “Viktor” uses the display font; “Hi, I’m” stays Poppins (matches previous home hero) */
+.hero-title .milka {
+  font-family: milka-aged, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Colored period after the name (brand accent) */
+.hero-title .milka .red {
+  color: var(--color-accent);
 }
 
 .hero-subtitle {
   font-size: var(--font-size-lg);
   font-weight: 400;
   margin: 0 0 var(--spacing-xl) 0;
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   max-width: 500px;
 }
@@ -1291,8 +1861,13 @@ pre code {
 }
 
 .hero-cta .button {
-  background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #1f2937 100%);
-  color: var(--color-text-inverse);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 45%,
+    var(--color-primary-light) 100%
+  );
+  color: #ffffff;
   padding: var(--spacing-md) var(--spacing-2xl);
   border-radius: 50px;
   text-decoration: none;
@@ -1300,12 +1875,12 @@ pre code {
   font-size: var(--font-size-sm);
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 8px 32px rgba(31, 41, 55, 0.4);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-primary) 38%, transparent);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid color-mix(in srgb, var(--color-primary-light) 45%, transparent);
 }
 
 .hero-cta .button::before {
@@ -1330,9 +1905,38 @@ pre code {
 
 .hero-cta .button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(31, 41, 55, 0.5);
-  background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #374151 100%);
-  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 40px color-mix(in srgb, var(--color-primary) 50%, transparent);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 50%,
+    color-mix(in srgb, var(--color-primary-light) 88%, #ffffff 12%) 100%
+  );
+  border-color: color-mix(in srgb, #ffffff 28%, var(--color-primary));
+}
+
+/* Light theme: stronger hero field + title ink (5% tints on white feel invisible) */
+html[data-theme="light"] .hero-section {
+  background:
+    linear-gradient(180deg, #f8fafc 0%, rgba(255, 255, 255, 0.55) 50%, #f1f5f9 100%),
+    linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.08) 100%),
+    radial-gradient(
+      circle at 18% 78%,
+      rgba(37, 99, 235, 0.09) 0%,
+      transparent 52%
+    );
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+html[data-theme="light"] .hero-title {
+  color: #0f172a;
+  letter-spacing: -0.03em;
+}
+
+html[data-theme="light"] .hero-profile {
+  box-shadow:
+    0 20px 44px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(15, 23, 42, 0.07);
 }
 
 /* Section Headers */
@@ -1348,8 +1952,21 @@ pre code {
   text-align: left;
 }
 
-/* Match body padding-top so filter scroll / #recent-heading sit below fixed navbar */
-#recent-heading {
+/* Home: section headings mirror hero’s bottom keyline; left on wide screens (blog archive uses .blog-page + .left-align) */
+@media (min-width: 769px) {
+  .home-main .section-title {
+    text-align: left;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    padding-bottom: var(--spacing-md);
+  }
+}
+
+html[data-theme="dark"] .home-main .section-title {
+  border-bottom-color: rgba(148, 163, 184, 0.18);
+}
+
+/* Match body padding-top so filter scroll / #posts-list-heading sit below fixed navbar */
+#posts-list-heading {
   scroll-margin-top: calc(var(--nav-offset) + var(--spacing-sm));
 }
 
@@ -1757,10 +2374,7 @@ pre code {
   line-height: 1.75;
 }
 
-.about-page a {
-  color: var(--color-primary);
-  font-weight: 700;
-}
+/* .about-page links: see prose + off-site link block above */
 
 .topic-page {
   padding-top: var(--spacing-2xl);
@@ -1975,6 +2589,183 @@ html[data-theme="dark"] .newsletter-signup__input::placeholder {
   }
 }
 
+/* Newsletter: delayed modal (see assets/newsletter-modal.js) */
+.newsletter-modal {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.newsletter-modal::backdrop {
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-modal::backdrop {
+    backdrop-filter: none;
+  }
+}
+
+html[data-theme="dark"] .newsletter-modal::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+.newsletter-modal__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.25rem;
+  pointer-events: none;
+}
+
+.newsletter-modal__underlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.newsletter-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 60rem);
+  max-height: min(90dvh, 100%);
+  padding: 0 0 0.25rem;
+  overflow: auto;
+  pointer-events: auto;
+  animation: newsletter-modal-in 0.24s ease-out;
+}
+
+.newsletter-modal__header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 0.5rem;
+  padding: 0 0.1rem 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-modal__panel {
+    animation: none;
+  }
+}
+
+@keyframes newsletter-modal-in {
+  from {
+    opacity: 0.85;
+    transform: translateY(0.4rem) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.newsletter-modal .newsletter-signup--modal {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.newsletter-modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  background: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.newsletter-modal__close-x {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1;
+  transform: translateY(-0.05em);
+}
+
+.newsletter-modal__close:hover {
+  background: var(--color-bg-secondary);
+  border-color: rgba(37, 99, 235, 0.28);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+html[data-theme="dark"] .newsletter-modal__close {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-light);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+html[data-theme="dark"] .newsletter-modal__close:hover {
+  border-color: rgba(96, 165, 250, 0.35);
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.newsletter-modal__footer {
+  margin: 0;
+  text-align: center;
+}
+
+.newsletter-modal__later {
+  margin: 0;
+  padding: 0.45rem 0.75rem 0.75rem;
+  border: 0;
+  background: none;
+  color: var(--color-text-light);
+  font: inherit;
+  font-size: 1.4rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.newsletter-modal__later:hover {
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 640px) {
+  .newsletter-modal__header {
+    margin-bottom: 0.4rem;
+  }
+}
+
 .red {
   color: var(--color-accent);
 }
@@ -2068,11 +2859,14 @@ html[data-theme="dark"] .newsletter-signup__input::placeholder {
 
 .container {
   max-width: 1100px;
-  width: 100vw;
+  width: 100%;
+  margin: 0 auto;
   padding: var(--spacing-lg);
 }
 
-header {
+/* Old full-width hero (home-backup) only. Do not target bare `header` — it breaks
+   .books-page__header / .post-header in light mode (white text on white). */
+header.gradient-bg[role="banner"] {
   color: var(--color-text-inverse);
   display: flex;
   align-items: center;
@@ -2516,8 +3310,9 @@ img + em {
   line-height: var(--line-height-normal);
 }
 
+/* Legacy duplicate: keep in sync with .hero-subtitle in hero block above */
 .hero-subtitle {
-  color: var(--color-text-primary);
+  color: var(--color-text-secondary);
   font-size: var(--font-size-lg);
   margin: var(--spacing-md) 0;
   font-weight: 400;
@@ -2641,6 +3436,30 @@ html[data-theme="dark"] .post-browse {
   background: rgba(15, 23, 42, 0.55);
   border-color: rgba(148, 163, 184, 0.22);
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.24);
+}
+
+/* Blog archive: same masthead as /books/ (books-page__header) + left-align browse UI to that column */
+.blog-page .post-browse {
+  max-width: none;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.blog-page .section-filter-label {
+  text-align: left;
+}
+
+.blog-page .post-browse__label {
+  text-align: left;
+}
+
+.blog-page .category-filter {
+  justify-content: flex-start;
+}
+
+.blog-page .topic-filter-list {
+  justify-content: flex-start;
 }
 
 .section-filter-label {
@@ -3910,9 +4729,16 @@ html[data-theme="dark"] .project-tag {
 
   .hero-profile {
     order: 1;
-    width: 220px;
-    height: 220px;
+    /* Was 220px — too small vs. headline; scale with viewport up to a cap */
+    width: min(300px, 88vw);
+    height: min(300px, 88vw);
     margin: 0 auto;
+  }
+
+  /* Scroll-driven hero: bigger disk on phones (38vw alone reads tiny on narrow screens) */
+  .hero-section.profile-scroll-active .hero-profile {
+    width: clamp(275px, 88vw, 400px);
+    height: clamp(275px, 88vw, 400px);
   }
 
   .hero-profile-wrap {

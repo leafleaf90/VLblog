@@ -6,7 +6,7 @@ series_title: "Firebase Emulator Suit"
 featured-image: /assets/post-media/2024-02-03/cover_lg.jpg
 featured-thumbnail: /assets/post-media/2024-02-03/cover_sm.jpg
 description: "How to test Firebase Cloud Functions locally with the Firebase emulator suite."
-categories: coding firebase
+categories: firebase
 ---
 
 ## What you'll learn

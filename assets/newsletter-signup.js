@@ -31,6 +31,16 @@
     }
   }
 
+  function onSubscribeSuccess(form) {
+    if (form && form.closest("#newsletterSignupModal")) {
+      document.dispatchEvent(
+        new CustomEvent("vlblog:newsletter-subscribed", {
+          detail: { inModal: true },
+        })
+      );
+    }
+  }
+
   frame.addEventListener("load", function () {
     if (!activeForm) return;
 
@@ -40,6 +50,7 @@
       "Almost done. Check your inbox to confirm the subscription. If you do not see it, check spam or junk.",
       "success"
     );
+    onSubscribeSuccess(activeForm);
     activeForm.reset();
     activeForm = null;
   });
@@ -58,6 +69,7 @@
           "Almost done. Check your inbox to confirm the subscription. If you do not see it, check spam or junk.",
           "success"
         );
+        onSubscribeSuccess(activeForm);
         activeForm.reset();
         activeForm = null;
       }, 3000);

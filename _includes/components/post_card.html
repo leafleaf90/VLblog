@@ -13,7 +13,7 @@
   class="post-card"
   {% if include.main_category %}data-category="{{ include.main_category }}"{% endif %}
   {% if post_obj.categories %}data-categories="{{ post_obj.categories | join: ',' }}"{% endif %}
-  {% if include.hidden %}style="display: none;"{% endif %}
+  {% if include.hidden %}data-initially-hidden="true" style="display: none;"{% endif %}
 >
   {% if post_thumb %}
   <img
