@@ -6,3 +6,24 @@
   RUBY_VERSION = "3.1.0"
   NODE_VERSION = "18"
   BUNDLE_CACHE = "true"
+
+# Keyword vanity paths → QR tool (canonical remains /qr/)
+[[redirects]]
+  from = "/qr-code-generator"
+  to = "/qr/"
+  status = 301
+
+[[redirects]]
+  from = "/qr-code-generator/"
+  to = "/qr/"
+  status = 301
+
+[[redirects]]
+  from = "/free-qr-code-generator"
+  to = "/qr/"
+  status = 301
+
+[[redirects]]
+  from = "/free-qr-code-generator/"
+  to = "/qr/"
+  status = 301

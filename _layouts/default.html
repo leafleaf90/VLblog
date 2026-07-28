@@ -34,6 +34,12 @@
     <title>{{ site.title }}</title>
     {% endif %}
     <meta name="description" content="{{ seo_desc | xml_escape }}" />
+    {% if seo_topics %}
+    <meta
+      name="keywords"
+      content="{{ seo_topics | join: ', ' | xml_escape }}"
+    />
+    {% endif %}
     {% if site.author %}
     <meta name="author" content="{{ site.author | xml_escape }}" />
     {% endif %}
@@ -289,6 +295,7 @@
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/books">Books</a></li>
           <li><a href="/quotes">Quotes</a></li>
+          <li><a href="/qr/">QR</a></li>
         </ul>
         <button
           type="button"
