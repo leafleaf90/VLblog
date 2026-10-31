@@ -1,0 +1,14 @@
+{% assign icon_name = include.icon %}
+{% if icon_name == nil or icon_name == "" %}
+  {% case include.id %}
+    {% when "3d-homes" %}
+      {% assign icon_name = "box" %}
+    {% when "web-apps" %}
+      {% assign icon_name = "app-window" %}
+    {% when "tech-setup" %}
+      {% assign icon_name = "settings-2" %}
+    {% when "shopify-themes" %}
+      {% assign icon_name = "store" %}
+  {% endcase %}
+{% endif %}
+{% include icon.html name=icon_name class="work-mark" %}

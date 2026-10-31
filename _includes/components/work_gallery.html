@@ -1,0 +1,23 @@
+{% if include.items and include.items.size > 0 %}
+{% capture gallery_html %}
+{% for item in include.items %}
+  {% assign gallery_file = site.static_files | where: "path", item.src | first %}
+  {% if gallery_file %}
+  <figure class="work-gallery__item">
+    <img
+      src="{{ item.src }}"
+      alt="{{ item.alt | xml_escape }}"
+      loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+    />
+    {% if item.caption %}
+    <figcaption>{{ item.caption }}</figcaption>
+    {% endif %}
+  </figure>
+  {% endif %}
+{% endfor %}
+{% endcapture %}
+{% assign gallery_html = gallery_html | strip %}
+{% if gallery_html != "" %}
+<div class="work-gallery">{{ gallery_html }}</div>
+{% endif %}
+{% endif %}

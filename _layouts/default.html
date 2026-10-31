@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+{%- assign loc = page.lang | default: "en" -%}
+{%- assign ui = site.data.i18n[loc] -%}
+<html lang="{{ ui.html_lang | default: loc }}">
   <head>
     <meta charset="UTF-8" />
     {% include theme-head.html %}
@@ -22,6 +24,15 @@
     {%- assign seo_desc = page.description | default: site.tagline | default: site.description | strip -%}
     {%- assign canonical_url = page.url | absolute_url -%}
     {%- assign social_image = page.featured-image | default: site.default_social_image -%}
+    {%- if page.service and page.featured-image == nil -%}
+      {%- assign og_service = site.data.services | where: "id", page.service | first -%}
+      {%- if og_service.featured_image -%}
+        {%- assign og_file = site.static_files | where: "path", og_service.featured_image | first -%}
+        {%- if og_file -%}
+          {%- assign social_image = og_service.featured_image -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
     {%- assign social_image_width = page.featured_image_width | default: site.default_social_image_width -%}
     {%- assign social_image_height = page.featured_image_height | default: site.default_social_image_height -%}
     {%- assign author_url = '/about/' | absolute_url -%}
@@ -44,6 +55,7 @@
     <meta name="author" content="{{ site.author | xml_escape }}" />
     {% endif %}
     <link rel="canonical" href="{{ canonical_url }}" />
+    {% include hreflang.html %}
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -62,6 +74,15 @@
       href="/assets/favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    {% if page.layout == "home" %}
+    <link
+      rel="preload"
+      as="image"
+      href="{{ '/assets/images/profile-frames/frame-0001.webp' | relative_url }}"
+      type="image/webp"
+      fetchpriority="high"
+    />
+    {% endif %}
     <link
       rel="stylesheet"
       href="{{ 'assets/styles.css' | relative_url }}?v={{ site.time | date: '%s' }}"
@@ -128,7 +149,12 @@
     {% if jekyll.environment == 'production' and site.google_analytics %} {%
     include analytics.html %} {% endif %}
     <meta property="og:site_name" content="{{ seo_brand | xml_escape }}" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="{{ ui.og_locale | default: 'en_US' }}" />
+    {% if loc == "sv" %}
+    <meta property="og:locale:alternate" content="en_US" />
+    {% elsif page.i18n.sv %}
+    <meta property="og:locale:alternate" content="sv_SE" />
+    {% endif %}
     <meta property="og:url" content="{{ canonical_url }}" />
     <meta property="og:description" content="{{ seo_desc | xml_escape }}" />
     {% if page.title %}
@@ -207,7 +233,10 @@
           "Firebase",
           "JavaScript",
           "digital minimalism",
-          "productivity"
+          "productivity",
+          "3D home visualization",
+          "Shopify theme development",
+          "small business technology"
         ],
         "sameAs": [
           "https://x.com/viktor_lovgren",
@@ -283,7 +312,7 @@
     </script>
     {% endif %}
   </head>
-  <body>
+  <body{% if page.service %} data-service="{{ page.service }}"{% endif %} data-lang="{{ loc }}">
     <!-- Modern Navigation -->
     <nav class="navbar">
       <div class="navbar-container">
@@ -291,18 +320,25 @@
           <span class="milka">VL<span class="red">.</span></span>
         </a>
         <ul class="navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/books">Books</a></li>
-          <li><a href="/quotes">Quotes</a></li>
-          <li><a href="/qr/">QR</a></li>
+          <li><a href="/">{{ ui.nav.home }}</a></li>
+          <li><a href="/blog/">{{ ui.nav.blog }}</a></li>
+          <li><a href="{{ ui.urls.work }}">{{ ui.nav.work }}</a></li>
+          <li><a href="/books">{{ ui.nav.books }}</a></li>
+          <li><a href="/quotes">{{ ui.nav.quotes }}</a></li>
+          <li><a href="/qr/">{{ ui.nav.qr }}</a></li>
         </ul>
+        <div class="navbar-tools">
+        {% include lang_switcher.html %}
         <button
           type="button"
           class="theme-toggle"
           id="themeToggle"
           aria-pressed="false"
-          aria-label="Switch to dark mode"
+          aria-label="{{ ui.theme.to_dark }}"
+          data-label-to-dark="{{ ui.theme.to_dark }}"
+          data-label-to-light="{{ ui.theme.to_light }}"
+          data-title-dark="{{ ui.theme.title_dark }}"
+          data-title-light="{{ ui.theme.title_light }}"
         >
           <span class="theme-toggle__icons" aria-hidden="true">
             <svg
@@ -340,6 +376,7 @@
             </svg>
           </span>
         </button>
+        </div>
       </div>
     </nav>
 
@@ -353,7 +390,12 @@
         href="mailto:mail@viktorlovgren.com"
         >mail@viktorlovgren.com</a
       >
-      <div class="site-footer__socials" aria-label="Social links">
+      <nav class="site-footer__nav" aria-label="{{ ui.nav.site }}">
+        <a class="site-footer__link" href="{{ ui.urls.work }}">{{ ui.nav.work }}</a>
+        <a class="site-footer__link" href="{{ ui.urls.about }}">{{ ui.nav.about }}</a>
+      </nav>
+      {% include lang_switcher.html %}
+      <div class="site-footer__socials" aria-label="{{ ui.nav.socials }}">
         <a
           class="site-footer__icon-link"
           href="https://x.com/viktor_lovgren"
@@ -378,13 +420,12 @@
       <div class="modal-overlay"></div>
       <div class="modal-content">
         <div class="modal-header">
-          <h3>Talk to me!</h3>
+          <h3>{{ ui.contact.title }}</h3>
           <button id="closeModal" class="close-btn">&times;</button>
         </div>
         <div class="modal-body">
           <p>
-            Need help with a website, webapp, or integration? Questions or
-            feedback? Send a message here.
+            {{ ui.contact.intro }}
           </p>
           <form
             id="contactForm"
@@ -392,18 +433,33 @@
             name="contact"
             method="POST"
             netlify
+            data-thanks="{{ ui.contact.thanks | xml_escape }}"
+            data-error="{{ ui.contact.error | xml_escape }}"
+            data-sending="{{ ui.contact.sending | xml_escape }}"
           >
             <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" name="page" id="contactPage" value="" />
+            <input type="hidden" name="locale" value="{{ loc }}" />
             <div class="form-group">
-              <label for="contactName">Name</label>
+              <label for="contactName">{{ ui.contact.name }}</label>
               <input type="text" id="contactName" name="name" required />
             </div>
             <div class="form-group">
-              <label for="contactEmail">Email</label>
+              <label for="contactEmail">{{ ui.contact.email }}</label>
               <input type="email" id="contactEmail" name="email" required />
             </div>
             <div class="form-group">
-              <label for="contactMessage">Message</label>
+              <label for="contactService">{{ ui.contact.service }}</label>
+              <select id="contactService" name="service" required>
+                <option value="">{{ ui.contact.choose }}</option>
+                {% for item in site.data.services %}
+                <option value="{{ item.id }}">{% if loc == "sv" and item.sv.form_label %}{{ item.sv.form_label }}{% else %}{{ item.form_label }}{% endif %}</option>
+                {% endfor %}
+                <option value="other">{{ ui.contact.other }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contactMessage">{{ ui.contact.message }}</label>
               <textarea
                 id="contactMessage"
                 name="message"
@@ -413,9 +469,9 @@
             </div>
             <div class="form-actions">
               <button type="button" id="cancelBtn" class="btn-cancel">
-                Cancel
+                {{ ui.contact.cancel }}
               </button>
-              <button type="submit" class="btn-send">Send</button>
+              <button type="submit" class="btn-send">{{ ui.contact.send }}</button>
             </div>
           </form>
         </div>
@@ -434,7 +490,7 @@
           d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
         ></path>
       </svg>
-      Talk to me!
+      {{ ui.contact.trigger }}
     </button>
 
     <script>
@@ -446,9 +502,32 @@
         const overlay = document.querySelector(".modal-overlay");
         const form = document.getElementById("contactForm");
         const footer = document.querySelector(".site-footer");
+        const serviceSelect = document.getElementById("contactService");
+        const pageField = document.getElementById("contactPage");
+
+        function currentPageService() {
+          const params = new URLSearchParams(window.location.search);
+          return (
+            params.get("service") ||
+            document.body.getAttribute("data-service") ||
+            ""
+          );
+        }
+
+        function applyService(serviceId) {
+          if (!serviceSelect) return;
+          const value = serviceId || currentPageService();
+          if (value) {
+            serviceSelect.value = value;
+          }
+        }
 
         // Open modal
-        function openModal() {
+        function openModal(serviceId) {
+          if (pageField) {
+            pageField.value = window.location.pathname;
+          }
+          applyService(serviceId);
           modal.style.display = "block";
           document.body.style.overflow = "hidden";
         }
@@ -458,13 +537,25 @@
           modal.style.display = "none";
           document.body.style.overflow = "auto";
           form.reset();
+          if (pageField) {
+            pageField.value = "";
+          }
         }
 
         // Event listeners
-        trigger.addEventListener("click", openModal);
+        trigger.addEventListener("click", function () {
+          openModal();
+        });
         closeBtn.addEventListener("click", closeModal);
         cancelBtn.addEventListener("click", closeModal);
         overlay.addEventListener("click", closeModal);
+
+        document.addEventListener("click", function (e) {
+          const opener = e.target.closest("[data-open-contact]");
+          if (!opener) return;
+          e.preventDefault();
+          openModal(opener.getAttribute("data-open-contact") || "");
+        });
 
         // Close on Escape key
         document.addEventListener("keydown", function (e) {
@@ -482,7 +573,7 @@
 
           // Show loading state
           submitBtn.disabled = true;
-          submitBtn.textContent = "Sending...";
+          submitBtn.textContent = form.dataset.sending || "Sending...";
 
           try {
             const formData = new FormData(form);
@@ -495,7 +586,7 @@
             });
 
             if (response.ok) {
-              alert("Thank you! Your message has been sent successfully.");
+              alert(form.dataset.thanks || "Thank you! Your message has been sent successfully.");
               closeModal();
             } else {
               throw new Error("Failed to send message");
@@ -503,7 +594,8 @@
           } catch (error) {
             console.error("Error:", error);
             alert(
-              "Sorry, there was an error sending your message. Please try again or email me directly at mail@viktorlovgren.com"
+              form.dataset.error ||
+                "Sorry, there was an error sending your message. Please try again or email me directly at mail@viktorlovgren.com"
             );
           } finally {
             // Reset button state

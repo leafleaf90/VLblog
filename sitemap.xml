@@ -5,51 +5,51 @@ sitemap:
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 {% assign sitemap_pages = site.pages | where_exp: "page", "page.sitemap.exclude != 'yes'" | where_exp: "page", "page.layout != nil" %}
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- assign sitemap_origin = site.url -%}
+{%- if sitemap_origin contains "localhost" or sitemap_origin contains "127.0.0.1" -%}
+  {%- assign sitemap_origin = "https://www.viktorlovgren.com" -%}
+{%- endif -%}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {% for post in site.posts %}
     {% unless post.published == false or post.sitemap.exclude == "yes" %}
+    {% assign post_lastmod = post.sitemap.lastmod | default: post.updated_date | default: post.date %}
     <url>
-      <loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
-      {% if post.sitemap.lastmod %}
-        <lastmod>{{ post.sitemap.lastmod | date: "%Y-%m-%d" }}</lastmod>
-      {% elsif post.date %}
-        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
-      {% else %}
-        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+      <loc>{{ sitemap_origin }}{{ site.baseurl }}{{ post.url }}</loc>
+      {% if post_lastmod %}
+        <lastmod>{{ post_lastmod | date: "%Y-%m-%d" }}</lastmod>
       {% endif %}
       {% if post.sitemap.changefreq %}
         <changefreq>{{ post.sitemap.changefreq }}</changefreq>
-      {% else %}
-        <changefreq>monthly</changefreq>
       {% endif %}
       {% if post.sitemap.priority %}
         <priority>{{ post.sitemap.priority }}</priority>
-      {% else %}
-        <priority>0.5</priority>
       {% endif %}
     </url>
     {% endunless %}
   {% endfor %}
   {% for page in sitemap_pages %}
     {% unless page.name == "404.html" or page.name == "feed.xml" or page.url contains ".css" or page.url contains ".xml" or page.url contains ".txt" %}
+    {% assign page_path = page.url | remove: "index.html" %}
+    {% assign page_lastmod = page.sitemap.lastmod | default: page.updated_date | default: page.date %}
     <url>
-      <loc>{{ site.url }}{{ site.baseurl }}{{ page.url | remove: "index.html" }}</loc>
-      {% if page.sitemap.lastmod %}
-        <lastmod>{{ page.sitemap.lastmod | date: "%Y-%m-%d" }}</lastmod>
-      {% elsif page.date %}
-        <lastmod>{{ page.date | date_to_xmlschema }}</lastmod>
-      {% else %}
-        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+      <loc>{{ sitemap_origin }}{{ site.baseurl }}{{ page_path }}</loc>
+      {% if page_lastmod %}
+        <lastmod>{{ page_lastmod | date: "%Y-%m-%d" }}</lastmod>
       {% endif %}
       {% if page.sitemap.changefreq %}
         <changefreq>{{ page.sitemap.changefreq }}</changefreq>
-      {% else %}
-        <changefreq>monthly</changefreq>
       {% endif %}
       {% if page.sitemap.priority %}
         <priority>{{ page.sitemap.priority }}</priority>
-      {% else %}
-        <priority>0.3</priority>
+      {% endif %}
+      {% if page.i18n.en %}
+      <xhtml:link rel="alternate" hreflang="en" href="{{ sitemap_origin }}{{ site.baseurl }}{{ page.i18n.en }}" />
+      {% endif %}
+      {% if page.i18n.sv %}
+      <xhtml:link rel="alternate" hreflang="sv" href="{{ sitemap_origin }}{{ site.baseurl }}{{ page.i18n.sv }}" />
+      {% endif %}
+      {% if page.i18n.en %}
+      <xhtml:link rel="alternate" hreflang="x-default" href="{{ sitemap_origin }}{{ site.baseurl }}{{ page.i18n.en }}" />
       {% endif %}
     </url>
     {% endunless %}

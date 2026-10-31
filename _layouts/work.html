@@ -1,0 +1,132 @@
+---
+layout: default
+---
+
+{% assign loc = page.lang | default: "en" %}
+{% assign ui = site.data.i18n[loc] %}
+
+{% if page.service %}
+  {% assign service = site.data.services | where: "id", page.service | first %}
+  {% assign journey = service.journey %}
+  {% assign faqs = service.faqs %}
+  {% assign cta_label = service.cta_label %}
+  {% if loc == "sv" and service.sv %}
+    {% if service.sv.journey.size > 0 %}
+      {% assign journey = service.sv.journey %}
+    {% endif %}
+    {% if service.sv.faqs.size > 0 %}
+      {% assign faqs = service.sv.faqs %}
+    {% endif %}
+    {% if service.sv.cta_label %}
+      {% assign cta_label = service.sv.cta_label %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+<main
+  class="page-container page-container--text work-page{% unless page.service %} work-page--hub{% endunless %}"
+  aria-labelledby="work-heading"
+>
+  <div class="work-page__inner">
+    <header class="work-page__header">
+      {% if page.service %}
+      <p class="work-page__eyebrow">
+        <a class="link--plain" href="{{ ui.urls.work }}">{{ ui.nav.work }}</a>
+      </p>
+      {% else %}
+      <p class="work-page__eyebrow">{{ ui.nav.work }}</p>
+      {% endif %}
+      <h1 id="work-heading">
+        {{ page.title }}<span class="milka red">.</span>
+      </h1>
+      {% if page.lede %}
+      <p>{{ page.lede }}</p>
+      {% endif %}
+      {% if page.i18n.en and page.i18n.sv %}
+      <p class="work-page__lang">
+        {% if loc == "sv" %}
+        <a href="{{ page.i18n.en }}" lang="en" hreflang="en">{{ ui.work.in_english }}</a>
+        {% else %}
+        <a href="{{ page.i18n.sv }}" lang="sv" hreflang="sv">{{ ui.work.in_swedish }}</a>
+        {% endif %}
+      </p>
+      {% endif %}
+    </header>
+
+    {% if page.intro %}
+    <div class="work-page__body work-page__intro">
+      {{ page.intro | markdownify }}
+    </div>
+    {% endif %}
+
+    {% if service and journey.size > 0 %}
+      {% include components/work_journey.html phases=journey label=ui.work.journey %}
+    {% elsif service and service.gallery.size > 0 %}
+      {% include components/work_gallery.html items=service.gallery %}
+    {% endif %}
+
+    {% assign work_body = content | strip %}
+    {% if work_body != "" %}
+    <div class="work-page__body">
+      {{ work_body }}
+    </div>
+    {% endif %}
+
+    {% unless page.service %}
+    <section class="work-cards" aria-label="{{ ui.work.kinds }}">
+      {% for item in site.data.services %}
+        {% include components/work_card.html service=item index=forloop.index %}
+      {% endfor %}
+    </section>
+    {% include components/work_cta.html label=ui.work.cta_note %}
+    {% endunless %}
+
+    {% if service %}
+      {% if faqs.size > 0 %}
+      <section class="work-section" aria-labelledby="work-faq-heading">
+        <h2 id="work-faq-heading">{{ ui.work.faq }}</h2>
+        <div class="qr-faq">
+          {% for faq in faqs %}
+          <details class="qr-faq__item">
+            <summary>{{ faq.q }}</summary>
+            <p>{{ faq.a }}</p>
+          </details>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% include components/work_cta.html
+        service=service.id
+        label=cta_label
+      %}
+
+      {% if service.related_slugs.size > 0 %}
+      <section class="work-section" aria-labelledby="work-related-heading">
+        <h2 id="work-related-heading">{{ ui.work.related }}</h2>
+        <div class="content-grid">
+          {% for slug in service.related_slugs %}
+            {% assign related = site.posts | where: "slug", slug | first %}
+            {% if related %}
+              {% include components/post_card.html post=related %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <section class="work-section" aria-labelledby="work-other-heading">
+        <h2 id="work-other-heading">{{ ui.work.more }}</h2>
+        <div class="work-cards work-cards--two">
+          {% for item in site.data.services %}
+            {% if item.id != service.id %}
+              {% include components/work_card.html service=item heading="h3" %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</main>
+
+{% include work_jsonld.html %}

@@ -1,0 +1,38 @@
+{% assign item = include.service %}
+{% assign heading_tag = include.heading | default: "h2" %}
+{% assign card_index = include.index %}
+{% assign loc = page.lang | default: "en" %}
+{% assign ui = site.data.i18n[loc] %}
+{% assign card_label = item.card_label %}
+{% assign card_title = item.card_title %}
+{% assign card_summary = item.card_summary %}
+{% assign card_href = item.permalink %}
+{% if loc == "sv" and item.sv %}
+  {% assign card_label = item.sv.card_label | default: item.card_label %}
+  {% assign card_title = item.sv.card_title | default: item.card_title %}
+  {% assign card_summary = item.sv.card_summary | default: item.card_summary %}
+  {% if item.permalink_sv %}
+    {% assign card_href = item.permalink_sv %}
+  {% endif %}
+{% endif %}
+<article class="work-card" data-work="{{ item.id }}">
+  <div class="work-card__mark" aria-hidden="true">
+    {% include components/work_mark.html id=item.id icon=item.icon %}
+  </div>
+  <div class="work-card__copy">
+    <p class="work-card__label">{{ card_label }}</p>
+    <{{ heading_tag }} class="work-card__title">{{ card_title }}</{{ heading_tag }}>
+    <p class="work-card__summary">{{ card_summary }}</p>
+    <span class="work-card__more">{{ ui.work.read_more }}</span>
+  </div>
+  {% if card_index %}
+  <span class="work-card__index" aria-hidden="true">{{
+    card_index | prepend: "0" | slice: -2, 2
+  }}</span>
+  {% endif %}
+  <a
+    class="post-card-hitbox link--plain"
+    href="{{ card_href }}"
+    aria-label="{{ card_title | append: ui.work.read_more_aria | xml_escape }}"
+  ></a>
+</article>

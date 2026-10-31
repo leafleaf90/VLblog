@@ -277,7 +277,7 @@ sitemap:
 </script>
 
 <script
-  src="{{ '/assets/vendor/qrcode.min.js' | relative_url }}?v={{ site.time | date: '%s' }}"
+  src="{{ '/assets/lib/qrcode.min.js' | relative_url }}?v={{ site.time | date: '%s' }}"
   defer
 ></script>
 <script

@@ -20,6 +20,10 @@
     }
   }
 
+  function attr(btn, name, fallback) {
+    return (btn && btn.getAttribute(name)) || fallback;
+  }
+
   function syncButton(btn) {
     if (!btn) return;
     var t = document.documentElement.getAttribute("data-theme") || "light";
@@ -27,13 +31,13 @@
     btn.setAttribute(
       "aria-label",
       t === "dark"
-        ? "Switch to light theme (currently dark)"
-        : "Switch to dark theme (currently light)"
+        ? attr(btn, "data-label-to-light", "Switch to light theme (currently dark)")
+        : attr(btn, "data-label-to-dark", "Switch to dark theme (currently light)")
     );
     btn.title =
       t === "dark"
-        ? "Currently dark — click for light theme"
-        : "Currently light — click for dark theme";
+        ? attr(btn, "data-title-dark", "Currently dark — click for light theme")
+        : attr(btn, "data-title-light", "Currently light — click for dark theme");
   }
 
   document.addEventListener("DOMContentLoaded", function () {

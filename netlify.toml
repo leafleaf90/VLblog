@@ -27,3 +27,103 @@
   from = "/free-qr-code-generator/"
   to = "/qr/"
   status = 301
+
+[[redirects]]
+  from = "/3d-floor-plan"
+  to = "/work/3d-homes/"
+  status = 301
+
+[[redirects]]
+  from = "/3d-floor-plan/"
+  to = "/work/3d-homes/"
+  status = 301
+
+[[redirects]]
+  from = "/3d-house"
+  to = "/work/3d-homes/"
+  status = 301
+
+[[redirects]]
+  from = "/3d-house/"
+  to = "/work/3d-homes/"
+  status = 301
+
+[[redirects]]
+  from = "/shopify-theme-development"
+  to = "/work/shopify-themes/"
+  status = 301
+
+[[redirects]]
+  from = "/shopify-theme-development/"
+  to = "/work/shopify-themes/"
+  status = 301
+
+[[redirects]]
+  from = "/tech-setup"
+  to = "/work/tech-setup/"
+  status = 301
+
+[[redirects]]
+  from = "/tech-setup/"
+  to = "/work/tech-setup/"
+  status = 301
+
+[[redirects]]
+  from = "/web-app-development"
+  to = "/work/web-apps/"
+  status = 301
+
+[[redirects]]
+  from = "/web-app-development/"
+  to = "/work/web-apps/"
+  status = 301
+
+[[redirects]]
+  from = "/nuxt-development"
+  to = "/work/web-apps/"
+  status = 301
+
+[[redirects]]
+  from = "/nuxt-development/"
+  to = "/work/web-apps/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/3d-planlosning"
+  to = "/sv/3d-hus-fran-planritning/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/3d-planlosning/"
+  to = "/sv/3d-hus-fran-planritning/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/3d-hus"
+  to = "/sv/3d-hus-fran-planritning/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/3d-hus/"
+  to = "/sv/3d-hus-fran-planritning/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/shopify-tema"
+  to = "/sv/anpassat-shopify-tema/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/shopify-tema/"
+  to = "/sv/anpassat-shopify-tema/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/shopify-teman"
+  to = "/sv/anpassat-shopify-tema/"
+  status = 301
+
+[[redirects]]
+  from = "/sv/shopify-teman/"
+  to = "/sv/anpassat-shopify-tema/"
+  status = 301

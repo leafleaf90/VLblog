@@ -3,7 +3,11 @@ layout: null
 sitemap:
   exclude: "yes"
 ---
+{%- assign sitemap_origin = site.url -%}
+{%- if sitemap_origin contains "localhost" or sitemap_origin contains "127.0.0.1" -%}
+  {%- assign sitemap_origin = "https://www.viktorlovgren.com" -%}
+{%- endif -%}
 User-agent: *
 Allow: /
 
-Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml
+Sitemap: {{ sitemap_origin }}{{ site.baseurl }}/sitemap.xml

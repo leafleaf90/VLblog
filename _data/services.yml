@@ -1,0 +1,375 @@
+- id: 3d-homes
+  icon: box
+  name: 3D home visualization
+  form_label: 3D home visualization
+  card_label: 3D homes
+  card_title: 3D house from a floor plan
+  card_summary: >-
+    I rebuild your 2D plan in RoomSketcher so you can walk through the house.
+    Stills, and AI renditions if you want them. From €500.
+  permalink: /work/3d-homes/
+  permalink_sv: /sv/3d-hus-fran-planritning/
+  cta_label: Get a quote
+  price_from: 500
+  price_currency: EUR
+  featured_image: /assets/work/3d-homes/og.webp
+  gallery: []
+  journey:
+    - kicker: How it starts
+      title: 2D floor plan, then RoomSketcher
+      text: >-
+        I start from your drawing. Architect PDF or a sketch of your own. Then
+        I rebuild the same rooms in RoomSketcher.
+      layout: pair
+      images:
+        - src: /assets/work/3d-homes/floor-plan-architect.webp
+          alt: Architect 2D floor plan of a kitchen and living room
+          caption: 2D floor plan
+          kind: plan
+          step: "01"
+          width: 1152
+          height: 638
+        - src: /assets/work/3d-homes/floor-plan-roomsketcher.webp
+          alt: The same rooms rebuilt as a RoomSketcher floor plan
+          caption: Rebuilt in RoomSketcher
+          kind: plan
+          step: "02"
+          width: 1194
+          height: 670
+    - kicker: What you get
+      title: Walkable 3D views and AI renditions
+      text: >-
+        A bird’s-eye still, a walk-through in the model, and an AI render when
+        you want furniture, vibe, and style in the picture.
+      layout: results
+      images:
+        - src: /assets/work/3d-homes/view-above.webp
+          alt: Bird’s-eye 3D view of the kitchen, dining, and living area
+          caption: 3D overview
+          width: 1600
+          height: 977
+        - src: /assets/work/3d-homes/view-walk.webp
+          alt: Eye-level 3D view walking through the same rooms
+          caption: Walk through
+          width: 800
+          height: 600
+        - src: /assets/work/3d-homes/render.webp
+          alt: AI render of a kitchen with furniture, materials, and a view outside
+          caption: AI render, for furniture, vibe, and style
+          wide: true
+          width: 1600
+          height: 1088
+    - kicker: And then
+      title: You build it
+      layout: pair
+      images:
+        - src: /assets/work/3d-homes/real-build.webp
+          alt: House framing with a view to water and a red cottage, before windows went in
+          caption: During the build
+          kind: site
+          width: 1600
+          height: 1200
+        - src: /assets/work/3d-homes/on-site.webp
+          alt: Viktor on the construction site, on a call in the framed house
+          caption: On site
+          kind: site-portrait
+          width: 895
+          height: 1201
+  related_slugs: []
+  faqs:
+    - q: Can you turn a 2D floor plan into a 3D house?
+      a: >-
+        Yes. I build a 3D model in RoomSketcher from your 2D floor plan. You
+        get a walkthrough and stills. AI renditions are optional if you want a
+        more realistic look.
+    - q: Can I walk through the model?
+      a: >-
+        That is the point. You click from room to room instead of guessing from
+        a flat drawing.
+    - q: Do I need a finished architect drawing?
+      a: >-
+        No. A PDF, a CAD export, or a photo of a sketch is enough to start.
+        Dimensions help. A known room size is enough if the drawing has no scale.
+    - q: Is this for a new build or a renovation?
+      a: >-
+        Either. New builds are usually a full plan. Renovations are often one
+        floor, an extension, or the rooms you are about to change.
+    - q: How much does a 3D house from a floor plan cost?
+      a: >-
+        From €500. That is a straightforward floor, the RoomSketcher model and
+        stills. A whole house or AI renders is more. Write and I will quote it.
+    - q: How do I send the floor plan?
+      a: >-
+        Not through the form. The form is a note. If the job is a fit, you
+        email the drawing after that.
+    - q: Do I need to be nearby?
+      a: >-
+        No. You email files, I send a model and images back.
+  sv:
+    name: 3D-hus från planritning
+    form_label: 3D-hus från planritning
+    card_label: 3D-hus
+    card_title: 3D-hus från planritning
+    card_summary: >-
+      Jag bygger om din 2D-planritning i RoomSketcher så du kan gå igenom
+      huset. Stillbilder, och AI-rendering om du vill. Från 500 €.
+    cta_label: Få en offert
+    journey:
+      - kicker: Så börjar det
+        title: 2D-planritning, sen RoomSketcher
+        text: >-
+          Jag utgår från din ritning. En arkitekt-PDF eller en skiss du gjort
+          själv. Sen bygger jag om samma rum i RoomSketcher.
+        layout: pair
+        images:
+          - src: /assets/work/3d-homes/floor-plan-architect.webp
+            alt: Arkitektens 2D-planritning över kök och vardagsrum
+            caption: 2D-planritning
+            kind: plan
+            step: "01"
+            width: 1152
+            height: 638
+          - src: /assets/work/3d-homes/floor-plan-roomsketcher.webp
+            alt: Samma rum ombyggda som en planlösning i RoomSketcher
+            caption: Ombyggd i RoomSketcher
+            kind: plan
+            step: "02"
+            width: 1194
+            height: 670
+      - kicker: Det du får
+        title: 3D-vyer du kan gå igenom, och AI-rendering
+        text: >-
+          En översikt uppifrån, en promenad i modellen, och en AI-bild när du
+          vill se möbler, stämning och stil.
+        layout: results
+        images:
+          - src: /assets/work/3d-homes/view-above.webp
+            alt: 3D-vy uppifrån över kök, matplats och vardagsrum
+            caption: 3D-översikt
+            width: 1600
+            height: 977
+          - src: /assets/work/3d-homes/view-walk.webp
+            alt: 3D-vy i ögonhöjd genom samma rum
+            caption: Promenad
+            width: 800
+            height: 600
+          - src: /assets/work/3d-homes/render.webp
+            alt: AI-rendering av ett kök med möbler, material och utsikt
+            caption: AI-rendering, för möbler, stämning och stil
+            wide: true
+            width: 1600
+            height: 1088
+      - kicker: Och sen
+        title: Du bygger det
+        layout: pair
+        images:
+          - src: /assets/work/3d-homes/real-build.webp
+            alt: Husets stomme med utsikt mot vatten och en röd stuga, innan fönstren sattes in
+            caption: Under bygget
+            kind: site
+            width: 1600
+            height: 1200
+          - src: /assets/work/3d-homes/on-site.webp
+            alt: Viktor på byggarbetsplatsen, i ett samtal inne i stommen
+            caption: På plats
+            kind: site-portrait
+            width: 895
+            height: 1201
+    faqs:
+      - q: Kan du göra ett 3D-hus från en planritning?
+        a: >-
+          Ja. Jag bygger en 3D-modell i RoomSketcher från din 2D-planritning. Du
+          får en genomgång och stillbilder. AI-rendering är valfritt om du vill
+          ha en mer realistisk bild.
+      - q: Vad är en 3D-planlösning hos dig?
+        a: >-
+          Samma rum som på ritningen, i 3D, så du kan klicka dig från rum till
+          rum i stället för att gissa från en platt skiss.
+      - q: Behöver jag en färdig arkitektritning?
+        a: >-
+          Nej. En PDF, en CAD-export eller ett foto av en skiss räcker för att
+          börja. Mått hjälper. Ett känt rums mått räcker om ritningen saknar
+          skala.
+      - q: Gäller det nybygge eller renovering?
+        a: >-
+          Båda. Nybyggen är oftast en hel plan. Renoveringar är ofta ett plan,
+          en tillbyggnad eller rummen du ska ändra.
+      - q: Vad kostar ett 3D-hus från planritning?
+        a: >-
+          Från 500 €. Det är ett enkelt våningsplan, RoomSketcher-modellen och
+          stillbilder. Ett helt hus eller AI-rendering kostar mer. Skriv så ger
+          jag ett pris.
+      - q: Hur skickar jag planritningen?
+        a: >-
+          Inte via formuläret. Formuläret är ett meddelande. Om uppdraget passar
+          mejlar du ritningen efter det.
+      - q: Behöver jag vara i närheten?
+        a: >-
+          Nej. Du mejlar filer, jag skickar tillbaka en modell och bilder.
+
+- id: web-apps
+  icon: app-window
+  name: Nuxt web app development
+  form_label: Web app development
+  card_label: Web apps
+  card_title: Custom web app
+  card_summary: >-
+    I build it, host it, pick a database that fits the project, set up
+    deploys, and can keep it running after launch.
+  permalink: /work/web-apps/
+  cta_label: Ask about a web app
+  featured_image:
+  gallery: []
+  related_slugs:
+    - nuxt-tailwind-quick-start
+    - nuxt-on-firebase
+    - nuxt-on-vercel
+    - firebase-emulator-functions
+    - jamstack-forms-in-netlify
+  faqs:
+    - q: What stack do you use?
+      a: >-
+        Nuxt and Tailwind for the app. Hosting, database, and CI/CD depend on
+        the project. Firebase is a common fit when it is. I will not add a
+        fourth database because a blog post said to.
+    - q: Do you also host it and set up a database?
+      a: >-
+        Yes. Hosting, storage, and a deploy pipeline are part of it, chosen
+        for the use case.
+    - q: Can you keep maintaining it after launch?
+      a: >-
+        Yes. Dependency updates, broken deploys, small features, the stuff that
+        shows up once real people use it. Scope that separately from the build
+        if you want, but it is on the menu.
+    - q: How is this different from tech setup?
+      a: >-
+        Tech setup is a small stack you can run yourself: domain, email, maybe a
+        simple site. A web app is custom software. If a form and a mailbox would
+        do, start there.
+  sv:
+    name: Webbappar i Nuxt
+    form_label: Webbapp
+    card_label: Webbappar
+    card_title: Skräddarsydd webbapp
+    card_summary: >-
+      Jag bygger den, hostar den, väljer en databas som passar, sätter upp
+      deploys och kan hålla den igång efter lansering.
+    cta_label: Fråga om en webbapp
+
+- id: tech-setup
+  icon: settings-2
+  name: Tech setup for people and small businesses
+  form_label: Tech setup
+  card_label: Tech setup
+  card_title: Domain, email, and a website
+  card_summary: >-
+    Domain and email on that domain, a small website if you need one, and AI
+    only where it saves time. For people and small shops.
+  permalink: /work/tech-setup/
+  cta_label: Ask about a setup
+  featured_image:
+  gallery: []
+  related_slugs:
+    - getting-started-with-jekyll
+    - jekyll-github-netlify
+    - jamstack-forms-in-netlify
+    - qr-without-the-nonsense
+    - open-ai-api
+  faqs:
+    - q: What does tech setup actually include?
+      a: >-
+        Whatever you are missing from a short list: domain, email on that
+        domain, a small website, and a restrained AI setup. We pick from that
+        list. We do not install a drawer of mystery tools.
+    - q: Is this only for companies?
+      a: >-
+        No. Regular people who want a personal site, sane email, or help
+        choosing AI tools are the same job, just with less branding.
+    - q: Will you just pick an AI tool and leave?
+      a: >-
+        I will tell you what is worth paying for and what to skip. If there is a
+        real repeatable task, a simple agent can be part of it. If there is not,
+        we stop.
+    - q: Do I need a custom app?
+      a: >-
+        Usually not. A lot of "we need a platform" is a website, a form, and
+        email that works. If you do need custom software, that is web app
+        work, not this page.
+  sv:
+    name: Tech-setup för privatpersoner och småföretag
+    form_label: Tech-setup
+    card_label: Tech-setup
+    card_title: Domän, e-post och en sajt
+    card_summary: >-
+      Domän och e-post på den, en liten webbplats om du behöver en, och AI
+      bara där det sparar tid. För privatpersoner och småbutiker.
+    cta_label: Fråga om en setup
+
+- id: shopify-themes
+  icon: store
+  name: Custom Shopify theme development
+  form_label: Shopify theme
+  card_label: Shopify
+  card_title: Custom Shopify theme
+  card_summary: >-
+    I start from Dawn and build a brand overlay on top.
+  permalink: /work/shopify-themes/
+  permalink_sv: /sv/anpassat-shopify-tema/
+  cta_label: Ask about a theme
+  featured_image:
+  gallery: []
+  related_slugs:
+    - getting-started-with-jekyll
+  faqs:
+    - q: Do you build custom Shopify themes?
+      a: >-
+        Yes. I start from Dawn and build a brand overlay in its own files:
+        product cards, cart drawer, header, product page.
+    - q: Do you customize Dawn?
+      a: >-
+        Dawn stays the official theme. Custom work sits on top. A Dawn update
+        is a short wire-up list.
+    - q: Can you work on a store that is already live?
+      a: >-
+        Yes. Preview themes exist so the live store can stay up while we work.
+        I need collaborator access and a list of apps that must keep working.
+    - q: What happens when Shopify updates Dawn?
+      a: >-
+        Dawn files stay thin: an entrypoint or a class. I re-apply that
+        wire-up.
+    - q: What do you need to start?
+      a: >-
+        The current store or the designs, collaborator access, and a short list
+        of what the theme must do. If you are not sure you need an overlay, say
+        that first. Sometimes a smaller fix is enough.
+  sv:
+    name: Anpassade Shopify-teman
+    form_label: Shopify-tema
+    card_label: Shopify
+    card_title: Anpassat Shopify-tema
+    card_summary: >-
+      Jag utgår från Dawn och bygger ett varumärkeslager ovanpå.
+    cta_label: Fråga om ett tema
+    faqs:
+      - q: Bygger du anpassade Shopify-teman?
+        a: >-
+          Ja. Jag utgår från Dawn och bygger ett varumärkeslager i egna filer:
+          produktkort, varukorgslåda, header, produktsida.
+      - q: Anpassar du Dawn?
+        a: >-
+          Dawn förblir det officiella temat. Det egna arbetet ligger ovanpå.
+          En Dawn-uppdatering är en kort inkopplingslista.
+      - q: Kan du jobba på en butik som redan är live?
+        a: >-
+          Ja. Förhandsgranskningsteman finns så den publicerade butiken kan
+          ligga kvar. Jag behöver medarbetaråtkomst och en lista på appar som
+          måste fortsätta fungera.
+      - q: Vad händer när Shopify uppdaterar Dawn?
+        a: >-
+          Dawn-filerna förblir tunna: en ingång eller en class. Jag gör om den
+          inkopplingen.
+      - q: Vad behöver du för att börja?
+        a: >-
+          Den nuvarande butiken eller designen, medarbetaråtkomst, och en kort
+          lista på vad temat måste göra. Om du är osäker på om du behöver ett
+          varumärkeslager, säg det först. Ibland räcker en mindre fix.

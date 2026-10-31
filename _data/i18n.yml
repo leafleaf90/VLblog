@@ -1,0 +1,103 @@
+en:
+  html_lang: en
+  og_locale: en_US
+  nav:
+    home: Home
+    blog: Blog
+    work: Work
+    books: Books
+    quotes: Quotes
+    qr: QR
+    about: About
+    site: Site
+    socials: Social links
+  urls:
+    work: /work/
+    about: /about/
+  theme:
+    to_dark: Switch to dark mode
+    to_light: Switch to light mode
+    title_dark: Currently dark — click for light theme
+    title_light: Currently light — click for dark theme
+  contact:
+    trigger: Talk to me!
+    title: Talk to me!
+    intro: A project, a question, or something that does not fit the list. Send a note.
+    name: Name
+    email: Email
+    service: What do you need?
+    choose: Choose one
+    other: Something else
+    message: Message
+    cancel: Cancel
+    send: Send
+    sending: Sending...
+    thanks: Thank you! Your message has been sent successfully.
+    error: Sorry, there was an error sending your message. Please try again or email me directly at mail@viktorlovgren.com
+  work:
+    kinds: Kinds of work
+    faq: FAQ
+    related: Related writing
+    more: More work
+    read_more: Read more
+    read_more_aria: " — read more"
+    cta_note: Send a note
+    journey: From plan to 3D
+    in_english: In English
+    in_swedish: In Swedish
+  lang:
+    en: EN
+    sv: SV
+    switch: Language
+
+sv:
+  html_lang: sv
+  og_locale: sv_SE
+  nav:
+    home: Hem
+    blog: Blogg
+    work: Uppdrag
+    books: Böcker
+    quotes: Citat
+    qr: QR
+    about: Om
+    site: Webbplats
+    socials: Sociala länkar
+  urls:
+    work: /sv/
+    about: /about/
+  theme:
+    to_dark: Byt till mörkt läge
+    to_light: Byt till ljust läge
+    title_dark: Mörkt läge — klicka för ljust
+    title_light: Ljust läge — klicka för mörkt
+  contact:
+    trigger: Skriv till mig
+    title: Skriv till mig
+    intro: Ett uppdrag, en fråga, eller något som inte passar listan. Skicka ett meddelande.
+    name: Namn
+    email: E-post
+    service: Vad behöver du?
+    choose: Välj ett
+    other: Något annat
+    message: Meddelande
+    cancel: Avbryt
+    send: Skicka
+    sending: Skickar...
+    thanks: Tack! Meddelandet är skickat.
+    error: Det gick inte att skicka. Försök igen eller mejla mail@viktorlovgren.com
+  work:
+    kinds: Uppdrag
+    faq: Vanliga frågor
+    related: Relaterat
+    more: Fler uppdrag
+    read_more: Läs mer
+    read_more_aria: " — läs mer"
+    cta_note: Skicka ett meddelande
+    journey: Från ritning till 3D
+    in_english: In English
+    in_swedish: På svenska
+  lang:
+    en: EN
+    sv: SV
+    switch: Språk

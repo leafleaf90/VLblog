@@ -1,0 +1,27 @@
+{%- assign loc = page.lang | default: "en" -%}
+{%- assign ui = site.data.i18n[loc] -%}
+{%- if page.i18n.en -%}
+  {%- assign lang_en = page.i18n.en -%}
+{%- else -%}
+  {%- assign lang_en = page.url -%}
+{%- endif -%}
+{%- if page.i18n.sv -%}
+  {%- assign lang_sv = page.i18n.sv -%}
+{%- else -%}
+  {%- assign lang_sv = "/sv/" -%}
+{%- endif -%}
+<nav class="lang-switcher" aria-label="{{ ui.lang.switch }}">
+  <a
+    href="{{ lang_en }}"
+    lang="en"
+    hreflang="en"
+    {% if loc == "en" %}aria-current="page"{% endif %}
+  >{{ ui.lang.en }}</a>
+  <span aria-hidden="true">/</span>
+  <a
+    href="{{ lang_sv }}"
+    lang="sv"
+    hreflang="sv"
+    {% if loc == "sv" %}aria-current="page"{% endif %}
+  >{{ ui.lang.sv }}</a>
+</nav>

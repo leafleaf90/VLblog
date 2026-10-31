@@ -23,6 +23,8 @@ description: >-
 
 <p>If you want new posts by email, use the newsletter signup on the homepage or below posts. It is manual, not an automated firehose. Civilization depends on small boundaries.</p>
 
+<p>I also take on a small amount of paid work: <a href="/work/web-apps/">Nuxt web apps</a>, <a href="/work/tech-setup/">tech setup for people and small businesses</a>, <a href="/work/shopify-themes/">custom Shopify themes</a>, and <a href="/work/3d-homes/">3D homes from a floor plan</a>. Details on the <a href="/work/">Work</a> page.</p>
+
 <p>You can reach me at <a href="mailto:mail@viktorlovgren.com">mail@viktorlovgren.com</a>, find me on <a href="https://www.linkedin.com/in/viktorlovgren/">LinkedIn</a>, occasionally on <a href="https://x.com/viktor_lovgren">X</a>, or browse my reading notes on <a href="https://www.goodreads.com/viktorlovgren">Goodreads</a>.</p>
 
 </main>

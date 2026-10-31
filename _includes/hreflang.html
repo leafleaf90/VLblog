@@ -1,0 +1,11 @@
+{%- if page.i18n -%}
+  {%- if page.i18n.en -%}
+<link rel="alternate" hreflang="en" href="{{ page.i18n.en | absolute_url }}" />
+  {%- endif -%}
+  {%- if page.i18n.sv -%}
+<link rel="alternate" hreflang="sv" href="{{ page.i18n.sv | absolute_url }}" />
+  {%- endif -%}
+  {%- if page.i18n.en -%}
+<link rel="alternate" hreflang="x-default" href="{{ page.i18n.en | absolute_url }}" />
+  {%- endif -%}
+{%- endif -%}

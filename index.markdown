@@ -4,4 +4,7 @@ layout: home
 description: >-
   Viktor Lövgren writes about software, digital sanity, useful tools, and the
   ongoing quest for fewer tabs open.
+sitemap:
+  changefreq: weekly
+  priority: 1.0
 ---

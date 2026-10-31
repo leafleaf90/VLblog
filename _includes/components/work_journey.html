@@ -1,0 +1,44 @@
+{% if include.phases and include.phases.size > 0 %}
+<section class="work-journey" aria-label="{{ include.label | default: 'From plan to 3D' }}">
+  {% for phase in include.phases %}
+  <div class="work-journey__phase work-journey__phase--{{ phase.layout | default: 'stack' }}">
+    <header class="work-journey__intro">
+      {% if phase.kicker %}
+      <p class="work-journey__kicker">{{ phase.kicker }}</p>
+      {% endif %}
+      {% if phase.title %}
+      <h2>{{ phase.title }}</h2>
+      {% endif %}
+      {% if phase.text %}
+      <p>{{ phase.text }}</p>
+      {% endif %}
+    </header>
+    <div class="work-journey__grid work-journey__grid--{{ phase.layout | default: 'stack' }}">
+      {% for item in phase.images %}
+      {% assign journey_file = site.static_files | where: "path", item.src | first %}
+      {% if journey_file %}
+      <figure class="work-journey__item{% if item.wide %} work-journey__item--wide{% endif %}">
+        {% if item.step %}
+        <span class="work-journey__step" aria-hidden="true">{{ item.step }}</span>
+        {% endif %}
+        <div class="work-journey__frame{% if item.kind %} work-journey__frame--{{ item.kind }}{% endif %}">
+          <img
+            src="{{ item.src }}"
+            alt="{{ item.alt | xml_escape }}"
+            {% if item.width %}width="{{ item.width }}"{% endif %}
+            {% if item.height %}height="{{ item.height }}"{% endif %}
+            loading="{% if forloop.parentloop.first and forloop.first %}eager{% else %}lazy{% endif %}"
+            decoding="async"
+          />
+        </div>
+        {% if item.caption %}
+        <figcaption>{{ item.caption }}</figcaption>
+        {% endif %}
+      </figure>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
